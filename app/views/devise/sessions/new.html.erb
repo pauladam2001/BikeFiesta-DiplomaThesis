@@ -33,43 +33,62 @@
 
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form action="#">
+		<div class="login-form">
 			<h1>Create Account</h1>
-			<div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-			<span>or use your email for registration</span>
-			<input type="text" placeholder="Name" />
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<button>Register</button>
-		</form>
+      <%= form_for("user", as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="field">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
+        </div>
+
+        <div class="field">
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password" %>
+        </div>
+
+        <div class="field">
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password Confirmation" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Sign up", :class => 'button' %>
+        </div>
+      <% end %>
+		</div>
 	</div>
 	<div class="form-container sign-in-container">
-		<form action="#">
+    <div class="login-form">
 			<h1>Log in</h1>
 			<div class="social-container">
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+        <%= link_to image_tag("google-icon.png", border: 0), omniauth_authorize_path(resource_name, 'google_oauth2'), method: :post %>
 			</div>
 			<span>or use your account</span>
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<button>Log In</button>
-		</form>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
+        <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password" %>
+        <% if devise_mapping.rememberable? %>
+          <div class="">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+        <%= f.submit "Log in", :class => 'button' %>
+      <% end %>
+    </div>
 	</div>
 	<div class="overlay-container">
 		<div class="overlay">
 			<div class="overlay-panel overlay-left">
 				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
-				<button class="ghost" id="signIn">Sign In</button>
+				<p>If you already have an account please log in with your personal info</p>
+				<button class="button ghost" id="signIn">Sign In</button>
 			</div>
 			<div class="overlay-panel overlay-right">
 				<h1>Hello!</h1>
 				<p>Start with creating an account if you don't have one</p>
-				<button class="ghost" id="signUp">Register</button>
+				<button class="button ghost" id="signUp">Register</button>
 			</div>
 		</div>
 	</div>
