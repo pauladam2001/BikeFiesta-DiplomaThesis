@@ -6,12 +6,19 @@
   <%= stylesheet_link_tag 'login' %>
 <head>
 
+<% if alert %>
+  <div class="alert-danger">
+    <span class="close-button" onclick="this.parentElement.style.display='none';">&times;</span>
+    <p class="alert-paragraph"><%= alert %></p>
+  </div>
+<% end%>
+
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
 		<div class="login-form">
 			<h1 class="titles">Create Account</h1>
       <%= form_for("user", as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
+        <%#= render "devise/shared/error_messages", resource: resource %>
         <%= f.text_field :first_name, autofocus: true, autocomplete: "First Name", placeholder: "First Name", :class => 'input' %>
         <%= f.text_field :last_name, autocomplete: "Last Name", placeholder: "Last Name", :class => 'input' %>
         <%= f.email_field :email, autocomplete: "email", placeholder: "Email", :class => 'input' %>
@@ -20,7 +27,7 @@
         <% end %><br />
         <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", :class => 'input' %>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password Confirmation", :class => 'input' %>
-        <%= f.submit "Sign up", :class => 'button margin-top' %>
+        <%= f.submit "Register", :class => 'button margin-top' %>
       <% end %>
 		</div>
 	</div>
@@ -49,7 +56,7 @@
 			<div class="overlay-panel overlay-left">
 				<h1 class="titles">Welcome Back!</h1>
 				<p class="paragraph">If you already have an account please log in with your personal info</p>
-				<button class="button ghost" id="signIn">Sign In</button>
+				<button class="button ghost" id="signIn">Log In</button>
 			</div>
 			<div class="overlay-panel overlay-right">
 				<h1 class="titles">Hello!</h1>
@@ -64,6 +71,8 @@
   const signUpButton = document.getElementById('signUp');
   const signInButton = document.getElementById('signIn');
   const container = document.getElementById('container');
+  const hiddenInput = document.getElementById('hiddenInput');
+  alert = "<%= alert %>";
 
   signUpButton.addEventListener('click', () => {
     container.classList.add("right-panel-active");
@@ -72,4 +81,8 @@
   signInButton.addEventListener('click', () => {
     container.classList.remove("right-panel-active");
   });
+
+  if (alert) {
+    container.classList.add("right-panel-active");
+  }
 </script>
