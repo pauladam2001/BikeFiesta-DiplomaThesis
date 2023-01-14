@@ -5,6 +5,17 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
+  VALID_PASSWORD_REGEX = /\A
+    (?=.{6,})     # at least 6 characters long
+    (?=.*\d)      # contains at least 1 digit
+    (?=.*[a-z])   # contains at least 1 lowercase letter
+    (?=.*[A-Z])   # comtains at least 1 uppercase letter
+  /x
+
+  validates :first_name, presence: true, length: { minimum: 3, maximum: 25 }
+  validates :last_name, presence: true, length: { minimum: 3, maximum: 25 }
+  validates :password, format: VALID_PASSWORD_REGEX
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
