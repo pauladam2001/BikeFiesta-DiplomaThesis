@@ -72,12 +72,14 @@
 			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
-	width: 768px;
+	width: 800px;
 	max-width: 100%;
-	min-height: 480px;
+	min-height: 600px;
   top: 50%;
-  margin-top: 25vh;
-  left: 5%;
+  margin-top: 20vh;
+  /* margin-top: 45vh; */
+  left: 3%;
+  opacity: 0.8;
 }
 
 .form-container {
@@ -199,8 +201,6 @@
 }
 
 .social-container a {
-	border: 1px solid #DDDDDD;
-	border-radius: 50%;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -233,4 +233,92 @@
 
 .alert-paragraph {
   text-align: center;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.login-background {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background-image: url('bike.jpg');
+  /* background-repeat: no-repeat; */
+  /* background-size: 100%; */
+  background-size: cover;
+  box-shadow: inset 0 0 0 1500px rgba(0, 0, 0, .7);
+  height: 100vh;
+}
+
+@keyframes showTopText {
+  0% {
+    transform: translate3d(0, 100%, 0);
+ }
+  40%, 60% {
+    transform: translate3d(0, 50%, 0);
+ }
+  100% {
+    transform: translate3d(0, 0, 0);
+ }
+}
+@keyframes showBottomText {
+  0% {
+    transform: translate3d(0, -100%, 0);
+ }
+  100% {
+    transform: translate3d(0, 0, 0);
+ }
+}
+.animated-title {
+  color: #fff;
+  height: 90vmin;
+  transform: translate(-50%, -50%);
+  width: 80vmin;
+  position: absolute;
+  top: 500px;
+  max-width: 800px;
+  right: -390px;
+  /* left: 490px; */
+}
+.animated-title > div {
+  height: 50%;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+}
+.animated-title > div div {
+  font-size: 40px;
+  padding: 2vmin 0;
+  position: absolute;
+}
+.animated-title > div div span {
+  display: block;
+}
+.animated-title > div.text-top {
+  border-bottom: 1vmin solid #FDF0D5;
+  top: 0;
+}
+.animated-title > div.text-top div {
+  animation: showTopText 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  bottom: 0;
+  transform: translate(0, 100%);
+}
+.animated-title > div.text-top div span:first-child {
+  color: #fff;
+}
+.animated-title > div.text-bottom {
+  bottom: 0;
+}
+.animated-title > div.text-bottom div {
+  animation: showBottomText 0.5s;
+  animation-delay: 1.75s;
+  animation-fill-mode: forwards;
+  top: 0;
+  transform: translate(0, -100%);
 }

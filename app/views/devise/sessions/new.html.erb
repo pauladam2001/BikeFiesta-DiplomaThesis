@@ -1,7 +1,3 @@
-<% if false %>
-<%= render "devise/shared/links" %>
-<% end %>
-
 <head>
   <%= stylesheet_link_tag 'login' %>
 <head>
@@ -13,12 +9,23 @@
   </div>
 <% end%>
 
+<div class="login-background">
+<div class="animated-title">
+  <div class="text-top">
+    <div>
+      <span>Welcome to BikeFiesta,</span>
+      <span>the newest marketplace for selling and buying</span>
+    </div>
+  </div>
+  <div class="text-bottom">
+    <div>used bicycles.</div>
+  </div>
+</div>
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
 		<div class="login-form">
 			<h1 class="titles">Create Account</h1>
       <%= form_for("user", as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%#= render "devise/shared/error_messages", resource: resource %>
         <%= f.text_field :first_name, autofocus: true, autocomplete: "First Name", placeholder: "First Name", :class => 'input' %>
         <%= f.text_field :last_name, autocomplete: "Last Name", placeholder: "Last Name", :class => 'input' %>
         <%= f.email_field :email, autocomplete: "email", placeholder: "Email", :class => 'input' %>
@@ -66,7 +73,7 @@
 		</div>
 	</div>
 </div>
-
+</div>
 <script type="text/javascript">
   const signUpButton = document.getElementById('signUp');
   const signInButton = document.getElementById('signIn');
