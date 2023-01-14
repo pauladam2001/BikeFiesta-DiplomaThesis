@@ -21,8 +21,8 @@
 
 .button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 2px solid #FDF0D5;
+	background-color: #C1121F;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -42,11 +42,11 @@
 
 .button.ghost {
 	background-color: transparent;
-	border-color: #FFFFFF;
+	border-color: #FDF0D5;
 }
 
 .login-form {
-	background-color: #FFFFFF;
+	background-color: #FDF0D5;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -57,7 +57,7 @@
 }
 
 .input {
-	background-color: #eee;
+	background-color: #EEDCB9;
 	border: none;
 	padding: 12px 15px;
 	margin: 8px 0;
@@ -139,9 +139,9 @@
 }
 
 .overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	background: #C1121F;
+	background: -webkit-linear-gradient(to right, #C1121F, #C1121F);
+	background: linear-gradient(to right, #C1121F, #C1121F);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -212,7 +212,7 @@
 .alert-danger {
   margin-top: 0px;
   padding: 20px;
-  background-color: #f44336;
+  background-color: #C1121F;
   color: white;
 }
 
@@ -228,10 +228,9 @@
 }
 
 .close-button:hover {
-  color: black;
+  color: #003049;
 }
 
 .alert-paragraph {
   text-align: center;
-  /* height: 10px; */
 }
