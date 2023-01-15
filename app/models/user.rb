@@ -25,4 +25,20 @@ class User < ApplicationRecord
       # user.skip_confirmation!
     end
   end
+
+  def name
+    if self.full_name.present?
+      return full_name
+    else
+      return [self.first_name, self.last_name].compact.join(" ")
+    end
+  end
+
+  def is_admin?
+    self.user_type == "admin"
+  end
+
+  def is_normal?
+    self.user_type == "normal"
+  end
 end
