@@ -59,3 +59,7 @@
 .menu .current-menu-item h6 {
   color: #780000;
 }
+
+.image-radius {
+  border-radius: 20px;
+}
