@@ -1,0 +1,92 @@
+.edit-title {
+  padding-top: 1rem;
+  padding-left: 2rem;
+  color: #003049;
+}
+
+.title-div {
+  padding-left: 5rem;
+  border-bottom: 1px solid #669BBC;
+  max-width: 1500px;
+  padding-bottom: 15px;
+  color: #003049;
+}
+
+.identity-div {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #669BBC;
+  max-width: 1500px;
+  padding-bottom: 15px;
+  color: #003049;
+}
+
+.security-div {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #669BBC;
+  max-width: 1500px;
+  padding-bottom: 15px;
+  color: #003049;
+}
+
+.identity-title {
+  margin-left: 12rem;
+}
+
+.security-title {
+  margin-left: 12rem;
+}
+
+.identity-inputs {
+  margin-left: 10rem;
+}
+
+.security-inputs {
+  margin-left: 13rem;
+}
+
+.input-edit {
+  background-color: #EEDCB9;
+	border: none;
+	padding: 12px 15px;
+	margin-bottom: 10px;
+  width: 400px;
+  border-radius: 10px;
+  color: #003049;
+}
+
+.edit-span {
+  padding-right: 30px;
+  color: #003049;
+}
+
+.update-button {
+  margin-left: 5rem;
+  margin-top: 9.3rem;
+}
+
+.cancel-account {
+  margin-top: 2rem;
+  margin-left: 14rem;
+  color: #003049;
+}
+
+.cancel-div {
+  margin-top: 5rem;
+  margin-left: 30%;
+}
+
+.unhappy-span {
+  padding-left: 5rem;
+  color: #003049;
+  font-size: 20px;
+}
+
+.add-div {
+  margin-bottom: 10px;
+}

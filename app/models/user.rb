@@ -15,7 +15,8 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation
   validates :last_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation
-  validates :password, format: VALID_PASSWORD_REGEX, unless: :skip_validation
+  # validates :password, format: VALID_PASSWORD_REGEX, unless: :skip_validation
+  validate :password_regex
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create!(skip_validation: true) do |user|
@@ -41,5 +42,10 @@ class User < ApplicationRecord
 
   def is_normal?
     self.role == "normal"
+  end
+
+  def password_regex
+    return if password.blank? || password =~ /\A(?=.*\d)(?=.*[A-Z])(?=.*\W)[^ ]{6,}\z/
+    errors.add :password, 'should have more than 6 characters including 1 uppercase letter, 1 number, 1 special character'
   end
 end
