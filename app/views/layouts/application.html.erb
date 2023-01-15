@@ -12,16 +12,56 @@
 
   <body>
     <% if current_user.present? && current_user.is_normal? %>
-      <% if @header.present? && @header == true %>
-        TODO
-      <% end %>
-      TODO
+      <%# if @header.present? && @header == true %>
+        <div class="menu">
+          <div class="">
+            <h6><%= link_to image_tag("logo.png", border: 0, width: '200px'), '#'%></h6>
+          </div>
+          <div class="menu-item first-item current-menu-item">
+              <h6>Home</h6>
+              <div class="wee"></div>
+          </div>
+          <div class="menu-item">
+              <h6>Short</h6>
+          </div>
+          <div class="menu-item">
+              <h6>Longer Navigation</h6>
+          </div>
+          <div class="menu-item">
+              <h6>Random</h6>
+          </div>
+          <div class="menu-item">
+              <h6><%= image_tag("user-icon.png", border: 0, width: '50px') %></h6>
+          </div>
+          <div class="menu-item">
+              <h6><%= link_to image_tag("logout-icon.png", border: 0, width: '35px'), destroy_user_session_path, data: {turbo: "false"}, method: :delete %></h6>
+          </div>
+        </div>
+      <%# end %>
     <% elsif current_user.present? && current_user.is_admin? %>
       <% if @sidebar.present? && @sidebar == true %>
         TODO
       <% end %>
     <% end %>
-    <br><br>
     <%= yield %>
   </body>
 </html>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(window).on('load resize', function() {
+      var $thisnav = $('.current-menu-item').offset().left;
+
+      $('.menu-item').hover(function() {
+        var $left = $(this).offset().left - $thisnav;
+        var $width = $(this).outerWidth();
+        var $start = 0;
+        $('.wee').css({ 'left': $left , 'width': $width });
+      }, function() {
+        var $initwidth = $('.current-menu-item').width();
+        $('.wee').css({ 'left': '0' , 'width': $initwidth });
+      });
+    });
+
+  });
+</script>
