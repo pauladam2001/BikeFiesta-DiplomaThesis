@@ -31,7 +31,12 @@
             <%= f.email_field :email, autocomplete: "email", placeholder: "Email", :class => 'input' %>
             <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", :class => 'input' %>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password Confirmation", :class => 'input' %>
-            <%= f.file_field :avatar %>
+            <%#= f.file_field :avatar, :class => 'inputfile' %>
+            <label for="image" class="drop-container">
+              <span class="drop-title">Drop your ID Card here</span>
+              or
+              <%= f.file_field :avatar, id: 'image', accept: 'image/*' %>
+            </label>
             <%= f.submit "Register", :class => 'button margin-top' %>
           <% end %>
         </div>

@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validate :password_regex
 
   has_one_attached :avatar
+  validates :avatar, :presence => true
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create!(skip_validation: true) do |user|
