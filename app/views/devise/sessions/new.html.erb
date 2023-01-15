@@ -87,7 +87,7 @@
     container.classList.remove("right-panel-active");
   });
 
-  if (alert) {
+  if (alert.start_with?("Error -")) {
     container.classList.add("right-panel-active");
   }
 </script>
