@@ -11,6 +11,17 @@
   </head>
 
   <body>
+    <% if current_user.present? && current_user.is_normal? %>
+      <% if @header.present? && @header == true %>
+        TODO
+      <% end %>
+      TODO
+    <% elsif current_user.present? && current_user.is_admin? %>
+      <% if @sidebar.present? && @sidebar == true %>
+        TODO
+      <% end %>
+    <% end %>
+    <br><br>
     <%= yield %>
   </body>
 </html>

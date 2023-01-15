@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  attr_accessor :skip_validation
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,12 +13,12 @@ class User < ApplicationRecord
     (?=.*[A-Z])   # comtains at least 1 uppercase letter
   /x
 
-  validates :first_name, presence: true, length: { minimum: 3, maximum: 25 }
-  validates :last_name, presence: true, length: { minimum: 3, maximum: 25 }
-  validates :password, format: VALID_PASSWORD_REGEX
+  validates :first_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation
+  validates :last_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation
+  validates :password, format: VALID_PASSWORD_REGEX, unless: :skip_validation
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    where(provider: auth.provider, uid: auth.uid).first_or_create!(skip_validation: true) do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.full_name = auth.info.name
@@ -35,10 +36,10 @@ class User < ApplicationRecord
   end
 
   def is_admin?
-    self.user_type == "admin"
+    self.role == "admin"
   end
 
   def is_normal?
-    self.user_type == "normal"
+    self.role == "normal"
   end
 end
