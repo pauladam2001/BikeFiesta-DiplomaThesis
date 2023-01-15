@@ -8,71 +8,69 @@
     <p class="alert-paragraph"><%= alert %></p>
   </div>
 <% end%>
-
-<div class="login-background">
-<div class="animated-title">
-  <div class="text-top">
-    <div>
-      <span>Welcome to BikeFiesta,</span>
-      <span>the newest marketplace for selling and buying</span>
+<div class="background">
+  <div class="login-container">
+    <div class="animated-title">
+      <div class="text-top">
+        <div>
+          <span>Welcome to BikeFiesta,</span>
+          <span>the newest marketplace for selling and buying</span>
+        </div>
+      </div>
+      <div class="text-bottom">
+        <div>used bicycles.</div>
+      </div>
     </div>
-  </div>
-  <div class="text-bottom">
-    <div>used bicycles.</div>
-  </div>
-</div>
-<div class="container" id="container">
-	<div class="form-container sign-up-container">
-		<div class="login-form">
-			<h1 class="titles">Create Account</h1>
-      <%= form_for("user", as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= f.text_field :first_name, autofocus: true, autocomplete: "First Name", placeholder: "First Name", :class => 'input' %>
-        <%= f.text_field :last_name, autocomplete: "Last Name", placeholder: "Last Name", :class => 'input' %>
-        <%= f.email_field :email, autocomplete: "email", placeholder: "Email", :class => 'input' %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", :class => 'input' %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password Confirmation", :class => 'input' %>
-        <%= f.submit "Register", :class => 'button margin-top' %>
-      <% end %>
-		</div>
-	</div>
-	<div class="form-container sign-in-container">
-    <div class="login-form">
-			<h1 class="titles">Log in</h1>
-			<div class="social-container">
-        <%= link_to image_tag("google-icon.png", border: 0), omniauth_authorize_path(resource_name, 'google_oauth2'), method: :post %>
-			</div>
-			<span class="span">or use your account</span>
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", :class => 'input' %>
-        <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", :class => 'input' %>
-        <% if devise_mapping.rememberable? %>
-          <div class="">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
+    <div class="container" id="container">
+      <div class="form-container sign-up-container">
+        <div class="login-form">
+          <h1 class="titles">Create Account</h1>
+          <%= form_for("user", as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= f.text_field :first_name, autofocus: true, autocomplete: "First Name", placeholder: "First Name", :class => 'input' %>
+            <%= f.text_field :last_name, autocomplete: "Last Name", placeholder: "Last Name", :class => 'input' %>
+            <%= f.email_field :email, autocomplete: "email", placeholder: "Email", :class => 'input' %>
+            <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", :class => 'input' %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password Confirmation", :class => 'input' %>
+            <%= f.submit "Register", :class => 'button margin-top' %>
+          <% end %>
+        </div>
+      </div>
+      <div class="form-container sign-in-container">
+        <div class="login-form">
+          <h1 class="titles">Log in</h1>
+          <div class="social-container">
+            <%= link_to image_tag("google-icon.png", border: 0), omniauth_authorize_path(resource_name, 'google_oauth2'), method: :post %>
           </div>
-        <% end %>
-        <%= f.submit "Log in", :class => 'button margin-top' %>
-      <% end %>
+          <span class="span">or use your account</span>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", :class => 'input' %>
+            <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", :class => 'input' %>
+            <% if devise_mapping.rememberable? %>
+              <div class="">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
+              </div>
+            <% end %>
+            <%= f.submit "Log in", :class => 'button margin-top' %>
+          <% end %>
+        </div>
+      </div>
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h1 class="titles">Welcome Back!</h1>
+            <p class="paragraph">If you already have an account please log in with your personal info</p>
+            <button class="button ghost" id="signIn">Log In</button>
+          </div>
+          <div class="overlay-panel overlay-right">
+            <h1 class="titles">Hello!</h1>
+            <p class="paragraph">Start with creating an account if you don't have one</p>
+            <button class="button ghost" id="signUp">Register</button>
+          </div>
+        </div>
+      </div>
     </div>
-	</div>
-	<div class="overlay-container">
-		<div class="overlay">
-			<div class="overlay-panel overlay-left">
-				<h1 class="titles">Welcome Back!</h1>
-				<p class="paragraph">If you already have an account please log in with your personal info</p>
-				<button class="button ghost" id="signIn">Log In</button>
-			</div>
-			<div class="overlay-panel overlay-right">
-				<h1 class="titles">Hello!</h1>
-				<p class="paragraph">Start with creating an account if you don't have one</p>
-				<button class="button ghost" id="signUp">Register</button>
-			</div>
-		</div>
-	</div>
-</div>
+  </div>
 </div>
 <script type="text/javascript">
   const signUpButton = document.getElementById('signUp');
