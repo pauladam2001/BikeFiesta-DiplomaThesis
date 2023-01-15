@@ -18,6 +18,8 @@ class User < ApplicationRecord
   # validates :password, format: VALID_PASSWORD_REGEX, unless: :skip_validation
   validate :password_regex
 
+  has_one_attached :avatar
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create!(skip_validation: true) do |user|
       user.email = auth.info.email

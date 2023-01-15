@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: deo5ucxgq
+  api_key: '655636562268861'
+  api_secret: eLlxAFS30us5lXHZItBYXOnrod0
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: deo5ucxgq
+  api_key: '655636562268861'
+  api_secret: eLlxAFS30us5lXHZItBYXOnrod0
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: deo5ucxgq
+  api_key: '655636562268861'
+  api_secret: eLlxAFS30us5lXHZItBYXOnrod0
+  enhance_image_tag: true
+  static_file_support: false
