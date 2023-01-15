@@ -1,5 +1,9 @@
 * {
 	box-sizing: border-box;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
 }
 
 .titles {
@@ -22,8 +26,8 @@
 .button {
 	border-radius: 20px;
 	border: 2px solid #FDF0D5;
-	background-color: #C1121F;
-	color: #FFFFFF;
+	background-color: #780000;
+	color: white;
 	font-size: 12px;
 	font-weight: bold;
 	padding: 12px 45px;
@@ -66,7 +70,7 @@
 }
 
 .container {
-	background-color: #fff;
+	background-color: #FDF0D5;
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
@@ -141,13 +145,13 @@
 }
 
 .overlay {
-	background: #C1121F;
-	background: -webkit-linear-gradient(to right, #C1121F, #C1121F);
-	background: linear-gradient(to right, #C1121F, #C1121F);
+	background: #780000;
+	background: -webkit-linear-gradient(to right, #780000, #780000);
+	background: linear-gradient(to right, #780000, #780000);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
-	color: #FFFFFF;
+	color: white;
 	position: relative;
 	left: -100%;
 	height: 100%;
@@ -280,26 +284,26 @@ body {
   width: 80vmin;
   position: absolute;
   top: 500px;
-  max-width: 800px;
-  right: -390px;
+  max-width: 550px;
+  right: -250px;
   /* left: 490px; */
 }
 .animated-title > div {
   height: 50%;
   overflow: hidden;
   position: absolute;
-  width: 100%;
+  width: 90%;
 }
 .animated-title > div div {
   font-size: 40px;
-  padding: 2vmin 0;
+  padding: 1vmin 0;
   position: absolute;
 }
 .animated-title > div div span {
   display: block;
 }
 .animated-title > div.text-top {
-  border-bottom: 1vmin solid #FDF0D5;
+  border-bottom: 5px solid #FDF0D5;
   top: 0;
 }
 .animated-title > div.text-top div {
