@@ -11,7 +11,7 @@
   transition: transform 250ms ease-in-out;
   font-size: 14px;
   line-height: 18px;
-  color: black;
+  color: #003049;
   background-image: url('magnifier.png');
   background-repeat: no-repeat;
   background-size: 20px 20px;
@@ -24,7 +24,7 @@
 }
 
 .search_input::placeholder {
-  color: black;
+  color: #003049;
   letter-spacing: 1.5px;
 }
 
