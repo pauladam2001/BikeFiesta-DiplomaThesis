@@ -16,10 +16,10 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation
   validates :last_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation
   # validates :password, format: VALID_PASSWORD_REGEX, unless: :skip_validation
-  validate :password_regex
+  validate :password_regex, unless: :skip_validation
 
   has_one_attached :avatar
-  validates :avatar, :presence => true
+  validates :avatar, :presence => true, unless: :skip_validation
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create!(skip_validation: true) do |user|
