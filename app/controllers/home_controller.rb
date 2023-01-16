@@ -3,7 +3,7 @@ class HomeController < ApplicationController
     if !current_user.present?
       redirect_to new_user_session_path and return
     else
-      redirect_to posts_index_path and return
+      redirect_to posts_path and return
     end
   end
 end
