@@ -14,14 +14,22 @@
  *= require_self
  */
 
+ :root {
+  --dark-red: #780000;
+  --light-red: #C1121F;
+  --beige: #FDF0D5;
+  --dark-blue: #003049;
+  --light-blue: #669BBC;
+ }
+
  .menu {
   padding-top: 20px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid #FDF0D5;
-  background-color: #FDF0D5;
+  border-bottom: 1px solid var(--beige);
+  background-color: var(--beige);
 }
 
 .menu .menu-item {
@@ -37,7 +45,7 @@
 .menu .menu-item .wee {
   height: 2px;
   width: 100%;
-  background-color: #780000;
+  background-color: var(--dark-red);
   position: absolute;
   left: 0;
   bottom: 0;
@@ -48,16 +56,16 @@
   margin: 0;
   padding: 0 1rem 1.5rem;
   font-size: 1rem;
-  color: #C1121F;
+  color: var(--light-red);
   transition: 0.75s;
 }
 
 .menu .menu-item:hover h6 {
-  color: #780000;
+  color: var(--dark-red);
 }
 
 .menu .current-menu-item h6 {
-  color: #780000;
+  color: var(--dark-red);
 }
 
 .image-radius {
@@ -66,11 +74,11 @@
 
 a {
   text-decoration: none;
-  color: #C1121F;
+  color: var(--light-red);
 }
 
 a:hover {
-  color: #780000;
+  color: var(--dark-red);
 }
 
 
@@ -79,8 +87,8 @@ a:hover {
   left: 0;
   right: 0;
   padding: 2rem;
-  background: #FDF0D5;
-  color: #C1121F;
+  background: var(--beige);
+  color: var(--light-red);
   font-weight: 500;
   display: flex;
   justify-content: center;

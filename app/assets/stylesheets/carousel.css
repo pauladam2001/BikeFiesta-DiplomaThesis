@@ -104,7 +104,7 @@ input[type='radio']:after {
   top: -2px;
   left: -1px;
   position: relative;
-  background-color: #669BBC;
+  background-color: var(--light-blue);
   content: '';
   display: inline-block;
   visibility: visible;
@@ -118,7 +118,7 @@ input[type='radio']:checked:after {
   top: -2px;
   left: -1px;
   position: relative;
-  background-color: #003049;
+  background-color: var(--dark-blue);
   content: '';
   display: inline-block;
   visibility: visible;

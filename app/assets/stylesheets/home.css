@@ -3,7 +3,7 @@
 }
 
 .most-viewed-title {
-  color: #003049;
+  color: var(--dark-blue);
   padding-left: 48.5rem;
 }
 
