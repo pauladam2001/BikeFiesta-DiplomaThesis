@@ -72,3 +72,26 @@ a {
 a:hover {
   color: #780000;
 }
+
+
+.footer {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: #FDF0D5;
+  color: #C1121F;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.footer-relative {
+  position: relative;
+}
+
+.footer-fixed {
+  position: fixed;
+}
