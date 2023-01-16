@@ -12,11 +12,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     require 'open-uri'
-    binding.pry
+
     link = 'http://localhost:8000/api/extract?token=24apa2001'
     bodyCall = { "file": params[:user][:avatar] }
     h = HTTParty.post(link, body: bodyCall)
-    binding.pry
+
     if h.include?("cloudinary.com")
       file = URI.open(h)
     else
