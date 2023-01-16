@@ -11,10 +11,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+    require 'open-uri'
+    binding.pry
+    link = 'http://localhost:8000/api/extract?token=24apa2001'
+    bodyCall = { "file": params[:user][:avatar] }
+    h = HTTParty.post(link, body: bodyCall)
+    binding.pry
+    if h.include?("cloudinary.com")
+      file = URI.open(h)
+    else
+      error_message = h
+      redirect_to new_user_session_path, alert: "#{error_message}."
+    end
+
     build_resource(sign_up_params)
 
     resource.save
     yield resource if block_given?
+
+    resource.avatar.attach(io: file, filename: 'image' + Random.rand(999999999).to_s + '.jpg')
+
     if resource.persisted?
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
