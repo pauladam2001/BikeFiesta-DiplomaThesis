@@ -21,6 +21,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
   validates :avatar, :presence => true, unless: :skip_validation
 
+  has_many :posts
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create!(skip_validation: true) do |user|
       user.email = auth.info.email
