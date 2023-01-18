@@ -64,7 +64,7 @@
                 <%= f.select :brandname_id, options_for_select(@brand_names.collect { |a| [a[0], a[1]]}, f.object.brandname_id), {}, class: "max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md" %>
               </div>
 
-              <div class="dropzone dropzone-flex drop-title dropzone-size drop-container" id="dropzone-form"></div>
+              <div class="dropzone dropzone-flex drop-title drop-container" id="dropzone-form"></div>
             </div>
           </div>
         </div>
@@ -96,6 +96,7 @@
     myDropzone = new Dropzone("div#dropzone-form", { uploadMutliple: true,
                                                     parallelUploads: 100,
                                                     maxFiles: 100,
+                                                    acceptedFiles: ".jpeg, .jpg, .png",
                                                     url: `/posts/post_upload_files`,
                                                     params: {}
                                                   });
