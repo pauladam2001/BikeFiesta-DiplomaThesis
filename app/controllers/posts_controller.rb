@@ -8,6 +8,7 @@ class PostsController < ApplicationController
   end
 
   def new
+    @current = 3
     @post = Post.new
     @locations = Location.order(:name).pluck(:name, :id)
     @brand_names = Brandname.order(:name).pluck(:name, :id)

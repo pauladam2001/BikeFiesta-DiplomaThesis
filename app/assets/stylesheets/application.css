@@ -36,6 +36,9 @@
   float: right;
   position: relative;
   cursor: pointer;
+}
+
+.menu-item-padding {
   padding-top: 20px;
 }
 
