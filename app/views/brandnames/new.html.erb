@@ -1,0 +1,37 @@
+<div class="edit-page-div">
+  <div class="edit-title-div bottom-border">
+    <h1 class="h1-edit-title"><%= @brand_name.persisted? ? "Edit" : "New" %>Brand Name</h1>
+  </div>
+  <div class="edit-title-div">
+    
+    <%= form_for @brand_name do |f| %>
+      <div class="edit-form-div-1">
+        <div class="edit-form-div-2">
+          <div class="edit-form-div-3">
+            <div class="flex-div">
+              <label for="first-name" class="edit-label-div">
+                Name
+              </label>
+              <div class="edit-field-div">
+                <%= f.text_field :name, class: "input" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-5">
+        <div class="edit-bottom-div">
+          <%= link_to brandnames_path, class: "cancel-link" do %>
+            Cancel
+          <% end %>
+          <button type="submit" class="button">
+            Save
+          </button>
+        </div>
+      </div>
+    <% end %>
+    
+  </div>
+</div>
+

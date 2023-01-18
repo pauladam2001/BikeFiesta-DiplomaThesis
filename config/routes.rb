@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   }
 
   resources :posts
+  resources :brandnames
+  resources :colors
 end

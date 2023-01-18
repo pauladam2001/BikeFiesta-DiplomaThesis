@@ -24,8 +24,8 @@
               <h6>Short</h6>
               <div class="<%= 'wee' if @current == 2 %>"></div>
           </div>
-          <div class="menu-item <%= 'current-menu-item' if @current == 3 %>">
-              <h6>Longer Navigation</h6>
+          <div class="<%= 'current-menu-item' if @current == 3 %>">
+              <%= button_to "Post", new_post_path, method: :get, :class => "button" %>
               <div class="<%= 'wee' if @current == 3 %>"></div>
           </div>
           <div class="menu-item <%= 'current-menu-item' if @current == 4 %>">
@@ -64,15 +64,15 @@
               </a>
             </li>
             <li>
-              <a href="#" class="sidebar-a">
+              <a href=<%= brandnames_path %> class="sidebar-a">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
-                <span class="sidebar-title-span">Reviews</span>
+                <span class="sidebar-title-span">Brand Names</span>
               </a>
             </li>
             <li>
-              <a href="#" class="sidebar-a">
+              <a href=<%= colors_path %> class="sidebar-a">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
-                <span class="sidebar-title-span">Cash Flow</span>
+                <span class="sidebar-title-span">Colors</span>
               </a>
             </li>
             <li>

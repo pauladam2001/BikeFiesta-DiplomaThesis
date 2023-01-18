@@ -36,6 +36,7 @@
   float: right;
   position: relative;
   cursor: pointer;
+  padding-top: 20px;
 }
 
 .first-item {

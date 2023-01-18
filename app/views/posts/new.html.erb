@@ -1,0 +1,85 @@
+<% if alert %>
+  <div class="alert-danger">
+    <span class="close-button" onclick="this.parentElement.style.display='none';">&times;</span>
+    <p class="alert-paragraph"><%= alert %></p>
+  </div>
+<% end%>
+<div class="">
+  <div class="">
+    <h1 class=""><%= @post.persisted? ? "Edit" : "New" %> Post</h1>
+  </div>
+  <div class="">
+    
+    <%= form_for @post do |f| %>
+      <div class="">
+        <div class="">
+          <div class="">
+            <div class="">
+              <label for="" class="">
+                Post Name (Maximum 20 characaters)
+              </label>
+              <div class="">
+                <%= f.text_field :name, class: "" %>
+              </div>
+              <label for="" class="">
+                Description
+              </label>
+              <div class="">
+                <%= f.text_field :description, class: "" %>
+              </div>
+              <label for="" class="">
+                Short Description (Maximum 50 characters)
+              </label>
+              <div class="">
+                <%= f.text_field :short_description, class: "" %>
+              </div>
+              <label for="" class="">
+                Price
+              </label>
+              <div class="">
+                <%= f.number_field :price, class: "" %>
+              </div>
+              <label for="" class="">
+                Color
+              </label>
+              <div class="">
+                <%= f.text_field :color, class: "" %>
+              </div>
+              <label for="" class="">
+                Year
+              </label>
+              <div class="">
+                <%= f.number_field :year, class: "" %>
+              </div>
+              <label for="" class="">
+                Location
+              </label>
+              <div class="">
+                <%= f.select :location, options_for_select(@social_ad_accounts.collect { |a| [a[0], a[1]]}, f.object.social_ad_account_id), {}, class: "max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+              <label for="" class="">
+                Brand Name
+              </label>
+              <div class="">
+                <%= f.select :brand_name, options_for_select(@social_ad_accounts.collect { |a| [a[0], a[1]]}, f.object.social_ad_account_id), {}, class: "max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="">
+          <%= link_to posts_path, class: "" do %>
+            Cancel
+          <% end %>
+          <button type="submit" class="">
+            Save
+          </button>
+        </div>
+      </div>
+    <% end %>
+    
+  </div>
+</div>
+

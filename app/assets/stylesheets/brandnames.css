@@ -1,0 +1,120 @@
+.main-page-div {
+  padding-left: 15rem;
+  padding-top: 2rem;
+  width: 99.8vw;
+}
+
+.h1-title {
+  font-size: 30px;
+  color: var(--dark-blue);
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+table {
+  width:100%;
+  table-layout: fixed;
+}
+
+.tbl-header {
+	background-color: #EEDCB9;
+}
+
+.tbl-content {
+  height: 75vh;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid var(--light-blue);
+}
+
+th {
+  padding: 20px 15px;
+  text-align: center;
+  font-size: 20px;
+  color: var(--dark-blue);
+}
+
+td {
+  padding: 15px;
+  text-align: center;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 20px;
+  color: var(--dark-blue);
+  border-bottom: 0.5px solid var(--light-blue);
+}
+
+.links-class {
+  font-size: 20px;
+}
+
+.add-link {
+  display: inline-flex; 
+  float: right; 
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem; 
+  padding-left: 0.75rem;
+  padding-right: 0.75rem; 
+  margin-top: 1rem; 
+  align-items: center; 
+  border-width: 1px; 
+  border-color: transparent; 
+}
+
+.edit-title-div {
+  padding-left: 1rem;
+  padding-right: 1rem; 
+  margin-left: auto;
+  margin-right: auto; 
+  max-width: 80rem;
+}
+
+.bottom-border {
+  border-bottom: 1px solid var(--light-blue);
+}
+
+.edit-form-div-1 {
+  margin-top: 1rem; 
+}
+
+.edit-form-div-2 {
+  padding-top: 1rem; 
+  margin-top: 1.5rem; 
+}
+
+.edit-form-div-3 {
+  margin-top: 1.5rem; 
+}
+
+.edit-label-div {
+  color: var(--dark-blue);
+  padding-top: 15px;
+}
+
+.edit-field-div {
+  margin-left: 5rem;
+}
+
+.edit-bottom-div {
+  display: flex; 
+  justify-content: flex-end; 
+}
+
+.edit-page-div {
+  padding-top: 3rem;
+  padding-left: 5rem;
+}
+
+.cancel-link {
+  padding-top: 10px;
+  padding-right: 10px;
+  font-size: 20px;
+}
+
+.h1-edit-title {
+  color: var(--dark-blue);
+}
+
+.flex-div {
+  display: flex;
+}

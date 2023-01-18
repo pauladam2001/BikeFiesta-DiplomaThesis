@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_16_150513) do
+ActiveRecord::Schema.define(version: 2023_01_18_145501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,24 @@ ActiveRecord::Schema.define(version: 2023_01_16_150513) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "brandnames", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "colors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -58,6 +76,12 @@ ActiveRecord::Schema.define(version: 2023_01_16_150513) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "views", default: 0
     t.text "short_description"
+    t.string "color"
+    t.integer "year"
+    t.string "location"
+    t.string "brand_name"
+    t.string "sale_price"
+    t.datetime "sale_price_expiration"
   end
 
   create_table "users", force: :cascade do |t|
