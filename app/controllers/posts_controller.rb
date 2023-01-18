@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
   
   def index
@@ -27,7 +28,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    binding.pry
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
@@ -41,6 +41,11 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path
+  end
+
+  # Receives a hash of images
+  def upload
+    
   end
 
   private

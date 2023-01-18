@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  resources :posts
+  resources :posts do
+    collection do
+      post "/post_upload_files", to: "posts#upload"
+    end
+  end
   resources :brandnames
   resources :colors
 end

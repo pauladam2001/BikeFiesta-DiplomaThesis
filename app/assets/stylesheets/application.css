@@ -104,3 +104,12 @@ a:hover {
 .footer-fixed {
   position: fixed;
 }
+
+.dropzone-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+/* .dropzone-size img {
+  width: 100px;
+} */

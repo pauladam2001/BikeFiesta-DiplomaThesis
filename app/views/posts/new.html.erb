@@ -63,6 +63,8 @@
               <div class="">
                 <%= f.select :brandname_id, options_for_select(@brand_names.collect { |a| [a[0], a[1]]}, f.object.brandname_id), {}, class: "max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md" %>
               </div>
+
+              <div class="dropzone dropzone-flex drop-title dropzone-size drop-container" id="dropzone-form"></div>
             </div>
           </div>
         </div>
@@ -83,3 +85,21 @@
   </div>
 </div>
 
+<script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+<link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+  let myDropzone = null;
+  let dropzoneDiv = document.getElementById("dropzone-form");
+
+  if (myDropzone == null) {
+    myDropzone = new Dropzone("div#dropzone-form", { uploadMutliple: true,
+                                                    parallelUploads: 100,
+                                                    maxFiles: 100,
+                                                    url: `/posts/post_upload_files`,
+                                                    params: {}
+                                                  });
+  } else {
+    myDropzone.enable();
+  }
+</script>
