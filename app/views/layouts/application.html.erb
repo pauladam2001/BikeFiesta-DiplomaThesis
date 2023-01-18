@@ -49,7 +49,58 @@
           </div>
         </div>
     <% elsif current_user.present? && current_user.is_admin? %>
-        TODO
+      <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
+
+      <div class="main-sidebar-div">
+        <div class="main-sidebar-div-2">
+          <div class="logo-div">
+            <h1><%= link_to image_tag("logo.png", border: 0, width: '200px'), '#' %></h1>
+          </div>
+          <ul class="sidebar-ul">
+            <li>
+              <a href="#" class="sidebar-a">
+                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-title-span">Users</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-a">
+                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-title-span">Reviews</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-a">
+                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-title-span">Cash Flow</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-a">
+                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-title-span">Costs</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-a">
+                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-title-span">Profit</span>
+                <%# <span class="ml-auto mr-6 text-sm bg-red-100 rounded-full px-3 py-px text-red-500">5</span> %>
+              </a>
+            </li>
+          </ul>
+          <div class="main-logout-div">
+            <div>
+              <p class="logout-p-name">
+                <%= current_user.email %>
+              </p>
+              <p class="logout-p-path">
+                <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
     <%= yield %>
   </body>
