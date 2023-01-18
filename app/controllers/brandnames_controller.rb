@@ -1,4 +1,6 @@
 class BrandnamesController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @brand_names = Brandname.order('name ASC')
   end

@@ -1,4 +1,6 @@
 class ColorsController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @colors = Color.order('name ASC')
   end
