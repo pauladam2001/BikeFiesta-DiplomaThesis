@@ -3,6 +3,7 @@ class BrandnamesController < ApplicationController
   
   def index
     @brand_names = Brandname.order('name ASC')
+    @brand_names = @brand_names.paginate(page: params[:page], per_page: 12)
   end
 
   def new

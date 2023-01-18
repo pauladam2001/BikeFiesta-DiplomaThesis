@@ -32,6 +32,9 @@
         <tr>
       </tbody>
     </table>
+    <div class="pagination">
+      <%= will_paginate @brand_names %>
+    </div>
   </div>
   <%= button_to "Add New Brand Name", new_brandname_path, method: :get, :class => "button add-link" %>
 </div>
