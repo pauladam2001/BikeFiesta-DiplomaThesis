@@ -8,6 +8,9 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @locations = Location.order(:name).pluck(:name, :id)
+    @brand_names = Brandname.order(:name).pluck(:name, :id)
+    @colors = Color.order(:name).pluck(:name, :id)
   end
 
   def edit
@@ -24,6 +27,7 @@ class PostsController < ApplicationController
   end
 
   def create
+    binding.pry
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
@@ -41,6 +45,6 @@ class PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:name)
+      params.require(:post).permit(:id, :name, :brandname_id, :location_id, :price, :description, :short_description, :color_id, :year)
     end
 end
