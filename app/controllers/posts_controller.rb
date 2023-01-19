@@ -34,7 +34,6 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     if @post.save
       # TODO Sidekiq for images verification
-      # TODO Sidekiq with Twillio message for following users
       redirect_to edit_post_path(@post, upload: true, post_id: @post.id)
     else
       redirect_back(fallback_location: posts_path, alert: "Error - #{@post.errors.full_messages.first}.")

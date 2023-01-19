@@ -1,7 +1,7 @@
 module Marketing
   
   def self.check_images_for_post(post_id)
-    # require 'open-uri'
+    #TODO sms here, after we mark it as active
     
     post = Post.find(post_id)
 
