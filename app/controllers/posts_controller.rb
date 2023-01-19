@@ -49,7 +49,6 @@ class PostsController < ApplicationController
 
   # Receives a hash of images
   def upload
-    binding.pry
     asset = Asset.new
     asset.post_id = params[:post_id]
     asset.user_id = current_user.id
