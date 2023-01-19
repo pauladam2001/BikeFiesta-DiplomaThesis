@@ -73,10 +73,6 @@
   color: var(--dark-red);
 }
 
-.menu .current-menu-item h6 {
-  color: var(--dark-red);
-}
-
 .image-radius {
   border-radius: 45px;
 }

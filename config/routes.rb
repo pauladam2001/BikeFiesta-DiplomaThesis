@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       post "/post_upload_files", to: "posts#upload"
     end
   end
+  get "/my_posts", to: "posts#my_posts"
   resources :brandnames
   resources :colors
 end

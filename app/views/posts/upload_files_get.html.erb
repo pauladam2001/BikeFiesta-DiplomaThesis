@@ -1,0 +1,31 @@
+<div class="dropzone dropzone-flex drop-title drop-container" id="dropzone-form"></div>
+<button id="createPost" type="submit" class="">
+            Save
+          </button>
+
+<script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+<link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+  const createPostButton = document.getElementById('createPost');
+  let myDropzone = null;
+  let dropzoneDiv = document.getElementById("dropzone-form");
+
+  if (myDropzone == null) {
+    myDropzone = new Dropzone("div#dropzone-form", { uploadMutliple: true,
+                                                    parallelUploads: 5,
+                                                    maxFiles: 5,
+                                                    acceptedFiles: ".jpeg, .jpg, .png",
+                                                    url: `/posts/post_upload_files`,
+                                                    autoProcessQueue: false,
+                                                    addRemoveLinks: true,
+                                                    params: {}
+                                                  });
+  } else {
+    myDropzone.enable();
+  }
+
+  createPostButton.addEventListener('click', () => {
+    myDropzone.processQueue();
+  });
+</script>

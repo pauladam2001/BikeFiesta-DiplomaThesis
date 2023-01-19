@@ -3,12 +3,10 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @current = 1
     @posts = Post.all
   end
 
   def new
-    @current = 3
     @post = Post.new
     @locations = Location.order(:name).pluck(:name, :id)
     @brand_names = Brandname.order(:name).pluck(:name, :id)
@@ -17,6 +15,9 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @locations = Location.order(:name).pluck(:name, :id)
+    @brand_names = Brandname.order(:name).pluck(:name, :id)
+    @colors = Color.order(:name).pluck(:name, :id)
     render :new
   end
 
@@ -32,7 +33,8 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      redirect_to posts_path
+      # TODO Sidekiq for this post here
+      redirect_to edit_post_path(@post, upload: true, post_id: @post.id)
     else
       redirect_back(fallback_location: posts_path, alert: "Error - #{@post.errors.full_messages.first}.")
     end
@@ -46,11 +48,20 @@ class PostsController < ApplicationController
 
   # Receives a hash of images
   def upload
-    
+    binding.pry
+    asset = Asset.new
+    asset.post_id = params[:post_id]
+    asset.user_id = current_user.id
+    asset.image = params[:file]
+    asset.save
+  end
+
+  def my_posts
+    @posts = Post.where(user_id: current_user.id)
   end
 
   private
     def post_params
-      params.require(:post).permit(:id, :name, :brandname_id, :location_id, :price, :description, :short_description, :color_id, :year)
+      params.require(:post).permit(:id, :name, :brandname_id, :location_id, :price, :description, :short_description, :color_id, :year, :post_id)
     end
 end
