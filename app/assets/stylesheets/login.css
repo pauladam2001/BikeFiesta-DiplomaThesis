@@ -6,6 +6,10 @@
   margin-bottom: 0px;
 }
 
+body {
+	color: var(--dark-blue);
+}
+
 .titles {
 	font-weight: bold;
 	margin: 0;
