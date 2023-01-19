@@ -5,15 +5,15 @@ module Marketing
     
     post = Post.find(post_id)
 
-    link = 'http://localhost:8000/api/predict?token=24apa2001'
+    link = 'http://localhost:8000/api/predict?token=24apa2001&cloudinary_url='
+
+    count = 0
 
     post.assets.each do |asset|
-      #TODO
+      asset_link = link + asset.image.url.split('http://res.cloudinary.com/')[1]
 
-      # bodyCall = { "file": asset.image }
-
-      # h = HTTParty.post(link, body: bodyCall)
-      # binding.pry
+      h = HTTParty.post(asset_link)
+      binding.pry
     end
   end
 end
