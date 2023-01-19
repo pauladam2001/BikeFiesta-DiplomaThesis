@@ -18,5 +18,6 @@ module BikeFiesta
     #
     # config.time_zone = "Central Time (US & Canada)"
     config.eager_load_paths << Rails.root.join("lib")
+    config.eager_load_paths << Rails.root.join("workers")
   end
 end
