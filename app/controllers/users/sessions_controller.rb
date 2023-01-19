@@ -2,6 +2,10 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  require 'authenticate_with_twilio'
+  include AuthenticateWithTwilio
+
+  # before_action :authenticate_with_otp_two_factor, if: -> { action_name == 'create' }
 
   # GET /resource/sign_in
   # def new

@@ -49,6 +49,11 @@ class User < ApplicationRecord
     self.role == "normal"
   end
 
+  def self.generate_code(user)
+    user.code = "2222"
+    user.save(validate: false)
+  end
+
   def password_regex
     return if password.blank? || password =~ /\A(?=.*\d)(?=.*[A-Z])(?=.*\W)[^ ]{6,}\z/
     errors.add :password, 'should have more than 6 characters including 1 uppercase letter, 1 number, 1 special character'
