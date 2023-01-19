@@ -77,7 +77,7 @@
 }
 
 .cancel-div {
-  margin-top: 5rem;
+  margin-top: 4rem;
   margin-left: 34.5%;
 }
 
@@ -89,4 +89,8 @@
 
 .add-div {
   margin-bottom: 10px;
+}
+
+.info-span {
+  margin-left: 31%;
 }
