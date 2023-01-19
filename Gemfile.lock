@@ -262,6 +262,10 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
+    twilio-ruby (5.74.1)
+      faraday (>= 0.9, < 3.0)
+      jwt (>= 1.5, <= 2.6)
+      nokogiri (>= 1.6, < 2.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -317,6 +321,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   turbolinks (~> 5)
+  twilio-ruby
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
