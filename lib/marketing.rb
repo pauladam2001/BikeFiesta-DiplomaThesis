@@ -35,7 +35,7 @@ module Marketing
   # Called hourly
   def self.check_posts_without_assets
     Post.find_each do |post|
-      if post.assets.count < 0
+      if post.assets.count < 0 && post.created_at < 30.minutes.ago
         Post.destroy
       end
     end
