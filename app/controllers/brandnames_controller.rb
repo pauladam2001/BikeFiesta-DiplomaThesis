@@ -1,5 +1,6 @@
 class BrandnamesController < ApplicationController
-  before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!, :check_permissions
   
   def index
     @brand_names = Brandname.order('name ASC')
@@ -36,7 +37,12 @@ class BrandnamesController < ApplicationController
     redirect_to brandnames_path
   end
 
-  def brandname_params
-    params.require(:brandname).permit(:id, :name)
-  end
+  private
+    def brandname_params
+      params.require(:brandname).permit(:id, :name)
+    end
+
+    def check_permissions
+      redirect_to posts_path and return if current_user.is_normal?
+    end
 end

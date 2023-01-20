@@ -1,5 +1,6 @@
 class ColorsController < ApplicationController
-  before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!, :check_permissions
   
   def index
     @colors = Color.order('name ASC')
@@ -36,7 +37,12 @@ class ColorsController < ApplicationController
     redirect_to colors_path
   end
 
-  def color_params
-    params.require(:color).permit(:id, :name)
-  end
+  private
+    def color_params
+      params.require(:color).permit(:id, :name)
+    end
+
+    def check_permissions
+      redirect_to posts_path and return if current_user.is_normal?
+    end
 end
