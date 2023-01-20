@@ -1,0 +1,37 @@
+.select-div {
+
+}
+
+select {
+  /* appearance: none; */
+  border: 0;
+  width: 20em;
+  height: 3em;
+  padding: 0 1em 0 0.5em;
+  background-color: #EEDCB9;
+  color: var(--dark-blue);
+  border-radius: 7px;
+  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+select option {
+  color: inherit;
+}
+
+select:focus {
+  outline: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.add-post-div {
+  margin-top: 2rem;
+  margin-left: 21rem;
+}
+
+.cancel-link {
+  font-size: 20px;
+}

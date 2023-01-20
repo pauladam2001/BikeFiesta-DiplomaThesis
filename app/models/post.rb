@@ -14,4 +14,5 @@ class Post < ApplicationRecord
   validates :color_id, presence: true
   validates :brandname_id, presence: true
   validates :location_id, presence: true
+  validates :year, presence: true
 end

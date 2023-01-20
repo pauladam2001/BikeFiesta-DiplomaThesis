@@ -17,7 +17,7 @@
     <% end %>
   </div>
   <% if !@post.persisted? %>
-    <div class="">
+    <div class="add-post-div container">
       <%= form_for @post do |f| %>
         <div class="">
           <div class="">
@@ -33,7 +33,7 @@
                   Description
                 </label>
                 <div class="">
-                  <%= f.text_field :description, class: "" %>
+                  <%= f.text_area :description, cols: "50", rows: "10", class: "" %>
                 </div>
                 <label for="" class="">
                   Short Description (Maximum 50 characters)
@@ -47,27 +47,15 @@
                 <div class="">
                   <%= f.number_field :price, class: "" %>
                 </div>
-                <label for="" class="">
-                  Color
-                </label>
                 <div class="">
                   <%= f.select :color_id, options_for_select([["Select a color", nil]] + @colors.collect { |a| [a[0], a[1]]}, f.object.color_id), {}, class: "" %>
                 </div>
-                <label for="" class="">
-                  Year
-                </label>
                 <div class="">
-                  <%= f.select :year, (Time.now.year).downto(Time.now.year - 70).to_a %>
+                  <%= f.select :year, [["Select an year", nil]] + (Time.now.year).downto(Time.now.year - 70).to_a %>
                 </div>
-                <label for="" class="">
-                  Location
-                </label>
-                <div class="">
+                <div class="select-div">
                   <%= f.select :location_id, options_for_select([["Select a location", nil]] + @locations.collect { |a| [a[0], a[1]]}, f.object.location_id), {}, class: "" %>
                 </div>
-                <label for="" class="">
-                  Brand Name
-                </label>
                 <div class="">
                   <%= f.select :brandname_id, options_for_select([["Select a brand name", nil]] + @brand_names.collect { |a| [a[0], a[1]]}, f.object.brandname_id), {}, class: "" %>
                 </div>
@@ -78,11 +66,11 @@
 
         <div class="">
           <div class="">
-            <%= link_to posts_path, class: "" do %>
+            <%= link_to posts_path, class: "cancel-link" do %>
               Cancel
             <% end %>
-            <button type="submit" class="">
-              Save
+            <button type="submit" class="button">
+              Go to Upload
             </button>
           </div>
         </div>

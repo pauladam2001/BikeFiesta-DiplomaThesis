@@ -84,7 +84,7 @@ body {
 	max-width: 100%;
 	min-height: 600px;
   top: 50%;
-  margin-top: 20vh;
+  /* margin-top: 20vh; */
   left: 3%;
   opacity: 0.90;
 }
