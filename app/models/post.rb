@@ -11,4 +11,7 @@ class Post < ApplicationRecord
   validates :description, presence: true, unless: :skip_validation
   validates :short_description, presence: true, length: { minimum: 1, maximum: 50 }, unless: :skip_validation
   validates :price, presence: true, numericality: { greater_than: 0, less_than: 1000000 }
+  validates :color_id, presence: true
+  validates :brandname_id, presence: true
+  validates :location_id, presence: true
 end
