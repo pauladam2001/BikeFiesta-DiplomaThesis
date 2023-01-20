@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get "/my_posts", to: "posts#my_posts"
   resources :brandnames
   resources :colors
+  # resources :relationships, only: [:create, :destroy] # do we need it? Page 871
 end
