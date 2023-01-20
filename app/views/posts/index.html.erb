@@ -3,7 +3,7 @@
       <input class="search_input" type="text" placeholder="Quick Search...">
   </div>
 
-  <% ["Most Viewed", "Sale", "All"].each do |title| %>
+  <% ["Most Viewed", "Sale", "Following", "All"].each do |title| %>
     <div class="most-viewed-div">
       <div class="most-viewed-title <%= 'sale-padding' if title == "Sale" || title == "All" %>">
         <h1><%= title %></h1>
