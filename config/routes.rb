@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   resources :brandnames
   resources :colors
   # resources :relationships, only: [:create, :destroy] # do we need it? Page 871
+  resources :users
+  get "/followers", to: "users#followers_following_page"
 end
