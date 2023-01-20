@@ -31,4 +31,13 @@ module Marketing
 
     post.save(validate: false)
   end
+
+  # Called hourly
+  def self.check_posts_without_assets
+    Post.find_each do |post|
+      if post.assets.count < 0
+        Post.destroy
+      end
+    end
+  end
 end

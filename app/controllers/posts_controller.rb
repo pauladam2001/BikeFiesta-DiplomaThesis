@@ -34,8 +34,8 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     if @post.save
       x = (Random.rand(3..10) * 100).seconds.from_now
-      AsyncCheckImagesForPost.perform_in(x, @post.id)   # by the time this is called the user already uploaded the images
-      redirect_to edit_post_path(@post, upload: true, post_id: @post.id)
+      # AsyncCheckImagesForPost.perform_in(x, @post.id)   # by the time this is called the user already uploaded the images
+      redirect_to edit_post_path(@post, upload: true)
     else
       redirect_back(fallback_location: posts_path, alert: "Error - #{@post.errors.full_messages.first}.")
     end
@@ -49,6 +49,7 @@ class PostsController < ApplicationController
 
   # Receives a hash of images
   def upload
+    binding.pry
     asset = Asset.new
     asset.post_id = params[:post_id]
     asset.user_id = current_user.id

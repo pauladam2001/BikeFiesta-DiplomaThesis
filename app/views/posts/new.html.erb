@@ -5,8 +5,16 @@
   </div>
 <% end%>
 <div class="">
-  <div class="">
-    <h1 class=""><%= @post.persisted? && params[:upload] == "false" ? "Edit" : "New" %> Post</h1>
+  <div class="edit-post-title-div">
+    <% if @post.persisted? %>
+      <% if params[:upload] == "true" %>
+        <h1 class="">Upload Images</h1>
+      <% else %>
+        <h1 class="">Edit Post</h1>
+      <% end %>
+    <% else %>
+      <h1 class="">New Post</h1>
+    <% end %>
   </div>
   <% if !@post.persisted? %>
     <div class="">
@@ -83,8 +91,16 @@
     </div>
   <% else %>
     <% if params[:upload] == "true" %>
-      <div class="dropzone dropzone-flex drop-title drop-container" id="dropzone-form"></div>
-      <%= button_to "Upload Files", posts_path, id: "createPost", method: :get, :class => "button" %>
+      <div class="upload-info-div-1">
+        <span style="margin-left: 2.5rem">Please upload maximum 5 images</span>
+        <br/>
+        <span>At least one image must include the entire bike</span>
+      </div>
+      <div class="dropzone dropzone-flex drop-title drop-container dropzone-styles" id="dropzone-form"></div>
+      <div class="upload-info-div-2">
+        <%= button_to "Upload", posts_path, id: "createPost", method: :get, :class => "button", :style => "margin-left: 7.5rem; margin-bottom: 0.5rem;" %>
+        <span>After uploading it takes up to 10 minutes to validate your post</span>
+      </div>
     <% else %>
       Edit others, not assets
     <% end %>
@@ -104,7 +120,7 @@
                                                     parallelUploads: 100,
                                                     maxFiles: 100,
                                                     acceptedFiles: ".jpeg, .jpg, .png",
-                                                    url: `/posts/post_upload_files?post_id=<%= params[:post_id] %>`,
+                                                    url: `/posts/post_upload_files?post_id=<%= params[:id] %>`,
                                                     autoProcessQueue: false,
                                                     addRemoveLinks: true
                                                   });
