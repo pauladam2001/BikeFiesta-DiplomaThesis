@@ -23,32 +23,20 @@
           <div class="">
             <div class="">
               <div class="">
-                <label for="" class="">
-                  Post Name (Maximum 20 characaters)
-                </label>
                 <div class="">
-                  <%= f.text_field :name, class: "" %>
-                </div>
-                <label for="" class="">
-                  Description
-                </label>
-                <div class="">
-                  <%= f.text_area :description, cols: "50", rows: "10", class: "" %>
-                </div>
-                <label for="" class="">
-                  Short Description (Maximum 50 characters)
-                </label>
-                <div class="">
-                  <%= f.text_field :short_description, class: "" %>
-                </div>
-                <label for="" class="">
-                  Price
-                </label>
-                <div class="">
-                  <%= f.number_field :price, class: "" %>
+                  <%= f.text_field :name, placeholder: "Post Name (Maximum 20 characters)", class: "input" %>
                 </div>
                 <div class="">
-                  <%= f.select :color_id, options_for_select([["Select a color", nil]] + @colors.collect { |a| [a[0], a[1]]}, f.object.color_id), {}, class: "" %>
+                  <%= f.text_area :description, placeholder: "Description...", cols: "50", rows: "10", class: "input" %>
+                </div>
+                <div class="">
+                  <%= f.text_area :short_description, placeholder: "Short Description (Maximum 50 characters)", cols: "30", rows: "5", class: "input" %>
+                </div>
+                <div class="">
+                  <%= f.number_field :price, placeholder: "Price", class: "input" %>
+                </div>
+                <div class="">
+                  <%= f.select :color_id, options_for_select([["Select a color", nil]] + @colors.collect { |a| [a[0], a[1]]}, f.object.color_id), {}, class: "input" %>
                 </div>
                 <div class="">
                   <%= f.select :year, [["Select an year", nil]] + (Time.now.year).downto(Time.now.year - 70).to_a %>
