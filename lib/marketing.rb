@@ -40,4 +40,33 @@ module Marketing
       end
     end
   end
+
+  # Called daily
+  def self.mark_posts_on_sale
+    random_offset = Random.rand(Post.count)
+    random_posts = Post.offset(random_offset).first(Post.count / 3)
+    random_posts.each do |post|
+      if post.sale_price.present? && post.sale_price_expiration.present?
+        next
+      end
+
+      sale_percentage = Random.rand(10)
+      sale_price = post.price - ((sale_percentage * post.price) / 100)
+
+      post.sale_price = sale_price
+      post.sale_price_expiration = Time.now + 1.day
+
+      post.save
+    end
+  end
+
+  # Called daily
+  def self.unmark_posts_on_sale
+    Post.where("sale_price_expiration <= ?", Time.now).where.not(sale_price: nil).find_each do |post|
+      post.sale = nil
+      post.sale_price_expiration = nil
+
+      post.save
+    end
+  end
 end
