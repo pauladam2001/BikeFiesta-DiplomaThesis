@@ -46,7 +46,7 @@ module Marketing
     random_offset = Random.rand(Post.count)
     random_posts = Post.offset(random_offset).first(Post.count / 3)
     random_posts.each do |post|
-      if post.sale_price.present? && post.sale_price_expiration.present?
+      if post.sale_price.present? && post.sale_price_expiration.present? && post.created_at < 7.days.ago
         next
       end
 
