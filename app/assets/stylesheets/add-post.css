@@ -26,6 +26,7 @@ select::-ms-expand {
 .add-post-div {
   margin-top: 2rem;
   margin-left: 21rem;
+  max-height: 1000px;
 }
 
 .cancel-link {

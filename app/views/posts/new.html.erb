@@ -17,7 +17,7 @@
     <% end %>
   </div>
   <% if !@post.persisted? %>
-    <div class="add-post-div container">
+    <div class="add-post-div container" style="overflow-y: scroll;">
       <%= form_for @post do |f| %>
         <div class="">
           <div class="">
