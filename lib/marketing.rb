@@ -12,6 +12,8 @@ module Marketing
       
       h.each do |response|
         if (response["class"].include?("bike") || response["class"].include?("bicycle") || response["class"].include?("cycle")) || response["confidence"] >= 50.0
+          asset.is_bicycle = true
+          asset.save
           is_bicycle = true
           break
         end
