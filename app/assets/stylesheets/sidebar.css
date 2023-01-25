@@ -84,3 +84,33 @@
 .logout-p-path {
   margin-left: 1.5rem;
 }
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  margin: 20px;
+  transition: 0.3s ease;
+}
+ 
+.rotate {
+  transform: rotate(90deg);
+  transition: 0.3s ease;
+}
+
+.sub-menu {
+  display: none;
+}
+
+.sub-btn {
+  padding-left: 3rem;
+}
+
+.dropdown-span {
+  color: var(--light-red);
+  cursor: pointer;
+}
+
+.dropdown-span:hover {
+  color: var(--dark-red);
+  transition: 0.5s ease;
+}

@@ -8,7 +8,7 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
   </head>
 
@@ -59,36 +59,42 @@
                 <span class="sidebar-title-span">Users</span>
               </a>
             </li>
-            <li>
-              <a href=<%= brandnames_path %> class="sidebar-a">
-                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
-                <span class="sidebar-title-span">Brand Names</span>
-              </a>
-            </li>
-            <li>
-              <a href=<%= colors_path %> class="sidebar-a">
-                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
-                <span class="sidebar-title-span">Colors</span>
-              </a>
-            </li>
-            <li>
-              <a href=<%= categories_path %> class="sidebar-a">
-                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
-                <span class="sidebar-title-span">Categories</span>
-              </a>
-            </li>
-            <li>
-              <a href=<%= materials_path %> class="sidebar-a">
-                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
-                <span class="sidebar-title-span">Materials</span>
-              </a>
-            </li>
-            <li>
-              <a href=<%= component_groups_path %> class="sidebar-a">
-                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
-                <span class="sidebar-title-span">Components</span>
-              </a>
-            </li>
+            <div class="item">
+              <%# <a class="sub-btn sidebar-title-span">Categorization</a> %>
+              <span class="sidebar-icon-span sub-btn dropdown-span" style="margin-left: 2rem">Categorization<%= image_tag("right-arrow.png", border: 0, width: '25px', :class => "dropdown dropdown-arrow") %></span>
+              <div class="sub-menu">
+                <li>
+                  <a href=<%= brandnames_path %> class="sidebar-a">
+                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                    <span class="sidebar-title-span">Brand Names</span>
+                  </a>
+                </li>
+                <li>
+                  <a href=<%= colors_path %> class="sidebar-a">
+                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                    <span class="sidebar-title-span">Colors</span>
+                  </a>
+                </li>
+                <li>
+                  <a href=<%= categories_path %> class="sidebar-a">
+                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                    <span class="sidebar-title-span">Categories</span>
+                  </a>
+                </li>
+                <li>
+                  <a href=<%= materials_path %> class="sidebar-a">
+                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                    <span class="sidebar-title-span">Materials</span>
+                  </a>
+                </li>
+                <li>
+                  <a href=<%= component_groups_path %> class="sidebar-a">
+                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                    <span class="sidebar-title-span">Components</span>
+                  </a>
+                </li>
+              </div>
+            </div>
             <li>
               <a href="#" class="sidebar-a">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
@@ -119,3 +125,12 @@
     <%= yield %>
   </body>
 </html>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+     $('.sub-btn').click(function(){
+       $(this).next('.sub-menu').slideToggle();
+       $(this).find('.dropdown').toggleClass('rotate');
+     });
+   });
+</script>
