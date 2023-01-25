@@ -11,6 +11,9 @@ class PostsController < ApplicationController
     @locations = Location.order(:name).pluck(:name, :id)
     @brand_names = Brandname.order(:name).pluck(:name, :id)
     @colors = Color.order(:name).pluck(:name, :id)
+    @categories = Category.order(:name).pluck(:name, :id)
+    @materials = Material.order(:name).pluck(:name, :id)
+    @component_groups = ComponentGroup.order(:name).pluck(:name, :id)
   end
 
   def edit
@@ -18,6 +21,9 @@ class PostsController < ApplicationController
     @locations = Location.order(:name).pluck(:name, :id)
     @brand_names = Brandname.order(:name).pluck(:name, :id)
     @colors = Color.order(:name).pluck(:name, :id)
+    @categories = Category.order(:name).pluck(:name, :id)
+    @materials = Material.order(:name).pluck(:name, :id)
+    @component_groups = ComponentGroup.order(:name).pluck(:name, :id)
     render :new
   end
 
@@ -63,6 +69,7 @@ class PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:id, :name, :brandname_id, :location_id, :price, :description, :short_description, :color_id, :year, :post_id)
+      params.require(:post).permit(:id, :name, :brandname_id, :location_id, :price, :description, :short_description, :color_id, :year, :post_id,
+              :category_id, :material_id, :size, :electric, :component_group_id, :condition)
     end
 end
