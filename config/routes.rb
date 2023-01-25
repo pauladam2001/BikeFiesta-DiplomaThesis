@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   get "/my_posts", to: "posts#my_posts"
   resources :brandnames
   resources :colors
+  resources :categories
+  resources :materials
+  resources :component_groups
   # resources :relationships, only: [:create, :destroy] # do we need it? Page 871
   resources :users
   get "/followers", to: "users#followers_following_page"

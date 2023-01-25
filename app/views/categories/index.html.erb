@@ -1,0 +1,40 @@
+<div class="main-page-div">
+  <h1 class="h1-title">Categories</h1>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td>
+              <%= category.name %>
+            </td>
+            <td>
+              <%= link_to category_path(category), method: :delete, class: "links-class", data: {confirm: "Are you sure you want to delete this category?"} do %>
+                Delete
+              <% end %>
+              •
+              <%= link_to edit_category_path(category), class: "links-class" do %>
+                Edit
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+      </tbody>
+    </table>
+    <div class="pagination">
+      <%= will_paginate @categories %>
+    </div>
+  </div>
+  <%= button_to "Add New Category", new_category_path, method: :get, :class => "button add-link" %>
+</div>
