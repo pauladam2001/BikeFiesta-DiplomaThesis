@@ -4,6 +4,9 @@ class Post < ApplicationRecord
   belongs_to :color, foreign_key: :color_id
   belongs_to :location, foreign_key: :location_id
   belongs_to :brandname, foreign_key: :brandname_id
+  belongs_to :category, foreign_key: :category_id
+  belongs_to :material, foreign_key: :material_id
+  belongs_to :component_group, foreign_key: :component_group_id
 
   attr_accessor :skip_validation
 
@@ -15,4 +18,10 @@ class Post < ApplicationRecord
   validates :brandname_id, presence: true
   validates :location_id, presence: true
   validates :year, presence: true
+  validates :category_id, presence: true
+  validates :size, presence: true
+  validates :condition, presence: true
+  validates :material_id, presence: true
+  validates :component_group_id, presence: true
+  validates :electric, presence: true
 end
