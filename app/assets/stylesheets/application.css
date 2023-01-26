@@ -156,3 +156,11 @@ a:hover {
 .pagination a:hover, .pagination a:focus {
   text-decoration: underline; 
 }
+
+.bg-white {
+  background-color: white;
+}
+
+.bg-gray {
+  background-color: rgb(229 231 235);
+}
