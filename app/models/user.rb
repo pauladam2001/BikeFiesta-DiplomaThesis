@@ -1,5 +1,8 @@
 class User < ApplicationRecord
+  after_save :update_phone_number
+
   attr_accessor :skip_validation
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -15,6 +18,7 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation
   validates :last_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation
+  validates :phone, presence: true, length: { minimum: 9, maximum: 9 }, unless: :skip_validation
   # validates :password, format: VALID_PASSWORD_REGEX, unless: :skip_validation
   validate :password_regex, unless: :skip_validation
 
@@ -54,7 +58,9 @@ class User < ApplicationRecord
   end
 
   def self.generate_code(user)
-    user.code = "2222"
+    code = Random.rand.to_s[2..7]
+    user.code = code
+    user.code_expiration_date = Time.now + 30.minutes
     user.save(validate: false)
   end
 
@@ -73,5 +79,16 @@ class User < ApplicationRecord
   def password_regex
     return if password.blank? || password =~ /\A(?=.*\d)(?=.*[A-Z])(?=.*\W)[^ ]{6,}\z/
     errors.add :password, 'should have more than 6 characters including 1 uppercase letter, 1 number, 1 special character'
+  end
+
+  # def active_for_authentication?
+  #   super and !self.archived
+  # end
+
+  def update_phone_number
+    if !self.phone.start_with?("+40")
+      self.phone = "+40" + self.phone
+      self.save(validate: false)
+    end
   end
 end

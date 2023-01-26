@@ -13,19 +13,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     require 'open-uri'
 
-    link = 'http://localhost:8000/api/extract?token=24apa2001'
-    bodyCall = { "file": params[:user][:avatar] }
-    h = HTTParty.post(link, body: bodyCall)
+    # link = 'http://localhost:8000/api/extract?token=24apa2001'
+    # bodyCall = { "file": params[:user][:avatar] }
+    # h = HTTParty.post(link, body: bodyCall)
 
-    if h.include?("cloudinary.com")
-      file = URI.open(h)
+    # if h.include?("cloudinary.com")
+      # file = URI.open(h)
 
       build_resource(sign_up_params)
 
       resource.save
       yield resource if block_given?
 
-      resource.avatar.attach(io: file, filename: 'image' + Random.rand(999999999).to_s + '.jpg')
+      # resource.avatar.attach(io: file, filename: 'image' + Random.rand(999999999).to_s + '.jpg')
 
       if resource.persisted?
         if resource.active_for_authentication?
@@ -48,10 +48,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
         end
         redirect_to new_user_session_path, alert: "Error - #{error_message}."
       end
-    else
-      error_message = h
-      redirect_to new_user_session_path, alert: "Error - #{error_message}."
-    end
+  #   else
+  #     error_message = h
+  #     redirect_to new_user_session_path, alert: "Error - #{error_message}."
+  #   end
   end
 
   # GET /resource/edit
@@ -102,12 +102,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :avatar])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :avatar, :phone])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :phone])
   end
 
   # The path used after sign up.

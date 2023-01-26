@@ -349,7 +349,7 @@ input[type=file]::file-selector-button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  height: 150px;
   padding: 20px;
   border-radius: 10px;
   border: 2px dashed #555;
@@ -373,4 +373,23 @@ input[type=file]::file-selector-button:hover {
   font-weight: bold;
   text-align: center;
   transition: color .2s ease-in-out;
+}
+
+.sms-code-div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	min-height: 80vh;
+}
+
+.sms-code-span {
+	padding-bottom: 15px;
+	font-size: 40px;
+	color: var(--dark-blue);
+}
+
+.input-center {
+	text-align: center;
 }

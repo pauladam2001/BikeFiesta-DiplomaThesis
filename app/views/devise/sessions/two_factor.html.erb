@@ -1,4 +1,21 @@
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), method: :post) do |f| %>
-  <%= f.text_field :code, autofocus: true, autocomplete: "code", placeholder: "Code" %>
-  <%= f.submit "Sign in", class: "button" %>
-<% end %>
+<% if alert %>
+  <div class="alert-danger">
+    <span class="close-button" onclick="this.parentElement.style.display='none';">&times;</span>
+    <p class="alert-paragraph"><%= alert %></p>
+  </div>
+<% end%>
+<div class="sms-code-div">
+  <span class="sms-code-span">Please introduce the code you received in the message</span>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), method: :post) do |f| %>
+    <%= f.hidden_field :email %>
+    <input type="text" class="input input-center" placeholder="SMS Code" name="sms_code" value="<%= params[:sms_code] %>">
+    <%= f.submit "Sign in", class: "button", id: "send-sms-button" %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $('#send-sms-button').click(
+    function(){
+        $(this).val('');
+    });
+</script>

@@ -71,4 +71,14 @@ module Marketing
       post.save
     end
   end
+
+  # Called every 30 minutes
+  def self.reset_user_codes
+    User.where("code_expiration_date <= ?", Time.now).find_each do |user|
+      user.code = nil
+      user.code_expiration_date = nil
+
+      user.save
+    end
+  end
 end
