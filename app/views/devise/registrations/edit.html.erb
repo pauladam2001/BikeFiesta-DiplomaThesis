@@ -21,10 +21,13 @@
     </div>
     <div class="identity-inputs">
       <span class="edit-span">First Name</span>
-      <%= f.text_field :first_name, autofocus: true, autocomplete: "First Name", placeholder: "First Name", :class => 'input-edit' %>
+      <%= f.text_field :first_name, autofocus: true, autocomplete: "First Name", placeholder: "First Name", :class => 'input-edit', :style => "margin-left: 1.5rem" %>
       </br>
       <span class="edit-span">Last Name</span>
-      <%= f.text_field :last_name, autocomplete: "Last Name", placeholder: "Last Name", :class => 'input-edit' %>
+      <%= f.text_field :last_name, autocomplete: "Last Name", placeholder: "Last Name", :class => 'input-edit', :style => "margin-left: 1.5rem" %>
+      </br>
+      <span class="edit-span">Phone Number</span>
+      <%= f.telephone_field :phone, autocomplete: "Phone Number", placeholder: "Phone Number", :class => 'input-edit' %>
     </div>
   </div>
   <div class="security-div">

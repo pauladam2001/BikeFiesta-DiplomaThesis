@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation
   validates :last_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation
-  validates :phone, presence: true, length: { minimum: 9, maximum: 9 }, unless: :skip_validation
+  validates :phone, presence: true, length: { minimum: 9, maximum: 12 }, unless: :skip_validation
   # validates :password, format: VALID_PASSWORD_REGEX, unless: :skip_validation
   validate :password_regex, unless: :skip_validation
 
@@ -87,7 +87,14 @@ class User < ApplicationRecord
 
   def update_phone_number
     if !self.phone.start_with?("+40")
-      self.phone = "+40" + self.phone
+      phone = self.phone
+
+      while phone[0] != "0"
+        phone = phone[1..-1]
+      end
+      phone = phone[1..-1]
+
+      self.phone = "+40" + phone
       self.save(validate: false)
     end
   end
