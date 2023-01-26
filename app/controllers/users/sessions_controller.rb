@@ -5,7 +5,7 @@ class Users::SessionsController < Devise::SessionsController
   require 'authenticate_with_twilio'
   include AuthenticateWithTwilio
 
-  prepend_before_action :authenticate_with_sms_code, if: -> { action_name == 'create' }
+  # prepend_before_action :authenticate_with_sms_code, if: -> { action_name == 'create' }
 
   # GET /resource/sign_in
   # def new
