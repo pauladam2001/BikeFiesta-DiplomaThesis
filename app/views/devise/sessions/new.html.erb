@@ -1,5 +1,9 @@
 <% if alert %>
-  <div class="alert-danger">
+  <% if alert.include?("successfully")%>
+    <div class="alert-success">
+  <% else %>
+    <div class="alert-danger">
+  <% end %>
     <span class="close-button" onclick="this.parentElement.style.display='none';">&times;</span>
     <p class="alert-paragraph"><%= alert %></p>
   </div>

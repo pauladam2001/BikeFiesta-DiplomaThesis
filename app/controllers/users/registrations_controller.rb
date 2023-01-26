@@ -13,25 +13,26 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     require 'open-uri'
 
-    # link = 'http://localhost:8000/api/extract?token=24apa2001'
-    # bodyCall = { "file": params[:user][:avatar] }
-    # h = HTTParty.post(link, body: bodyCall)
+    link = 'http://localhost:8000/api/extract?token=24apa2001'
+    bodyCall = { "file": params[:user][:avatar] }
+    h = HTTParty.post(link, body: bodyCall)
 
-    # if h.include?("cloudinary.com")
-      # file = URI.open(h)
+    if h.include?("cloudinary.com")
+      file = URI.open(h)
 
       build_resource(sign_up_params)
 
       resource.save
       yield resource if block_given?
 
-      # resource.avatar.attach(io: file, filename: 'image' + Random.rand(999999999).to_s + '.jpg')
+      resource.avatar.attach(io: file, filename: 'image' + Random.rand(999999999).to_s + '.jpg')
 
       if resource.persisted?
         if resource.active_for_authentication?
           set_flash_message! :notice, :signed_up
-          sign_up(resource_name, resource)
-          respond_with resource, location: after_sign_up_path_for(resource)
+          # sign_up(resource_name, resource)
+          # respond_with resource, location: after_sign_up_path_for(resource)
+          redirect_to new_user_session_path, alert: "Account created successfully."
         else
           set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
           expire_data_after_sign_in!
@@ -48,10 +49,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
         end
         redirect_to new_user_session_path, alert: "Error - #{error_message}."
       end
-  #   else
-  #     error_message = h
-  #     redirect_to new_user_session_path, alert: "Error - #{error_message}."
-  #   end
+    else
+      error_message = h
+      redirect_to new_user_session_path, alert: "Error - #{error_message}."
+    end
   end
 
   # GET /resource/edit

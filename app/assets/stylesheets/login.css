@@ -223,6 +223,13 @@ body {
   color: white;
 }
 
+.alert-success {
+	margin-top: 0px;
+	padding: 20px;
+	background-color: green;
+	color: white;
+}
+
 .close-button {
   margin-left: 15px;
   color: white;

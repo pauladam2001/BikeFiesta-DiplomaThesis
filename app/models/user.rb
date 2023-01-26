@@ -86,7 +86,10 @@ class User < ApplicationRecord
   # end
 
   def update_phone_number
-    if !self.phone.start_with?("+40")
+    if self.phone.length == 9
+      self.phone = "+40" + self.phone
+      self.save(validate: false)
+    elsif !self.phone.start_with?("+40")
       phone = self.phone
 
       while phone[0] != "0"
