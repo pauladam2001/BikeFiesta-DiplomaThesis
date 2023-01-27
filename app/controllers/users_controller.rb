@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   
   def index
     @users = User.order(:email)
+    @users = @users.paginate(page: params[:page], per_page: 12)
   end
 
   def show
@@ -17,28 +18,28 @@ class UsersController < ApplicationController
   def archive_user
     user = User.find(params[:id])
     user.archived = true
-    user.save
+    user.save(validate: false)
     redirect_back(fallback_location: users_path)
   end
 
   def unarchive_user
     user = User.find(params[:id])
     user.archived = false
-    user.save
+    user.save(validate: false)
     redirect_back(fallback_location: users_path)
   end
 
   def make_user_admin
     user = User.find(params[:id])
     user.role = "admin"
-    user.save
+    user.save(validate: false)
     redirect_back(fallback_location: users_path)
   end
 
   def remove_user_admin
     user = User.find(params[:id])
     user.role = "normal"
-    user.save
+    user.save(validate: false)
     redirect_back(fallback_location: users_path)
   end
 

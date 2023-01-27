@@ -1,2 +1,53 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<div class="main-page-div">
+  <h1 class="h1-title">Users</h1>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <% @users.each do |user| %>
+          <tr class="<%= cycle("bg-white", "bg-gray") %>">
+            <td>
+              <%= user.email %>
+            </td>
+            <td>
+              <% if user.id != current_user.id %>
+                <% if !user.archived %>
+                  <%= link_to archive_user_user_path(user), :method => :put, class: "links-class" do %>
+                    Archive
+                  <% end %>
+                <% else %>
+                  <%= link_to unarchive_user_user_path(user), :method => :put, class: "links-class" do %>
+                    Unarchive
+                  <% end %>
+                <% end %>
+                •
+                <% if user.is_normal? %>
+                  <%= link_to make_user_admin_user_path(user), :method => :put, class: "links-class" do %>
+                    Make Admin
+                  <% end %>
+                <% else %>
+                  <%= link_to remove_user_admin_user_path(user), :method => :put, class: "links-class" do %>
+                    Remove Admin
+                  <% end %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+      </tbody>
+    </table>
+    <div class="pagination">
+      <%= will_paginate @users %>
+    </div>
+  </div>
+</div>
