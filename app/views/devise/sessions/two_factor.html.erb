@@ -1,9 +1,3 @@
-<% if alert %>
-  <div class="alert-danger">
-    <span class="close-button" onclick="this.parentElement.style.display='none';">&times;</span>
-    <p class="alert-paragraph"><%= alert %></p>
-  </div>
-<% end%>
 <div class="sms-code-div">
   <span class="sms-code-span">Please introduce the code you received in the message</span>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), method: :post) do |f| %>

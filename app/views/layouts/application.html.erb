@@ -12,6 +12,8 @@
   </head>
 
   <body>
+    <%= render "layouts/notices" %>
+
     <% if current_user.present? && current_user.is_normal? %>
         <div class="menu">
           <div class="">
