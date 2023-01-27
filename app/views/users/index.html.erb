@@ -5,6 +5,7 @@
       <thead>
         <tr>
           <th>Email</th>
+          <th>Name</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -17,6 +18,15 @@
           <tr class="<%= cycle("bg-white", "bg-gray") %>">
             <td>
               <%= user.email %>
+              <% if user.archived %>
+                <span style="padding-top: 0.1em; padding-bottom: 0.1rem" class="archived-label">Archived</span>
+              <% end %>
+              <% if user.is_admin? %>
+                <span style="padding-top: 0.1em; padding-bottom: 0.1rem" class="admin-label">Admin</span>
+              <% end %>
+            </td>
+            <td>
+              <%= user.name %>
             </td>
             <td>
               <% if user.id != current_user.id %>

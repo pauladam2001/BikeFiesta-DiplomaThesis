@@ -164,3 +164,24 @@ a:hover {
 .bg-gray {
   background-color: rgb(229 231 235);
 }
+
+.archived-label {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem; 
+  background-color: #FECACA; 
+  color: #991B1B; 
+  font-size: 1rem;
+  line-height: 1rem; 
+  border-radius: 9999px; 
+  
+}
+
+.admin-label {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem; 
+  background-color: #A7F3D0; 
+  color: #065F46; 
+  font-size: 1rem;
+  line-height: 1rem; 
+  border-radius: 9999px; 
+}
