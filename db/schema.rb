@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_26_110828) do
+ActiveRecord::Schema.define(version: 2023_01_27_090314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,13 @@ ActiveRecord::Schema.define(version: 2023_01_26_110828) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "costs", force: :cascade do |t|
+    t.float "amount"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -120,6 +127,36 @@ ActiveRecord::Schema.define(version: 2023_01_26_110828) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "revenues", force: :cascade do |t|
+    t.float "amount"
+    t.integer "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "stats", force: :cascade do |t|
+    t.datetime "analysis_start_time"
+    t.datetime "analysis_end_time"
+    t.integer "total_views"
+    t.integer "total_posts"
+    t.float "total_cost"
+    t.float "total_revenue"
+    t.float "total_profit"
+    t.integer "total_transactions"
+    t.float "roi"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "seller_id"
+    t.integer "buyer_id"
+    t.integer "post_id"
+    t.float "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
