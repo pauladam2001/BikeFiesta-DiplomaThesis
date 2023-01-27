@@ -6,7 +6,7 @@ class HomeController < ApplicationController
       if current_user.is_normal?
         redirect_to posts_path and return
       else
-        #TODO
+        redirect_to users_path and return
       end
     end
   end

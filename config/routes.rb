@@ -7,23 +7,31 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  # devise_scope :user do
-  #   post "/send_sms_code" => "users/sessions#send_sms_code"
-  # end
-
   resources :posts do
     collection do
       post "/post_upload_files", to: "posts#upload"
     end
   end
+
   get "/my_posts", to: "posts#my_posts"
+
   resources :brandnames
   resources :colors
   resources :categories
   resources :materials
   resources :component_groups
+
   # resources :relationships, only: [:create, :destroy] # do we need it? Page 871
-  resources :users
+
+  resources :users do
+    member do
+      put :archive_user
+      put :unarchive_user
+      put :make_user_admin
+      put :remove_user_admin
+    end
+  end
+
   get "/followers", to: "users#followers_following_page"
 
   get '*path' => redirect('/posts')

@@ -81,24 +81,26 @@ class User < ApplicationRecord
     errors.add :password, 'should have more than 6 characters including 1 uppercase letter, 1 number, 1 special character'
   end
 
-  # def active_for_authentication?
-  #   super and !self.archived
-  # end
+  def active_for_authentication?
+    super and !self.archived
+  end
 
   def update_phone_number
-    if self.phone.length == 9
-      self.phone = "+40" + self.phone
-      self.save(validate: false)
-    elsif !self.phone.start_with?("+40")
-      phone = self.phone
+    if !self.phone.nil?
+      if self.phone&.length == 9
+        self.phone = "+40" + self.phone
+        self.save(validate: false)
+      elsif !self.phone&.start_with?("+40")
+        phone = self.phone
 
-      while phone[0] != "0"
+        while phone[0] != "0"
+          phone = phone[1..-1]
+        end
         phone = phone[1..-1]
-      end
-      phone = phone[1..-1]
 
-      self.phone = "+40" + phone
-      self.save(validate: false)
+        self.phone = "+40" + phone
+        self.save(validate: false)
+      end
     end
   end
 end
