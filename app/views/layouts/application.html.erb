@@ -13,7 +13,7 @@
 
   <body>
     <%= render "layouts/notices" %>
-
+    <%= render "devise/shared/error_messages", resource: resource %>
     <% if current_user.present? && current_user.is_normal? %>
         <div class="menu">
           <div class="">
