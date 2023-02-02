@@ -400,3 +400,14 @@ input[type=file]::file-selector-button:hover {
 .input-center {
 	text-align: center;
 }
+
+.password-send-div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 10rem;
+}
+
+.password-send-form {
+	margin-top: 3rem;
+}
