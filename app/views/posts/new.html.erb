@@ -24,7 +24,7 @@
                   <%= f.text_area :description, placeholder: "Description...", cols: "50", rows: "10", class: "input" %>
                 </div>
                 <div class="">
-                  <%= f.text_area :short_description, placeholder: "Short Description (Maximum 50 characters)", cols: "30", rows: "5", class: "input" %>
+                  <%= f.text_area :short_description, placeholder: "Short Description (Maximum 100 characters)", cols: "30", rows: "5", class: "input" %>
                 </div>
                 <div class="">
                   <%= f.number_field :price, placeholder: "Price", class: "input" %>
@@ -57,7 +57,7 @@
                   <%= f.select :component_group_id, options_for_select([["Select the component group brand", nil]] + @component_groups.collect { |a| [a[0], a[1]]}, f.object.brandname_id), {}, class: "" %>
                 </div>
                 <div class="">
-                  <%= f.select :electric, [["Select the bike type", nil], ["Electric", true], ["Normal", false]] %>
+                  <%= f.select :electric, options_for_select([["Select the bike type", nil], ["Electric", true], ["Normal", false]]) %>
                 </div>
               </div>
             </div>

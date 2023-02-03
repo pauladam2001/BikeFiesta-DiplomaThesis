@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_27_091927) do
+ActiveRecord::Schema.define(version: 2023_02_03_105230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 2023_01_27_091927) do
     t.integer "views", default: 0
     t.text "short_description"
     t.integer "year"
-    t.string "sale_price"
+    t.float "sale_price"
     t.datetime "sale_price_expiration"
     t.integer "color_id"
     t.integer "location_id"

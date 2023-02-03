@@ -9,39 +9,60 @@
         <h1><%= title %></h1>
       </div>
       <div class="carousel-div">
-        <input type="radio" name="position" checked />
-        <input type="radio" name="position" />
-        <input type="radio" name="position" />
-        <input type="radio" name="position" />
-        <input type="radio" name="position" />
+        <% if title == "Most Viewed" %>
+          <% posts = @most_viewed_posts %>
+        <% elsif title == "Sale" %>
+          <% posts = @sale_posts %>
+        <% elsif title == "Following" %>
+          <% posts = @following_posts %>
+        <% else %>
+          <% posts = @all_posts %>
+        <% end %>
+        <% if posts.present? %>
+          <input type="radio" name="position" checked />
+          <% (posts.size - 1).times do |_|%>
+            <input type="radio" name="position" />
+          <% end %>
+        <% end %>
         <main id="carousel">
-          <% [1, 2, 3, 4, 5].each do |number| %>
-            <div class="div-item">
-              <head>
-                <title>Harvest vase</title>
-              </head>
-
-              <body>
+          <% if posts.present? %>
+            <% posts.each do |post| %>
+              <div class="div-item">
                 <div class="wrapper">
                   <div class="product-img">
-                    <img src="http://bit.ly/2tMBBTd" height="420" width="327">
+                    <% if post.assets.present? %>
+                      <%= image_tag(post.assets.where(is_bicycle: true).first.image.url, border: 0, width: '100%', height: '100%', :class => "") %>
+                    <% else %>
+                      <%= image_tag("bike3.jpg", border: 0, width: '100%', height: '100%') %>
+                    <% end %>
+                    <% if post.electric %>
+                      <button class="button electric-button">Electric</button>
+                    <% end %>
+                    <button class="button size-button"><%= post.size %></button>
                   </div>
                   <div class="product-info">
                     <div class="product-text">
-                      <h1>Harvest Vase</h1>
-                      <h2>by studio and friends</h2>
-                      <p>Harvest Vases are a reinterpretation<br> of peeled fruits and vegetables as<br> functional objects. The surfaces<br> appear to be sliced and pulled aside,<br> allowing room for growth. </p>
+                      <h1><%= post.name %></h1>
+                      <h2>by <%= post.user.name %></h2>
+                      <p><%= post.short_description %></p>
+                      <h2>Condition: <%= post.condition %></h2>
+                      <h2>Year: <%= post.year %></h2>
+                      <h2>Material: <%= post.material.name %></h2>
                     </div>
                     <div class="product-price-btn">
-                      <div class="product-price"><small>$96.00</small>$230.99</div>
-                      <p><span class="card-span">78</span>$</p>
-                      <button type="button">buy now</button>
+                      <% if post.sale_price.present? %>
+                        <div class="product-price"><small>$<%= post.price %></small>$<%= post.sale_price %></div>
+                      <% else %>
+                        <p><span class="card-span">$<%= post.price %></span></p>
+                      <% end %>
+                      <button class="button">See Post</button>
                     </div>
                   </div>
                 </div>
-
-              </body>
-            </div>
+              </div>
+            <% end %>
+          <% else %>
+            <p style="margin-left: 17.5rem;">No posts found</p>
           <% end %>
         </div>
       <main>

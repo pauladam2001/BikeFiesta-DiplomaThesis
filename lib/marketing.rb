@@ -63,7 +63,7 @@ module Marketing
       post.sale_price = sale_price
       post.sale_price_expiration = Time.now + 1.day
 
-      post.save
+      post.save(validate: false)
     end
   end
 
@@ -71,10 +71,10 @@ module Marketing
   # Unmark the posts from sale
   def self.unmark_posts_on_sale
     Post.where("sale_price_expiration <= ?", Time.now).where.not(sale_price: nil).find_each do |post|
-      post.sale = nil
+      post.sale_price = nil
       post.sale_price_expiration = nil
 
-      post.save
+      post.save(validate: false)
     end
   end
 
@@ -85,7 +85,7 @@ module Marketing
       user.code = nil
       user.code_expiration_date = nil
 
-      user.save
+      user.save(validate: false)
     end
   end
 end

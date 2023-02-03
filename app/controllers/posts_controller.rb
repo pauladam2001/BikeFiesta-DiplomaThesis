@@ -3,7 +3,10 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @posts = Post.all
+    @most_viewed_posts = Post.all
+    @sale_posts = Post.all
+    @following_posts = Post.all
+    @all_posts = Post.all #TODO limit to 5 posts for all categories
   end
 
   def new
@@ -55,7 +58,6 @@ class PostsController < ApplicationController
 
   # Receives a hash of images
   def upload
-    binding.pry
     asset = Asset.new
     asset.post_id = params[:post_id]
     asset.user_id = current_user.id
