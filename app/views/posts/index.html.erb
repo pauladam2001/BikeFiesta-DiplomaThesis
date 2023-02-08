@@ -51,9 +51,9 @@
                     </div>
                     <div class="product-price-btn">
                       <% if post.sale_price.present? %>
-                        <div class="product-price"><small>$<%= post.price %></small>$<%= post.sale_price %></div>
+                        <div class="product-price"><small><%= number_to_currency(post.price, precision: 2, :unit => '€') %></small><%= number_to_currency(post.sale_price, precision: 2, :unit => '€') %></div>
                       <% else %>
-                        <p><span class="card-span">$<%= post.price %></span></p>
+                        <p><span class="card-span"><%= number_to_currency(post.price, precision: 2, :unit => '€') %></span></p>
                       <% end %>
                       <button class="button">See Post</button>
                     </div>
