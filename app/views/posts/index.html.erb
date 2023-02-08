@@ -6,8 +6,18 @@
   <% ["Most Viewed", "Sale", "Following", "All"].each do |title| %>
     <div class="most-viewed-div">
       <div class="most-viewed-title <%= 'sale-padding' if title == "Sale" || title == "All" %>">
-        <h1><%= title %></h1>
-      </div>
+        <h1>
+          <% if title == "Most Viewed" %>
+            <%= link_to title, most_viewed_posts_path %>
+          <% elsif title == "Sale" %>
+            <%= link_to title, on_sale_posts_path %>
+          <% elsif title == "Following" %>
+            <%= link_to title, following_posts_path %>
+          <% else %>
+            <%= link_to title, all_posts_path %>
+          <% end %>
+        </h1>
+    </div>
       <div class="carousel-div">
         <% if title == "Most Viewed" %>
           <% posts = @most_viewed_posts %>

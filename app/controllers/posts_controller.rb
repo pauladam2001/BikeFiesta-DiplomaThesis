@@ -69,6 +69,22 @@ class PostsController < ApplicationController
     @posts = Post.where(user_id: current_user.id)
   end
 
+  def most_viewed_posts
+
+  end
+
+  def on_sale_posts
+
+  end
+
+  def following_posts
+
+  end
+
+  def all_posts
+    
+  end
+
   private
     def post_params
       params.require(:post).permit(:id, :name, :brandname_id, :location_id, :price, :description, :short_description, :color_id, :year, :post_id,

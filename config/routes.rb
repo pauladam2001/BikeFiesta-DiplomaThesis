@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   end
 
   get "/my_posts", to: "posts#my_posts"
+  get "/most_viewed_posts", to: "posts#most_viewed_posts"
+  get "/on_sale_posts", to: "posts#on_sale_posts"
+  get "/following_posts", to: "posts#following_posts"
+  get "/all_posts", to: "posts#all_posts"
 
   resources :brandnames
   resources :colors
