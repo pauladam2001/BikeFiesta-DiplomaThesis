@@ -259,6 +259,9 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    sidekiq-cron (1.9.0)
+      fugit (~> 1)
+      sidekiq (>= 4.2.1)
     sidekiq-scheduler (4.0.0)
       redis (>= 4.2.0)
       rufus-scheduler (~> 3.2)
@@ -339,6 +342,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   sidekiq
+  sidekiq-cron
   sidekiq-scheduler
   spring
   turbolinks (~> 5)

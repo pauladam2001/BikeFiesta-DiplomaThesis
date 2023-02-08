@@ -1,0 +1,23 @@
+check_posts_without_assets_job:
+  cron: "every hour"
+  class: "CronJobCheckPostsWithoutAssets"
+  # queue: cron_jobs
+  # status: 'disabled'
+
+mark_posts_on_sale_job:
+  cron: "every day at 12:10am"
+  class: "CronJobMarkPostsOnSale"
+  # queue: cron_jobs
+  # status: 'disabled'
+
+unmark_posts_on_sale_job:
+  cron: "every day at 12am"
+  class: "CronJobUnmarkPostsOnSale"
+  # queue: cron_jobs
+  # status: 'disabled'
+
+reset_user_codes_job:
+  cron: "every 30 minutes"
+  class: "CronJobResetUserCodes"
+  # queue: cron_jobs
+  # status: 'disabled'
