@@ -65,7 +65,7 @@
                       <% else %>
                         <p><span class="card-span"><%= number_to_currency(post.price, precision: 2, :unit => '€') %></span></p>
                       <% end %>
-                      <button class="button">See Post</button>
+                      <button class="button"><%= link_to "See Post", post_path(post) %></button>
                     </div>
                   </div>
                 </div>
@@ -74,8 +74,8 @@
           <% else %>
             <p style="margin-left: 17.5rem;">No posts found</p>
           <% end %>
-        </div>
-      <main>
+        </main>
+      </div>
     </div>
   <% end %>
 
