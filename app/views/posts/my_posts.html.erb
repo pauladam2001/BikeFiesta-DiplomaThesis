@@ -1,5 +1,1 @@
-<% @posts.each do |post| %>
-  <div>
-    <%= post.id %>
-  </div>
-<% end %>
+<%= render 'posts_grid', grid_posts: @my_posts %>

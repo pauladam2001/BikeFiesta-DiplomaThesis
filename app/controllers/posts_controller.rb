@@ -3,10 +3,10 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @most_viewed_posts = Post.all
-    @sale_posts = Post.all
-    @following_posts = Post.all
-    @all_posts = Post.all #TODO limit to 5 posts for all categories
+    @most_viewed_posts = Post.all.limit(5)
+    @sale_posts = Post.all.limit(5)
+    @following_posts = Post.all.limit(5)
+    @all_posts = Post.all.limit(5)
   end
 
   def new
@@ -66,23 +66,28 @@ class PostsController < ApplicationController
   end
 
   def my_posts
-    @posts = Post.where(user_id: current_user.id)
+    @my_posts = Post.where(user_id: current_user.id)
+    @my_posts = @my_posts.paginate(page: params[:page], per_page: 16)
   end
 
   def most_viewed_posts
-
+    @most_viewed_posts = Post.all
+    @most_viewed_posts = @most_viewed_posts.paginate(page: params[:page], per_page: 16)
   end
 
   def on_sale_posts
-
+    @on_sale_posts = Post.all
+    @on_sale_posts = @on_sale_posts.paginate(page: params[:page], per_page: 16)
   end
 
   def following_posts
-
+    @following_posts = Post.all
+    @following_posts = @following_posts.paginate(page: params[:page], per_page: 16)
   end
 
   def all_posts
-    
+    @all_posts = Post.all
+    @all_posts = @all_posts.paginate(page: params[:page], per_page: 16)
   end
 
   private
