@@ -7,6 +7,7 @@ class PostsController < ApplicationController
     @sale_posts = Post.all.limit(5)
     @following_posts = Post.all.limit(5)
     @all_posts = Post.all.limit(5)
+    @favorite_posts = current_user.favorite_posts
   end
 
   def new
@@ -79,21 +80,45 @@ class PostsController < ApplicationController
   def most_viewed_posts
     @most_viewed_posts = Post.all
     @most_viewed_posts = @most_viewed_posts.paginate(page: params[:page], per_page: 16)
+    @favorite_posts = current_user.favorite_posts
   end
 
   def on_sale_posts
     @on_sale_posts = Post.all
     @on_sale_posts = @on_sale_posts.paginate(page: params[:page], per_page: 16)
+    @favorite_posts = current_user.favorite_posts
   end
 
   def following_posts
     @following_posts = Post.all
     @following_posts = @following_posts.paginate(page: params[:page], per_page: 16)
+    @favorite_posts = current_user.favorite_posts
   end
 
   def all_posts
     @all_posts = Post.all
     @all_posts = @all_posts.paginate(page: params[:page], per_page: 16)
+    @favorite_posts = current_user.favorite_posts
+  end
+
+  def favorites
+    @favorites = current_user.favorite_posts
+    @favorites = @favorites.paginate(page: params[:page], per_page: 16)
+  end
+
+  def add_to_favorites
+    post_id = params[:id]
+    user_id= current_user.id
+    new_favorite = Favorite.find_or_create_by(post_id: post_id, user_id: user_id)
+    redirect_back(fallback_location: posts_path)
+  end
+
+  def remove_from_favorites
+    post_id = params[:id]
+    user_id= current_user.id
+    favorite = Favorite.where(post_id: post_id, user_id: user_id).first
+    favorite.delete
+    redirect_back(fallback_location: posts_path)
   end
 
   private

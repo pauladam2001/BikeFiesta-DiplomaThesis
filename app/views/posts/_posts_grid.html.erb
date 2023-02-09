@@ -9,6 +9,11 @@
             <% else %>
               <%= image_tag("bike3.jpg", border: 0, width: '100%', height: '100%') %>
             <% end %>
+            <% if favorite_posts.where(id: post.id).size == 0 %>
+              <%= link_to image_tag("mark_favorite.png"), add_to_favorites_post_path(post), :method => :put, remote: true, class: 'favorites-button' %>
+            <% else %>
+              <%= link_to image_tag("favorite.png"), remove_from_favorites_post_path(post), :method => :put, remote: true, class: 'favorites-button' %>
+            <% end %>
             <% if post.electric %>
               <button class="button electric-button">Electric</button>
             <% end %>

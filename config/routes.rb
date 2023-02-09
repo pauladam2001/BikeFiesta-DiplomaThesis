@@ -11,6 +11,11 @@ Rails.application.routes.draw do
     collection do
       post "/post_upload_files", to: "posts#upload"
     end
+    
+    member do
+      put :add_to_favorites
+      put :remove_from_favorites
+    end
   end
 
   get "/my_posts", to: "posts#my_posts"
@@ -18,6 +23,7 @@ Rails.application.routes.draw do
   get "/on_sale_posts", to: "posts#on_sale_posts"
   get "/following_posts", to: "posts#following_posts"
   get "/all_posts", to: "posts#all_posts"
+  get "favorites", to: "posts#favorites"
 
   resources :brandnames
   resources :colors

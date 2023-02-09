@@ -38,6 +38,14 @@
   margin-top: 13rem;
 }
 
+.product-img .favorites-button {
+  position: absolute;
+}
+
+.product-img-grid .favorites-button {
+  position: absolute;
+}
+
 .product-img .size-button {
   position: absolute;
   margin-top: 23rem;

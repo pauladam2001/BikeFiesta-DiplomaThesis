@@ -7,6 +7,7 @@ class Post < ApplicationRecord
   belongs_to :category, foreign_key: :category_id
   belongs_to :material, foreign_key: :material_id
   belongs_to :component_group, foreign_key: :component_group_id
+  has_many :favorites
 
   attr_accessor :skip_validation
 
