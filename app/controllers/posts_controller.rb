@@ -33,8 +33,10 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     @post.attributes = post_params
-    if @post.save!
-      redirect_to posts_path
+    if @post.save
+      redirect_to my_posts_path
+    else
+      redirect_back(fallback_location: my_posts_path, alert: "Error - #{@post.errors.full_messages.first}.")
     end
   end
 

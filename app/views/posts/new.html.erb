@@ -10,7 +10,7 @@
       <h1 class="">New Post</h1>
     <% end %>
   </div>
-  <% if !@post.persisted? %>
+  <% if !(params[:upload] == "true") %>
     <div class="add-post-div container" style="overflow-y: scroll;">
       <%= form_for @post do |f| %>
         <div class="">
@@ -27,7 +27,7 @@
                   <%= f.text_area :short_description, placeholder: "Short Description (Maximum 100 characters)", cols: "30", rows: "5", class: "input" %>
                 </div>
                 <div class="">
-                  <%= f.number_field :price, placeholder: "Price", class: "input" %>
+                  <%= f.number_field :price, placeholder: "Price", class: "input", step: :any %>
                 </div>
                 <div class="">
                   <%= f.select :color_id, options_for_select([["Select the color", nil]] + @colors.collect { |a| [a[0], a[1]]}, f.object.color_id), {}, class: "input" %>
@@ -48,16 +48,16 @@
                   <%= f.select :brandname_id, options_for_select([["Select the brand name", nil]] + @brand_names.collect { |a| [a[0], a[1]]}, f.object.brandname_id), {}, class: "" %>
                 </div>
                 <div class="">
-                  <%= f.select :category_id, options_for_select([["Select the category", nil]] + @categories.collect { |a| [a[0], a[1]]}, f.object.brandname_id), {}, class: "" %>
+                  <%= f.select :category_id, options_for_select([["Select the category", nil]] + @categories.collect { |a| [a[0], a[1]]}, f.object.category_id), {}, class: "" %>
                 </div>
                 <div class="">
-                  <%= f.select :material_id, options_for_select([["Select the material", nil]] + @materials.collect { |a| [a[0], a[1]]}, f.object.brandname_id), {}, class: "" %>
+                  <%= f.select :material_id, options_for_select([["Select the material", nil]] + @materials.collect { |a| [a[0], a[1]]}, f.object.material_id), {}, class: "" %>
                 </div>
                 <div class="">
-                  <%= f.select :component_group_id, options_for_select([["Select the component group brand", nil]] + @component_groups.collect { |a| [a[0], a[1]]}, f.object.brandname_id), {}, class: "" %>
+                  <%= f.select :component_group_id, options_for_select([["Select the component group brand", nil]] + @component_groups.collect { |a| [a[0], a[1]]}, f.object.component_group_id), {}, class: "" %>
                 </div>
                 <div class="">
-                  <%= f.select :electric, options_for_select([["Select the bike type", nil], ["Electric", true], ["Normal", false]]) %>
+                  <%= f.select :electric, options_for_select([["Select the bike type", nil], ["Electric", true], ["Normal", false]], f.object.electric), {}, class: "" %>
                 </div>
               </div>
             </div>
@@ -70,28 +70,28 @@
               Cancel
             <% end %>
             <button type="submit" class="button">
-              Go to Upload
+              <% if !@post.persisted? %>
+                Go to Upload
+              <% else %>
+                Save Changes
+              <% end %>
             </button>
           </div>
         </div>
       <% end %>
-      
     </div>
-  <% else %>
-    <% if params[:upload] == "true" %>
-      <div class="upload-info-div-1">
-        <span style="margin-left: 2.5rem">Please upload maximum 5 images</span>
-        <br/>
-        <span>At least one image must include the entire bike</span>
-      </div>
-      <div class="dropzone dropzone-flex drop-title drop-container dropzone-styles" id="dropzone-form"></div>
-      <div class="upload-info-div-2">
-        <%= button_to "Upload", posts_path, id: "createPost", method: :get, :class => "button", :style => "margin-left: 7.5rem; margin-bottom: 0.5rem;" %>
-        <span>After uploading it takes up to 10 minutes to validate your post</span>
-      </div>
-    <% else %>
-      Edit others, not assets
-    <% end %>
+  <% end %>
+  <% if params[:upload] == "true" %>
+    <div class="upload-info-div-1">
+      <span style="margin-left: 2.5rem">Please upload maximum 5 images</span>
+      <br/>
+      <span>At least one image must include the entire bike</span>
+    </div>
+    <div class="dropzone dropzone-flex drop-title drop-container dropzone-styles" id="dropzone-form"></div>
+    <div class="upload-info-div-2">
+      <%= button_to "Upload", posts_path, id: "createPost", method: :get, :class => "button", :style => "margin-left: 7.5rem; margin-bottom: 0.5rem;" %>
+      <span>After uploading it takes up to 10 minutes to validate your post</span>
+    </div>
   <% end %>
 </div>
 

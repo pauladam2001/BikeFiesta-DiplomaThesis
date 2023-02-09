@@ -16,9 +16,22 @@
           </div>
           <div class="product-info-grid">
             <div class="product-text-grid">
-              <h1><%= post.name %></h1>
+              <h1>
+                <%= post.name %>
+              </h1>
+              <% if post.user_id == current_user.id %>
+                <div style="margin-left: 10px;">
+                  <a class=""><%= link_to "Edit", edit_post_path(post) %></a>
+                  • 
+                  <a class=""><%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %></a>
+                  <% if post.assets.count == 0 %>
+                    •
+                    <a class=""><%= link_to "Upload", edit_post_path(post, upload: true) %></a>
+                  <% end %>
+                </div>
+              <% end %>
               <h2>by <%= post.user.name %></h2>
-              <p><%= post.short_description[0,60] %>[...]</p>
+              <p><%= post.short_description[0, 45] %>[...]</p>
               <h2>Condition: <%= post.condition %></h2>
               <h2>Year: <%= post.year %></h2>
               <h2>Material: <%= post.material.name %></h2>
