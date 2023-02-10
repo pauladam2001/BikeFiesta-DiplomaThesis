@@ -7,3 +7,10 @@
 .grid-item {
   padding-bottom: 32.5rem;
 }
+
+.no-posts {
+  font-size: 35px;
+  margin-top: 20rem;
+  margin-left: 43rem;
+  width: 400px;
+}

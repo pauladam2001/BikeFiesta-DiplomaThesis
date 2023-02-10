@@ -55,6 +55,11 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+
+    if current_user.id != @post.user_id
+      @post.views += 1
+      @post.save
+    end
   end
 
   def destroy
@@ -78,19 +83,20 @@ class PostsController < ApplicationController
   end
 
   def most_viewed_posts
-    @most_viewed_posts = Post.all
+    @most_viewed_posts = Post.order(views: :desc)
     @most_viewed_posts = @most_viewed_posts.paginate(page: params[:page], per_page: 16)
     @favorite_posts = current_user.favorite_posts
   end
 
   def on_sale_posts
-    @on_sale_posts = Post.all
+    @on_sale_posts = Post.where.not(sale_price: [nil, ""])
     @on_sale_posts = @on_sale_posts.paginate(page: params[:page], per_page: 16)
     @favorite_posts = current_user.favorite_posts
   end
 
   def following_posts
-    @following_posts = Post.all
+    following_users = current_user.following
+    @following_posts = Post.where(user_id: following_users)
     @following_posts = @following_posts.paginate(page: params[:page], per_page: 16)
     @favorite_posts = current_user.favorite_posts
   end
