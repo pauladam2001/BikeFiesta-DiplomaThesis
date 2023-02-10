@@ -58,20 +58,6 @@ module AuthenticateWithTwilio
     end
 
     def send_auth_sms(phone, code)
-      # require 'twilio-ruby'
-
-      # account_sid = ENV['TWILLIO_ACCOUNT_SID']
-      # auth_token = ENV['TWILLIO_AUTH_TOKEN']
-      # client = Twilio::REST::Client.new(account_sid, auth_token)
-
-      # from = '+15162615353'
-      # to = phone
-
-      # client.messages.create(
-      #   from: from,
-      #   to: to,
-      #   body: "BikeFiesta - Your code is " + code
-      # )
       message = "BikeFiesta - Your code is " + code
       Marketing.send_sms(phone, message)
     end
