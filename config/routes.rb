@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     member do
       put :add_to_favorites
       put :remove_from_favorites
+      put :ban
     end
   end
 
@@ -30,7 +31,11 @@ Rails.application.routes.draw do
   resources :categories
   resources :materials
   resources :component_groups
-  resources :reports
+  resources :reports do
+    member do
+      put :solve
+    end
+  end
 
   resources :relationships, only: [:create, :destroy]
 

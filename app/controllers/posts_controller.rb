@@ -138,6 +138,13 @@ class PostsController < ApplicationController
     redirect_back(fallback_location: posts_path)
   end
 
+  def ban
+    post = Post.find(params[:id])
+    post.is_active = -1
+    post.save
+    redirect_back(fallback_location: reports_path)
+  end
+
   private
     def post_params
       params.require(:post).permit(:id, :name, :brandname_id, :location_id, :price, :description, :short_description, :color_id, :year, :post_id,

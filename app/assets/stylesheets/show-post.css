@@ -1,5 +1,5 @@
 .user-section {
-  margin-top: 3rem;
+  padding-top: 3rem;
   margin-left: 67rem;
   font-size: 50px;
   display: flex;
@@ -13,4 +13,8 @@
 
 .report-section {
   margin-left: 67rem;
+}
+
+.admin-margin {
+  margin-left: 15rem;
 }

@@ -1,2 +1,57 @@
-<h1>Reports#index</h1>
-<p>Find me in app/views/reports/index.html.erb</p>
+<div class="main-page-div">
+  <h1 class="h1-title">Reports</h1>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Message</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <% @reports.each do |report| %>
+          <tr class="<%= cycle("bg-white", "bg-gray") %>">
+            <td>
+              <%= report.title %>
+            </td>
+            <td style="width: 35%;">
+              <%= report.message %>
+            </td>
+            <td>
+              <%= link_to post_path(report.post_id), class: "links-class" do %>
+                See Post
+              <% end %>
+              <% if report.post.is_active != -1 %>
+                •
+                <%= link_to ban_post_path(report.post_id), method: :put, class: "links-class" do %>
+                  Ban Post
+                <% end %>
+              <% end %>
+              <% if ! report.solved%>
+                •
+                <%= link_to solve_report_path(report), class: "links-class", method: :put, data: {confirm: "Are you sure you want to mark this report as solved?"}  do %>
+                  Mark as Solved
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+      </tbody>
+    </table>
+    <div class="pagination">
+      <%= will_paginate @reports %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#main-sidebar-div").classList.add("hidden");
+  })
+</script>

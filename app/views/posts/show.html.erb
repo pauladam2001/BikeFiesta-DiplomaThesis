@@ -1,5 +1,5 @@
-<div class="show-flex-div">
-  <div class="slidershow middle">
+<div class="show-flex-div <%= 'admin-margin' if current_user.is_admin? %>">
+  <div class="slidershow middle <%= 'admin-margin' if current_user.is_admin? %>">
     <div class="slides">
       <% @post.assets.each_with_index do |asset, index| %>
         <% if index == 0 %>

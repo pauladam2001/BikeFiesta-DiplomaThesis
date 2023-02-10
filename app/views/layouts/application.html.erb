@@ -54,7 +54,7 @@
         </div>
     <% elsif current_user.present? && current_user.is_admin? %>
 
-      <div class="main-sidebar-div">
+      <div id="main-sidebar-div" class="main-sidebar-div">
         <div class="main-sidebar-div-2">
           <div class="logo-div">
             <h1><%= link_to image_tag("logo.png", border: 0, width: '200px'), users_path %></h1>
@@ -64,6 +64,12 @@
               <a href=<%= users_path %> class="sidebar-a">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                 <span class="sidebar-title-span">Users</span>
+              </a>
+            </li>
+            <li>
+              <a href=<%= reports_path %> class="sidebar-a">
+                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-title-span">Reports</span>
               </a>
             </li>
             <div class="item">

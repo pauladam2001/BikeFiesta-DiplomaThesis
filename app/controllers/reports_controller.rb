@@ -3,6 +3,15 @@ class ReportsController < ApplicationController
   before_action :authenticate_user!, :check_permissions
 
   def index
+    @reports = Report.all #TODO with filters
+    @reports = @reports.paginate(page: params[:page], per_page: 12)
+  end
+
+  def solve
+    report = Report.find(params[:id])
+    report.solved = true
+    report.save
+    redirect_back(fallback_location: reports_path)
   end
 
   private
