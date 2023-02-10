@@ -54,13 +54,23 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
-    @user = @post.user
+    if params[:submitButton] == "Report Post"
+      report(params[:id], current_user.id, params[:message], params[:title])
+    else
+      @post = Post.find(params[:id])
+      @user = @post.user
 
-    if current_user.id != @post.user_id
-      @post.views += 1
-      @post.save
+      if current_user.id != @post.user_id
+        @post.views += 1
+        @post.save
+      end
     end
+  end
+
+  def report(post_id, user_id, message, title)
+    report = Report.find_or_create_by(post_id: post_id, user_id: user_id, message: message, title: title)
+    
+    redirect_to post_path(post_id)
   end
 
   def destroy

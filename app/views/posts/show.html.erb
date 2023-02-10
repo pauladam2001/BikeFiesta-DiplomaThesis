@@ -48,5 +48,23 @@
         <% end %>
       </div>
     </div>
+    <div class="report-section">
+      <form id="report-form">
+        <input type="button" class="button" onclick="openReportPopUp()" value="Report Post"></input>
+        <%= render "reports/report_pop_up" %>
+      </form>
+    </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  let report_pop_up = document.getElementById("report_pop_up");
+
+  function openReportPopUp() {
+    report_pop_up.classList.remove("hidden");
+  }
+
+  function closeReportPopUp() {
+    report_pop_up.classList.add("hidden");
+  }
+</script>
