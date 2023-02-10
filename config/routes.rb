@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :materials
   resources :component_groups
+  resources :reports
 
   resources :relationships, only: [:create, :destroy]
 
