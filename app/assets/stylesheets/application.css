@@ -25,6 +25,8 @@
   --light-green: #318223;
   --mid-green: #3C5233;
   --light-red: #C1121F; */
+  --primary-color: #185ee0;
+  --secondary-color: #e6eef9;
  }
 
  .menu {
@@ -48,7 +50,7 @@
 }
 
 .first-item {
-  margin-left: 55em;
+  margin-left: 47em;
 }
 
 .menu .menu-item .wee {

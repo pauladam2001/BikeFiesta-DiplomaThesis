@@ -27,24 +27,26 @@
   </div>
   <div>
     <div class="user-section">
-      <% if @user.provider == "google_oauth2" %>
-        <h6><%= image_tag(@user.avatar_url, border: 0, width: '40px', class: "image-radius") %> <%= @user.name %></h6>
-      <% else %>
-        <% if @user.avatar.attached? %>
-          <h6><%= image_tag(@user.avatar, border: 0, width: '80px', class: "image-radius") %> <%= @user.name %></h6>
+      <div class="user-name">
+        <% if @user.provider == "google_oauth2" %>
+          <h6><%= image_tag(@user.avatar_url, border: 0, width: '40px', class: "image-radius") %> <%= @user.name %></h6>
         <% else %>
-          <h6><%= image_tag("user-icon.png", border: 0, width: '40px') %> <%= @user.name %></h6>
-        <% end %>
-      <% end %>
-      <% if current_user.id != @user.id %>
-        <div>
-          <% if current_user.following?(@user) %>
-            <%= render 'users/unfollow' %>
+          <% if @user.avatar.attached? %>
+            <h6><%= image_tag(@user.avatar, border: 0, width: '80px', class: "image-radius") %> <%= @user.name %></h6>
           <% else %>
-            <%= render 'users/follow' %>
+            <h6><%= image_tag("user-icon.png", border: 0, width: '40px') %> <%= @user.name %></h6>
           <% end %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
+      <div>
+        <% if current_user.id != @user.id %>
+          <% if current_user.following?(@user) %>
+            <%= render 'users/unfollow', user: @user %>
+          <% else %>
+            <%= render 'users/follow', user: @user %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

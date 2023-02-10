@@ -1,0 +1,28 @@
+<div class="tabs-container">
+	<div class="tabs">
+    <input type="radio" id="radio-1" name="tabs" checked />
+    <label class="tab" for="radio-1">Followers<span class="notification"><%= @followers.count %></span></label>
+    <input type="radio" id="radio-2" name="tabs" />
+    <label class="tab" for="radio-2">Following<span class="notification"><%= @following.count %></span></label>
+		<span class="glider"></span>
+	</div>
+</div>
+<%= render 'users/followers' %>
+<%= render 'users/following' %>
+
+<script type="text/javascript">
+  const followers_div = document.getElementById('followers-div');
+  const following_div = document.getElementById('following-div');
+  const radio_1 = document.getElementById('radio-1');
+  const radio_2 = document.getElementById('radio-2');
+  
+  radio_1.addEventListener('click', () => {
+    followers_div.classList.remove("hidden");
+    following_div.classList.add("hidden");
+  });
+
+  radio_2.addEventListener('click', () => {
+    followers_div.classList.add("hidden");
+    following_div.classList.remove("hidden");
+  });
+</script>

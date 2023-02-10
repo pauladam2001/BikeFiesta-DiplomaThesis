@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/followers", to: "users#followers_following_page"
+  get "/follow_page", to: "users#follow_page"
 
   get '*path' => redirect('/posts')
 end

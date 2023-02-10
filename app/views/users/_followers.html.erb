@@ -1,0 +1,50 @@
+<div id="followers-div" class="followers-div">
+  <div class="user-cards-grid">
+    <% @followers.each do |follower| %>
+      <div class="user-card">
+        <div class="profile">
+          <div class="image">
+            <% if follower.provider == "google_oauth2" %>
+              <h6><%= image_tag(follower.avatar_url, border: 0, width: '40px', class: "image-radius") %></h6>
+            <% else %>
+              <% if follower.avatar.attached? %>
+                <h6><%= image_tag(follower.avatar, border: 0, width: '80px', class: "image-radius") %></h6>
+              <% else %>
+                <h6><%= image_tag("user-icon.png", border: 0, width: '70px') %></h6>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="name"><%= follower.name %></div>
+          <div class="actions">
+            <% if current_user.following?(follower) %>
+              <%= render 'users/unfollow', user: follower %>
+            <% else %>
+              <%= render 'users/follow', user: follower %>
+            <% end %>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="box">
+            <span class="value"><%= follower.posts.count %></span>
+            <span class="parameter">Posts</span>
+          </div>
+          <div class="box">
+            <span class="value"><%= follower.posts.sum(:views) %></span>
+            <span class="parameter">Views</span>
+          </div>
+          <div class="box">
+            <span class="value"><%= follower.followers.count %></span>
+            <span class="parameter">Followers</span>
+          </div>
+          <div class="box">
+            <span class="value"><%= follower.following.count %></span>
+            <span class="parameter">Following</span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="pagination">
+    <%= will_paginate @followers %>
+  </div>
+</div>

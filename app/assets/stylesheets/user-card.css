@@ -1,0 +1,99 @@
+.user-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding: 2rem;
+  grid-gap: 30px;
+}
+
+.user-card {
+  height: 180px;
+  width: 250px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
+}
+
+.profile {
+  float: left;
+  width: 120px;
+  height: 200px;
+  text-align: center;
+}
+
+.profile .image {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  margin: 38px auto 0 auto;
+}
+
+.profile .image img {
+  display: block;
+  border-radius: 50%;
+  background: #f5e8df;
+}
+
+.profile .name {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.profile .actions {
+  margin-top: 10px;
+}
+
+.profile .actions .btn {
+  display: block;
+  width: 110px;
+  height: 30px;
+  margin: 0 auto 10px auto;
+  background: none;
+  border: 1px solid #786450;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+  color: #786450;
+}
+
+.profile .actions .btn:hover {
+  background: #786450;
+  color: #fff;
+}
+
+.stats {
+  float: left;
+}
+
+.stats .box {
+  box-sizing: border-box;
+  width: 130px;
+  height: 45px;
+  background: #f5e8df;
+  text-align: center;
+  padding-top: 5px;
+  transition: all 0.4s ease-in-out;
+}
+
+.stats .box:nth-child(2) {
+  margin: 1px 0;
+}
+
+.stats .box:nth-child(3) {
+  margin: 1px 0;
+}
+
+.stats span {
+  display: block;
+}
+
+.stats .value {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.stats .parameter {
+  font-size: 11px;
+}

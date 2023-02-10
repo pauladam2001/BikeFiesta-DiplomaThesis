@@ -11,8 +11,11 @@ class UsersController < ApplicationController
 
   end
 
-  def followers_following_page
-
+  def follow_page
+    @followers = current_user.followers
+    @following = current_user.following
+    @followers = @followers.paginate(page: params[:page], per_page: 30)
+    @following = @following.paginate(page: params[:page], per_page: 30)
   end
 
   def archive_user
@@ -45,6 +48,6 @@ class UsersController < ApplicationController
 
   private
     def check_permissions
-      redirect_to posts_path and return if current_user.is_normal?
+      redirect_to posts_path and return if current_user.is_normal? && params[:action] != "follow_page"
     end
 end
