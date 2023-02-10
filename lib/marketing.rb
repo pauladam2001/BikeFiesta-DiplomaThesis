@@ -88,4 +88,22 @@ module Marketing
       user.save(validate: false)
     end
   end
+
+  # Used to send SMS to specific users
+  def self.send_sms(phone, message)
+    require 'twilio-ruby'
+
+    account_sid = ENV['TWILIO_ACCOUNT_SID']
+    auth_token = ENV['TWILIO_AUTH_TOKEN']
+    client = Twilio::REST::Client.new(account_sid, auth_token)
+
+    from = ENV['TWILIO_NUMBER']
+    to = phone
+    binding.pry
+    client.messages.create(
+      from: from,
+      to: to,
+      body: message
+    )
+  end
 end

@@ -8,7 +8,7 @@ module AuthenticateWithTwilio
       authenticate_user_with_sms_code(user)
     elsif user&.valid_password?(user_params[:password])
       User.generate_code(user)
-      send_sms(user.phone, user.code)
+      send_auth_sms(user.phone, user.code)
       prompt_for_sms_code(user, nil)
     end
   end
@@ -57,20 +57,22 @@ module AuthenticateWithTwilio
       end
     end
 
-    def send_sms(phone, code)
-      require 'twilio-ruby'
+    def send_auth_sms(phone, code)
+      # require 'twilio-ruby'
 
-      account_sid = ENV['TWILLIO_ACCOUNT_SID']
-      auth_token = ENV['TWILLIO_AUTH_TOKEN']
-      client = Twilio::REST::Client.new(account_sid, auth_token)
+      # account_sid = ENV['TWILLIO_ACCOUNT_SID']
+      # auth_token = ENV['TWILLIO_AUTH_TOKEN']
+      # client = Twilio::REST::Client.new(account_sid, auth_token)
 
-      from = '+15162615353'
-      to = phone
+      # from = '+15162615353'
+      # to = phone
 
-      client.messages.create(
-        from: from,
-        to: to,
-        body: "BikeFiesta - Your code is " + code
-      )
+      # client.messages.create(
+      #   from: from,
+      #   to: to,
+      #   body: "BikeFiesta - Your code is " + code
+      # )
+      message = "BikeFiesta - Your code is " + code
+      Marketing.send_sms(phone, message)
     end
 end
