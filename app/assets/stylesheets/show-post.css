@@ -1,0 +1,10 @@
+.show-flex-div {
+  /* display: flex; */
+  /* flex-direction: column; */
+}
+
+.user-section {
+  margin-top: 3rem;
+  margin-left: 67rem;
+  font-size: 70px;
+}

@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resources :materials
   resources :component_groups
 
-  # resources :relationships, only: [:create, :destroy] # do we need it? Page 871
+  resources :relationships, only: [:create, :destroy]
 
   resources :users do
     member do
