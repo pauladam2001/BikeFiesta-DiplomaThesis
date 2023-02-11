@@ -33,7 +33,7 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :favorite_posts, through: :favorites, source: :post
   has_many :reports
-  has_many :notifications
+  has_many :notifications, foreign_key: :notified_id, dependent: :destroy
   has_many :reviews
 
   def self.from_omniauth(auth)

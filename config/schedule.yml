@@ -21,3 +21,9 @@ reset_user_codes_job:
   class: "CronJobResetUserCodes"
   # queue: cron_jobs
   # status: 'disabled'
+
+send_notification_to_buyers_job:
+  cron: "every day at 2am"
+  class: "CronJobSendNotificationToBuyers"
+  # queue: cron_jobs
+  # status: 'disabled'

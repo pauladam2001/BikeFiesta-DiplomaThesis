@@ -48,6 +48,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :reviews
+
   get "/follow_page", to: "users#follow_page"
 
   get '*path' => redirect('/posts')

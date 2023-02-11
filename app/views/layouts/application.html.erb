@@ -38,13 +38,18 @@
             <input type="checkbox" id="navtoggle" />
             <div class="toggleNotifications">
               <div class="count">
-                <div class="num">4</div>
+                <div class="num"><%= @notifications_number %></div>
               </div>
               <label class="show" for="navtoggle"><%= image_tag("notification.png", border: 0, width: '40px', height: '40px') %></label>
               <div class="notifications">
                 <div class="groupofnotes">
-                  <div class="note">This is a notification</div>
-                  <div class="note">You've got mail</div>
+                  <% @notifications.each do |notification| %>
+                    <div class="note">
+                      <%= link_to new_review_path, class: "" do %>
+                        Live a review for <%= notification.user.full_name %> when you want!
+                      <% end %>
+                    </div>
+                  <% end %>
                 </div>
               </div>
             </div>
