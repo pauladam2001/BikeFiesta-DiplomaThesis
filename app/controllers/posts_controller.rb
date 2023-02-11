@@ -3,9 +3,10 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @most_viewed_posts = Post.all.limit(5)
-    @sale_posts = Post.all.limit(5)
-    @following_posts = Post.all.limit(5)
+    @most_viewed_posts = Post.order(views: :desc).limit(5)
+    @sale_posts = Post.where.not(sale_price: [nil, ""]).limit(5)
+    following_users = current_user.following
+    @following_posts = Post.where(user_id: following_users).limit(5)
     @all_posts = Post.all.limit(5)
     @favorite_posts = current_user.favorite_posts
   end
