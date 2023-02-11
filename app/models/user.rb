@@ -33,6 +33,8 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :favorite_posts, through: :favorites, source: :post
   has_many :reports
+  has_many :notifications
+  has_many :reviews
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create!(skip_validation: true) do |user|

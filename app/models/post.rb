@@ -9,6 +9,7 @@ class Post < ApplicationRecord
   belongs_to :component_group, foreign_key: :component_group_id
   has_many :favorites
   has_many :reports
+  has_one :notification
 
   attr_accessor :skip_validation
 
