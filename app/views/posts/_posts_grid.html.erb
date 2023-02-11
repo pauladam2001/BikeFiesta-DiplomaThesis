@@ -1,6 +1,8 @@
 <form id="filters-form" style="margin-top: 1.5rem; margin-left: 47rem; margin-bottom: 2rem;">
-  <input type="button" class="button" onclick="openFiltersPopUp()" value="Filters"></input>
-  <%= render "posts/filters_pop_up" %>
+  <% if !my_posts %>
+    <input type="button" class="button" onclick="openFiltersPopUp()" value="Filters"></input>
+    <%= render "posts/filters_pop_up" %>
+  <% end %>
 </form>
 <div class="grid-post-container">
   <% if grid_posts.size > 0 %>
