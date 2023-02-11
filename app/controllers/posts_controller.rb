@@ -3,12 +3,16 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @most_viewed_posts = Post.order(views: :desc).limit(5)
-    @sale_posts = Post.where.not(sale_price: [nil, ""]).limit(5)
-    following_users = current_user.following
-    @following_posts = Post.where(user_id: following_users).limit(5)
-    @all_posts = Post.all.limit(5)
-    @favorite_posts = current_user.favorite_posts
+    if params[:name].present?
+      redirect_to all_posts_path(name: params[:name])
+    else
+      @most_viewed_posts = Post.order(views: :desc).limit(5)
+      @sale_posts = Post.where.not(sale_price: [nil, ""]).limit(5)
+      following_users = current_user.following
+      @following_posts = Post.where(user_id: following_users).limit(5)
+      @all_posts = Post.all.limit(5)
+      @favorite_posts = current_user.favorite_posts
+    end
   end
 
   def new
@@ -115,8 +119,13 @@ class PostsController < ApplicationController
 
   def all_posts
     @all_posts = Post.all
-    @all_posts = @all_posts.paginate(page: params[:page], per_page: 16)
     @favorite_posts = current_user.favorite_posts
+
+    if params[:name].present?
+      @all_posts = @all_posts.where("name ilike?", "%#{params[:name]}%")
+    end
+
+    @all_posts = @all_posts.paginate(page: params[:page], per_page: 16)
   end
 
   def favorites

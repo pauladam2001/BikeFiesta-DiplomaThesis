@@ -1,6 +1,8 @@
 <div class='page-div'>
   <div class="search_container">
-      <input class="search_input" type="text" placeholder="Quick Search...">
+      <form>
+        <input class="search_input" type="text" placeholder="Search by Name..." name="name" value="<%= params[:name] %>">
+      </form>
   </div>
 
   <% ["Most Viewed", "Sale", "Following", "All"].each do |title| %>
