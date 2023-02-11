@@ -22,7 +22,7 @@ class User < ApplicationRecord
   # validates :password, format: VALID_PASSWORD_REGEX, unless: :skip_validation
   validate :password_regex, unless: :skip_validation
 
-  has_one_attached :avatarre
+  has_one_attached :avatar
   validates :avatar, :presence => true, unless: :skip_validation, unless: Proc.new { |u| u.reset_password_token.present? }
 
   has_many :posts, dependent: :destroy
