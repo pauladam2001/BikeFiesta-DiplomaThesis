@@ -34,8 +34,20 @@
           <div class="menu-item">
             <%= button_to "Post", new_post_path, method: :get, :class => "button" %>
           </div>
-          <div class="menu-item menu-item-padding">
-            <h6>Random</h6>
+          <div class="menu-item">
+            <input type="checkbox" id="navtoggle" />
+            <div class="toggleNotifications">
+              <div class="count">
+                <div class="num">4</div>
+              </div>
+              <label class="show" for="navtoggle"><%= image_tag("notification.png", border: 0, width: '40px', height: '40px') %></label>
+              <div class="notifications">
+                <div class="groupofnotes">
+                  <div class="note">This is a notification</div>
+                  <div class="note">You've got mail</div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="menu-item menu-item-padding">
             <% if current_user.provider == "google_oauth2" %>

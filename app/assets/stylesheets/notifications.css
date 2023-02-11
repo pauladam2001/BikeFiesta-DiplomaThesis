@@ -1,0 +1,119 @@
+.title {
+  float: left;
+  height: 60px;
+  line-height: 58px;
+  padding: 0px 20px;
+}
+
+.toggleNotifications {
+  position: relative;
+  display: inline-flex;
+  float: right;
+  height: 58px;
+  width: 70px;
+  user-select: none;
+}
+
+.toggleNotifications .show {
+  flex: 1;
+  margin: auto;
+  height: 40px;
+  max-width: 40px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 24px;
+  transition: all 0.2s;
+}
+
+.toggleNotifications .show:hover {
+  cursor: pointer;
+}
+
+.count {
+  position: absolute;
+  top: 5px;
+  right: 26px;
+}
+
+.count .num {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: var(--light-red);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 17px;
+  font-size: 11px;
+  box-shadow: 0px 1px 3px white;
+  border: 1px solid white;
+  transition: all 0.3s;
+}
+
+.notifications {
+  position: absolute;
+  top: 5rem;
+  right: 24px;
+  width: 350px;
+  background: var(--beige);
+  border: 1px solid #455;
+  border-radius: 2px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s;
+  display: none;
+}
+
+.notifications:after {
+  content: ' ';
+  position: absolute;
+  top: -20px;
+  right: 0px;
+  width: 0px;
+  height: 10px;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-bottom: 10px solid var(--beige);
+  pointer-events: none;
+}
+
+.notifications:before {
+  content: ' ';
+  position: absolute;
+  top: -21px;
+  right: 0px;
+  width: 0px;
+  height: 10px;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-bottom: 10px solid var(--beige);
+  pointer-events: none;
+}
+
+.notifications .note {
+  padding: 0px 20px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 2px;
+  transition: all 0.2s;
+  overflow: hidden;
+  max-height: 40px;
+}
+
+.notifications .note:first-of-type {
+  margin-top: 0px;
+}
+
+.notifications .note:hover {
+  background: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+#navtoggle {
+  display: none;
+}
+
+#navtoggle:checked ~ .toggleNotifications .notifications {
+  display: block;
+}
