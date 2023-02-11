@@ -1,3 +1,7 @@
+<form id="filters-form" style="margin-top: 1.5rem; margin-left: 47rem; margin-bottom: 2rem;">
+  <input type="button" class="button" onclick="openFiltersPopUp()" value="Filters"></input>
+  <%= render "posts/filters_pop_up" %>
+</form>
 <div class="grid-post-container">
   <% if grid_posts.size > 0 %>
     <% grid_posts.each do |post| %>
@@ -64,3 +68,15 @@
 <div class="pagination">
   <%= will_paginate grid_posts %>
 </div>
+
+<script type="text/javascript">
+  let filters_pop_up = document.getElementById("filters_pop_up");
+
+  function openFiltersPopUp() {
+    filters_pop_up.classList.remove("hidden");
+  }
+
+  function closeFiltersPopUp() {
+    filters_pop_up.classList.add("hidden");
+  }
+</script>

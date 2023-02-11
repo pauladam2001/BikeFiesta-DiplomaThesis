@@ -1,0 +1,68 @@
+<div id="filters_pop_up" class="hidden">
+  <div class="popup-wrapper" style="margin-top: 1rem; z-index: 2; overflow: scroll; height: 780px; width: 720px; overflow-x: hidden; overflow-y:hidden;">
+    <div style="margin-left: 1rem; margin-top: 1rem; margin-right: 1rem;">
+      <div>
+        <input type="text" name="name" placeholder="Search by Name..." value="<%= params[:name] %>" class="filter-input" style="margin-right: 10px;">
+        <input type="text" name="description" placeholder="Search by Description..." value="<%= params[:description] %>" class="filter-input" style="margin-right: 10px;">
+        <select name="condition">
+          <%= options_for_select([["Search by Condition", "all"], ["Brand New", "brand_new"], ["Perfect", "perfect"], ["Very Good", "very_good"], ["Good", "good"], ["Ok", "ok"], ["Bad", "bad"]], params[:condition]) %>
+        </select>
+      </div>
+      <div style="padding-top: 20px; margin-left: 4rem;">
+        <select name="start_year" style="margin-right: 10px;">
+          <%= options_for_select([["Start Year", "all"]] + (Time.now.year).downto(Time.now.year - 70).to_a, params[:start_year]) %>
+        </select>
+        <select name="end_year">
+          <%= options_for_select([["End Year", "all"]] + (Time.now.year).downto(Time.now.year - 70).to_a, params[:end_year]) %>
+        </select>
+      </div>
+      <div style="padding-top: 20px;">
+        <input type="number" step="any" name="start_price" placeholder="Start Price..." value="<%= params[:start_price] %>" class="filter-input" style="margin-right: 10px;">
+        <input type="number" step="any" name="end_price" placeholder="End Price..." value="<%= params[:end_price] %>" class="filter-input" style="margin-right: 10px;">
+        <select name="user">
+          <%= options_for_select([["Search by User", "all"]] + @users.collect { |o| [o[0], o[1]]}, params[:user]) %>
+        </select>
+      </div>
+      <div style="padding-top: 20px; margin-left: 4rem;">
+        <select name="color[]" style="margin-right: 10px; height: 100px;" multiple="multiple">
+          <%= options_for_select([["Search for a Specific Color", "all", {:disabled => 'restricted'}]] + @colors.collect { |o| [o[0], o[1]]}, params[:color]) %>
+        </select>
+        <select name="location[]" style="height: 100px;" multiple="multiple">
+          <%= options_for_select([["Search for a Specific Location", "all", {:disabled => 'restricted'}]] + @locations.collect { |o| [o[0], o[1]]}, params[:location]) %>
+        </select>
+      </div>
+      <div style="padding-top: 20px; margin-left: 4rem;">
+        <select name="brand[]" style="margin-right: 10px; height: 100px;" multiple="multiple">
+          <%= options_for_select([["Search for a Specific Brand", "all", {:disabled => 'restricted'}]] + @brand_names.collect { |o| [o[0], o[1]]}, params[:brand]) %>
+        </select>
+        <select name="category[]" style="margin-right: 10px; height: 100px;" multiple="multiple">
+          <%= options_for_select([["Search for a Specific Category", "all", {:disabled => 'restricted'}]] + @categories.collect { |o| [o[0], o[1]]}, params[:category]) %>
+        </select>
+      </div>
+      <div style="padding-top: 20px; margin-left: 4rem;">
+        <select name="size" style="margin-right: 10px;">
+          <%= options_for_select([["Search by Size", "all"], ["XXS (<47)", "XXS"], ["XS (48-50)", "XS"], ["S (50-52)", "S"], ["M (53-55)", "M"], ["L (56-58)", "L"], ["XL (59-62)", "XL"], ["XXL (>63)", "XXL"]], params[:size]) %>
+        </select>
+        <select name="electric">
+          <%= options_for_select([["Bike Type", "all"], ["Electric", "true"], ["Normal", "false"]], params[:size]) %>
+        </select>
+      </div>
+      <div style="padding-top: 20px; margin-left: 4rem;">
+        <select name="material[]" style="margin-right: 10px; height: 100px;" multiple="multiple">
+          <%= options_for_select([["Search for a Specific Material", "all", {:disabled => 'restricted'}]] + @materials.collect { |o| [o[0], o[1]]}, params[:material]) %>
+        </select>
+        <select name="component[]" style="margin-right: 10px; height: 100px;" multiple="multiple">
+          <%= options_for_select([["Search for a Specific Component", "all", {:disabled => 'restricted'}]] + @component_groups.collect { |o| [o[0], o[1]]}, params[:component]) %>
+        </select>
+      </div>
+      <div style="margin-top: 8rem; margin-left: 11rem;">
+        <button name="submitButton" value="Filters" class="button">
+          Search
+        </button>
+        <button type="button" onclick="closeFiltersPopUp()" class="button">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

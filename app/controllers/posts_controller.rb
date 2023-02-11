@@ -121,7 +121,30 @@ class PostsController < ApplicationController
     @all_posts = Post.all
     @favorite_posts = current_user.favorite_posts
 
+    @users = User.where(role: "normal", archived: false).pluck(:full_name, :id)
+    @colors = Color.order(:name).pluck(:name, :id)
+    @locations = Location.order(:name).pluck(:name, :id)
+    @brand_names = Brandname.order(:name).pluck(:name, :id)
+    @categories = Category.order(:name).pluck(:name, :id)
+    @materials = Material.order(:name).pluck(:name, :id)
+    @component_groups = ComponentGroup.order(:name).pluck(:name, :id)
+
     @all_posts = @all_posts.where("name ilike?", "%#{params[:name]}%") if params[:name].present?
+    @all_posts = @all_posts.where("description ilike?", "%#{params[:description]}%") if params[:description].present?
+    @all_posts = @all_posts.where(condition: params[:condition]) if params[:condition].present? && params[:condition] != "all"
+    @all_posts = @all_posts.where("year >= ?", params[:start_year]) if params[:start_year].present? && params[:start_year] != "all"
+    @all_posts = @all_posts.where("year <= ?", params[:end_year]) if params[:end_year].present? && params[:end_year] != "all"
+    @all_posts = @all_posts.where("price >= ? OR sale_price >= ?", params[:start_price], params[:start_price]) if params[:start_price].present? && params[:start_price] != "all"
+    @all_posts = @all_posts.where("price <= ? OR sale_price <= ?", params[:end_price], params[:end_price]) if params[:end_price].present? && params[:end_price] != "all"
+    @all_posts = @all_posts.where(user_id: params[:user]) if params[:user].present? && params[:user] != "all"
+    @all_posts = @all_posts.where(color_id: params[:color]) if params[:color].present? && params[:color] != "all"
+    @all_posts = @all_posts.where(location_id: params[:location]) if params[:location].present? && params[:location] != "all"
+    @all_posts = @all_posts.where(brandname_id: params[:brand]) if params[:brand].present? && params[:brand] != "all"
+    @all_posts = @all_posts.where(category_id: params[:category]) if params[:category].present? && params[:category] != "all"
+    @all_posts = @all_posts.where(size: params[:size]) if params[:size].present? && params[:size] != "all"
+    @all_posts = @all_posts.where(electric: params[:electric]) if params[:electric].present? && params[:electric] != "all"
+    @all_posts = @all_posts.where(material_id: params[:material]) if params[:material].present? && params[:material] != "all"
+    @all_posts = @all_posts.where(component_group_id: params[:component]) if params[:component].present? && params[:component] != "all"
 
     @all_posts = @all_posts.paginate(page: params[:page], per_page: 16)
   end
