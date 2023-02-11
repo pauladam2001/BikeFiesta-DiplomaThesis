@@ -117,4 +117,21 @@ module Marketing
       post.save
     end
   end
+
+  # Called daily
+  # Calculate user's rating based on reviews
+  def self.calculate_users_rating
+    User.where(role: "normal", archived: false).find_each do |user|
+      rating = 0.0
+      count = 0
+      
+      user.reviews.each do |review|
+        rating += review.grade
+        count += 1
+      end
+
+      user.rating = (rating / count) || 0.0
+      user.save(validate: false)
+    end
+  end
 end

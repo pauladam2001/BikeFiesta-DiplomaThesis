@@ -27,3 +27,9 @@ send_notification_to_buyers_job:
   class: "CronJobSendNotificationToBuyers"
   # queue: cron_jobs
   # status: 'disabled'
+
+calculate_users_rating_job:
+  cron: "every day at 3am"
+  class: "CronJobCalculateUsersRating"
+  # queue: cron_jobs
+  # status: 'disabled'

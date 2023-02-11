@@ -22,7 +22,7 @@ class User < ApplicationRecord
   # validates :password, format: VALID_PASSWORD_REGEX, unless: :skip_validation
   validate :password_regex, unless: :skip_validation
 
-  has_one_attached :avatar
+  has_one_attached :avatarre
   validates :avatar, :presence => true, unless: :skip_validation, unless: Proc.new { |u| u.reset_password_token.present? }
 
   has_many :posts, dependent: :destroy
@@ -34,7 +34,7 @@ class User < ApplicationRecord
   has_many :favorite_posts, through: :favorites, source: :post
   has_many :reports
   has_many :notifications, foreign_key: :notified_id, dependent: :destroy
-  has_many :reviews
+  has_many :reviews, foreign_key: :reviewed_id, dependent: :destroy
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create!(skip_validation: true) do |user|
