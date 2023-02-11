@@ -1,2 +1,67 @@
-<h1>Reviews#new</h1>
-<p>Find me in app/views/reviews/new.html.erb</p>
+<%= form_for @review do |f| %>
+  <div class="review-wrapper">
+    <div style="margin-left: 18.3rem;">
+      <div style="margin-top: 0.5rem; margin-left: 4.3rem;">
+        <% if @reviewed.provider == "google_oauth2" %>
+          <h6><%= image_tag(@reviewed.avatar_url, border: 0, width: '60px', class: "image-radius") %></h6>
+        <% else %>
+          <% if @reviewed.avatar.attached? %>
+            <h6><%= image_tag(@reviewed.avatar, border: 0, width: '80px', class: "image-radius") %></h6>
+          <% else %>
+            <h6><%= image_tag("user-icon.png", border: 0, width: '60px') %></h6>
+          <% end %>
+        <% end %>
+      </div>
+      <div style="margin-top: 0.5rem; margin-left: 3.5rem; font-size: 20px;">
+        <%= @reviewed.full_name %>
+      </div>
+      <div class="rating">
+        <input type="radio" name="rating" id="r1">
+        <label for="r1"></label>
+        <input type="radio" name="rating" id="r2">
+        <label for="r2"></label>
+        <input type="radio" name="rating" id="r3">
+        <label for="r3"></label>
+        <input type="radio" name="rating" id="r4">
+        <label for="r4"></label>
+        <input type="radio" name="rating" id="r5">
+        <label for="r5"></label>
+        </div>
+    </div>
+    <div style="margin-top: 4rem;">
+      <textarea required name="message" cols="2" rows="12" placeholder="Leave a review..." maxLength="1000" class="input review-textarea"></textarea>
+      <input type="number" class="hidden" name="post_id" value=<%= request.parameters["post_id"] %>>
+      <input type="number" class="hidden" name="reviewer_id" value=<%= request.parameters["reviewer_id"] %>>
+      <input id="grade" type="number" class="hidden" name="grade">
+    </div>
+    <div style="margin-left: 20rem; margin-bottom: 0.5rem;">
+      <button type="submit" class="button">
+        Submit
+      </button>
+    </div>
+  </div>
+<% end%>
+
+<script type="text/javascript">
+  const r1 = document.getElementById("r1");
+  const r2 = document.getElementById("r2");
+  const r3 = document.getElementById("r3");
+  const r4 = document.getElementById("r4");
+  const r5 = document.getElementById("r5");
+
+  r1.addEventListener('click', () => {
+    $('#grade').val('5');
+  });
+  r2.addEventListener('click', () => {
+    $('#grade').val('4');
+  });
+  r3.addEventListener('click', () => {
+    $('#grade').val('3');
+  });
+  r4.addEventListener('click', () => {
+    $('#grade').val('2');
+  });
+  r5.addEventListener('click', () => {
+    $('#grade').val('1');
+  });
+</script>
