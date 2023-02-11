@@ -14,6 +14,12 @@ class UsersController < ApplicationController
   def follow_page
     @followers = current_user.followers     # TODO observer/socket or how we will implement to buy button/chat app
     @following = current_user.following
+
+    if params[:name].present?
+      @followers = @followers.where("full_name ilike?", "%#{params[:name]}%")
+      @following = @following.where("full_name ilike?", "%#{params[:name]}%")
+    end
+
     @followers = @followers.paginate(page: params[:page], per_page: 30)
     @following = @following.paginate(page: params[:page], per_page: 30)
   end

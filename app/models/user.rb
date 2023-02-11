@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  after_save :update_phone_number
+  after_save :update_phone_number_and_name
 
   attr_accessor :skip_validation
   
@@ -88,7 +88,12 @@ class User < ApplicationRecord
     super and !self.archived
   end
 
-  def update_phone_number
+  def update_phone_number_and_name
+    if self.full_name.nil?
+      self.full_name = [self.first_name, self.last_name].compact.join(" ")
+      self.save(validate: false)
+    end
+
     if !self.phone.nil?
       if self.phone&.length == 9
         self.phone = "+40" + self.phone

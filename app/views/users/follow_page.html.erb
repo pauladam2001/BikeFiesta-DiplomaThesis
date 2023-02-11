@@ -8,7 +8,9 @@
 	</div>
 </div>
 <div class="search_container">
-  <input class="search_input" type="text" placeholder="Search by Name...">
+  <form>
+    <input class="search_input" type="text" placeholder="Search by Name..." name="name" value="<%= params[:name] %>">
+  </form>
 </div>
 <%= render 'users/followers' %>
 <%= render 'users/following' %>
