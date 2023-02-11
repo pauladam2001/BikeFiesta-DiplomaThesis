@@ -121,9 +121,7 @@ class PostsController < ApplicationController
     @all_posts = Post.all
     @favorite_posts = current_user.favorite_posts
 
-    if params[:name].present?
-      @all_posts = @all_posts.where("name ilike?", "%#{params[:name]}%")
-    end
+    @all_posts = @all_posts.where("name ilike?", "%#{params[:name]}%") if params[:name].present?
 
     @all_posts = @all_posts.paginate(page: params[:page], per_page: 16)
   end

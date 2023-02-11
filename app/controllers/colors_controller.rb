@@ -4,6 +4,9 @@ class ColorsController < ApplicationController
   
   def index
     @colors = Color.order('name ASC')
+
+    @colors = @colors.where("name ilike ?", "%#{params[:name]}%") if params[:name].present?
+
     @colors = @colors.paginate(page: params[:page], per_page: 12)
   end
 

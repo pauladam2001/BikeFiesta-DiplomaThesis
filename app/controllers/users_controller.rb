@@ -4,6 +4,11 @@ class UsersController < ApplicationController
   
   def index
     @users = User.order(:email)
+
+    @users = @users.where("email ilike?", "%#{params[:email]}%") if params[:email].present?
+    @users = @users.where("full_name ilike?", "%#{params[:name]}%") if params[:name].present?
+    @users = @users.where(role: params[:role]) if params[:role].present? && params[:role] != "all"
+
     @users = @users.paginate(page: params[:page], per_page: 12)
   end
 

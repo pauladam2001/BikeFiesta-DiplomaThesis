@@ -1,5 +1,19 @@
 <div class="main-page-div">
   <h1 class="h1-title">Colors</h1>
+  <div class="filter-first-div">
+    <div class="filter-second-div">
+      <form>
+        <div class="filter-option-div">
+          <span class="filter-span">Filter by Name</span>
+          <br/>
+          <input type="text" name="name" value="<%= params[:name] %>" class="filter-input">
+        </div>
+        <div style="float: left;">
+          <input type="submit" name="submitButton" class="filter-submit" value="Search"/>
+        </div>
+      </form>
+    </div>
+  </div>
   <div class="tbl-header">
     <table cellpadding="0" cellspacing="0" border="0">
       <thead>

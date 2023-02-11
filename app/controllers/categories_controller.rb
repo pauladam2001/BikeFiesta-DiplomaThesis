@@ -4,6 +4,9 @@ class CategoriesController < ApplicationController
   
   def index
     @categories = Category.order('name ASC')
+
+    @categories = @categories.where("name ilike ?", "%#{params[:name]}%") if params[:name].present?
+
     @categories = @categories.paginate(page: params[:page], per_page: 12)
   end
 

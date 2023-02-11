@@ -4,6 +4,9 @@ class MaterialsController < ApplicationController
   
   def index
     @materials = Material.order('name ASC')
+
+    @materials = @materials.where("name ilike ?", "%#{params[:name]}%") if params[:name].present?
+
     @materials = @materials.paginate(page: params[:page], per_page: 12)
   end
 

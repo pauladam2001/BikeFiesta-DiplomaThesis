@@ -118,3 +118,75 @@ td {
 .flex-div {
   display: flex;
 }
+
+.filter-first-div {
+  display: inline-block; 
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem; 
+  vertical-align: middle; 
+  min-width: 100%; 
+}
+
+.filter-second-div {
+  overflow-y: auto; 
+  overflow: hidden; 
+  padding: 1rem; 
+  border-bottom-width: 1px; 
+  border-color: #E5E7EB; 
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); 
+}
+
+.filter-option-div {
+  float: left; 
+  margin-right: 1rem; 
+}
+
+.filter-span {
+  font-size: 0.875rem;
+  line-height: 1.25rem; 
+}
+
+.filter-input {
+  width: 12rem; 
+  max-width: 32rem; 
+  height: 2.5rem; 
+  border-radius: 0.375rem; 
+  border-color: #D1D5DB; 
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
+}
+
+.filter-submit {
+  display: inline-flex; 
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem; 
+  padding-left: 1rem;
+  padding-right: 1rem; 
+  margin-left: 1rem; 
+  margin-top: 1.25rem; 
+  background-color: #4F46E5; 
+  color: #ffffff; 
+  font-size: 0.875rem;
+  line-height: 1.25rem; 
+  font-weight: 500; 
+  line-height: 1rem; 
+  align-items: center; 
+  border-radius: 0.375rem; 
+  border-width: 1px; 
+  border-color: transparent; 
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
+}
+
+.filter-submit:hover {
+  background-color: #4338CA;
+  cursor: pointer;
+}
+
+.filter-select {
+  display: block; 
+  width: 12rem; 
+  max-width: 32rem; 
+  height: 2.5rem; 
+  border-radius: 0.375rem; 
+  border-color: #D1D5DB; 
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}

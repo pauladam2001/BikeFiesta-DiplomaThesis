@@ -4,6 +4,9 @@ class ComponentGroupsController < ApplicationController
   
   def index
     @components = ComponentGroup.order('name ASC')
+
+    @components = @components.where("name ilike ?", "%#{params[:name]}%") if params[:name].present?
+
     @components = @components.paginate(page: params[:page], per_page: 12)
   end
 
