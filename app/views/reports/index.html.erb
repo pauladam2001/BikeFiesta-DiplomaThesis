@@ -13,6 +13,12 @@
           <br/>
           <input type="date" name="end_date" value="<%= params[:end_date] %>" class="filter-input">
         </div>
+        <div class="filter-option-div">
+          <span class="filter-span">Unsolved / Solved</span>
+          <select id="solved" name="solved" class="filter-select">
+            <%= options_for_select([["Unsolved", "false"], ["Solved", "true"]], params[:solved]) %>
+          </select>
+        </div>
         <div style="float: left;">
           <input type="submit" name="submitButton" class="filter-submit" value="Search"/>
         </div>
@@ -38,6 +44,9 @@
           <tr class="<%= cycle("bg-white", "bg-gray") %>">
             <td>
               <%= report.created_at.strftime("%d/%m/%y") %>
+              <% if report.solved %>
+                <span style="padding-top: 0.1em; padding-bottom: 0.1rem" class="admin-label">Solved</span>
+              <% end %>
             </td>
             <td>
               <%= report.title %>
