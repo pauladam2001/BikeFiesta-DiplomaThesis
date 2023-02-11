@@ -173,8 +173,11 @@ class PostsController < ApplicationController
     post = Post.find(params[:id])
     post.is_active = -1
     post.save
+
     phone = post.user.phone
-    AsyncSendSmsToUser.perform_async(phone)
+    message = "BikeFiesta - One of the posts that you reported was banned. Thank you!"
+    AsyncSendSmsToUser.perform_async(phone, message)
+
     redirect_back(fallback_location: reports_path)
   end
 

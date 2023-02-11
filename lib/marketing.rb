@@ -29,7 +29,7 @@ module Marketing
 
     if is_bicycle
       post.is_active = 1
-      #TODO asyncSendSMS
+      AsyncSendSmsToFollowers.perform_async(post.user_id)
     else
       post.is_active = -1
     end
@@ -99,7 +99,7 @@ module Marketing
 
     from = ENV['TWILIO_NUMBER']
     to = phone
-    binding.pry
+    
     client.messages.create(
       from: from,
       to: to,
