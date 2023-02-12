@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_11_161138) do
+ActiveRecord::Schema.define(version: 2023_02_12_113821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 2023_02_11_161138) do
     t.integer "notified_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "message"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -182,6 +183,13 @@ ActiveRecord::Schema.define(version: 2023_02_11_161138) do
     t.float "total_profit"
     t.integer "total_transactions"
     t.float "roi"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "suggestions", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
