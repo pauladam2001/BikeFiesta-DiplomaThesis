@@ -10,3 +10,14 @@
 .sale-padding {
   padding-left: 52rem;
 }
+
+.suggestion-div {
+  margin-top: 3rem;
+  margin-left: 32rem;
+  margin-bottom: 4rem;
+  width: 40rem;
+}
+
+.suggestion-span {
+  padding-left: 11rem;
+}

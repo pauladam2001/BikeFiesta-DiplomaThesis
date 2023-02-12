@@ -3,6 +3,10 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   
   def index
+    if params[:submitButton] == "Send Suggestion"
+      send_suggestion(current_user.id, params[:message])
+    end
+
     if params[:name].present?
       redirect_to all_posts_path(name: params[:name])
     else
@@ -76,6 +80,12 @@ class PostsController < ApplicationController
     report = Report.find_or_create_by(post_id: post_id, user_id: user_id, message: message, title: title)
     
     redirect_to post_path(post_id)
+  end
+
+  def send_suggestion(user_id, message)
+    Suggestion.create(user_id: user_id, message: message)
+
+    redirect_to posts_path, alert: "Suggestion sent successfully."
   end
 
   def destroy

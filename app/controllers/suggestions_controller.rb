@@ -21,13 +21,6 @@ class SuggestionsController < ApplicationController
     @suggestions = @suggestions.paginate(page: params[:page], per_page: 12)
   end
 
-  def create
-    # @category = Category.new(category_params)
-    # if @category.save
-    #   redirect_to categories_path
-    # end
-  end
-
   def solve
     suggestion = Suggestion.find(params[:id])
     suggestion.solved = true
