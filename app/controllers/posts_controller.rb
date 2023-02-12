@@ -6,11 +6,11 @@ class PostsController < ApplicationController
     if params[:name].present?
       redirect_to all_posts_path(name: params[:name])
     else
-      @most_viewed_posts = Post.order(views: :desc).limit(5)
-      @sale_posts = Post.where.not(sale_price: [nil, ""]).limit(5)
+      @most_viewed_posts = Post.where(is_active: 1).order(views: :desc).limit(5)
+      @sale_posts = Post.where(is_active: 1).where.not(sale_price: [nil, ""]).limit(5)
       following_users = current_user.following
-      @following_posts = Post.where(user_id: following_users).limit(5)
-      @all_posts = Post.all.limit(5)
+      @following_posts = Post.where(is_active: 1).where(user_id: following_users).limit(5)
+      @all_posts = Post.where(is_active: 1).limit(5)
       @favorite_posts = current_user.favorite_posts
     end
   end
@@ -100,7 +100,7 @@ class PostsController < ApplicationController
   end
 
   def most_viewed_posts
-    @most_viewed_posts = Post.order(views: :desc)
+    @most_viewed_posts = Post.where(is_active: 1).order(views: :desc)
     @favorite_posts = current_user.favorite_posts
 
     @users = User.where(role: "normal", archived: false).pluck(:full_name, :id)
@@ -117,7 +117,7 @@ class PostsController < ApplicationController
   end
 
   def on_sale_posts
-    @on_sale_posts = Post.where.not(sale_price: [nil, ""])
+    @on_sale_posts = Post.where(is_active: 1).where.not(sale_price: [nil, ""])
     @favorite_posts = current_user.favorite_posts
 
     @users = User.where(role: "normal", archived: false).pluck(:full_name, :id)
@@ -135,7 +135,7 @@ class PostsController < ApplicationController
 
   def following_posts
     following_users = current_user.following
-    @following_posts = Post.where(user_id: following_users)
+    @following_posts = Post.where(is_active: 1).where(user_id: following_users)
     @favorite_posts = current_user.favorite_posts
 
     @users = User.where(role: "normal", archived: false).pluck(:full_name, :id)
@@ -152,7 +152,7 @@ class PostsController < ApplicationController
   end
 
   def all_posts
-    @all_posts = Post.all
+    @all_posts = Post.where(is_active: 1)
     @favorite_posts = current_user.favorite_posts
 
     @users = User.where(role: "normal", archived: false).pluck(:full_name, :id)

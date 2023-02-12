@@ -38,6 +38,14 @@
   margin-top: 13rem;
 }
 
+.product-img-grid .validating-span {
+  position: absolute;
+  padding-left: 4rem;
+  padding-top: 4rem;
+  opacity: 1;
+  font-weight: 700;
+}
+
 .product-img .favorites-button {
   position: absolute;
 }

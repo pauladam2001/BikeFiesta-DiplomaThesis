@@ -8,7 +8,7 @@
   <% if grid_posts.size > 0 %>
     <% grid_posts.each do |post| %>
       <div class="grid-item">
-        <div class="div-item">
+        <div class="div-item <%= 'validating' if post.is_active == 0 %>">
           <div class="wrapper-grid">
             <div class="product-img-grid">
               <% if post.assets.present? %>
@@ -23,6 +23,11 @@
                   <%= link_to image_tag("favorite.png"), remove_from_favorites_post_path(post), :method => :put, remote: true, class: 'favorites-button' %>
                 <% end %>
               <% end %>
+              <% if post.is_active == 0 %>
+                <span class="validating-span">We are validating the post...</span>
+              <% elsif post.is_active == -1 %>
+                <span class="validating-span">This post is permanently banned</span>
+              <% end %>
               <% if post.electric %>
                 <button class="button electric-button">Electric</button>
               <% end %>
@@ -35,8 +40,10 @@
                 </h1>
                 <% if post.user_id == current_user.id %>
                   <div style="margin-left: 10px;">
-                    <a class=""><%= link_to "Edit", edit_post_path(post) %></a>
-                    • 
+                    <% if post.is_active == 1%>
+                      <a class=""><%= link_to "Edit", edit_post_path(post) %></a>
+                      • 
+                    <% end %>
                     <a class=""><%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %></a>
                     <% if post.assets.count == 0 %>
                       •
@@ -56,7 +63,9 @@
                 <% else %>
                   <p><span class="card-span-grid"><%= number_to_currency(post.price, precision: 2, :unit => '€') %></span></p>
                 <% end %>
-                <button class="button"><%= link_to "See Post", post_path(post) %></button>
+                <% if post.is_active == 1 %>
+                  <button class="button"><%= link_to "See Post", post_path(post) %></button>
+                <% end %>
               </div>
             </div>
           </div>
