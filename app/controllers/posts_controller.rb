@@ -209,6 +209,8 @@ class PostsController < ApplicationController
     message = "BikeFiesta - One of the posts that you reported was banned. Thank you!"
     AsyncSendSmsToUser.perform_async(phone, message)
 
+    AsyncMarkPostReportsAsSolved.perform_async(post.id)
+
     redirect_back(fallback_location: reports_path)
   end
 

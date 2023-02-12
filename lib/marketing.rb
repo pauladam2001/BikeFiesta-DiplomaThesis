@@ -136,4 +136,19 @@ module Marketing
       user.save(validate: false)
     end
   end
+
+  # Called every time a post is banned (async)
+  # It goes through all the reports that were related to the banned post, marks them as solved and sends messages to all
+  # users that reported the post
+  def self.mark_post_reports_as_solved(post_id)
+    message = "BikeFiesta - One of the posts that you reported was banned. Thank you!"
+
+    Report.where(post_id: post_id).find_each do |report|
+      phone = report.user.phone
+      AsyncSendSmsToUser.perform_async(phone, message)
+
+      report.solved = true
+      report.save
+    end
+  end
 end
