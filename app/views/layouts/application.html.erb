@@ -47,7 +47,7 @@
                     <% @notifications.each do |notification| %>
                       <div class="note">
                         <%= link_to new_review_path(post_id: notification.post_id, reviewer_id: notification.notified_id), class: "" do %>
-                          Leave a review for <%= notification.user.full_name %> when you want.
+                          <%= notification.message %> <%= notification.post.user.full_name %>.
                         <% end %>
                       </div>
                     <% end %>
