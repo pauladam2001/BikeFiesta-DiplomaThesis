@@ -29,9 +29,11 @@ module Marketing
 
     if is_bicycle
       post.is_active = 1
+      Notification.create(notified_id: post.user_id, message: "One of your posts has just been approved")
       AsyncSendSmsToFollowers.perform_async(post.user_id)
     else
       post.is_active = -1
+      Notification.create(notified_id: post.user_id, message: "One of your posts was not approved")
     end
 
     post.save(validate: false)
