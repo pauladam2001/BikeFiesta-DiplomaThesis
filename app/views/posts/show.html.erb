@@ -88,8 +88,13 @@
     </div>
     <div class="actions-section">
       <button class="button">Buy Now</button>
-      <div class="right-buttons">
-        <button class="button">Add to Favorites</button>
+      <% is_fav = @favorite_posts.where(id: @post.id).size == 0 %>
+      <div class="<%= is_fav ? 'right-buttons' : 'right-buttons-remove' %>">
+        <% if is_fav %>
+          <%= button_to "Add to Favorites", add_to_favorites_post_path(@post), :method => :put, remote: true, :class => "button" %>
+        <% else %>
+          <%= button_to "Remove from Favorites", remove_from_favorites_post_path(@post), :method => :put, remote: true, :class => "button" %>
+        <% end %>
         <form id="report-form">
           <input type="button" class="button" onclick="openReportPopUp()" value="Report Post"></input>
           <%= render "reports/report_pop_up" %>

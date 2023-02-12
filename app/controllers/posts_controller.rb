@@ -66,6 +66,8 @@ class PostsController < ApplicationController
     if params[:submitButton] == "Report Post"
       report(params[:id], current_user.id, params[:message], params[:title])
     else
+      @favorite_posts = current_user.favorite_posts
+      
       @post = Post.find(params[:id])
       @user = @post.user
 

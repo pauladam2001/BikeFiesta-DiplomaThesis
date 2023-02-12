@@ -89,3 +89,8 @@
   display: flex;
   margin-left: 11rem;
 }
+
+.right-buttons-remove {
+  display: flex;
+  margin-left: 8rem;
+}
