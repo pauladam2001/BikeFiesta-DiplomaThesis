@@ -5,7 +5,7 @@
         <input type="text" name="name" placeholder="Search by Name..." value="<%= params[:name] %>" class="filter-input" style="margin-right: 10px;">
         <input type="text" name="description" placeholder="Search by Description..." value="<%= params[:description] %>" class="filter-input" style="margin-right: 10px;">
         <select name="condition">
-          <%= options_for_select([["Search by Condition", "all"], ["Brand New", "brand_new"], ["Perfect", "perfect"], ["Very Good", "very_good"], ["Good", "good"], ["Ok", "ok"], ["Bad", "bad"]], params[:condition]) %>
+          <%= options_for_select([["Search by Condition", "all"], ["Brand New", "Brand New"], ["Perfect", "Perfect"], ["Very Good", "Very Good"], ["Good", "Good"], ["Ok", "Ok"], ["Bad", "Bad"]], params[:condition]) %>
         </select>
       </div>
       <div style="padding-top: 20px; margin-left: 4rem;">

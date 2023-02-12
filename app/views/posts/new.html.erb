@@ -39,7 +39,7 @@
                   <%= f.select :size, [["Select the size", nil], ["XXS (<47)", "XXS"], ["XS (48-50)", "XS"], ["S (50-52)", "S"], ["M (53-55)", "M"], ["L (56-58)", "L"], ["XL (59-62)", "XL"], ["XXL (>63)", "XXL"]] %>
                 </div>
                 <div class="">
-                  <%= f.select :condition, [["Select the condition", nil], ["Brand New", "brand_new"], ["Perfect", "perfect"], ["Very Good", "very_good"], ["Good", "good"], ["Ok", "ok"], ["Bad", "bad"]] %>
+                  <%= f.select :condition, [["Select the condition", nil], ["Brand New", "Brand New"], ["Perfect", "Perfect"], ["Very Good", "Very Good"], ["Good", "Good"], ["Ok", "Ok"], ["Bad", "Bad"]] %>
                 </div>
                 <div class="select-div">
                   <%= f.select :location_id, options_for_select([["Select the location", nil]] + @locations.collect { |a| [a[0], a[1]]}, f.object.location_id), {}, class: "" %>

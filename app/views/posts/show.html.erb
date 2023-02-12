@@ -1,4 +1,4 @@
-<div class="show-flex-div <%= 'admin-margin' if current_user.is_admin? %>">
+<div class="<%= 'admin-margin' if current_user.is_admin? %>">
   <div class="slidershow middle <%= 'admin-margin' if current_user.is_admin? %>">
     <div class="slides">
       <% @post.assets.each_with_index do |asset, index| %>
@@ -28,17 +28,23 @@
   <div>
     <div class="user-section">
       <div class="user-name">
-        <% if @user.provider == "google_oauth2" %>
-          <h6><%= image_tag(@user.avatar_url, border: 0, width: '40px', class: "image-radius") %> <%= @user.name %> <%= @user.rating %></h6>
-        <% else %>
-          <% if @user.avatar.attached? %>
-            <h6><%= image_tag(@user.avatar, border: 0, width: '80px', class: "image-radius") %> <%= @user.name %> <%= @user.rating %></h6>
+        <div style="display: flex;">
+          <% if @user.provider == "google_oauth2" %>
+            <span><%= image_tag(@user.avatar_url, border: 0, width: '40px', class: "image-radius") %></span>
+            <span class="user-name-span"><%= @user.name %> <%= @user.rating %></span>
           <% else %>
-            <h6><%= image_tag("user-icon.png", border: 0, width: '40px') %> <%= @user.name %> <span class="star-span">★</span><%= @user.rating %></h6>
+            <% if @user.avatar.attached? %>
+              <span><%= image_tag(@user.avatar, border: 0, width: '80px', class: "image-radius") %></span>
+              <span class="user-name-span"><%= @user.name %> <%= @user.rating %></span>
+            <% else %>
+              <span><%= image_tag("user-icon.png", border: 0, width: '40px', style: "padding-top: 0rem;") %></span>
+              <span class="user-name-span"><%= @user.name %></span>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
+        <span class="star-span">★</span><span class="rating-span"><%= @user.rating %> (<%= @user.reviews.count %> reviews)</span>
       </div>
-      <div>
+      <div style="margin-top: 0.7rem; margin-left: 0.5rem;">
         <% if current_user.id != @user.id %>
           <% if current_user.following?(@user) %>
             <%= render 'users/unfollow', user: @user %>
@@ -48,11 +54,47 @@
         <% end %>
       </div>
     </div>
-    <div class="report-section">
-      <form id="report-form">
-        <input type="button" class="button" onclick="openReportPopUp()" value="Report Post"></input>
-        <%= render "reports/report_pop_up" %>
-      </form>
+    <div class="information-section">
+      <div class="main-info-div">
+        <span class="name-span"><%= @post.name %>,</span>
+        <%= image_tag("pin.png", border: 0, width: '45px', style: "padding-top: 0rem;") %>
+        <span class="location-span"><%= @post.location.name %></span>
+        <br/>
+        <% if @post.sale_price.present? %>
+          <div class="sale-price-div"><small><%= number_to_currency(@post.price, precision: 2, :unit => '€') %></small><%= number_to_currency(@post.sale_price, precision: 2, :unit => '€') %></div>
+        <% else %>
+          <p><span class="price-span"><%= number_to_currency(@post.price, precision: 2, :unit => '€') %></span></p>
+        <% end %>
+      </div>
+      <div class="description-div">
+        <span style="font-size: 28px;">Description</span>
+        <br/>
+        <div class="description-span"><%= @post.description %></div>
+      </div>
+      <div class="other-info-div">
+        <ul style="list-style-type: circle;">
+          <li>Size - <%= @post.size %></li>
+          <li>Condition - <%= @post.condition %></li>
+          <li>Year - <%= @post.year %></li>
+          <li>Color - <%= @post.color.name %></li>
+        </ul>
+        <ul style="list-style-type: circle;">
+          <li>Name - <%= @post.brandname.name %></li>
+          <li>Category - <%= @post.category.name %></li>
+          <li>Material - <%= @post.material.name %></li>
+          <li>Components - <%= @post.component_group.name %></li>
+        </ul>
+      </div>
+    </div>
+    <div class="actions-section">
+      <button class="button">Buy Now</button>
+      <div class="right-buttons">
+        <button class="button">Add to Favorites</button>
+        <form id="report-form">
+          <input type="button" class="button" onclick="openReportPopUp()" value="Report Post"></input>
+          <%= render "reports/report_pop_up" %>
+        </form>
+      </div>
     </div>
   </div>
 </div>

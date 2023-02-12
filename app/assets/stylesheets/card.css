@@ -231,3 +231,11 @@
   display: inline-block;
   margin-right: 5px;
 }
+
+small {
+  font-size: 70%;
+  font-weight: 400;
+  text-decoration: line-through;
+  display: inline-block;
+  margin-right: 5px;
+}
