@@ -47,7 +47,7 @@
                     <% @notifications.each do |notification| %>
                       <div class="note">
                         <%= link_to new_review_path(post_id: notification.post_id, reviewer_id: notification.notified_id), class: "" do %>
-                          <%= notification.message %> <%= notification.post.user.full_name %>.
+                          <%= notification.message %><%= notification&.post&.user&.full_name %>.
                         <% end %>
                         <%= link_to notification_path(notification), method: :delete, class: "links-class" do %>
                           <span style="float: right;">&times;</span>
@@ -94,6 +94,12 @@
               <a href=<%= reports_path %> class="sidebar-a">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                 <span class="sidebar-title-span">Reports</span>
+              </a>
+            </li>
+            <li>
+              <a href=<%= suggestions_path %> class="sidebar-a">
+                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-title-span">Suggestions</span>
               </a>
             </li>
             <div class="item">

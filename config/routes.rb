@@ -36,6 +36,11 @@ Rails.application.routes.draw do
       put :solve
     end
   end
+  resources :suggestions do
+    member do
+      put :solve
+    end
+  end
 
   resources :relationships, only: [:create, :destroy]
 

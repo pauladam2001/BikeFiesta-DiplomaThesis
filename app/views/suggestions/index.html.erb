@@ -1,5 +1,5 @@
 <div class="main-page-div">
-  <h1 class="h1-title">Reports</h1>
+  <h1 class="h1-title">Suggestions</h1>
   <div class="filter-first-div">
     <div class="filter-second-div">
       <form>
@@ -30,7 +30,6 @@
       <thead>
         <tr>
           <th>Date</th>
-          <th>Title</th>
           <th>Message</th>
           <th>Actions</th>
         </tr>
@@ -40,33 +39,20 @@
   <div class="tbl-content">
     <table cellpadding="0" cellspacing="0" border="0">
       <tbody>
-        <% @reports.each do |report| %>
+        <% @suggestions.each do |suggestion| %>
           <tr class="<%= cycle("bg-white", "bg-gray") %>">
             <td>
-              <%= report.created_at.strftime("%d/%m/%y") %>
-              <% if report.solved %>
+              <%= suggestion.created_at.strftime("%d/%m/%y") %>
+              <% if suggestion.solved %>
                 <span style="padding-top: 0.1em; padding-bottom: 0.1rem" class="admin-label">Solved</span>
               <% end %>
             </td>
-            <td>
-              <%= report.title %>
-            </td>
             <td style="width: 35%;">
-              <%= report.message %>
+              <%= suggestion.message %>
             </td>
             <td>
-              <%= link_to post_path(report.post_id), class: "links-class" do %>
-                See Post
-              <% end %>
-              <% if report.post.is_active != -1 %>
-                •
-                <%= link_to ban_post_path(report.post_id), method: :put, class: "links-class" do %>
-                  Ban Post
-                <% end %>
-              <% end %>
-              <% if ! report.solved %>
-                •
-                <%= link_to solve_report_path(report), class: "links-class", method: :put, data: {confirm: "Are you sure you want to mark this report as solved?"}  do %>
+              <% if ! suggestion.solved %>    <%#TODO maybe have the option to chat to user%>
+                <%= link_to solve_suggestion_path(suggestion), class: "links-class", method: :put, data: {confirm: "Are you sure you want to mark this suggestion as solved?"}  do %>
                   Mark as Solved
                 <% end %>
               <% end %>
