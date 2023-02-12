@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   end
 
   resources :reviews
+  resources :notifications
 
   get "/follow_page", to: "users#follow_page"
 
