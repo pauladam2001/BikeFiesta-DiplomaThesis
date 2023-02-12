@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   
   def index
     if params[:submitButton] == "Send Suggestion"
-      send_suggestion(current_user.id, params[:message])
+      send_suggestion(current_user.id, params[:suggestion])
     end
 
     if params[:name].present?
