@@ -15,67 +15,73 @@
     <%= render "layouts/notices" %>
     
     <% if current_user.present? && current_user.is_normal? %>
-        <div class="menu">
-          <div class="">
-            <h6><%= link_to image_tag("logo.png", border: 0, width: '200px'), posts_path %></h6>
-          </div>
-          <div class="menu-item menu-item-padding first-item">
-            <h6><%= link_to "Home", posts_path %></h6>
-          </div>
-          <div class="menu-item menu-item-padding">
-            <h6><%= link_to "Follow Page", follow_page_path %></h6>
-          </div>
-          <div class="menu-item menu-item-padding">
-            <h6><%= link_to "My Posts", my_posts_path %></h6>
-          </div>
-          <div class="menu-item menu-item-padding">
-            <h6><%= link_to "Favorites", favorites_path %></h6>
-          </div>
-          <div class="menu-item">
-            <%= button_to "Post", new_post_path, method: :get, :class => "button" %>
-          </div>
-          <div class="menu-item">
-            <input type="checkbox" id="navtoggle" />
-            <div class="toggleNotifications">
-              <div class="count">
-                <div class="num"><%= @notifications_number %></div>
-              </div>
-              <label class="show" for="navtoggle"><%= image_tag("notification.png", border: 0, width: '40px', height: '40px') %></label>
-              <div class="notifications">
-                <div class="groupofnotes">
-                  <% if @notifications_number > 0 %>
-                    <% @notifications.each do |notification| %>
-                      <div class="note">
-                        <%= link_to new_review_path(post_id: notification.post_id, reviewer_id: notification.notified_id), class: "" do %>
-                          <%= notification.message %><%= notification&.post&.user&.full_name %>.
-                        <% end %>
-                        <%= link_to notification_path(notification), method: :delete, class: "links-class" do %>
-                          <span style="float: right;">&times;</span>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  <% else %>
-                    You have no new notifications.
+      <div class="spinner">
+        <div id="loop" class="center "></div>
+        <div id="bike-wrapper" class="center ">
+          <div id="bike" class="centerBike"></div>
+        </div>
+      </div>
+      <div class="menu">
+        <div class="">
+          <h6><%= link_to image_tag("logo.png", border: 0, width: '200px'), posts_path %></h6>
+        </div>
+        <div class="menu-item menu-item-padding first-item">
+          <h6><%= link_to "Home", posts_path %></h6>
+        </div>
+        <div class="menu-item menu-item-padding">
+          <h6><%= link_to "Follow Page", follow_page_path %></h6>
+        </div>
+        <div class="menu-item menu-item-padding">
+          <h6><%= link_to "My Posts", my_posts_path %></h6>
+        </div>
+        <div class="menu-item menu-item-padding">
+          <h6><%= link_to "Favorites", favorites_path %></h6>
+        </div>
+        <div class="menu-item">
+          <%= button_to "Post", new_post_path, method: :get, :class => "button" %>
+        </div>
+        <div class="menu-item">
+          <input type="checkbox" id="navtoggle" />
+          <div class="toggleNotifications">
+            <div class="count">
+              <div class="num"><%= @notifications_number %></div>
+            </div>
+            <label class="show" for="navtoggle"><%= image_tag("notification.png", border: 0, width: '40px', height: '40px') %></label>
+            <div class="notifications">
+              <div class="groupofnotes">
+                <% if @notifications_number > 0 %>
+                  <% @notifications.each do |notification| %>
+                    <div class="note">
+                      <%= link_to new_review_path(post_id: notification.post_id, reviewer_id: notification.notified_id), class: "" do %>
+                        <%= notification.message %><%= notification&.post&.user&.full_name %>.
+                      <% end %>
+                      <%= link_to notification_path(notification), method: :delete, class: "links-class" do %>
+                        <span style="float: right;">&times;</span>
+                      <% end %>
+                    </div>
                   <% end %>
-                </div>
+                <% else %>
+                  You have no new notifications.
+                <% end %>
               </div>
             </div>
           </div>
-          <div class="menu-item menu-item-padding">
-            <% if current_user.provider == "google_oauth2" %>
-              <h6><%= link_to image_tag(current_user.avatar_url, border: 0, width: '40px', class: "image-radius"), edit_user_registration_path %></h6>
-            <% else %>
-              <% if current_user.avatar.attached? %>
-                <h6><%= link_to image_tag(current_user.avatar, border: 0, width: '80px', class: "image-radius"), edit_user_registration_path %></h6>
-              <% else %>
-                <h6><%= link_to image_tag("user-icon.png", border: 0, width: '40px'), edit_user_registration_path %></h6>
-              <% end %>
-            <% end %>
-          </div>
-          <div class="menu-item menu-item-padding">
-              <h6><%= link_to image_tag("logout-icon.png", border: 0, width: '35px'), destroy_user_session_path, data: {turbo: "false"}, method: :delete %></h6>
-          </div>
         </div>
+        <div class="menu-item menu-item-padding">
+          <% if current_user.provider == "google_oauth2" %>
+            <h6><%= link_to image_tag(current_user.avatar_url, border: 0, width: '40px', class: "image-radius"), edit_user_registration_path %></h6>
+          <% else %>
+            <% if current_user.avatar.attached? %>
+              <h6><%= link_to image_tag(current_user.avatar, border: 0, width: '80px', class: "image-radius"), edit_user_registration_path %></h6>
+            <% else %>
+              <h6><%= link_to image_tag("user-icon.png", border: 0, width: '40px'), edit_user_registration_path %></h6>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="menu-item menu-item-padding">
+            <h6><%= link_to image_tag("logout-icon.png", border: 0, width: '35px'), destroy_user_session_path, data: {turbo: "false"}, method: :delete %></h6>
+        </div>
+      </div>
     <% elsif current_user.present? && current_user.is_admin? %>
 
       <div id="main-sidebar-div" class="main-sidebar-div">
@@ -176,4 +182,15 @@
        $(this).find('.dropdown').toggleClass('rotate');
      });
    });
+
+  let loop = document.getElementById("loop");
+  let bike_wrapper = document.getElementById("bike_wrapper");
+
+  $(document).on("turbolinks:visit", function(){
+    $(".spinner").show();
+  });
+
+  $(document).on("turbolinks:load", function(){
+    $(".spinner").hide();
+  });
 </script>

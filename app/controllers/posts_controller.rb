@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   
   def index
+    sleep 2
     if params[:submitButton] == "Send Suggestion"
       send_suggestion(current_user.id, params[:suggestion])
     end
@@ -63,6 +64,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    sleep 2
     if params[:submitButton] == "Report Post"
       report(params[:id], current_user.id, params[:message], params[:title])
     else
@@ -182,6 +184,15 @@ class PostsController < ApplicationController
 
   def favorites
     @favorites = current_user.favorite_posts
+
+    @users = User.where(role: "normal", archived: false).pluck(:full_name, :id)
+    @colors = Color.order(:name).pluck(:name, :id)
+    @locations = Location.order(:name).pluck(:name, :id)
+    @brand_names = Brandname.order(:name).pluck(:name, :id)
+    @categories = Category.order(:name).pluck(:name, :id)
+    @materials = Material.order(:name).pluck(:name, :id)
+    @component_groups = ComponentGroup.order(:name).pluck(:name, :id)
+    
     @favorites = @favorites.paginate(page: params[:page], per_page: 16)
   end
 

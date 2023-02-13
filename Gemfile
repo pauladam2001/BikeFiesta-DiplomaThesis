@@ -44,6 +44,8 @@ gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'sidekiq-cron'
 
+gem 'activemerchant'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
