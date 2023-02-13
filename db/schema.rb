@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_12_120656) do
+ActiveRecord::Schema.define(version: 2023_02_13_081018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,15 @@ ActiveRecord::Schema.define(version: 2023_02_12_120656) do
     t.boolean "notification_sent", default: false
   end
 
+  create_table "purchases", force: :cascade do |t|
+    t.integer "seller_id"
+    t.integer "buyer_id"
+    t.integer "post_id"
+    t.float "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -193,15 +202,6 @@ ActiveRecord::Schema.define(version: 2023_02_12_120656) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "solved", default: false
-  end
-
-  create_table "transactions", force: :cascade do |t|
-    t.integer "seller_id"
-    t.integer "buyer_id"
-    t.integer "post_id"
-    t.float "amount"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

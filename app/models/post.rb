@@ -10,6 +10,7 @@ class Post < ApplicationRecord
   has_many :favorites
   has_many :reports
   has_one :notification
+  has_one :purchase
 
   attr_accessor :skip_validation
 
