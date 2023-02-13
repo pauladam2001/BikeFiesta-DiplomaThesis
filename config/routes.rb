@@ -58,5 +58,7 @@ Rails.application.routes.draw do
 
   get "/follow_page", to: "users#follow_page"
 
+  get "/checkout", to: "purchase#index"
+
   get '*path' => redirect('/posts')
 end

@@ -87,7 +87,7 @@
       </div>
     </div>
     <div class="actions-section">
-      <button class="button">Buy Now</button>
+      <%= link_to "Buy Now", checkout_path(post_id: @post.id), :method => :get, class: "button" %>
       <% is_fav = @favorite_posts.where(id: @post.id).size == 0 %>
       <div class="<%= is_fav ? 'right-buttons' : 'right-buttons-remove' %>">
         <% if is_fav %>
