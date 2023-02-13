@@ -11,16 +11,17 @@
     <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
   </head>
 
-  <body>
+  <div class="spinner">
+    <div id="loop" class="center"></div>
+    <div id="bike-wrapper" class="center">
+      <div id="bike" class="centerBike"></div>
+    </div>
+  </div>
+
+  <main id="main-body">
     <%= render "layouts/notices" %>
     
     <% if current_user.present? && current_user.is_normal? %>
-      <div class="spinner">
-        <div id="loop" class="center "></div>
-        <div id="bike-wrapper" class="center ">
-          <div id="bike" class="centerBike"></div>
-        </div>
-      </div>
       <div class="menu">
         <div class="">
           <h6><%= link_to image_tag("logo.png", border: 0, width: '200px'), posts_path %></h6>
@@ -183,11 +184,11 @@
      });
    });
 
-  let loop = document.getElementById("loop");
-  let bike_wrapper = document.getElementById("bike_wrapper");
+  let main_sidebar_div = document.getElementById("main-sidebar-div");
 
   $(document).on("turbolinks:visit", function(){
     $(".spinner").show();
+    $("#main-body").css("opacity", "0.2");
   });
 
   $(document).on("turbolinks:load", function(){

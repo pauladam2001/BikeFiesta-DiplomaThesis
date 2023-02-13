@@ -1,23 +1,25 @@
 
 .centerBike {
   position: absolute;
-  top: 20%;
-  left: 20%;
+  top: 50%;
+  left: 50%;
   margin-top: 26px;
   margin-left: -12px;
+  z-index: 500;
 }
 
 .center {
   position: absolute;
-  top: 20%;
-  left: 20%;
+  top: 50%;
+  left: 50%;
   margin-top: -50px;
   margin-left: -50px;
+  z-index: 500;
 }
 
 #loop {
-  height: 100px;
-  width: 100px;
+  height: 108px;
+  width: 108px;
   border: #bb5f27 solid 4px;
   border-radius: 200px;
 }
