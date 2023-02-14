@@ -10,11 +10,16 @@
             <label for="address">Address</label>
             <input required type="text" id="address" name="address" placeholder="Str. Tomis Nr. 3">
             <label for="county">County</label>
-            <input required type="text" id="county" name="county" placeholder="TODO">
+            <select required name="county" id="county-select" class="">
+              <%= options_for_select([["Select", "", {disabled: ['0'], selected: ['0']}]] + Location.all.collect { |l| [l.name, l.short]}, params[:county]) %>
+            </select>
             <div class="row">
               <div class="col-50">
                 <label for="city">City</label>
-                <input required type="text" id="city" name="city" placeholder="TODO">
+                <select required name="city" id="city-select" class="">
+                  <%#= options_for_select([[params[:county], "", {disabled: ['0'], selected: ['0']}]] + Location.all.collect { |l| [l.name, l.short]}, params[:city]) %>
+                  <%= options_for_select([["Select", "", {disabled: ['0'], selected: ['0']}]], params[:city]) %>
+                </select>
               </div>
               <div class="col-50">
                 <label for="zip_code">Zip</label>
@@ -63,3 +68,18 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $('#county-select').change(function () {   
+    url = "https://roloca.coldfuse.io/orase/" + $("#county-select option:selected").val();
+
+    $.get(url, function(data) {
+      $('#city-select option:gt(0)').remove();
+      
+      for (let i = 0; i < data.length; i++) {
+        let option = $('<option></option>').attr(data[i]["nume"].replace(/\s/g, ''), data[i]["nume"].replace(/\s/g, '')).text(data[i]["nume"].replace(/\s/g, ''));
+        $("#city-select").append(option);
+      }
+    })
+  });
+</script>
