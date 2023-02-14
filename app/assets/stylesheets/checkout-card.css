@@ -1,0 +1,103 @@
+.align-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+.card {
+  width: 500px;
+  height: 300px;
+  border-radius: 12px;
+  box-shadow: 2px 2px 0 #222, 2px 2px 15px rgba(0,0,0,0.9);
+  background: black;
+}
+
+.card-title {
+  float:left;
+  margin-top: 15px;
+  color: #fff;
+  margin-left: 15px;
+}
+
+.logo {
+  float: right;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+.card-number {
+  float: left;
+  margin-top: 50px;
+  margin-left: 5px;
+  color: white;
+}
+.card-number .card-number-input {
+  height: 25px;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+}
+
+.card-name {
+  clear: both;
+  float: left;
+  margin-left: 10px;
+  color: #fff;
+}
+
+.card-name .card-name-input {
+  height: 25px;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.card-number-input:focus, .card-name-input:focus {
+  color: #fff;
+  outline: none;
+  border-bottom: 1px solid white;
+}
+
+.select-date {
+  float: left;
+  margin-left: 15px;
+}
+
+.card-cvc {
+  float: right;
+  margin-right: 20px;
+}
+
+.card-cvc .card-cvc-input {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  height: 10px;
+}
+
+.checkout-select {
+  border: none;
+  background-color: rgba(255,255,255, 0.2);
+  color: #fff;
+  width: 90px;
+  height: 30px;
+}
+
+.buy-button {
+  cursor: pointer;
+  margin-top: 65px;
+  margin-left: 100px;
+  margin-right: -100px;
+  padding: 10px 10px;
+  border-radius: 6px;
+  box-shadow: -2px 0px 6px 1px #000000;
+  background-color: #FFAB40;
+  border:none;
+  color: #fff;
+}
+
+.buy-button:hover {
+  background-color: #66BB6A;
+  transition: linear 0.2s;
+}

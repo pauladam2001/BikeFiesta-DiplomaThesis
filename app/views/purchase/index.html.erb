@@ -1,1 +1,65 @@
-Hello
+<div class="row">
+  <div class="col-75">
+    <div class="checkout-container">
+      <form>
+        <div class="row">
+          <div class="col-50">
+            <h3 style="padding-left: 15rem; padding-bottom: 1rem;">Shipping Address</h3>
+            <label for="full_name">Full Name</label>
+            <input required type="text" id="full_name" name="full_name" placeholder="Victor Popescu">
+            <label for="address">Address</label>
+            <input required type="text" id="address" name="address" placeholder="Str. Tomis Nr. 3">
+            <label for="county">County</label>
+            <input required type="text" id="county" name="county" placeholder="TODO">
+            <div class="row">
+              <div class="col-50">
+                <label for="city">City</label>
+                <input required type="text" id="city" name="city" placeholder="TODO">
+              </div>
+              <div class="col-50">
+                <label for="zip_code">Zip</label>
+                <input required type="text" id="zip_code" name="zip_code" placeholder="400436">
+              </div>
+            </div>
+          </div>
+          <div class="col-50">
+            <div class="align-center">
+              <div class="card">
+                <div>
+                  <h3 class="card-title">Payment Details</h3>
+                  <img width="128" alt="Visa Inc. logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/128px-Visa_Inc._logo.svg.png" class="logo"/>
+                </div>
+                <div class="card-number">
+                  <label for="card_number" style="padding-left: 12px;">Card Number</label>
+                  <input required type="text" id="card_number" name="card_number" class="card-number-input" size="40" placeholder="4242 4242 4242 4242"/>
+                </div>
+                <div class="card-name">
+                  <label for="card_name" style="padding-left: 10px;">Name</label>
+                  <input required type="text" id="card_name" name="card_name" class="card-name-input" size="40" placeholder="Victor Popescu"/>
+                </div>
+                <div class="select-date">
+                  <label for="date" style="color: #fff;">Expiration</label>
+                  <select required name="card_month" id="date" class="checkout-select">
+                    <%= options_for_select([["MM", "", {disabled: ['0'], selected: ['0']}], ["01", "01"], ["02", "02"], ["03", "03"], ["04", "04"], ["05", "05"], ["06", "06"], ["07", "07"], ["08", "08"], ["09", "09"], ["10", "10"], ["11", "11"], ["12", "12"]], params[:card_month]) %>
+                  </select>
+                  <select required name="card_year" id="date" class="checkout-select">
+                    <%= options_for_select([["YY", "", {disabled: ['0'], selected: ['0']}], ["23", "23"], ["24", "24"], ["25", "25"], ["26", "26"], ["27", "27"], ["28", "28"]], params[:card_year]) %>
+                  </select>
+                </div>
+                <div class="card-cvc">
+                  <label for="card_cvc" style="color: #fff; padding-left: 10px;">CVV</label>
+                  <input required type="text" id="cvc" name="card_cvc" class="card-cvc-input" size="3" placeholder="123"/>
+                </div>
+                <div style="padding-top: 2rem;">
+                  <button name="submitButton" value="Complete Purchase" class="buy-button">
+                    Complete Purchase
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
