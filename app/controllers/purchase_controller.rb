@@ -5,11 +5,24 @@ class PurchaseController < ApplicationController
   def index
     if params[:submitButton] == "Complete Purchase"
       card_number = params[:card_number].delete(' ')
-      if card_number.length != 16
-        redirect_back(fallback_location: checkout_path(post_id: params[:post_id]), alert: "Error - The card number needs to have exactly 16 digits.")
+      if !card_number.scan(/\D/).empty? || card_number.length != 16
+        redirect_back(fallback_location: checkout_path(post_id: params[:post_id]), alert: "Error - The Card Number needs to have exactly 16 digits.")
+        return
       end
 
-      # TODO check zip code and expiration date
+      zip_code = params[:zip_code]
+      if !zip_code.scan(/\D/).empty?
+        redirect_back(fallback_location: checkout_path(post_id: params[:post_id]), alert: "Error - The Zip Code should contain only digits.")
+        return
+      end
+
+      cvv = params[:card_cvc]
+      if !cvv.scan(/\D/).empty?
+        redirect_back(fallback_location: checkout_path(post_id: params[:post_id]), alert: "Error - The CVV should contain only digits.")
+        return
+      end
+
+      # TODO check expiration date
 
       county = Location.where(short: params[:county]).first.name
 
