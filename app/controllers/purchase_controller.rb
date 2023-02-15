@@ -5,9 +5,11 @@ class PurchaseController < ApplicationController
   def index
     if params[:submitButton] == "Complete Purchase"
       card_number = params[:card_number].delete(' ')
-      if card_number != 16
+      if card_number.length != 16
         redirect_back(fallback_location: checkout_path(post_id: params[:post_id]), alert: "Error - The card number needs to have exactly 16 digits.")
       end
+
+      # TODO check zip code and expiration date
 
       county = Location.where(short: params[:county]).first.name
 
