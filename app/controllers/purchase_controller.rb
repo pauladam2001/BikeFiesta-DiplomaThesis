@@ -22,7 +22,12 @@ class PurchaseController < ApplicationController
         return
       end
 
-      # TODO check expiration date
+      card_year = params[:card_year].to_i
+      card_month = params[:card_month].to_i
+      if card_year == Time.now.year % 100 && card_month < Time.now.month
+        redirect_back(fallback_location: checkout_path(post_id: params[:post_id]), alert: "Error - The Card is expired.")
+        return
+      end
 
       county = Location.where(short: params[:county]).first.name
 
