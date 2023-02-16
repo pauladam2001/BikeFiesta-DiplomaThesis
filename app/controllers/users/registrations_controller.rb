@@ -32,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
           set_flash_message! :notice, :signed_up
           # sign_up(resource_name, resource)
           # respond_with resource, location: after_sign_up_path_for(resource)
-          Notification.create(type: "card_edit", notified_id: resource.id, message: "Please introduce your merchant card")
+          Notification.create(notification_type: "card_edit", notified_id: resource.id, message: "Please introduce your merchant card")
           redirect_to new_user_session_path, alert: "Account created successfully."
         else
           set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
