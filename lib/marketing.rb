@@ -29,11 +29,11 @@ module Marketing
 
     if is_bicycle
       post.is_active = 1
-      Notification.create(notified_id: post.user_id, message: "One of your posts has just been approved")
+      Notification.create(notification_type: "post_status", notified_id: post.user_id, message: "One of your posts has just been approved")
       AsyncSendSmsToFollowers.perform_async(post.user_id)
     else
       post.is_active = -1
-      Notification.create(notified_id: post.user_id, message: "One of your posts was not approved")
+      Notification.create(notification_type: "post_status", notified_id: post.user_id, message: "One of your posts was not approved")
     end
 
     post.save(validate: false)
@@ -113,7 +113,7 @@ module Marketing
   # Send notification to buyer if he bought the bike more than 3 days ago
   def self.send_notification_to_buyers
     Post.where(notification_sent: false).where("sold_date <= ?", 3.days.ago).find_each do |post|
-      Notification.create(post_id: post.id, notified_id: post.user_id, message: "Leave a review for ")
+      Notification.create(notification_type: "review", post_id: post.id, notified_id: post.user_id, message: "Leave a review for ")
       
       post.notification_sent = true
       post.save

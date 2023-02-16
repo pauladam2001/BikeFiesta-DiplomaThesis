@@ -53,8 +53,16 @@
                 <% if @notifications_number > 0 %>
                   <% @notifications.each do |notification| %>
                     <div class="note">
-                      <%= link_to new_review_path(post_id: notification.post_id, reviewer_id: notification.notified_id), class: "" do %>
-                        <%= notification.message %><%= notification&.post&.user&.full_name %>.
+                      <% if notification.notification_type == "review" %>
+                        <%= link_to new_review_path(post_id: notification.post_id, reviewer_id: notification.notified_id), class: "" do %>
+                          <%= notification.message %><%= notification&.post&.user&.full_name %>.
+                        <% end %>
+                      <% elsif notification.notification_type == "suggestion" || notification.notification_type == "post_status" %>
+                        <%= notification.message %>.
+                      <% elsif notification.notification_type == "card_edit" %>
+                        <%= link_to edit_user_registration_path, class: "" do %>
+                          <%= notification.message %>.
+                        <% end %>
                       <% end %>
                       <%= link_to notification_path(notification), method: :delete, class: "links-class" do %>
                         <span style="float: right;">&times;</span>
