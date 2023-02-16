@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def follow_page
-    @followers = current_user.followers     # TODO observer/socket or how we will implement to buy button/chat app
+    @followers = current_user.followers     # TODO observer/socket or how we will implement the buy button/chat app
     @following = current_user.following
 
     if params[:name].present?
