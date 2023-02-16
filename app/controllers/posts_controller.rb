@@ -20,13 +20,21 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
-    @locations = Location.order(:name).pluck(:name, :id)
-    @brand_names = Brandname.order(:name).pluck(:name, :id)
-    @colors = Color.order(:name).pluck(:name, :id)
-    @categories = Category.order(:name).pluck(:name, :id)
-    @materials = Material.order(:name).pluck(:name, :id)
-    @component_groups = ComponentGroup.order(:name).pluck(:name, :id)
+    if current_user.first_post
+      redirect_to card_details_path
+    else
+      @post = Post.new
+      @locations = Location.order(:name).pluck(:name, :id)
+      @brand_names = Brandname.order(:name).pluck(:name, :id)
+      @colors = Color.order(:name).pluck(:name, :id)
+      @categories = Category.order(:name).pluck(:name, :id)
+      @materials = Material.order(:name).pluck(:name, :id)
+      @component_groups = ComponentGroup.order(:name).pluck(:name, :id)
+    end
+  end
+
+  def card_details
+    
   end
 
   def edit
