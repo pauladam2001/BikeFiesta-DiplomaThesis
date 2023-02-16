@@ -6,9 +6,9 @@
           <div class="col-50">
             <h3 style="padding-left: 15rem; padding-bottom: 1rem;">Shipping Address</h3>
             <label for="full_name">Full Name</label>
-            <input required type="text" id="full_name" name="full_name" placeholder="Victor Popescu">
+            <input required type="text" id="full_name" name="full_name" placeholder="Victor Popescu" class="checkout-input">
             <label for="address">Address</label>
-            <input required type="text" id="address" name="address" placeholder="Str. Tomis Nr. 3">
+            <input required type="text" id="address" name="address" placeholder="Str. Tomis Nr. 3" class="checkout-input">
             <label for="county">County</label>
             <select required name="county" id="county-select" class="">
               <%= options_for_select([["Select", "", {disabled: ['0'], selected: ['0']}]] + Location.all.collect { |l| [l.name, l.short]}, params[:county]) %>
@@ -22,7 +22,7 @@
               </div>
               <div class="col-50">
                 <label for="zip_code">Zip</label>
-                <input required type="text" id="zip_code" name="zip_code" placeholder="400436">
+                <input required type="text" id="zip_code" name="zip_code" placeholder="400436" class="checkout-input">
               </div>
               <input type="number" class="hidden" name="post_id" value=<%= request.parameters["post_id"] %>>
             </div>
@@ -36,11 +36,11 @@
                 </div>
                 <div class="card-number">
                   <label for="card_number" style="padding-left: 12px;">Card Number</label>
-                  <input required type="text" id="card_number" name="card_number" class="card-number-input" size="40" placeholder="4242 4242 4242 4242"/>
+                  <input required type="text" id="card_number" name="card_number" class="card-number-input checkout-input" size="40" placeholder="4242 4242 4242 4242"/>
                 </div>
                 <div class="card-name">
                   <label for="card_name" style="padding-left: 10px;">Name</label>
-                  <input required type="text" id="card_name" name="card_name" class="card-name-input" size="40" placeholder="Victor Popescu"/>
+                  <input required type="text" id="card_name" name="card_name" class="card-name-input checkout-input" size="40" placeholder="Victor Popescu"/>
                 </div>
                 <div class="select-date">
                   <label for="date" style="color: #fff;">Expiration</label>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="card-cvc">
                   <label for="card_cvc" style="color: #fff; padding-left: 10px;">CVV</label>
-                  <input required type="text" id="cvc" name="card_cvc" class="card-cvc-input" size="3" placeholder="123" minlength="3" maxlength="3"/>
+                  <input required type="text" id="cvc" name="card_cvc" class="card-cvc-input checkout-input" size="3" placeholder="123" minlength="3" maxlength="3"/>
                 </div>
                 <div style="padding-top: 2rem;">
                   <button name="submitButton" value="Complete Purchase" class="buy-button">
