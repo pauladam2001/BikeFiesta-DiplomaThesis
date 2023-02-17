@@ -55,10 +55,11 @@ Rails.application.routes.draw do
 
   resources :reviews
   resources :notifications
+  resources :purchases
 
   get "/follow_page", to: "users#follow_page"
 
-  get "/checkout", to: "purchases#index"
+  get "/checkout", to: "purchases#checkout"
 
   get '*path' => redirect('/posts')
 end

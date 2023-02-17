@@ -3,6 +3,10 @@ class PurchasesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @purchases = Purchase.order(created_at: :desc)
+  end
+
+  def checkout
     if params[:submitButton] == "Complete Purchase"
       card_number = params[:card_number].delete(' ')
       if !card_number.scan(/\D/).empty? || card_number.length != 16
