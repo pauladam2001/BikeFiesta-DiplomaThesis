@@ -105,10 +105,22 @@ class PostsController < ApplicationController
     asset.save
   end
 
+  def upload_proof
+    if params[:method] == "post"
+      binding.pry
+    end
+  end
+
   def my_posts
     @my_posts = Post.where(user_id: current_user.id).order(is_active: :desc)
     
     @my_posts = @my_posts.paginate(page: params[:page], per_page: 16)
+  end
+
+  def bikes_to_ship
+    @bikes_to_ship = Post.where(user_id: current_user.id, sold: true, shipped: false)
+
+    @bikes_to_ship = @bikes_to_ship.paginate(page: params[:page], per_page: 16)
   end
 
   def most_viewed_posts

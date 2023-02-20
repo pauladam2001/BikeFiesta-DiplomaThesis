@@ -10,16 +10,19 @@ Rails.application.routes.draw do
   resources :posts do
     collection do
       post "/post_upload_files", to: "posts#upload"
+      post "/post_upload_proof", to: "posts#upload_proof"
     end
     
     member do
       put :add_to_favorites
       put :remove_from_favorites
       put :ban
+      get :upload_proof
     end
   end
 
   get "/my_posts", to: "posts#my_posts"
+  get "bikes_to_ship", to: "posts#bikes_to_ship"
   get "/most_viewed_posts", to: "posts#most_viewed_posts"
   get "/on_sale_posts", to: "posts#on_sale_posts"
   get "/following_posts", to: "posts#following_posts"

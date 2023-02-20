@@ -105,7 +105,7 @@ class PurchasesController < ApplicationController
         Notification.create(notification_type: "ship_bike", notified_id: post.user_id, message: "#{post.name} was bought. Ship it in 2 days")
 
         phone = post.user.phone
-        message = "BikeFiesta - Your post #{post.name} was bought. You have 2 days to ship it and upload the receipt for confirmation. Shipping details - Name:
+        message = "BikeFiesta - Your post #{post.name} was bought. You have 2 days to ship it and upload the proof. Shipping details - Name:
           #{full_name}, Address: #{address}, County: #{county}, City: #{city}, Zip Code: #{zip_code}"
         Marketing.send_sms(phone, message)
         

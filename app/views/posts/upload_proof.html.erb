@@ -1,0 +1,33 @@
+<div class="upload-info-div-1">
+  <span style="margin-left: 2.5rem">Please upload your shipping proof here.</span>
+</div>
+<div class="dropzone dropzone-flex drop-title drop-container dropzone-styles" id="dropzone-form-2"></div>
+<div class="upload-info-div-2">
+  <%= button_to "Upload", posts_path, id: "createPost", method: :get, :class => "button", :style => "margin-left: 7.5rem; margin-bottom: 0.5rem;" %>
+</div>
+
+<script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+<link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+  const createPostButton = document.getElementById('createPost');
+  let myDropzone = null;
+  let dropzoneDiv = document.getElementById("dropzone-form-2");
+
+  if (myDropzone == null) {
+    myDropzone = new Dropzone("div#dropzone-form-2", { uploadMutliple: false,
+                                                    parallelUploads: 1,
+                                                    maxFiles: 1,
+                                                    acceptedFiles: ".jpeg, .jpg, .png",
+                                                    url: `/posts/post_upload_proof?post_id=<%= params[:id] %>&method=post`,
+                                                    autoProcessQueue: false,
+                                                    addRemoveLinks: true
+                                                  });
+  } else {
+    myDropzone.enable();
+  }
+
+  createPostButton.addEventListener('click', () => {
+    myDropzone.processQueue();
+  });
+</script>
