@@ -106,7 +106,7 @@ class PostsController < ApplicationController
   end
 
   def my_posts
-    @my_posts = Post.where(user_id: current_user.id)
+    @my_posts = Post.where(user_id: current_user.id).order(is_active: :desc)
     
     @my_posts = @my_posts.paginate(page: params[:page], per_page: 16)
   end
