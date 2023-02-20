@@ -59,7 +59,7 @@
                         <% end %>
                       <% elsif notification.notification_type == "suggestion" || notification.notification_type == "post_status" %>
                         <%= notification.message %>.
-                      <% elsif notification.notification_type == "card_edit" %>
+                      <% elsif notification.notification_type == "paypal_edit" %>
                         <%= link_to edit_user_registration_path, class: "" do %>
                           <%= notification.message %>.
                         <% end %>

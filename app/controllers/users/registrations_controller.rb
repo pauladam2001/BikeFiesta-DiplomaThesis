@@ -32,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
           set_flash_message! :notice, :signed_up
           # sign_up(resource_name, resource)
           # respond_with resource, location: after_sign_up_path_for(resource)
-          Notification.create(notification_type: "card_edit", notified_id: resource.id, message: "Please introduce your merchant card")
+          Notification.create(notification_type: "paypal_edit", notified_id: resource.id, message: "Please introduce your PayPal email")
           redirect_to new_user_session_path, alert: "Account created successfully."
         else
           set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
@@ -109,7 +109,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :phone, :card_name, :card_iban])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :phone, :paypal_email])
   end
 
   # The path used after sign up.
