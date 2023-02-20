@@ -107,7 +107,7 @@ class PostsController < ApplicationController
 
   def upload_proof
     if params[:method] == "post"
-      binding.pry
+      #TODO
     end
   end
 
