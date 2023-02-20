@@ -38,4 +38,39 @@ class PurchasesController < ApplicationController
       # TODO call function to process the payment
     end
   end
+
+  # ActiveMerchant::Billing::Base.mode = :test
+  # gateway = ActiveMerchant::Billing::PaypalGateway.new(
+  #   :login => ENV['PAYPAL_LOGIN'],
+  #   :password => ENV['PAYPAL_PASSWORD],
+  #   :signature => ENV['PAYPAL_SIGNATURE']
+  # )
+  # credit_card = ActiveMerchant::Billing::CreditCard.new(
+  #   :brand               => "visa",
+  #   :number             => ENV['PAYPAL_TEST_CARD_NUMBER'],
+  #   :verification_value => "123",
+  #   :month              => 3,
+  #   :year               => 2028,
+  #   :first_name         => "John",
+  #   :last_name          => "Doe"
+  # )
+  # if credit_card.valid?
+  #   # or gateway.purchase to do both authorize and capture
+  #   response = gateway.authorize(1000, credit_card, :ip => "127.0.0.1")
+  #   if response.success?
+  #     gateway.capture(1000, response.authorization)
+  #     puts "Purchase complete!"
+  #   else
+  #     puts "Error: #{response.message}"
+  #   end
+  # else
+  #   puts "Error: credit card is not valid. #{credit_card.errors.full_messages.join('. ')}"
+  # end
+  # response = gateway.purchase(1000, credit_card, :ip => "127.0.0.1")
+  # gateway.void(response.authorization)
+  # gateway.credit(1000, response.authorization)
+  # transfer = gateway.transfer(
+  #   1000, 'sb-3orv825105929@personal.example.com', :subject => "The money I owe you", :note => "Sorry it's so late"
+  # )
+    
 end
