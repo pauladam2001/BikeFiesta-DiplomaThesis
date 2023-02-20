@@ -57,7 +57,7 @@
                         <%= link_to new_review_path(post_id: notification.post_id, reviewer_id: notification.notified_id), class: "" do %>
                           <%= notification.message %><%= notification&.post&.user&.full_name %>.
                         <% end %>
-                      <% elsif notification.notification_type == "suggestion" || notification.notification_type == "post_status" %>
+                      <% elsif notification.notification_type == "suggestion" || notification.notification_type == "post_status" || notification.notification_type == "ship_bike" %>
                         <%= notification.message %>.
                       <% elsif notification.notification_type == "paypal_edit" %>
                         <%= link_to edit_user_registration_path, class: "" do %>

@@ -101,6 +101,13 @@ class PurchasesController < ApplicationController
         }
         Purchase.create(seller_id: post.user_id, buyer_id: current_user.id, post_id: post.id, amount: price / 100, status: "AUTHORIZED", shipping_details: shipping_details,
           payment_details: payment_details)
+
+        Notification.create(notification_type: "ship_bike", notified_id: post.user_id, message: "#{post.name} was bought. Ship it in 2 days")
+
+        phone = post.user.phone
+        message = "BikeFiesta - Your post #{post.name} was bought. You have 2 days to ship it and upload the receipt for confirmation. Shipping details - Name:
+          #{full_name}, Address: #{address}, County: #{county}, City: #{city}, Zip Code: #{zip_code}"
+        Marketing.send_sms(phone, message)
         
         redirect_to posts_path, alert: "Your payment was authorized. Your money will leave your account once the seller will ship the bicycle, he has 2 days to do it."
       else
