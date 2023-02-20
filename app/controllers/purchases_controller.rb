@@ -7,7 +7,7 @@ class PurchasesController < ApplicationController
   end
 
   def checkout
-    if params[:submitButton] == "Complete Purchase"
+    if !params["_method"].present? && params[:submitButton] == "Complete Purchase"
       card_number = params[:card_number].delete(' ')
       if !card_number.scan(/\D/).empty? || card_number.length != 16
         redirect_back(fallback_location: checkout_path(post_id: params[:post_id]), alert: "Error - The Card Number needs to have exactly 16 digits.")
