@@ -35,42 +35,88 @@ class PurchasesController < ApplicationController
 
       county = Location.where(short: params[:county]).first.name
 
-      # TODO call function to process the payment
+
+      process_payment(params[:post_id], card_number, cvv, card_year, card_month, params[:card_first_name], params[:card_last_name], params[:full_name], params[:address],
+        params[:county], params[:city], params[:zip_code])
     end
   end
 
-  # ActiveMerchant::Billing::Base.mode = :test
-  # gateway = ActiveMerchant::Billing::PaypalGateway.new(
-  #   :login => ENV['PAYPAL_LOGIN'],
-  #   :password => ENV['PAYPAL_PASSWORD],
-  #   :signature => ENV['PAYPAL_SIGNATURE']
-  # )
-  # credit_card = ActiveMerchant::Billing::CreditCard.new(
-  #   :brand               => "visa",
-  #   :number             => ENV['PAYPAL_TEST_CARD_NUMBER'],
-  #   :verification_value => "123",
-  #   :month              => 3,
-  #   :year               => 2028,
-  #   :first_name         => "John",
-  #   :last_name          => "Doe"
-  # )
-  # if credit_card.valid?
-  #   # or gateway.purchase to do both authorize and capture
-  #   response = gateway.authorize(1000, credit_card, :ip => "127.0.0.1")
-  #   if response.success?
-  #     gateway.capture(1000, response.authorization)
-  #     puts "Purchase complete!"
-  #   else
-  #     puts "Error: #{response.message}"
-  #   end
-  # else
-  #   puts "Error: credit card is not valid. #{credit_card.errors.full_messages.join('. ')}"
-  # end
-  # response = gateway.purchase(1000, credit_card, :ip => "127.0.0.1")
-  # gateway.void(response.authorization)
-  # gateway.credit(1000, response.authorization)
+  def process_payment(post_id, card_number, card_cvv, card_year, card_month, card_first_name, card_last_name, full_name, address, county, city, zip_code)
+    ActiveMerchant::Billing::Base.mode = :test
+
+    post = Post.find(post_id)
+
+    gateway = ActiveMerchant::Billing::PaypalGateway.new(
+      login: ENV['PAYPAL_LOGIN'],
+      password: ENV['PAYPAL_PASSWORD'],
+      signature: ENV['PAYPAL_SIGNATURE']
+    )
+
+    # credit_card = ActiveMerchant::Billing::CreditCard.new(
+    #   brand: "visa",
+    #   number: card_number,
+    #   verification_value: card_cvv,
+    #   month: card_month,
+    #   year: card_year,
+    #   first_name: card_first_name,
+    #   last_name: card_last_name
+    # )
+
+    credit_card = ActiveMerchant::Billing::CreditCard.new(
+      brand: "visa",
+      number: ENV['PAYPAL_TEST_CARD_NUMBER'],
+      verification_value: "123",
+      month: 3,
+      year: 2028,
+      first_name: "John",
+      last_name: "Doe"
+    )
+
+    if credit_card.valid?
+      price = 0
+      if post.sale_price.present?
+        price = post.sale_price
+      else
+        price = post.price
+      end
+      price = price * 100
+
+      response = gateway.authorize(price, credit_card, ip: "127.0.0.1")   # just authorize the payment, don't get the money (gateway.purchase to do both authorize and capture)
+      if response.success?
+        post.sold = true
+        post.sold_date = Time.now     #TODO if after 2 days it was not shipped, then make these false and nil
+        post.buyer_id = current_user.id
+        post.save
+
+        shipping_details = {
+          full_name: full_name,
+          address: address,
+          county: county,
+          city: city,
+          zip_code: zip_code
+        }
+        payment_details = {
+          authorization_code: response.authorization,
+          amount: price
+        }
+        Purchase.create(seller_id: post.user_id, buyer_id: current_user.id, post_id: post.id, amount: price / 100, status: "AUTHORIZED", shipping_details: shipping_details,
+          payment_details: payment_details)
+        
+        redirect_to posts_path, alert: "Your payment was authorized. Your money will leave your account once the seller will ship the bicycle, he has 2 days to do it."
+      else
+        redirect_back(fallback_location: checkout_path(post_id: post_id), alert: "Error - #{response.message}.")
+        return
+      end
+    else
+      redirect_back(fallback_location: checkout_path(post_id: post_id), alert: "Error - The credit card is not valid: #{credit_card.errors.full_messages.join('. ')}.")
+      return
+    end
+  end
+
+  # gateway.capture(price, response.authorization) #TODO after the bike was shipped we capture the payment
+  # gateway.void(response.authorization)  #TODO if after 2 days the bike was not shipped we unblock the money
+  # gateway.credit(1000, response.authorization)  #TODO if .void fails try this
   # transfer = gateway.transfer(
-  #   1000, 'sb-3orv825105929@personal.example.com', :subject => "The money I owe you", :note => "Sorry it's so late"
+  #   1000, 'sb-3orv825105929@personal.example.com', :subject => "The money I owe you", :note => "Sorry it's so late" #TODO after we capture the payment we keep 10% to us and send the rest to the seller
   # )
-    
 end

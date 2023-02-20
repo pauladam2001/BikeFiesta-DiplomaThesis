@@ -4,8 +4,8 @@ class Purchase < ApplicationRecord
   belongs_to :buyer, foreign_key: :buyer_id, class_name: "User"
   belongs_to :post, foreign_key: :post_id
   
-  # status: "PENDING", "SHIPPED", "NOT_SHIPPED", "REFUNDED"
+  # status: "AUTHORIZED", "CAPTURED", "REFUNDED" #TODO when we refund it we can just delete the purchase, so no need for "REFUNDED"
 
   serialize :shipping_details
-  serialize :payment_details    #TODO here we will need the authorization that the first transaction returns (I think, check)
+  serialize :payment_details
 end
