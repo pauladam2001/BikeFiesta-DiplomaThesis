@@ -8,7 +8,7 @@
   <% if grid_posts.size > 0 %>
     <% grid_posts.each do |post| %>
       <div class="grid-item">
-        <div class="div-item <%= 'validating' if post.is_active == 0 %>">
+        <div class="div-item <%= 'validating' if post.is_active != 1 %>">
           <div class="wrapper-grid">
             <div class="product-img-grid">
               <% if post.assets.present? %>
@@ -27,6 +27,8 @@
                 <span class="validating-span">We are validating the post...</span>
               <% elsif post.is_active == -1 %>
                 <span class="validating-span">This post is permanently banned</span>
+              <% elsif post.is_active == -2 %>
+                <span class="validating-span">SOLD</span>
               <% end %>
               <% if post.electric %>
                 <button class="button electric-button">Electric</button>

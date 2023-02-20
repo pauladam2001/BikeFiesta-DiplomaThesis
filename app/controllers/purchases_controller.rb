@@ -87,7 +87,7 @@ class PurchasesController < ApplicationController
         post.sold_date = Time.now     #TODO if after 2 days it was not shipped, then make these false and nil
         post.buyer_id = current_user.id
         post.save
-
+        # TODO after the bike was shipped set is_active = -2
         shipping_details = {
           full_name: full_name,
           address: address,

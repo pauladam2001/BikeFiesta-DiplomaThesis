@@ -12,6 +12,8 @@ class Post < ApplicationRecord
   has_one :notification
   has_one :purchase
 
+  # is_active: 0 = validating, -1 = banned, 1 = active, -2 = sold & shipped
+
   attr_accessor :skip_validation
 
   validates :name, presence: true, length: { minimum: 1, maximum: 20 }, unless: :skip_validation
