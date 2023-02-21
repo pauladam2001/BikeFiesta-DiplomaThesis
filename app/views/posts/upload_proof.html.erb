@@ -20,7 +20,7 @@
                                                     maxFiles: 1,
                                                     acceptedFiles: ".jpeg, .jpg, .png",
                                                     url: `/posts/post_upload_proof?post_id=<%= params[:id] %>&method=post`,
-                                                    autoProcessQueue: false,
+                                                    autoProcessQueue: true,
                                                     addRemoveLinks: true
                                                   });
   } else {
