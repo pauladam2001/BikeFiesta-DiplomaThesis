@@ -58,7 +58,12 @@ Rails.application.routes.draw do
 
   resources :reviews
   resources :notifications
-  resources :purchases
+  resources :purchases do
+    member do
+      put :mark_as_shipped
+      put :cancel_purchase
+    end
+  end
 
   get "/follow_page", to: "users#follow_page"
 

@@ -4,9 +4,15 @@
     <div class="filter-second-div">
       <form>
         <div class="filter-option-div">
-          <span class="filter-span">Unsolved / Solved</span>
-          <select id="solved" name="solved" class="filter-select">
-            <%= options_for_select([["Unsolved", "false"], ["Solved", "true"]], params[:solved]) %>
+          <span class="filter-span">Not Shipped / Shipped</span>
+          <select id="shiped" name="shipped" class="filter-select">
+            <%= options_for_select([["Not Shipped", "false"], ["Shipped", "true"]], params[:shipped]) %>
+          </select>
+        </div>
+        <div class="filter-option-div">
+          <span class="filter-span">With Proof / Without Proof</span>
+          <select id="proof" name="proof" class="filter-select">
+            <%= options_for_select([["With Proof", "true"], ["Without Proof", "false"]], params[:proof]) %>
           </select>
         </div>
         <div style="float: left;">
@@ -47,13 +53,25 @@
               <% end %>
             </td>
             <td style="width: 20%;">
-              <%= purchase.seller.full_name %> - <%= purchase.buyer.full_name %> - <%= purchase.post.name %> - <%= purchase.amount %>
+              <%= purchase.seller.full_name %> - <%= purchase.buyer.full_name %> - <%= link_to purchase.post.name, post_path(purchase.post) %> - <%= number_to_currency(purchase.amount, precision: 2, :unit => '€') %>
             </td>
             <td style="width: 20%;">
               <%= purchase.shipping_details %>
             </td>
             <td>
-              TODO
+              <% if purchase.status != "CAPTURED"%>
+                <% if purchase.status == "AUTHORIZED_PROOF" %>
+                  <%= link_to mark_as_shipped_purchase_path(purchase), class: "links-class" do %>
+                    Mark as Shipped
+                  <% end %>
+                  <br/>
+                  •
+                  <br/>
+                <% end %>
+                <%= link_to cancel_purchase_purchase_path(purchase), class: "links-class" do %>
+                  Cancel Purchase
+                <% end %>
+              <% end %>
             </td>
           </tr>
         <% end %>
