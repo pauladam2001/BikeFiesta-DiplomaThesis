@@ -84,7 +84,7 @@ class PurchasesController < ApplicationController
       response = gateway.authorize(price, credit_card, ip: "127.0.0.1")   # just authorize the payment, don't get the money (gateway.purchase to do both authorize and capture)
       if response.success?
         post.sold = true
-        post.sold_date = Time.now     #TODO if after 2 days it was not shipped, then make these false and nil
+        post.sold_date = Time.now     #TODO if after 3 days it was not shipped, then make these false and nil
         post.buyer_id = current_user.id
         post.save
         # TODO after the bike was shipped set is_active = -2
@@ -99,7 +99,7 @@ class PurchasesController < ApplicationController
           authorization_code: response.authorization,
           amount: price
         }
-        Purchase.create(seller_id: post.user_id, buyer_id: current_user.id, post_id: post.id, amount: price / 100, status: "AUTHORIZED", shipping_details: shipping_details,
+        Purchase.create(seller_id: post.user_id, buyer_id: current_user.id, post_id: post.id, amount: price / 100, status: "AUTHORIZED_NO_PROOF", shipping_details: shipping_details,
           payment_details: payment_details)
 
         Notification.create(notification_type: "ship_bike", notified_id: post.user_id, message: "#{post.name} was bought. Ship it in 2 days")
@@ -121,7 +121,7 @@ class PurchasesController < ApplicationController
   end
 
   # gateway.capture(price, response.authorization) #TODO after the bike was shipped we capture the payment
-  # gateway.void(response.authorization)  #TODO if after 2 days the bike was not shipped we unblock the money
+  # gateway.void(response.authorization)  #TODO if after 3 days the bike was not shipped we unblock the money
   # gateway.credit(1000, response.authorization)  #TODO if .void fails try this
   # transfer = gateway.transfer(
   #   1000, 'sb-3orv825105929@personal.example.com', :subject => "The money I owe you", :note => "Sorry it's so late" #TODO after we capture the payment we keep 10% to us and send the rest to the seller

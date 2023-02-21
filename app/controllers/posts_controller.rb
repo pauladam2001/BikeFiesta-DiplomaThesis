@@ -24,6 +24,7 @@ class PostsController < ApplicationController
       redirect_back(fallback_location: posts_path, alert: "Error - Please introduce your PayPal Email (see your Profile Page) before listing a bicycle for sale.")
       return
     end
+    
     @post = Post.new
     @locations = Location.order(:name).pluck(:name, :id)
     @brand_names = Brandname.order(:name).pluck(:name, :id)
@@ -100,7 +101,6 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
-  # Receives a hash of images
   def upload
     asset = Asset.new
     asset.post_id = params[:post_id]
@@ -111,7 +111,12 @@ class PostsController < ApplicationController
 
   def upload_proof
     if params[:method] == "post"
-      #TODO
+      post = Post.find(params[:post_id])
+      purchase = post.purchase
+      purchase.proof = params[:file]
+      purchase.status = "AUTHORIZED_PROOF"
+      purchase.save
+      redirect_back(fallback_location: posts_path)
     end
   end
 

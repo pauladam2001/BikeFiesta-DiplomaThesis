@@ -48,7 +48,7 @@
                   <div style="margin-left: 10px;">
                     <% if post.sold == true && post.shipped == false && !post&.purchase&.proof&.attached?  %>
                       <a class=""><%= link_to "Upload Proof", upload_proof_post_path(post), method: :get %></a>
-                    <% else %>
+                    <% elsif !post&.purchase&.proof&.attached?  %>
                       <% if post.is_active == 1 %>
                         <a class=""><%= link_to "Edit", edit_post_path(post) %></a>
                         • 
