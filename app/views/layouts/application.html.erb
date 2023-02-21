@@ -121,7 +121,6 @@
               </a>
             </li>
             <div class="item">
-              <%# <a class="sub-btn sidebar-title-span">Categorization</a> %>
               <span class="sidebar-icon-span sub-btn dropdown-span" style="margin-left: 2rem">Categorization<%= image_tag("right-arrow.png", border: 0, width: '25px', :class => "dropdown dropdown-arrow") %></span>
               <div class="sub-menu">
                 <li>
@@ -188,13 +187,11 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-     $('.sub-btn').click(function(){
-       $(this).next('.sub-menu').slideToggle();
-       $(this).find('.dropdown').toggleClass('rotate');
-     });
-   });
-
-  let main_sidebar_div = document.getElementById("main-sidebar-div");
+    $('.sub-btn').click(function(){
+      $(this).next('.sub-menu').slideToggle();
+      $(this).find('.dropdown').toggleClass('rotate');
+    });
+  });
 
   $(document).on("turbolinks:visit", function(){
     $(".spinner").show();
