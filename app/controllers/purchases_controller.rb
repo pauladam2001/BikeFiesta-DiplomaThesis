@@ -4,6 +4,8 @@ class PurchasesController < ApplicationController
 
   def index
     @purchases = Purchase.order(created_at: :desc)
+
+    @purchases = @purchases.paginate(page: params[:page], per_page: 12)
   end
 
   def checkout
@@ -87,7 +89,7 @@ class PurchasesController < ApplicationController
         post.sold_date = Time.now     #TODO if after 3 days it was not shipped, then make these false and nil
         post.buyer_id = current_user.id
         post.save
-        # TODO after the bike was shipped set is_active = -2
+        # TODO after the bike was shipped set is_active = -2 and have a new field, "commission"
         shipping_details = {
           full_name: full_name,
           address: address,

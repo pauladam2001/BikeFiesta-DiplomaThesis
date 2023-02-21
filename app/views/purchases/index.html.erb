@@ -1,0 +1,67 @@
+<div class="main-page-div">
+  <h1 class="h1-title">Purchases</h1>
+  <div class="filter-first-div">
+    <div class="filter-second-div">
+      <form>
+        <div class="filter-option-div">
+          <span class="filter-span">Unsolved / Solved</span>
+          <select id="solved" name="solved" class="filter-select">
+            <%= options_for_select([["Unsolved", "false"], ["Solved", "true"]], params[:solved]) %>
+          </select>
+        </div>
+        <div style="float: left;">
+          <input type="submit" name="submitButton" class="filter-submit" value="Search"/>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Proof</th>
+          <th>Seller - Buyer - Post - Amount</th>
+          <th>Shipping Details</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <% @purchases.each do |purchase| %>
+          <tr class="<%= cycle("bg-white", "bg-gray") %>">
+            <td>
+              <%= purchase.created_at.strftime("%d/%m/%y") %>
+              <%# if report.solved %>
+                <%# <span style="padding-top: 0.1em; padding-bottom: 0.1rem" class="admin-label">Solved</span> %>
+              <%# end %>
+            </td>
+            <td style="width: 20%;">
+              <% if purchase&.proof&.url.present? %>
+                <%= image_tag(purchase.proof.url, border: 0, width: '100%', height: '100%', :class => "") %>
+              <% else %>
+              <p>No proof yet</p>
+              <% end %>
+            </td>
+            <td style="width: 20%;">
+              <%= purchase.seller.full_name %> - <%= purchase.buyer.full_name %> - <%= purchase.post.name %> - <%= purchase.amount %>
+            </td>
+            <td style="width: 20%;">
+              <%= purchase.shipping_details %>
+            </td>
+            <td>
+              TODO
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+      </tbody>
+    </table>
+    <div class="pagination">
+      <%= will_paginate @purchases %>
+    </div>
+  </div>
+</div>
