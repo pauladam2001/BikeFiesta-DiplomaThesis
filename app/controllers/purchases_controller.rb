@@ -5,6 +5,18 @@ class PurchasesController < ApplicationController
   def index
     @purchases = Purchase.order(created_at: :desc)
 
+    if params[:shipped].present? && params[:shipped] == "true"
+      @purchases = @purchases.where(status: "CAPTURED")
+    else
+      @purchases = @purchases.where.not(status: "CAPTURED")
+    end
+
+    if params[:proof].present? && params[:proof] == "false"
+      @purchases = @purchases.where(status: "AUTHORIZED_NO_PROOF")
+    else
+      @purchases = @purchases.where(status: "AUTHORIZED_PROOF")
+    end
+
     @purchases = @purchases.paginate(page: params[:page], per_page: 12)
   end
 
@@ -120,6 +132,14 @@ class PurchasesController < ApplicationController
       redirect_back(fallback_location: checkout_path(post_id: post_id), alert: "Error - The credit card is not valid: #{credit_card.errors.full_messages.join('. ')}.")
       return
     end
+  end
+
+  def mark_as_shipped
+
+  end
+
+  def cancel_purchase
+
   end
 
   # gateway.capture(price, response.authorization) #TODO after the bike was shipped we capture the payment
