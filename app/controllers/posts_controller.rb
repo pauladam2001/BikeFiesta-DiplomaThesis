@@ -20,6 +20,10 @@ class PostsController < ApplicationController
   end
 
   def new
+    if current_user.paypal_email.nil?
+      redirect_back(fallback_location: posts_path, alert: "Error - Please introduce your PayPal Email (see your Profile Page) before listing a bicycle for sale.")
+      return
+    end
     @post = Post.new
     @locations = Location.order(:name).pluck(:name, :id)
     @brand_names = Brandname.order(:name).pluck(:name, :id)
