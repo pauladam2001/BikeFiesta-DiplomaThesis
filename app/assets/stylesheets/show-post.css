@@ -12,7 +12,11 @@
 }
 
 .admin-margin {
-  margin-left: 15rem;
+  margin-left: 7rem;
+}
+
+.admin-margin-top {
+  padding-top: 12rem;
 }
 
 .star-span {
