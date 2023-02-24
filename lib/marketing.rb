@@ -114,7 +114,7 @@ module Marketing
   # Called daily
   # Send notification to buyer if he bought the bike more than 3 days ago
   def self.send_notification_to_buyers
-    Post.where(leave_review_notification_sent: false).where("sold_date <= ?", 3.days.ago).find_each do |post|
+    Post.where(leave_review_notification_sent: false).where("shipped_date <= ?", 5.days.ago).find_each do |post|
       Notification.create(notification_type: "review", post_id: post.id, notified_id: post.user_id, message: "Leave a review for ")
       
       post.leave_review_notification_sent = true
@@ -158,13 +158,86 @@ module Marketing
   # It goes thorugh the posts that are sold but not shipped and checks if they were bought more than 3 days ago. If yes
   # and the seller did not update the proof, then we cancel the purchase
   def self.check_posts_to_be_shipped
+    ActiveMerchant::Billing::Base.mode = :test
 
+    gateway = ActiveMerchant::Billing::PaypalGateway.new(
+      login: ENV['PAYPAL_LOGIN'],
+      password: ENV['PAYPAL_PASSWORD'],
+      signature: ENV['PAYPAL_SIGNATURE']
+    )
+
+    Post.where(sold: true, shipped: false).where("sold_date <= ?", 3.days.ago).find_each do |post|
+      purchase = post.purchase
+      success = false
+
+      if !purchase.proof.attached?
+        void_method_response = gateway.void(purchase.payment_details[:authorization_code])
+        if !void_method_response.success?
+          refund_method_response = gateway.refund(purchase.amount * 100, purchase.payment_details[:authorization_code])
+          if refund_method_response.success?
+            success = true
+          end
+        else
+          success = true
+        end
+
+        if success
+          Notification.create(notification_type: "cancel_purchase", notified_id: purchase.seller_id, message: "The shipping proof for #{purchase.post.name} was not uploaded in time. The purchase was cancelled")
+          Notification.create(notification_type: "cancel_purchase", notified_id: purchase.buyer_id, message: "The shipping proof for #{purchase.post.name} was not uploaded in time. The purchase was cancelled")
+
+          seller_phone = purchase.seller.phone
+          buyer_phone = purchase.buyer.phone
+          message = "BikeFiesta - The shipping proof for #{purchase.post.name} was not uploaded in time. The purchase was cancelled."
+
+          AsyncSendSmsToUser.perform_async(seller_phone, message)
+          AsyncSendSmsToUser.perform_async(buyer_phone, message)
+
+          post.sold_date = nil
+          post.sold = false
+          post.buyer_id = nil
+          post.save
+
+          purchase.delete
+        end
+      end
+    end
   end
 
   # Called hourly
   # It goes through the posts that were shipped more than 5 days ago and if the associated purchase is not on hold, then
   # we send the money to the seller
   def self.send_money_to_sellers
-    
+    ActiveMerchant::Billing::Base.mode = :test
+
+    gateway = ActiveMerchant::Billing::PaypalGateway.new(
+      login: ENV['PAYPAL_LOGIN'],
+      password: ENV['PAYPAL_PASSWORD'],
+      signature: ENV['PAYPAL_SIGNATURE']
+    )
+
+    Post.where(sold: true, shipped: true).where("shipped_date <= ?", 5.days.ago).joins(:purchase).where({purchase: {money_sent_to_seller: false}}).find_each do |post|
+      purchase = post.purchase
+      if !purchase.on_hold
+        if post.sale_percentage.nil?
+          amount = 0.9 * purchase.amount * 100
+        else
+          amount = ((90 + post.sale_percentage) / 100) * purchase.amount * 100
+        end
+
+        # transfer = gateway.transfer(amount, purchase.seller.paypal_email, :subject => "Money for #{post.name}", :note => "Thank you for listing you bike on our site.")
+        transfer = gateway.transfer(amount, 'sb-3orv825105929@personal.example.com', :subject => "Money for #{post.name}", :note => "Thank you for listing you bike on our site.")
+        if transfer.success?
+          Notification.create(notification_type: "money_sent", notified_id: purchase.seller_id, message: "The money for #{purchase.post.name} were sent to you")
+
+          seller_phone = purchase.seller.phone
+          message = "BikeFiesta - The money for #{purchase.post.name} were sent to you. Check you PayPal today."
+
+          AsyncSendSmsToUser.perform_async(seller_phone, message)
+
+          purchase.money_sent_to_seller = true
+          purchase.save
+        end
+      end
+    end
   end
 end

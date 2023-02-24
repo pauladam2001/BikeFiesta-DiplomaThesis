@@ -33,3 +33,15 @@ calculate_users_rating_job:
   class: "CronJobCalculateUsersRating"
   # queue: cron_jobs
   # status: 'disabled'
+
+check_posts_to_be_shipped_job:
+  cron: "every hour"
+  class: "CronJobCheckPostsToBeShipped"
+  # queue: cron_jobs
+  # status: 'disabled'
+
+send_money_to_sellers_job:
+  cron: "every hour"
+  class: "CronJobSendMoneyToSellers"
+  # queue: cron_jobs
+  # status: 'disabled'

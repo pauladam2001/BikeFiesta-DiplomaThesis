@@ -93,7 +93,7 @@ class PurchasesController < ApplicationController
       response = gateway.authorize(price, credit_card, ip: "127.0.0.1")   # just authorize the payment, don't get the money (gateway.purchase to do both authorize and capture)
       if response.success?
         post.sold = true
-        post.sold_date = Time.now     #TODO if after 3 days it was not shipped, then make these false and nil
+        post.sold_date = Time.now
         post.buyer_id = current_user.id
         post.save
         
@@ -142,11 +142,7 @@ class PurchasesController < ApplicationController
 
     response = gateway.capture(purchase.amount * 100, purchase.payment_details[:authorization_code])
     if response.success?
-      #TODO send money to seller only after 5 days, if everything is ok (and purchase is not on hold)
-      #TODO admin has the possibility to put a shipped purchase on hold if the buyer is complaining about something
-      # transfer = gateway.transfer(
-      #   1000, 'sb-3orv825105929@personal.example.com', :subject => "The money I owe you", :note => "Sorry it's so late" #TODO after we capture the payment we keep 10% (or 10 - sale_percentage) to us and send the rest to the seller
-      # )
+      #TODO admin has the possibility to put a shipped purchase on hold if the buyer is complaining about something (chat)
 
       Notification.create(notification_type: "shipped_purchase", notified_id: purchase.seller_id, message: "The bike #{purchase.post.name} was shipped. You will receive it in 2-3 days")
       Notification.create(notification_type: "shipped_purchase", notified_id: purchase.buyer_id, message: "The bike #{purchase.post.name} was shipped. You will receive it in 2-3 days")
@@ -165,6 +161,7 @@ class PurchasesController < ApplicationController
       post = purchase.post
       post.is_active = -2
       post.shipped = true
+      post.shipped_date = Time.now
       post.save
     end
   end
@@ -204,6 +201,11 @@ class PurchasesController < ApplicationController
 
       AsyncSendSmsToUser.perform_async(seller_phone, message)
       AsyncSendSmsToUser.perform_async(buyer_phone, message)
+
+      post.sold_date = nil
+      post.sold = false
+      post.buyer_id = nil
+      post.save
 
       purchase.delete
     end

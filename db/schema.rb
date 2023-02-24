@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_24_095509) do
+ActiveRecord::Schema.define(version: 2023_02_24_112720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 2023_02_24_095509) do
     t.boolean "leave_review_notification_sent", default: false
     t.boolean "shipped", default: false
     t.float "sale_percentage"
+    t.datetime "shipped_date"
   end
 
   create_table "purchases", force: :cascade do |t|
