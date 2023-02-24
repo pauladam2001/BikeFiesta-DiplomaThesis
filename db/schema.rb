@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_20_152246) do
+ActiveRecord::Schema.define(version: 2023_02_24_095509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 2023_02_20_152246) do
     t.datetime "sold_date"
     t.boolean "leave_review_notification_sent", default: false
     t.boolean "shipped", default: false
+    t.float "sale_percentage"
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -150,6 +151,8 @@ ActiveRecord::Schema.define(version: 2023_02_20_152246) do
     t.string "status"
     t.text "shipping_details"
     t.text "payment_details"
+    t.boolean "on_hold", default: false
+    t.boolean "money_sent_to_seller", default: false
   end
 
   create_table "relationships", force: :cascade do |t|

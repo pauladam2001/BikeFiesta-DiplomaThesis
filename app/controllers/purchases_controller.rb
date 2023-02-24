@@ -87,12 +87,7 @@ class PurchasesController < ApplicationController
     )
 
     if credit_card.valid?
-      price = 0
-      if post.sale_price.present?
-        price = post.sale_price
-      else
-        price = post.price
-      end
+      price = post.sale_price.present? ? post.sale_price : post.price
       price = price * 100
 
       response = gateway.authorize(price, credit_card, ip: "127.0.0.1")   # just authorize the payment, don't get the money (gateway.purchase to do both authorize and capture)
@@ -101,7 +96,7 @@ class PurchasesController < ApplicationController
         post.sold_date = Time.now     #TODO if after 3 days it was not shipped, then make these false and nil
         post.buyer_id = current_user.id
         post.save
-        # TODO after the bike was shipped set is_active = -2 and have a new field, "commission"
+        
         shipping_details = {
           full_name: full_name,
           address: address,
@@ -121,7 +116,7 @@ class PurchasesController < ApplicationController
         phone = post.user.phone
         message = "BikeFiesta - Your post #{post.name} was bought. You have 2 days to ship it and upload the proof. Shipping details - Name:
           #{full_name}, Address: #{address}, County: #{county}, City: #{city}, Zip Code: #{zip_code}"
-        Marketing.send_sms(phone, message)
+        AsyncSendSmsToUser.perform_async(phone, message)
         
         redirect_to posts_path, alert: "Your payment was authorized. Your money will leave your account once the seller will ship the bicycle, he has 2 days to do it."
       else
@@ -135,17 +130,82 @@ class PurchasesController < ApplicationController
   end
 
   def mark_as_shipped
+    ActiveMerchant::Billing::Base.mode = :test
 
+    purchase = Purchase.find(params[:id])
+
+    gateway = ActiveMerchant::Billing::PaypalGateway.new(
+      login: ENV['PAYPAL_LOGIN'],
+      password: ENV['PAYPAL_PASSWORD'],
+      signature: ENV['PAYPAL_SIGNATURE']
+    )
+
+    response = gateway.capture(purchase.amount * 100, purchase.payment_details[:authorization_code])
+    if response.success?
+      #TODO send money to seller only after 5 days, if everything is ok (and purchase is not on hold)
+      #TODO admin has the possibility to put a shipped purchase on hold if the buyer is complaining about something
+      # transfer = gateway.transfer(
+      #   1000, 'sb-3orv825105929@personal.example.com', :subject => "The money I owe you", :note => "Sorry it's so late" #TODO after we capture the payment we keep 10% (or 10 - sale_percentage) to us and send the rest to the seller
+      # )
+
+      Notification.create(notification_type: "shipped_purchase", notified_id: purchase.seller_id, message: "The bike #{purchase.post.name} was shipped. You will receive it in 2-3 days")
+      Notification.create(notification_type: "shipped_purchase", notified_id: purchase.buyer_id, message: "The bike #{purchase.post.name} was shipped. You will receive it in 2-3 days")
+
+      seller_phone = purchase.seller.phone
+      buyer_phone = purchase.buyer.phone
+      seller_message = "BikeFiesta - The bike #{purchase.post.name} was shipped. You will receive it in 2-3 days."
+      buyer_message = "BikeFiesta - The bike #{purchase.post.name} was shipped. You will receive it in 2-3 days. Please contact an admin in maximum 5 days if anything bad happens"
+      
+      AsyncSendSmsToUser.perform_async(seller_phone, seller_message)
+      AsyncSendSmsToUser.perform_async(buyer_phone, buyer_message)
+
+      purchase.status = "CAPTURED"
+      purchase.save
+
+      post = purchase.post
+      post.is_active = -2
+      post.shipped = true
+      post.save
+    end
   end
 
   def cancel_purchase
+    ActiveMerchant::Billing::Base.mode = :test
+    success = false
 
+    purchase = Purchase.find(params[:id])
+
+    gateway = ActiveMerchant::Billing::PaypalGateway.new(
+      login: ENV['PAYPAL_LOGIN'],
+      password: ENV['PAYPAL_PASSWORD'],
+      signature: ENV['PAYPAL_SIGNATURE']
+    )
+
+    void_method_response = gateway.void(purchase.payment_details[:authorization_code])
+    if !void_method_response.success?
+      refund_method_response = gateway.refund(purchase.amount * 100, purchase.payment_details[:authorization_code])
+      if refund_method_response.success?
+        success = true
+      else
+        redirect_back(fallback_location: purchases_path, alert: "Error - The money were not refunded.")
+        return
+      end
+    else
+      success = true
+    end
+
+    if success
+      Notification.create(notification_type: "cancel_purchase", notified_id: purchase.seller_id, message: "The shipping proof for #{purchase.post.name} was not okay. The purchase was cancelled")
+      Notification.create(notification_type: "cancel_purchase", notified_id: purchase.buyer_id, message: "The shipping proof for #{purchase.post.name} was not okay. The purchase was cancelled")
+
+      seller_phone = purchase.seller.phone
+      buyer_phone = purchase.buyer.phone
+      message = "BikeFiesta - The shipping proof for #{purchase.post.name} was not okay. The purchase was cancelled."
+
+      AsyncSendSmsToUser.perform_async(seller_phone, message)
+      AsyncSendSmsToUser.perform_async(buyer_phone, message)
+
+      purchase.delete
+    end
   end
-
-  # gateway.capture(price, response.authorization) #TODO after the bike was shipped we capture the payment
-  # gateway.void(response.authorization)  #TODO if after 3 days the bike was not shipped we unblock the money
-  # gateway.credit(1000, response.authorization)  #TODO if .void fails try this
-  # transfer = gateway.transfer(
-  #   1000, 'sb-3orv825105929@personal.example.com', :subject => "The money I owe you", :note => "Sorry it's so late" #TODO after we capture the payment we keep 10% to us and send the rest to the seller
-  # )
 end

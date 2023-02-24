@@ -55,13 +55,14 @@ module Marketing
     random_offset = Random.rand(Post.count)
     random_posts = Post.offset(random_offset).first(Post.count / 3)
     random_posts.each do |post|
-      if post.sale_price.present? && post.sale_price_expiration.present? && post.created_at < 7.days.ago
+      if (post.sale_price.present? && post.sale_price_expiration.present? && post.created_at < 7.days.ago) || post.is_active != 1
         next
       end
 
       sale_percentage = Random.rand(10)
       sale_price = post.price - ((sale_percentage * post.price) / 100)
 
+      post.sale_percentage = sale_percentage
       post.sale_price = sale_price
       post.sale_price_expiration = Time.now + 1.day
 
@@ -72,9 +73,10 @@ module Marketing
   # Called daily
   # Unmark the posts from sale
   def self.unmark_posts_on_sale
-    Post.where("sale_price_expiration <= ?", Time.now).where.not(sale_price: nil).find_each do |post|
+    Post.where.not(is_active: 1).where("sale_price_expiration <= ?", Time.now).where.not(sale_price: nil).find_each do |post|
       post.sale_price = nil
       post.sale_price_expiration = nil
+      post.sale_percentage = nil
 
       post.save(validate: false)
     end
@@ -150,5 +152,19 @@ module Marketing
       report.solved = true
       report.save
     end
+  end
+
+  # Called hourly
+  # It goes thorugh the posts that are sold but not shipped and checks if they were bought more than 3 days ago. If yes
+  # and the seller did not update the proof, then we cancel the purchase
+  def self.check_posts_to_be_shipped
+
+  end
+
+  # Called hourly
+  # It goes through the posts that were shipped more than 5 days ago and if the associated purchase is not on hold, then
+  # we send the money to the seller
+  def self.send_money_to_sellers
+    
   end
 end

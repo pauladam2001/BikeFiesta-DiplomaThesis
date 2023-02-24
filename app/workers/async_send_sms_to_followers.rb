@@ -8,7 +8,7 @@ class AsyncSendSmsToFollowers
 
     user.followers.each do |follower|
       phone = follower.phone
-      Marketing.send_sms(phone, message)
+      AsyncSendSmsToUser.perform_async(phone, message)
     end
     puts "Finish Running AsyncSendSmsToFollowers"
   end
