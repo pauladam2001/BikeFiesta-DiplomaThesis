@@ -163,6 +163,10 @@ class PurchasesController < ApplicationController
       post.shipped = true
       post.shipped_date = Time.now
       post.save
+
+      redirect_back(fallback_location: purchases_path)
+    else
+      redirect_back(fallback_location: purchases_path, alert: "Error - #{response.message}.")
     end
   end
 
@@ -184,7 +188,7 @@ class PurchasesController < ApplicationController
       if refund_method_response.success?
         success = true
       else
-        redirect_back(fallback_location: purchases_path, alert: "Error - The money were not refunded.")
+        redirect_back(fallback_location: purchases_path, alert: "Error - #{refund_method_response.message}.")
         return
       end
     else
@@ -208,6 +212,8 @@ class PurchasesController < ApplicationController
       post.save
 
       purchase.delete
+
+      redirect_back(fallback_location: purchases_path)
     end
   end
 end
