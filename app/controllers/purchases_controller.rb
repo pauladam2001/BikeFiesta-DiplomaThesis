@@ -60,71 +60,78 @@ class PurchasesController < ApplicationController
 
     post = Post.find(post_id)
 
-    gateway = ActiveMerchant::Billing::PaypalGateway.new(
-      login: ENV['PAYPAL_LOGIN'],
-      password: ENV['PAYPAL_PASSWORD'],
-      signature: ENV['PAYPAL_SIGNATURE']
-    )
+    if !post.sold
+      post.with_lock do
+        gateway = ActiveMerchant::Billing::PaypalGateway.new(
+          login: ENV['PAYPAL_LOGIN'],
+          password: ENV['PAYPAL_PASSWORD'],
+          signature: ENV['PAYPAL_SIGNATURE']
+        )
 
-    # credit_card = ActiveMerchant::Billing::CreditCard.new(
-    #   brand: "visa",
-    #   number: card_number,
-    #   verification_value: card_cvv,
-    #   month: card_month,
-    #   year: card_year,
-    #   first_name: card_first_name,
-    #   last_name: card_last_name
-    # )
+        # credit_card = ActiveMerchant::Billing::CreditCard.new(
+        #   brand: "visa",
+        #   number: card_number,
+        #   verification_value: card_cvv,
+        #   month: card_month,
+        #   year: card_year,
+        #   first_name: card_first_name,
+        #   last_name: card_last_name
+        # )
 
-    credit_card = ActiveMerchant::Billing::CreditCard.new(
-      brand: "visa",
-      number: ENV['PAYPAL_TEST_CARD_NUMBER'],
-      verification_value: "123",
-      month: 3,
-      year: 2028,
-      first_name: "John",
-      last_name: "Doe"
-    )
+        credit_card = ActiveMerchant::Billing::CreditCard.new(
+          brand: "visa",
+          number: ENV['PAYPAL_TEST_CARD_NUMBER'],
+          verification_value: "123",
+          month: 3,
+          year: 2028,
+          first_name: "John",
+          last_name: "Doe"
+        )
 
-    if credit_card.valid?
-      price = post.sale_price.present? ? post.sale_price : post.price
-      price = price * 100
+        if credit_card.valid?
+          price = post.sale_price.present? ? post.sale_price : post.price
+          price = price * 100
 
-      response = gateway.authorize(price, credit_card, ip: "127.0.0.1")   # just authorize the payment, don't get the money (gateway.purchase to do both authorize and capture)
-      if response.success?
-        post.sold = true
-        post.sold_date = Time.now
-        post.buyer_id = current_user.id
-        post.save
-        
-        shipping_details = {
-          full_name: full_name,
-          address: address,
-          county: county,
-          city: city,
-          zip_code: zip_code
-        }
-        payment_details = {
-          authorization_code: response.authorization,
-          amount: price
-        }
-        Purchase.create(seller_id: post.user_id, buyer_id: current_user.id, post_id: post.id, amount: price / 100, status: "AUTHORIZED_NO_PROOF", shipping_details: shipping_details,
-          payment_details: payment_details)
+          response = gateway.authorize(price, credit_card, ip: "127.0.0.1")   # just authorize the payment, don't get the money (gateway.purchase to do both authorize and capture)
+          if response.success?
+            post.sold = true
+            post.sold_date = Time.now
+            post.buyer_id = current_user.id
+            
+            shipping_details = {
+              full_name: full_name,
+              address: address,
+              county: county,
+              city: city,
+              zip_code: zip_code
+            }
+            payment_details = {
+              authorization_code: response.authorization,
+              amount: price
+            }
+            Purchase.create(seller_id: post.user_id, buyer_id: current_user.id, post_id: post.id, amount: price / 100, status: "AUTHORIZED_NO_PROOF", shipping_details: shipping_details,
+              payment_details: payment_details)
 
-        Notification.create(notification_type: "ship_bike", notified_id: post.user_id, message: "#{post.name} was bought. Ship it in 2 days")
+            Notification.create(notification_type: "ship_bike", notified_id: post.user_id, message: "#{post.name} was bought. Ship it in 2 days")
 
-        phone = post.user.phone
-        message = "BikeFiesta - Your post #{post.name} was bought. You have 2 days to ship it and upload the proof. Shipping details - Name:
-          #{full_name}, Address: #{address}, County: #{county}, City: #{city}, Zip Code: #{zip_code}"
-        AsyncSendSmsToUser.perform_async(phone, message)
-        
-        redirect_to posts_path, alert: "Your payment was authorized. Your money will leave your account once the seller will ship the bicycle, he has 2 days to do it."
-      else
-        redirect_back(fallback_location: checkout_path(post_id: post_id), alert: "Error - #{response.message}.")
-        return
+            phone = post.user.phone
+            message = "BikeFiesta - Your post #{post.name} was bought. You have 2 days to ship it and upload the proof. Shipping details - Name:
+              #{full_name}, Address: #{address}, County: #{county}, City: #{city}, Zip Code: #{zip_code}"
+            AsyncSendSmsToUser.perform_async(phone, message)
+            
+            post.save!
+            redirect_to posts_path, alert: "Your payment was authorized. Your money will leave your account once the seller will ship the bicycle, he has 2 days to do it."
+          else
+            redirect_back(fallback_location: checkout_path(post_id: post_id), alert: "Error - #{response.message}.")
+            return
+          end
+        else
+          redirect_back(fallback_location: checkout_path(post_id: post_id), alert: "Error - The credit card is not valid: #{credit_card.errors.full_messages.join('. ')}.")
+          return
+        end
       end
     else
-      redirect_back(fallback_location: checkout_path(post_id: post_id), alert: "Error - The credit card is not valid: #{credit_card.errors.full_messages.join('. ')}.")
+      redirect_back(fallback_location: posts_path, alert: "Error - Sorry, this bike was just bought by someone else.")
       return
     end
   end
