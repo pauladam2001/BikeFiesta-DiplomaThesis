@@ -62,6 +62,8 @@ Rails.application.routes.draw do
     member do
       put :mark_as_shipped
       put :cancel_purchase
+      put :mark_on_hold
+      put :mark_off_hold
     end
   end
 

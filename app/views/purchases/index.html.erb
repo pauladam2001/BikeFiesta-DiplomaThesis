@@ -47,6 +47,10 @@
               <% if purchase.status == "AUTHORIZED_PROOF" %>
                 <span style="padding-top: 0.1em; padding-bottom: 0.1rem; background-color: orange;" class="admin-label">Proof</span>
               <% end %>
+
+              <% if purchase.on_hold %>
+                <span style="padding-top: 0.1em; padding-bottom: 0.1rem; background-color: yellow;" class="admin-label">On Hold</span>
+              <% end %>
             </td>
             <td style="width: 20%;">
               <% if purchase&.proof&.url.present? %>
@@ -63,7 +67,7 @@
             </td>
             <td>
               <% if purchase.status != "CAPTURED"%>
-                <% if purchase.status == "AUTHORIZED_PROOF" %>
+                <% if purchase.status == "AUTHORIZED_PROOF" && !purchase.on_hold %>
                   <%= link_to mark_as_shipped_purchase_path(purchase), class: "links-class", method: :put, data: {confirm: "Are you sure you want to mark this purchase as shipped?"} do %>
                     Mark as Shipped
                   <% end %>
@@ -73,6 +77,18 @@
                 <% end %>
                 <%= link_to cancel_purchase_purchase_path(purchase), class: "links-class", method: :put, data: {confirm: "Are you sure you want to delete this purchase?"} do %>
                   Cancel Purchase
+                <% end %>
+                <br/>
+                •
+                <br/>
+                <% if purchase.on_hold %>
+                  <%= link_to mark_off_hold_purchase_path(purchase), class: "links-class", method: :put do %>
+                    Mark Off Hold
+                  <% end %>
+                <% else %>
+                  <%= link_to mark_on_hold_purchase_path(purchase), class: "links-class", method: :put do %>
+                    Mark On Hold
+                  <% end %>
                 <% end %>
               <% end %>
             </td>

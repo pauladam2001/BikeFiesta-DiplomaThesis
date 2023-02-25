@@ -216,4 +216,18 @@ class PurchasesController < ApplicationController
       redirect_back(fallback_location: purchases_path)
     end
   end
+
+  def mark_on_hold
+    purchase = Purchase.find(params[:id])
+    purchase.on_hold = true
+    purchase.save
+    redirect_back(fallback_location: purchases_path)
+  end
+
+  def mark_off_hold
+    purchase = Purchase.find(params[:id])
+    purchase.on_hold = false
+    purchase.save
+    redirect_back(fallback_location: purchases_path)
+  end
 end
