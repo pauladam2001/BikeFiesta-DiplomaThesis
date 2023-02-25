@@ -58,10 +58,11 @@ class PurchasesController < ApplicationController
   def process_payment(post_id, card_number, card_cvv, card_year, card_month, card_first_name, card_last_name, full_name, address, county, city, zip_code)
     ActiveMerchant::Billing::Base.mode = :test
 
-    post = Post.find(post_id)
-
-    if !post.sold
-      post.with_lock do
+    Post.transaction do
+      post = Post.find(post_id)
+      post.lock!
+      
+      if !post.sold
         gateway = ActiveMerchant::Billing::PaypalGateway.new(
           login: ENV['PAYPAL_LOGIN'],
           password: ENV['PAYPAL_PASSWORD'],
@@ -129,10 +130,10 @@ class PurchasesController < ApplicationController
           redirect_back(fallback_location: checkout_path(post_id: post_id), alert: "Error - The credit card is not valid: #{credit_card.errors.full_messages.join('. ')}.")
           return
         end
+      else
+        redirect_back(fallback_location: posts_path, alert: "Error - Sorry, this bike was just bought by someone else.")
+        return
       end
-    else
-      redirect_back(fallback_location: posts_path, alert: "Error - Sorry, this bike was just bought by someone else.")
-      return
     end
   end
 
