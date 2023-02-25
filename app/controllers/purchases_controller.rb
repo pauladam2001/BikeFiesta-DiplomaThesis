@@ -60,7 +60,7 @@ class PurchasesController < ApplicationController
 
     Post.transaction do
       post = Post.find(post_id)
-      post.lock!
+      post.lock!  # pessimistic locking
       
       if !post.sold
         gateway = ActiveMerchant::Billing::PaypalGateway.new(
