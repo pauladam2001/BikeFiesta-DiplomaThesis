@@ -31,6 +31,8 @@
                 <% elsif post.is_active == -1 %>
                   <span class="validating-span">This post is permanently banned</span>
                 <% elsif post.is_active == -2 %>
+                  <span class="validating-span">Please upload your shipping proof</span>
+                <% elsif post.is_active == -3 %>
                   <span class="validating-span">SOLD</span>
                 <% end %>
               <% end %>
@@ -53,7 +55,7 @@
                         <a class=""><%= link_to "Edit", edit_post_path(post) %></a>
                         • 
                       <% end %>
-                      <% if post.is_active != -2 %>
+                      <% if post.is_active != -2 && post.is_active != -3 %>
                         <a class=""><%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %></a>
                       <% end %>
                       <% if post.assets.count == 0 %>

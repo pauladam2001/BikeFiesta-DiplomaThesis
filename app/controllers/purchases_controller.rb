@@ -97,6 +97,7 @@ class PurchasesController < ApplicationController
             post.sold = true
             post.sold_date = Time.now
             post.buyer_id = current_user.id
+            post.is_active = -2
             
             shipping_details = {
               full_name: full_name,
@@ -164,7 +165,7 @@ class PurchasesController < ApplicationController
       purchase.save
 
       post = purchase.post
-      post.is_active = -2
+      post.is_active = -3
       post.shipped = true
       post.shipped_date = Time.now
       post.save

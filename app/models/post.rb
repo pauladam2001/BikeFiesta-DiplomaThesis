@@ -12,7 +12,7 @@ class Post < ApplicationRecord
   has_one :notification
   has_one :purchase
 
-  # is_active: 0 = validating, -1 = banned, 1 = active, -2 = sold & shipped
+  # is_active: 0 = validating, -1 = banned, 1 = active, -2 = sold & not shipped, -3 = sold & shipped
 
   attr_accessor :skip_validation
 
