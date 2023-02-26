@@ -149,8 +149,6 @@ class PurchasesController < ApplicationController
 
     response = gateway.capture(purchase.amount * 100, purchase.payment_details[:authorization_code])
     if response.success?
-      #TODO admin has the possibility to put a shipped purchase on hold if the buyer is complaining about something (chat)
-
       Notification.create(notification_type: "shipped_purchase", notified_id: purchase.seller_id, message: "The bike #{purchase.post.name} was shipped. You will receive it in 2-3 days")
       Notification.create(notification_type: "shipped_purchase", notified_id: purchase.buyer_id, message: "The bike #{purchase.post.name} was shipped. You will receive it in 2-3 days")
 
