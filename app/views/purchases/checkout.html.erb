@@ -14,7 +14,12 @@
               <%= options_for_select([["Select", "", {disabled: ['0'], selected: ['0']}]] + Location.all.collect { |l| [l.name, l.short]}, params[:county]) %>
             </select>
             <div class="row">
-              
+              <div class="col-50">
+                <label for="city">City</label>
+                <select required name="city" id="city-select" class="">
+                  <%= options_for_select([["Select", "", {disabled: ['0'], selected: ['0']}]], params[:city]) %>
+                </select>
+              </div>
               <div class="col-50">
                 <label for="zip_code">Zip</label>
                 <input required type="text" id="zip_code" name="zip_code" placeholder="400436" class="checkout-input">

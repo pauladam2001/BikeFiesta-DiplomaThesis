@@ -16,14 +16,14 @@ class User < ApplicationRecord
     (?=.*[A-Z])   # comtains at least 1 uppercase letter
   /x
 
-  validates :first_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation, unless: Proc.new { |u| u.reset_password_token.present? }
-  validates :last_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation, unless: Proc.new { |u| u.reset_password_token.present? }
-  validates :phone, presence: true, length: { minimum: 9, maximum: 12 }, unless: :skip_validation, unless: Proc.new { |u| u.reset_password_token.present? }
+  validates :first_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation || Proc.new { |u| u.reset_password_token.present? }
+  validates :last_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation || Proc.new { |u| u.reset_password_token.present? }
+  validates :phone, presence: true, length: { minimum: 9, maximum: 12 }, unless: :skip_validation || Proc.new { |u| u.reset_password_token.present? }
   # validates :password, format: VALID_PASSWORD_REGEX, unless: :skip_validation
   validate :password_regex, unless: :skip_validation
 
   has_one_attached :avatar
-  validates :avatar, :presence => true, unless: :skip_validation, unless: Proc.new { |u| u.reset_password_token.present? }
+  validates :avatar, :presence => true, unless: :skip_validation || Proc.new { |u| u.reset_password_token.present? }
 
   has_many :posts, dependent: :destroy
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
