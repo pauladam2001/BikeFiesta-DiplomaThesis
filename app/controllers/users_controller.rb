@@ -12,10 +12,6 @@ class UsersController < ApplicationController
     @users = @users.paginate(page: params[:page], per_page: 12)
   end
 
-  def show
-
-  end
-
   def follow_page
     @followers = current_user.followers     # TODO observer/socket or how we will implement the buy button/chat app
     @following = current_user.following

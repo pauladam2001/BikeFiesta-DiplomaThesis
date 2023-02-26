@@ -186,19 +186,19 @@
 </html>
 
 <script type="text/javascript">
-  $(document).ready(function(){
+  $(document).ready(function() {
     $('.sub-btn').click(function(){
       $(this).next('.sub-menu').slideToggle();
       $(this).find('.dropdown').toggleClass('rotate');
     });
   });
 
-  $(document).on("turbolinks:visit", function(){
+  $(document).on("turbolinks:visit", function() {
     $(".spinner").show();
     $("#main-body").css("opacity", "0.2");
   });
 
-  $(document).on("turbolinks:load", function(){
+  $(document).on("turbolinks:load", function() {
     $(".spinner").hide();
     $("#main-body").css("opacity", "1");
   });
