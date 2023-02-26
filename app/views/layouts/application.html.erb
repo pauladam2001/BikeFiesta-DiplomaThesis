@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+
+<style>                                     <%#TODO put this in css or something%>
+  <%= ".msg-#{current_user&.id}" %> {
+  background-color: #007bff !important;
+  padding: 10px;
+  }
+  <%= ".cont-#{current_user&.id}" %> {
+  display: flex;
+  justify-content: flex-end
+  }
+</style>
+
 <html>
   <head>
     <title>BikeFiesta</title>
@@ -40,6 +52,9 @@
         </div>
         <div class="menu-item menu-item-padding">
           <h6><%= link_to "Favorites", favorites_path %></h6>
+        </div>
+        <div class="menu-item menu-item-padding">
+          <h6><%= link_to "Rooms", rooms_path %></h6>
         </div>
         <div class="menu-item">
           <%= button_to "Post", new_post_path, method: :get, :class => "button" %>

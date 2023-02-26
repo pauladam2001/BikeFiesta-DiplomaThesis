@@ -187,3 +187,13 @@ a:hover {
   line-height: 1rem; 
   border-radius: 9999px; 
 }
+
+.message-box {
+  width: fit-content;
+  max-width: 40%;             /*TODO put this in a css file with all the others*/
+  padding: 5px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background-color: #555555 ;
+  padding: 10px
+}

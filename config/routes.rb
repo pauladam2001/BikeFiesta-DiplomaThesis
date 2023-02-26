@@ -34,11 +34,13 @@ Rails.application.routes.draw do
   resources :categories
   resources :materials
   resources :component_groups
+  
   resources :reports do
     member do
       put :solve
     end
   end
+  
   resources :suggestions do
     member do
       put :solve
@@ -58,6 +60,7 @@ Rails.application.routes.draw do
 
   resources :reviews
   resources :notifications
+  
   resources :purchases do
     member do
       put :mark_as_shipped
@@ -65,6 +68,10 @@ Rails.application.routes.draw do
       put :mark_on_hold
       put :mark_off_hold
     end
+  end
+
+  resources :rooms do
+    resources :messages
   end
 
   get "/follow_page", to: "users#follow_page"

@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   after_save :update_phone_number_and_name
+  after_create_commit { broadcast_append_to "users" }
+  has_many :messages
 
   attr_accessor :skip_validation
   

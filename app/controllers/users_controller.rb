@@ -12,6 +12,20 @@ class UsersController < ApplicationController
     @users = @users.paginate(page: params[:page], per_page: 12)
   end
 
+  def show
+    @user = User.find(params[:id])
+    @current_user = current_user
+    @rooms = Room.public_rooms
+    @users = User.where.not(id: @current_user.id)
+    @room = Room.new
+    @message = Message.new
+    @room_name = get_name(@user, @current_user)
+    @single_room = Room.where(name: @room_name).first || Room.create_private_room([@user, @current_user], @room_name)
+    @messages = @single_room.messages
+
+    render "rooms/index"
+  end
+
   def follow_page
     @followers = current_user.followers     # TODO observer/socket or how we will implement the buy button/chat app
     @following = current_user.following
@@ -55,6 +69,11 @@ class UsersController < ApplicationController
 
   private
     def check_permissions
-      redirect_to posts_path and return if current_user.is_normal? && params[:action] != "follow_page"
+      redirect_to posts_path and return if current_user.is_normal? && (params[:action] != "follow_page" && params[:action] != "show")
+    end
+
+    def get_name(user1, user2)
+      users = [user1, user2].sort
+      "private_#{users[0].id}_#{users[1].id}"
     end
 end
