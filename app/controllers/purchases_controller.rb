@@ -49,7 +49,6 @@ class PurchasesController < ApplicationController
 
       county = Location.where(short: params[:county]).first.name
 
-
       process_payment(params[:post_id], card_number, cvv, card_year, card_month, params[:card_first_name], params[:card_last_name], params[:full_name], params[:address],
         params[:county], params[:city], params[:zip_code])
     end
@@ -121,7 +120,7 @@ class PurchasesController < ApplicationController
             AsyncSendSmsToUser.perform_async(phone, message)
             
             post.save!
-            redirect_to posts_path, alert: "Your payment was authorized. Your money will leave your account once the seller will ship the bicycle, he has 2 days to do it."
+            redirect_to posts_path, alert: "Your payment was authorized successfully. Your money will leave your account once the seller will ship the bicycle, he has 2 days to do it."
           else
             redirect_back(fallback_location: checkout_path(post_id: post_id), alert: "Error - #{response.message}.")
             return
@@ -131,7 +130,7 @@ class PurchasesController < ApplicationController
           return
         end
       else
-        redirect_back(fallback_location: posts_path, alert: "Error - Sorry, this bike was just bought by someone else.")
+        redirect_to posts_path, alert: "Error - Sorry, this bike was just bought by someone else."
         return
       end
     end
