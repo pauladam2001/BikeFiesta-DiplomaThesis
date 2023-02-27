@@ -112,7 +112,7 @@ module Marketing
   end
 
   # Called daily
-  # Send notification to buyer if he bought the bike more than 3 days ago
+  # Send notification to buyer if he bought the bike more than 5 days ago
   def self.send_notification_to_buyers
     Post.where(leave_review_notification_sent: false).where("shipped_date <= ?", 5.days.ago).find_each do |post|
       Notification.create(notification_type: "review", post_id: post.id, notified_id: post.user_id, message: "Leave a review for ")
@@ -157,6 +157,7 @@ module Marketing
   # Called hourly
   # It goes thorugh the posts that are sold but not shipped and checks if they were bought more than 3 days ago. If yes
   # and the seller did not update the proof, then we cancel the purchase
+  # PayPal recommends to capture payments within 3 days of the original authorization
   def self.check_posts_to_be_shipped
     ActiveMerchant::Billing::Base.mode = :test
 
