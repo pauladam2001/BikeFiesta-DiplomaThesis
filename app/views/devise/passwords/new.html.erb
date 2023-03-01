@@ -4,7 +4,7 @@
   <div class="password-send-form">
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
       <div>
-        <%= f.email_field :email, autocomplete: "email", placeholder: "Email", :class => 'input' %>
+        <%= f.email_field :email, id: "reset-email", autocomplete: "email", placeholder: "Email", :class => 'input' %>
       </div>
       <%= f.submit "Send me reset password instructions", :class => 'button', :style => "margin-top: 0.3rem; font-size: 10px" %>
     <% end %>

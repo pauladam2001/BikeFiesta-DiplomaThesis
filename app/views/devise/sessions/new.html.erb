@@ -19,8 +19,8 @@
             <%= f.text_field :first_name, autofocus: true, autocomplete: "First Name", placeholder: "First Name", :class => 'input' %>
             <%= f.text_field :last_name, autocomplete: "Last Name", placeholder: "Last Name", :class => 'input' %>
             <%= f.telephone_field :phone, autocomplete: "Phone Number", placeholder: "Phone Number (+40xxx-xxx-xxx)", :class => 'input' %>
-            <%= f.email_field :email, autocomplete: "email", placeholder: "Email", :class => 'input' %>
-            <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password", :class => 'input' %>
+            <%= f.email_field :email, id: "registration-email", autocomplete: "email", placeholder: "Email", :class => 'input' %>
+            <%= f.password_field :password, id: "registration-password", autocomplete: "new-password", placeholder: "Password", :class => 'input' %>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password Confirmation", :class => 'input' %>
             <label for="image" class="drop-container">
               <span class="drop-title">Drop your ID Card here</span>
@@ -35,12 +35,15 @@
         <div class="login-form">
           <h1 class="titles">Log in</h1>
           <div class="social-container">
-            <%= link_to image_tag("google-icon.png", border: 0), omniauth_authorize_path(resource_name, 'google_oauth2'), method: :post %>
+            <%#= link_to image_tag("google-icon.png", border: 0), omniauth_authorize_path(resource_name, 'google_oauth2'), method: :post, data: { turbo: "false" } %>
+            <%= form_for "Login", url: omniauth_authorize_path(resource_name, 'google_oauth2'), method: :post, data: {turbo: "false"} do |f| %>
+              <%= image_submit_tag("google-icon.png", border: 0) %>
+            <% end %>  
           </div>
           <span class="span">or use your account</span>
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", :class => 'input' %>
-            <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", :class => 'input' %>
+            <%= f.email_field :email, id: "sign-in-email", autofocus: true, autocomplete: "email", placeholder: "Email", :class => 'input' %>
+            <%= f.password_field :password, id: "sign-in-password", autocomplete: "current-password", placeholder: "Password", :class => 'input' %>
             <% if devise_mapping.rememberable? %>
               <div class="">
                 <%= f.check_box :remember_me %>

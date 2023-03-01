@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 
-<style>                                     <%#TODO put this in css or something%>
+<style>
   <%= ".msg-#{current_user&.id}" %> {
-  background-color: #007bff !important;
-  padding: 10px;
+    background-color: var(--beige) !important;
   }
   <%= ".cont-#{current_user&.id}" %> {
-  display: flex;
-  justify-content: flex-end
+    display: flex;
+    justify-content: flex-end;
   }
 </style>
 

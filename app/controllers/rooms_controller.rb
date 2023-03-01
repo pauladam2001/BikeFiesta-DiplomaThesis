@@ -1,4 +1,7 @@
 class RoomsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!
+  
   def index
     @current_user = current_user
     @rooms = Room.public_rooms
@@ -17,7 +20,7 @@ class RoomsController < ApplicationController
     @users = User.where.not(id: @current_user.id)
     @room = Room.new
     @message = Message.new
-    @messages = @single_room.messages
+    @messages = @single_room.messages.order(created_at: :asc)
 
     render "index"
   end

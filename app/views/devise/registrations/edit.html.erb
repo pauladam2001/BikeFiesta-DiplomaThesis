@@ -24,7 +24,7 @@
       <%= f.telephone_field :phone, autocomplete: "Phone Number", placeholder: "Phone Number", :class => 'input-edit' %>
       </br>
       <span class="edit-span">Paypal Email</span>
-      <%= f.email_field :paypal_email, autocomplete: "PayPal Email", placeholder: "PayPal Email", :class => 'input-edit', :style => "margin-left: 0.5rem" %>
+      <%= f.email_field :paypal_email, id: "paypal-email", autocomplete: "PayPal Email", placeholder: "PayPal Email", :class => 'input-edit', :style => "margin-left: 0.5rem" %>
       </br>
     </div>
   </div>
@@ -34,7 +34,7 @@
     </div>
     <div class="security-inputs">
       <span class="edit-span">Email</span>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", :class => "input-edit", :style => "margin-left: 9rem" %>
+      <%= f.email_field :email, id: "edit-email", autofocus: true, autocomplete: "email", placeholder: "Email", :class => "input-edit", :style => "margin-left: 9rem" %>
       <br/>
       <span class="edit-span">New Password</span>
       <%= f.password_field :password, autocomplete: "new-password", placeholder: "Leave blank if you don't want to change it", :class => "input-edit", :style => "margin-left: 5.5rem" %>
