@@ -3,19 +3,36 @@
   max-width: 40%;
   border-radius: 10px;
   margin-bottom: 10px;
+  margin-left: 15px;
   padding: 15px;
   background-color: var(--light-red);
 }
 
+.messages-main-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .content-container {
+  margin-top: 20px;
   display: flex;
   flex-direction: column-reverse;
-  height: 35rem;
+  height: 86vh;
   overflow-y: scroll;
-  width: 98vw;
+  width: 79vw;
   padding-right: 20px;
   border: 1px solid black;
   margin-left: 5px;
+  overflow-x: hidden;
+}
+
+.rooms-container {
+  width: 20vw;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
 }
 
 .message-date-div {
@@ -39,7 +56,7 @@
 }
 
 .create-message-footer {
-  width: 100%;
+  width: 102%;
   height: 100px;
   display: flex;
   align-items: center;
@@ -49,17 +66,8 @@
 
 .room-name-div {
   position: absolute;
-  bottom: 30rem;
-  margin-left: 50rem;
-}
-
-.footer-chat {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  border-top: 2px solid #EEE;
-  background-color: red;
+  bottom: 28rem;
+  margin-left: 45rem;
 }
 
 .write-message {

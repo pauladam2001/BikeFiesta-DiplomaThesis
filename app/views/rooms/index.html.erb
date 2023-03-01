@@ -1,27 +1,32 @@
 <div class="messages-main-container">
-  <h4> Users </h4>
-  <%= turbo_stream_from "users" %>
-  <div id="users">
-    <%= render @users %>
-  </div>
-  <h4> Rooms </h4>
-  <%= turbo_stream_from "rooms" %>
-  <div id="rooms">
-    <%= render @rooms %>
-  </div>
+  <div class="flex-container">
+    <div class="rooms-container">
+      <h4> Users </h4>
+      <%= turbo_stream_from "users" %>
+      <div id="users">
+        <%= render @users %>
+      </div>
+      <h4> Rooms </h4>
+      <%= turbo_stream_from "rooms" %>
+      <div id="rooms">
+        <%= render @rooms %>
+      </div>
+      <%= render partial: "layouts/new_room_form" %>
+    </div>
+  <div>
 
-  <%= render partial: "layouts/new_room_form" %>
-
-<%= session[:current_user]%>
   <div class="content-container">
     <% if @single_room %>
       <%= render partial: 'layouts/new_message_form' %>
       <div id="messages">
+        <div style="margin-top: 5rem; margin-left: 45rem;">
+          <span>This is the beginning of the conversation</span>
+        </div>
         <%= render @messages, locals: { alert: "asdgsajhvcjsa" } %>
-      </div>                                                  <%# everything in this div is reversed because we have flex-direction: column-reverse in order to have be scrolled to the text box%>
+      </div>                                                  <%# everything in this div is reversed because we have flex-direction: column-reverse in order to be scrolled to the text box%>
       <%= turbo_stream_from @single_room %>
       <div class="room-name-div">
-        <h4 class="text-center"><%= @user&.name || @single_room.name %></h4>
+        <h4 class="text-center" style="margin-left: 6rem;"><%= @user&.name || @single_room.name %></h4>
       </div>
     <% end %>
   </div>
