@@ -1,7 +1,10 @@
 class MessagesController < ApplicationController
   def create
     @current_user = current_user
-    @message = @current_user.messages.create(content: msg_params[:content], room_id: params[:room_id])
+
+    crypt = ActiveSupport::MessageEncryptor.new(Base64.decode64(ENV['KEY']))
+    encrypted_content = crypt.encrypt_and_sign(msg_params[:content])
+    @message = @current_user.messages.create(content: encrypted_content, room_id: params[:room_id])
   end
 
   private
