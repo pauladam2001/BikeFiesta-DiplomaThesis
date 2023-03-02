@@ -16,10 +16,10 @@
 <%= render 'users/following' %>
 
 <script type="text/javascript">
-  const followers_div = document.getElementById('followers-div');
-  const following_div = document.getElementById('following-div');
-  const radio_1 = document.getElementById('radio-1');
-  const radio_2 = document.getElementById('radio-2');
+  var followers_div = document.getElementById('followers-div');
+  var following_div = document.getElementById('following-div');
+  var radio_1 = document.getElementById('radio-1');
+  var radio_2 = document.getElementById('radio-2');
   
   radio_1.addEventListener('click', () => {
     followers_div.classList.remove("hidden");
