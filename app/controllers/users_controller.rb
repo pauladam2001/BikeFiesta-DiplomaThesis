@@ -15,6 +15,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @current_user = current_user
+    if @current_user.is_normal? && @user.is_normal?
+      redirect_to posts_path, alert: "Error - You can not chat with other users."
+      return
+    end
     @rooms = Room.public_rooms
     @users = User.where.not(id: @current_user.id)
     @room = Room.new
