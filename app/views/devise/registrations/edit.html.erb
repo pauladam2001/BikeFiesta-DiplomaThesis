@@ -1,6 +1,6 @@
 <div class="edit-title">
   <div>
-  <%= link_to image_tag("back-arrow.png", border: 0, width: '50px'), :back %>
+  <%= link_to image_tag("back-arrow.png", border: 0, width: '50px'), :back, data: { turbo: "false" } %>
   </div>
   <div class="title-div">
     <h1>Hi, <%= current_user.name %>! 

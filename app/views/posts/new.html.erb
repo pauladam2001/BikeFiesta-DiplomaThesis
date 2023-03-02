@@ -66,7 +66,7 @@
 
         <div class="">
           <div class="">
-            <%= link_to posts_path, class: "cancel-link" do %>
+            <%= link_to posts_path, class: "cancel-link", data: { turbo: "false" } do %>
               Cancel
             <% end %>
             <button type="submit" class="button">
@@ -99,9 +99,9 @@
 <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-  const createPostButton = document.getElementById('createPost');
-  let myDropzone = null;
-  let dropzoneDiv = document.getElementById("dropzone-form");
+  var createPostButton = document.getElementById('createPost');
+  var myDropzone = null;
+  var dropzoneDiv = document.getElementById("dropzone-form");
 
   if (myDropzone == null) {
     myDropzone = new Dropzone("div#dropzone-form", { uploadMutliple: true,

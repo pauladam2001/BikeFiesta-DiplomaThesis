@@ -60,7 +60,7 @@
               <% end %>
             </td>
             <td style="width: 20%;">
-              <%= purchase.seller.full_name %> - <%= purchase.buyer.full_name %> - <%= link_to purchase.post.name, post_path(purchase.post) %> - <%= number_to_currency(purchase.amount, precision: 2, :unit => '€') %>
+              <%= purchase.seller.full_name %> - <%= purchase.buyer.full_name %> - <%= link_to purchase.post.name, post_path(purchase.post), data: { turbo: "false" } %> - <%= number_to_currency(purchase.amount, precision: 2, :unit => '€') %>
             </td>
             <td style="width: 20%;">
               <%= purchase.shipping_details %>
@@ -97,7 +97,7 @@
         <tr>
       </tbody>
     </table>
-    <div class="pagination">
+    <div class="pagination" data-turbo="false">
       <%= will_paginate @purchases %>
     </div>
   </div>

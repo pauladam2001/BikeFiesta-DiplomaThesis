@@ -33,11 +33,11 @@
               <%= category.name %>
             </td>
             <td>
-              <%= link_to category_path(category), method: :delete, class: "links-class", data: {confirm: "Are you sure you want to delete this category?"} do %>
+              <%= link_to category_path(category), method: :delete, class: "links-class", data: {confirm: "Are you sure you want to delete this category?", turbo: "false"} do %>
                 Delete
               <% end %>
               •
-              <%= link_to edit_category_path(category), class: "links-class" do %>
+              <%= link_to edit_category_path(category), class: "links-class", data: { turbo: "false" } do %>
                 Edit
               <% end %>
             </td>
@@ -46,9 +46,9 @@
         <tr>
       </tbody>
     </table>
-    <div class="pagination">
+    <div class="pagination" data-turbo="false">
       <%= will_paginate @categories %>
     </div>
   </div>
-  <%= button_to "Add New Category", new_category_path, method: :get, :class => "button add-link" %>
+  <%= button_to "Add New Category", new_category_path, method: :get, :class => "button add-link", data: { turbo: "false" } %>
 </div>

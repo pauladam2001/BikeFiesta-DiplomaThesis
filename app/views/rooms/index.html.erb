@@ -6,7 +6,7 @@
       <div id="users" class="users-div">
         <%= render @users %>
       </div>
-      <div class="pagination"">
+      <div class="pagination" data-turbo="false">
         <%= will_paginate @users, param_name: 'users_page' %>
       </div>
       <h1 class="h1-title" style="margin-left: 2rem; margin-bottom: 2rem;">Rooms</h1>
@@ -14,7 +14,7 @@
       <div id="rooms" class="rooms-div">
         <%= render @rooms %>
       </div>
-      <div class="pagination">
+      <div class="pagination" data-turbo="false">
         <%= will_paginate @rooms, param_name: 'rooms_page' %>
       </div>
       <%= render partial: "layouts/new_room_form" %>

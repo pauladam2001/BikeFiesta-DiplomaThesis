@@ -22,7 +22,7 @@
 
       <div class="pt-5">
         <div class="edit-bottom-div">
-          <%= link_to component_groups_path, class: "cancel-link" do %>
+          <%= link_to component_groups_path, class: "cancel-link", data: { turbo: "false" } do %>
             Cancel
           <% end %>
           <button type="submit" class="button">

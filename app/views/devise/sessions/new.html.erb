@@ -27,7 +27,7 @@
               or
               <%= f.file_field :avatar, id: 'image', accept: 'image/*' %>
             </label>
-            <%= f.submit "Register", :class => 'button margin-top' %>
+            <%= f.submit "Register", :class => 'button margin-top', data: { turbo: "false" } %>
           <% end %>
         </div>
       </div>
@@ -51,9 +51,9 @@
               </div>
             <% end %>
             <div style="padding-top: 1rem;">
-              <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+              <%= link_to "Forgot your password?", new_password_path(resource_name), data: { turbo: "false" } %>
             </div>
-            <%= f.submit "Log in", :class => 'button margin-top' %>
+            <%= f.submit "Log in", :class => 'button margin-top', data: { turbo: "false" } %>
           <% end %>
         </div>
       </div>
@@ -75,10 +75,10 @@
   </div>
 </div>
 <script type="text/javascript">
-  const signUpButton = document.getElementById('signUp');
-  const signInButton = document.getElementById('signIn');
-  const container = document.getElementById('container');
-  const hiddenInput = document.getElementById('hiddenInput');
+  var signUpButton = document.getElementById('signUp');
+  var signInButton = document.getElementById('signIn');
+  var container = document.getElementById('container');
+  var hiddenInput = document.getElementById('hiddenInput');
   alert = "<%= alert %>";
 
   signUpButton.addEventListener('click', () => {

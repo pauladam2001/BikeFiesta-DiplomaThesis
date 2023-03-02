@@ -1,4 +1,4 @@
-<form id="filters-form" style="margin-top: 1.5rem; margin-left: 47rem; margin-bottom: 2rem;">
+<form id="filters-form" style="margin-top: 1.5rem; margin-left: 47rem; margin-bottom: 2rem;" data-turbo="false">
   <% if !my_posts %>
     <input type="button" class="button" onclick="openFiltersPopUp()" value="Filters"></input>
     <%= render "posts/filters_pop_up" %>
@@ -49,18 +49,18 @@
                 <% if post.user_id == current_user.id %>
                   <div style="margin-left: 10px;">
                     <% if post.sold == true && post.shipped == false && !post&.purchase&.proof&.attached?  %>
-                      <a class=""><%= link_to "Upload Proof", upload_proof_post_path(post), method: :get %></a>
+                      <a class=""><%= link_to "Upload Proof", upload_proof_post_path(post), method: :get, data: { turbo: "false" } %></a>
                     <% elsif !post&.purchase&.proof&.attached?  %>
                       <% if post.is_active == 1 %>
-                        <a class=""><%= link_to "Edit", edit_post_path(post) %></a>
+                        <a class=""><%= link_to "Edit", edit_post_path(post), data: { turbo: "false" } %></a>
                         • 
                       <% end %>
                       <% if post.is_active != -2 && post.is_active != -3 %>
-                        <a class=""><%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" } %></a>
+                        <a class=""><%= link_to "Delete", post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?", turbo: "false" } %></a>
                       <% end %>
                       <% if post.assets.count == 0 %>
                         •
-                        <a class=""><%= link_to "Upload", edit_post_path(post, upload: true) %></a>
+                        <a class=""><%= link_to "Upload", edit_post_path(post, upload: true), data: { turbo: "false" } %></a>
                       <% end %>
                     <% end %>
                   </div>
@@ -78,7 +78,7 @@
                   <p><span class="card-span-grid"><%= number_to_currency(post.price, precision: 2, :unit => '€') %></span></p>
                 <% end %>
                 <% if post.is_active == 1 %>
-                  <button class="button"><%= link_to "See Post", post_path(post) %></button>
+                  <button class="button"><%= link_to "See Post", post_path(post), data: { turbo: "false" } %></button>
                 <% end %>
               </div>
             </div>
@@ -90,7 +90,7 @@
     <p class="no-posts">No posts found.</p>
   <% end %>
 </div>
-<div class="pagination">
+<div class="pagination" data-turbo="false">
   <%= will_paginate grid_posts %>
 </div>
 

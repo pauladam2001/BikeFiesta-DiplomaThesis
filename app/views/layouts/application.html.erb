@@ -35,25 +35,25 @@
     <% if current_user.present? && current_user.is_normal? %>
       <div class="menu">
         <div class="">
-          <h6><%= link_to image_tag("logo.png", border: 0, width: '200px'), posts_path %></h6>
+          <h6><%= link_to image_tag("logo.png", border: 0, width: '200px'), posts_path, data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item menu-item-padding first-item">
-          <h6><%= link_to "Home", posts_path %></h6>
+          <h6><%= link_to "Home", posts_path, data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item menu-item-padding">
-          <h6><%= link_to "Follow Page", follow_page_path %></h6>
+          <h6><%= link_to "Follow Page", follow_page_path, data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item menu-item-padding">
-          <h6><%= link_to "My Posts", my_posts_path %></h6>
+          <h6><%= link_to "My Posts", my_posts_path, data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item menu-item-padding">
-          <h6><%= link_to "Bikes to Ship", bikes_to_ship_path %></h6>
+          <h6><%= link_to "Bikes to Ship", bikes_to_ship_path, data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item menu-item-padding">
-          <h6><%= link_to "Favorites", favorites_path %></h6>
+          <h6><%= link_to "Favorites", favorites_path, data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item">
-          <%= button_to "Post", new_post_path, method: :get, :class => "button" %>
+          <%= button_to "Post", new_post_path, method: :get, :class => "button", data: { turbo: "false" } %>
         </div>
         <div class="menu-item">
           <input type="checkbox" id="navtoggle" />
@@ -68,11 +68,11 @@
                   <% @notifications.each do |notification| %>
                     <div class="note">
                       <% if notification.notification_type == "review" %>
-                        <%= link_to new_review_path(post_id: notification.post_id, reviewer_id: notification.notified_id), class: "" do %>
+                        <%= link_to new_review_path(post_id: notification.post_id, reviewer_id: notification.notified_id), class: "", data: { turbo: "false" } do %>
                           <%= notification.message %><%= notification&.post&.user&.full_name %>.
                         <% end %>
                       <% elsif notification.notification_type == "paypal_edit" %>
-                        <%= link_to edit_user_registration_path, class: "" do %>
+                        <%= link_to edit_user_registration_path, class: "", data: { turbo: "false" } do %>
                           <%= notification.message %>.
                         <% end %>
                       <% else %>
@@ -92,17 +92,22 @@
         </div>
         <div class="menu-item menu-item-padding">
           <% if current_user.provider == "google_oauth2" %>
-            <h6><%= link_to image_tag(current_user.avatar_url, border: 0, width: '40px', class: "image-radius"), edit_user_registration_path %></h6>
+            <h6><%= link_to image_tag(current_user.avatar_url, border: 0, width: '40px', class: "image-radius"), edit_user_registration_path, data: { turbo: "false" } %></h6>
           <% else %>
             <% if current_user.avatar.attached? %>
-              <h6><%= link_to image_tag(current_user.avatar, border: 0, width: '80px', class: "image-radius"), edit_user_registration_path %></h6>
+              <h6><%= link_to image_tag(current_user.avatar, border: 0, width: '80px', class: "image-radius"), edit_user_registration_path, data: { turbo: "false" } %></h6>
             <% else %>
-              <h6><%= link_to image_tag("user-icon.png", border: 0, width: '40px'), edit_user_registration_path %></h6>
+              <h6><%= link_to image_tag("user-icon.png", border: 0, width: '40px'), edit_user_registration_path, data: { turbo: "false" } %></h6>
             <% end %>
           <% end %>
         </div>
         <div class="menu-item menu-item-padding">
-            <h6><%= link_to image_tag("logout-icon.png", border: 0, width: '35px'), destroy_user_session_path, data: {turbo: "false"}, method: :delete %></h6>
+            <h6>
+            <%#= link_to image_tag("logout-icon.png", border: 0, width: '35px'), destroy_user_session_path, data: {turbo: "false"}, method: :delete %>
+            <%= form_for "Logout", url: destroy_user_session_path, method: :delete, data: {turbo: "false"} do |f| %>
+              <%= image_submit_tag("logout-icon.png", border: 0, width: '35px') %>
+            <% end %>
+            </h6>
         </div>
       </div>
     <% elsif current_user.present? && current_user.is_admin? %>
@@ -110,23 +115,23 @@
       <div id="main-sidebar-div" class="main-sidebar-div">
         <div class="main-sidebar-div-2">
           <div class="logo-div">
-            <h1><%= link_to image_tag("logo.png", border: 0, width: '200px'), users_path %></h1>
+            <h1><%= link_to image_tag("logo.png", border: 0, width: '200px'), users_path, data: { turbo: "false" } %></h1>
           </div>
           <ul class="sidebar-ul">
             <li>
-              <a href=<%= users_path %> class="sidebar-a">
+              <a href=<%= users_path %> class="sidebar-a" data-turbo="false">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                 <span class="sidebar-title-span">Users</span>
               </a>
             </li>
             <li>
-              <a href=<%= reports_path %> class="sidebar-a">
+              <a href=<%= reports_path %> class="sidebar-a" data-turbo="false">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                 <span class="sidebar-title-span">Reports</span>
               </a>
             </li>
             <li>
-              <a href=<%= suggestions_path %> class="sidebar-a">
+              <a href=<%= suggestions_path %> class="sidebar-a" data-turbo="false">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                 <span class="sidebar-title-span">Suggestions</span>
               </a>
@@ -135,31 +140,31 @@
               <span class="sidebar-icon-span sub-btn dropdown-span" style="margin-left: 2rem">Categorization<%= image_tag("right-arrow.png", border: 0, width: '25px', :class => "dropdown dropdown-arrow") %></span>
               <div class="sub-menu">
                 <li>
-                  <a href=<%= brandnames_path %> class="sidebar-a">
+                  <a href=<%= brandnames_path %> class="sidebar-a" data-turbo="false">
                     <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                     <span class="sidebar-title-span">Brand Names</span>
                   </a>
                 </li>
                 <li>
-                  <a href=<%= colors_path %> class="sidebar-a">
+                  <a href=<%= colors_path %> class="sidebar-a" data-turbo="false">
                     <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                     <span class="sidebar-title-span">Colors</span>
                   </a>
                 </li>
                 <li>
-                  <a href=<%= categories_path %> class="sidebar-a">
+                  <a href=<%= categories_path %> class="sidebar-a" data-turbo="false">
                     <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                     <span class="sidebar-title-span">Categories</span>
                   </a>
                 </li>
                 <li>
-                  <a href=<%= materials_path %> class="sidebar-a">
+                  <a href=<%= materials_path %> class="sidebar-a" data-turbo="false">
                     <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                     <span class="sidebar-title-span">Materials</span>
                   </a>
                 </li>
                 <li>
-                  <a href=<%= component_groups_path %> class="sidebar-a">
+                  <a href=<%= component_groups_path %> class="sidebar-a" data-turbo="false">
                     <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                     <span class="sidebar-title-span">Components</span>
                   </a>
@@ -167,19 +172,19 @@
               </div>
             </div>
             <li>
-              <a href=<%= purchases_path %> class="sidebar-a">
+              <a href=<%= purchases_path %> class="sidebar-a" data-turbo="false">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                 <span class="sidebar-title-span">Purchases</span>
               </a>
             </li>
             <li>
-              <a href=<%= rooms_path %> class="sidebar-a">
+              <a href=<%= rooms_path %> class="sidebar-a" data-turbo="false">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                 <span class="sidebar-title-span">Messages</span>
               </a>
             </li>
             <li>
-              <a href="#" class="sidebar-a">
+              <a href="#" class="sidebar-a" data-turbo="false">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                 <span class="sidebar-title-span">Profit</span>
               </a>
@@ -187,11 +192,14 @@
           </ul>
           <div class="main-logout-div">
             <div>
-              <p class="logout-p-name">
+              <p class="logout-p-name" style="margin-left: 13px;">
                 <%= current_user.email %>
               </p>
               <p class="logout-p-path">
-                <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+                <%#= link_to "Log Out", destroy_user_session_path, id: "try", method: :delete, data: { turbo: "false" } %>
+                <%= form_for "Log Out", url: destroy_user_session_path, method: :delete, data: {turbo: "false"} do |f| %>
+                  <%= submit_tag 'Log Out', class: "button" %>
+                <% end %>
               </p>
             </div>
           </div>

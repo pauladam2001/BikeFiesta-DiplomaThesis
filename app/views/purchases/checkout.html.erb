@@ -78,8 +78,8 @@
     $.get(url, function(data) {
       $('#city-select option:gt(0)').remove();
       
-      for (let i = 0; i < data.length; i++) {
-        let option = $('<option></option>').attr(data[i]["nume"].replace(/\s/g, ''), data[i]["nume"].replace(/\s/g, '')).text(data[i]["nume"].replace(/\s/g, ''));
+      for (var i = 0; i < data.length; i++) {
+        var option = $('<option></option>').attr(data[i]["nume"].replace(/\s/g, ''), data[i]["nume"].replace(/\s/g, '')).text(data[i]["nume"].replace(/\s/g, ''));
         $("#city-select").append(option);
       }
     })

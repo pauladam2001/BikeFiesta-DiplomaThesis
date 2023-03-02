@@ -56,21 +56,21 @@
             <td>
               <% if user.id != current_user.id %>
                 <% if !user.archived %>
-                  <%= link_to archive_user_user_path(user), :method => :put, class: "links-class" do %>
+                  <%= link_to archive_user_user_path(user), :method => :put, class: "links-class", data: { turbo: "false" } do %>
                     Archive
                   <% end %>
                 <% else %>
-                  <%= link_to unarchive_user_user_path(user), :method => :put, class: "links-class" do %>
+                  <%= link_to unarchive_user_user_path(user), :method => :put, class: "links-class", data: { turbo: "false" } do %>
                     Unarchive
                   <% end %>
                 <% end %>
                 •
                 <% if user.is_normal? %>
-                  <%= link_to make_user_admin_user_path(user), :method => :put, class: "links-class" do %>
+                  <%= link_to make_user_admin_user_path(user), :method => :put, class: "links-class", data: { turbo: "false" } do %>
                     Make Admin
                   <% end %>
                 <% else %>
-                  <%= link_to remove_user_admin_user_path(user), :method => :put, class: "links-class" do %>
+                  <%= link_to remove_user_admin_user_path(user), :method => :put, class: "links-class", data: { turbo: "false" } do %>
                     Remove Admin
                   <% end %>
                 <% end %>
@@ -81,7 +81,7 @@
         <tr>
       </tbody>
     </table>
-    <div class="pagination">
+    <div class="pagination" data-turbo="false">
       <%= will_paginate @users %>
     </div>
   </div>

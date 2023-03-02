@@ -10,9 +10,9 @@
 <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-  const createPostButton = document.getElementById('createPost');
-  let myDropzone = null;
-  let dropzoneDiv = document.getElementById("dropzone-form-2");
+  var createPostButton = document.getElementById('createPost');
+  var myDropzone = null;
+  var dropzoneDiv = document.getElementById("dropzone-form-2");
 
   if (myDropzone == null) {
     myDropzone = new Dropzone("div#dropzone-form-2", { uploadMutliple: false,

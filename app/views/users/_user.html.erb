@@ -4,5 +4,5 @@
   <% elsif user.avatar.attached? %>
     <h6 style="margin-left: 12px;"><%= image_tag(user.avatar, border: 0, width: '80px', class: "image-radius") %></h6>
   <% end %>
-  <%= link_to user.name, user %> 
+  <%= link_to user.name, user, data: { turbo: "false" } %> 
 </div>

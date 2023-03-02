@@ -1,6 +1,6 @@
 <div class='page-div'>
   <div class="search_container">
-      <form>
+      <form data-turbo="false">
         <input class="search_input" type="text" placeholder="Search by Name..." name="name" value="<%= params[:name] %>">
       </form>
   </div>
@@ -10,13 +10,13 @@
       <div class="most-viewed-title <%= 'sale-padding' if title == "Sale" || title == "All" %>">
         <h1>
           <% if title == "Most Viewed" %>
-            <%= link_to title, most_viewed_posts_path %>
+            <%= link_to title, most_viewed_posts_path, data: { turbo: "false" } %>
           <% elsif title == "Sale" %>
-            <%= link_to title, on_sale_posts_path %>
+            <%= link_to title, on_sale_posts_path, data: { turbo: "false" } %>
           <% elsif title == "Following" %>
-            <%= link_to title, following_posts_path %>
+            <%= link_to title, following_posts_path, data: { turbo: "false" } %>
           <% else %>
-            <%= link_to title, all_posts_path %>
+            <%= link_to title, all_posts_path, data: { turbo: "false" } %>
           <% end %>
         </h1>
     </div>
@@ -72,7 +72,7 @@
                       <% else %>
                         <p><span class="card-span"><%= number_to_currency(post.price, precision: 2, :unit => '€') %></span></p>
                       <% end %>
-                      <button class="button"><%= link_to "See Post", post_path(post) %></button>
+                      <button class="button"><%= link_to "See Post", post_path(post), data: { turbo: "false" } %></button>
                     </div>
                   </div>
                 </div>

@@ -33,11 +33,11 @@
               <%= material.name %>
             </td>
             <td>
-              <%= link_to material_path(material), method: :delete, class: "links-class", data: {confirm: "Are you sure you want to delete this material?"} do %>
+              <%= link_to material_path(material), method: :delete, class: "links-class", data: {confirm: "Are you sure you want to delete this material?", turbo: "false"} do %>
                 Delete
               <% end %>
               •
-              <%= link_to edit_material_path(material), class: "links-class" do %>
+              <%= link_to edit_material_path(material), class: "links-class", data: { turbo: "false" } do %>
                 Edit
               <% end %>
             </td>
@@ -46,9 +46,9 @@
         <tr>
       </tbody>
     </table>
-    <div class="pagination">
+    <div class="pagination" data-turbo="false">
       <%= will_paginate @materials %>
     </div>
   </div>
-  <%= button_to "Add New Material", new_material_path, method: :get, :class => "button add-link" %>
+  <%= button_to "Add New Material", new_material_path, method: :get, :class => "button add-link", data: { turbo: "false" } %>
 </div>
