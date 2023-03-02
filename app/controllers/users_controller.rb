@@ -23,6 +23,9 @@ class UsersController < ApplicationController
     @single_room = Room.where(name: @room_name).first || Room.create_private_room([@user, @current_user], @room_name)
     @messages = @single_room.messages.order(created_at: :asc)
 
+    @users = @users.paginate(page: params[:users_page], per_page: 12)
+    @rooms = @rooms.paginate(page: params[:rooms_page], per_page: 28)
+
     render "rooms/index"
   end
 

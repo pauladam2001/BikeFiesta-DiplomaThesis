@@ -1,1 +1,8 @@
-<div> <%= link_to user.name, user %> </div>
+<div style="flex: 0 1 calc(33%);">
+  <% if user.provider == "google_oauth2" %>
+    <h6 style="margin-left: 12px;"><%= image_tag(user.avatar_url, border: 0, width: '40px', class: "image-radius") %></h6>
+  <% elsif user.avatar.attached? %>
+    <h6 style="margin-left: 12px;"><%= image_tag(user.avatar, border: 0, width: '80px', class: "image-radius") %></h6>
+  <% end %>
+  <%= link_to user.name, user %> 
+</div>
