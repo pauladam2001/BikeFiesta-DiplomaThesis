@@ -17,8 +17,7 @@
   margin-top: 2rem;
   display: flex;
   flex-direction: column-reverse;
-  /* height: 93vh; */
-  height: 650px;
+  height: 93vh;
   overflow-y: scroll;
   width: 65vw;
   padding-right: 20px;
@@ -87,9 +86,9 @@
 }
 
 .room-name-div {
-  position: absolute;
-  bottom: 28rem;
-  margin-left: 45rem;
+  margin-top: 1rem;
+  margin-left: 33rem;
+  margin-bottom: 0.5rem;
 }
 
 .write-message {
@@ -103,7 +102,7 @@
 .footer-chat-form {
   margin-top: 30px;
   margin-bottom: 30px;
-  margin-left: 15rem;
+  margin-left: 2rem;
 }
 
 .send-image {
