@@ -20,18 +20,21 @@ class UsersController < ApplicationController
       return
     end
     @rooms = Room.public_rooms
+    @rooms = @rooms.ordered
     if current_user.is_admin?
       @users = User.where.not(id: @current_user.id)
     else
       @users = User.where(role: "admin")
     end
+    @users = @users.ordered
     @room = Room.new
     @message = Message.new
     @room_name = get_name(@user, @current_user)
     @single_room = Room.where(name: @room_name).first || Room.create_private_room([@user, @current_user], @room_name)
 
-    @single_room.last_read_at = Time.now
-    @single_room.save
+    participant = Participant.find_or_create_by(user_id: current_user.id, room_id: @single_room.id)
+    participant.last_read_at = Time.now
+    participant.save
 
     @messages = @single_room.messages.order(created_at: :asc)
 

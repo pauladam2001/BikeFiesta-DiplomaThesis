@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   after_save :update_phone_number_and_name
+  scope :ordered, -> { joins(:messages).order('messages.created_at DESC').uniq }    # the users/rooms will always be shown starting with the one with the most current message
   after_create_commit { broadcast_append_to "users" }
   has_many :messages
 
