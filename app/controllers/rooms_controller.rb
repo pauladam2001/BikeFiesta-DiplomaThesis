@@ -5,13 +5,14 @@ class RoomsController < ApplicationController
   def index
     @current_user = current_user
     @rooms = Room.public_rooms
-    @rooms = @rooms.ordered
+    @no_message_rooms = @rooms.joins("LEFT OUTER JOIN messages ON messages.room_id = rooms.id").where('messages.id IS NULL').uniq
+    @rooms = @rooms.ordered + @no_message_rooms
     if current_user.is_admin?
       @users = User.where.not(id: @current_user.id)
     else
       @users = User.where(role: "admin")
     end
-    @users = @users.ordered
+    @users = @users.order(:full_name)
     @room = Room.new
 
     @users = @users.paginate(page: params[:users_page], per_page: 12)
@@ -31,9 +32,10 @@ class RoomsController < ApplicationController
     participant.save
 
     @rooms = Room.public_rooms
-    @rooms = @rooms.ordered
+    @no_message_rooms = @rooms.joins("LEFT OUTER JOIN messages ON messages.room_id = rooms.id").where('messages.id IS NULL').uniq
+    @rooms = @rooms.ordered + @no_message_rooms
     @users = User.where.not(id: @current_user.id)
-    @users = @users.ordered
+    @users = @users.order(:full_name)
     @room = Room.new
     @message = Message.new
     @messages = @single_room.messages.order(created_at: :asc)

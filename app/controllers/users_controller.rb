@@ -20,13 +20,14 @@ class UsersController < ApplicationController
       return
     end
     @rooms = Room.public_rooms
-    @rooms = @rooms.ordered
+    @no_message_rooms = @rooms.joins("LEFT OUTER JOIN messages ON messages.room_id = rooms.id").where('messages.id IS NULL').uniq
+    @rooms = @rooms.ordered + @no_message_rooms
     if current_user.is_admin?
       @users = User.where.not(id: @current_user.id)
     else
       @users = User.where(role: "admin")
     end
-    @users = @users.ordered
+    @users = @users.order(:full_name)
     @room = Room.new
     @message = Message.new
     @room_name = get_name(@user, @current_user)

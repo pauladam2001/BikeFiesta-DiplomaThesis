@@ -1,7 +1,7 @@
 class Room < ApplicationRecord
   validates_uniqueness_of :name
   scope :public_rooms, -> { where(is_private: false) }
-  scope :ordered, -> { joins(:messages).order('messages.created_at DESC').uniq }
+  scope :ordered, -> { joins(:messages).order('messages.created_at DESC').uniq }    # the rooms will always be shown starting with the one with the most current message (the users will be shown alphabetically)
   after_create_commit { broadcast_if_public }
   has_many :messages
   has_many :participants
