@@ -51,6 +51,11 @@ class PurchasesController < ApplicationController
 
       process_payment(params[:post_id], card_number, cvv, card_year, card_month, params[:card_first_name], params[:card_last_name], params[:full_name], params[:address],
         params[:county], params[:city], params[:zip_code])
+    else
+      if current_user.phone.nil?
+        redirect_back(fallback_location: posts_path, alert: "Error - Please introduce your Phone Number (see your Profile Page) before trying to buy a bicycle.")
+        return
+      end
     end
   end
 
