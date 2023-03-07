@@ -31,18 +31,19 @@
         <div style="display: flex;">
           <% if @user.provider == "google_oauth2" %>
             <span><%= image_tag(@user.avatar_url, border: 0, width: '40px', class: "image-radius") %></span>
-            <span class="user-name-span"><%= @user.name %> <%= @user.rating %></span>
+            <span class="user-name-span"><%= @user.name %></span>
           <% else %>
             <% if @user.avatar.attached? %>
               <span><%= image_tag(@user.avatar, border: 0, width: '80px', class: "image-radius") %></span>
-              <span class="user-name-span"><%= @user.name %> <%= @user.rating %></span>
+              <span class="user-name-span"><%= @user.name %></span>
             <% else %>
               <span><%= image_tag("user-icon.png", border: 0, width: '40px', style: "padding-top: 0rem;") %></span>
               <span class="user-name-span"><%= @user.name %></span>
             <% end %>
           <% end %>
         </div>
-        <span class="star-span">★</span><span class="rating-span"><%= @user.rating %> (<%= @user.reviews.count %> reviews)</span>
+        <span class="star-span">★</span><span class="rating-span" style="cursor: pointer;" onclick="openReviewsPopUp()"><%= @user.rating %> (<%= pluralize(@user.reviews.count, 'review') %>)</span>
+        <%= render "reviews/reviews_pop_up" %>
       </div>
       <div style="margin-top: 0.7rem; margin-left: 0.5rem;">
         <% if current_user.id != @user.id %>
@@ -106,6 +107,7 @@
 
 <script type="text/javascript">
   var report_pop_up = document.getElementById("report_pop_up");
+  var reviews_pop_up = document.getElementById("reviews_pop_up");
 
   function openReportPopUp() {
     report_pop_up.classList.remove("hidden");
@@ -113,5 +115,13 @@
 
   function closeReportPopUp() {
     report_pop_up.classList.add("hidden");
+  }
+
+  function openReviewsPopUp() {
+    reviews_pop_up.classList.remove("hidden");
+  }
+
+  function closeReviewsPopUp() {
+    reviews_pop_up.classList.add("hidden");
   }
 </script>

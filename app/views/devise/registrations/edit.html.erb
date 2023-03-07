@@ -46,7 +46,7 @@
       <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "We need your current password to confirm your changes", :class => "input-edit", :style => "margin-left: 4.5rem" %>
     </div>
     <div class="actions">
-      <%= f.submit "Update", :class => 'button update-button' %>
+      <%= f.submit "Update", :class => 'button update-button', data: { turbo: "false" } %>
     </div>
   </div>
 <% end %>

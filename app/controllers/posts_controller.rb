@@ -80,6 +80,8 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
       @user = @post.user
 
+      @reviews = Review.where(reviewed_id: @user.id).order(created_at: :desc).limit(50)
+
       if current_user.id != @post.user_id
         @post.views += 1
         @post.save
