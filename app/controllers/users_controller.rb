@@ -20,7 +20,11 @@ class UsersController < ApplicationController
       return
     end
     @rooms = Room.public_rooms
-    @users = User.where.not(id: @current_user.id)
+    if current_user.is_admin?
+      @users = User.where.not(id: @current_user.id)
+    else
+      @users = User.where(role: "admin")
+    end
     @room = Room.new
     @message = Message.new
     @room_name = get_name(@user, @current_user)
