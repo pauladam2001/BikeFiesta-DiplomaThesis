@@ -59,16 +59,24 @@
                 See Post
               <% end %>
               <% if report.post.is_active != -1 %>
+                <br/>
                 •
+                <br/>
                 <%= link_to ban_post_path(report.post_id), method: :put, class: "links-class", data: { turbo: "false" } do %>
                   Ban Post
                 <% end %>
               <% end %>
-              <% if ! report.solved %>
+              <% if !report.solved %>
+                <br/>
                 •
+                <br/>
                 <%= link_to solve_report_path(report), class: "links-class", method: :put, data: { confirm: "Are you sure you want to mark this report as solved?", turbo: "false" }  do %>
                   Mark as Solved
                 <% end %>
+                <br/>
+                •
+                <br/>
+                <%= link_to "Chat", "/users/#{report.user_id}", data: { turbo: "false" } %>
               <% end %>
             </td>
           </tr>
