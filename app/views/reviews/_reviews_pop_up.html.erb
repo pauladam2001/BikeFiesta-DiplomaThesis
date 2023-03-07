@@ -1,18 +1,20 @@
-<div id="reviews_pop_up" class="hidden">
+<div id="reviews_pop_up" class="">
   <div class="popup-wrapper" style="margin-top: 2rem;">
     <div class="reviews-div">
       <div class="reviews-popup-title">
-        <span>Last 50 Reviews</span>
-        <a onclick="closeReviewsPopUp()" style="cursor: pointer;">Cancel</a>
+        <span style="font-size: 25px; font-weight: 600; margin-left: 19rem;">Last 50 Reviews</span>
+        <a onclick="closeReviewsPopUp()" style="cursor: pointer; float: right; padding-right: 10px;">Cancel</a>
       </div>
       <% @reviews.each do |review| %>
         <div class="review-box">
           <div class="review-header">
-            <%= review.grade %>
-            <%= review.created_at.strftime("%d/%m/%y") %>
+          <% for var in 1..review.grade do %>
+            <span class="star-span" style="margin-left: 0; padding-right: 0;">★</span>
+          <% end %>
+            <span style="float: right;"><%= review.created_at.strftime("%d/%m/%y") %></span>
           </div>
           <div class="review-reviewer">
-            <%= review.reviewer.full_name %>
+            <span style="font-weight: 600;"><%= review.reviewer.full_name %></span>
           </div>
           <div class="review-message">
             <%= review.message %>
