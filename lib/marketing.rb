@@ -243,4 +243,17 @@ module Marketing
       end
     end
   end
+
+  # Called hourly
+  # It goes through the private chats and checks if the last message of the chat is sent by the admin. If yes, then it
+  # create a notification for the normal user in order for him to see that the admin responded (this happens 1 time only).
+  def self.send_chat_notification_to_users
+    Room.where(is_private: true).find_each do |room|
+      binding.pry
+      last_message = room.messages.order(created_at: :asc).last
+      if last_message.present? && last_message.user.is_admin? && last_message.created_at <= 1.hour.ago && last_message.created_at >= 2.hours.ago
+        Notification.create(notification_type: "admin_responded", notified_id: room.participants.where.not(user_id: last_message.user_id).first.user_id, message: "An admin responded to your message")
+      end
+    end
+  end
 end
