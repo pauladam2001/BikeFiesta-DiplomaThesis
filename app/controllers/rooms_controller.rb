@@ -5,7 +5,11 @@ class RoomsController < ApplicationController
   def index
     @current_user = current_user
     @rooms = Room.public_rooms
-    @users = User.where.not(id: @current_user.id)
+    if current_user.is_admin?
+      @users = User.where.not(id: @current_user.id)
+    else
+      @users = User.where(role: "admin")
+    end
     @room = Room.new
 
     @users = @users.paginate(page: params[:users_page], per_page: 12)
@@ -19,6 +23,10 @@ class RoomsController < ApplicationController
   def show
     @current_user = current_user
     @single_room = Room.find(params[:id])
+
+    @single_room.last_read_at = Time.now
+    @single_room.save
+    
     @rooms = Room.public_rooms
     @users = User.where.not(id: @current_user.id)
     @room = Room.new

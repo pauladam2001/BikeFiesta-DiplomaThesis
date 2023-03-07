@@ -25,6 +25,10 @@ class UsersController < ApplicationController
     @message = Message.new
     @room_name = get_name(@user, @current_user)
     @single_room = Room.where(name: @room_name).first || Room.create_private_room([@user, @current_user], @room_name)
+
+    @single_room.last_read_at = Time.now
+    @single_room.save
+
     @messages = @single_room.messages.order(created_at: :asc)
 
     @users = @users.paginate(page: params[:users_page], per_page: 12)
@@ -34,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def follow_page
-    @followers = current_user.followers     # TODO socket?
+    @followers = current_user.followers
     @following = current_user.following
 
     if params[:name].present?

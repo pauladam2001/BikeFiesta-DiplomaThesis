@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'new_messages/index'
   get 'issues/index'
   root 'home#index'
 
@@ -80,7 +81,9 @@ Rails.application.routes.draw do
   get "/checkout", to: "purchases#checkout"
   post "/checkout", to: "purchases#checkout"
 
-  get "/issues", to: "issues#indedx"
+  get "/issues", to: "issues#index"
+  
+  get "/new_messages", to: "new_messages#index"
 
   get '*path' => redirect('/posts')
 end

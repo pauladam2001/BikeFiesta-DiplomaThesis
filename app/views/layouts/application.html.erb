@@ -102,6 +102,9 @@
           <% end %>
         </div>
         <div class="menu-item menu-item-padding">
+          <h6><%= link_to "Support", rooms_path, data: { turbo: "false" } %></h6>
+        </div>
+        <div class="menu-item menu-item-padding">
             <h6>
             <%#= link_to image_tag("logout-icon.png", border: 0, width: '35px'), destroy_user_session_path, data: {turbo: "false"}, method: :delete %>
             <%= form_for "Logout", url: destroy_user_session_path, method: :delete, data: {turbo: "false"} do |f| %>
@@ -187,6 +190,10 @@
               <a href=<%= rooms_path %> class="sidebar-a" data-turbo="false">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                 <span class="sidebar-title-span">Messages</span>
+              </a>
+              <a href=<%= new_messages_index_path %> class="sidebar-a" data-turbo="false">
+                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-title-span">New Messages</span>
               </a>
             </li>
             <li>
