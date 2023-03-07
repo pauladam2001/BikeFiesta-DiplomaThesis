@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'issues/index'
   root 'home#index'
 
   devise_for :users, controllers: {
@@ -78,6 +79,8 @@ Rails.application.routes.draw do
 
   get "/checkout", to: "purchases#checkout"
   post "/checkout", to: "purchases#checkout"
+
+  get "/issues", to: "issues#indedx"
 
   get '*path' => redirect('/posts')
 end
