@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_09_100724) do
+ActiveRecord::Schema.define(version: 2023_03_09_112649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -196,13 +196,6 @@ ActiveRecord::Schema.define(version: 2023_03_09_100724) do
     t.boolean "solved", default: false
   end
 
-  create_table "revenues", force: :cascade do |t|
-    t.float "amount"
-    t.integer "post_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "reviews", force: :cascade do |t|
     t.integer "reviewer_id"
     t.integer "reviewed_id"
@@ -232,6 +225,12 @@ ActiveRecord::Schema.define(version: 2023_03_09_100724) do
     t.integer "total_transactions"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "period"
+    t.integer "validating_posts"
+    t.integer "banned_posts"
+    t.integer "active_posts"
+    t.integer "sold_not_shipped_posts"
+    t.integer "sold_shipped_posts"
   end
 
   create_table "suggestions", force: :cascade do |t|
