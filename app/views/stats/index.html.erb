@@ -25,14 +25,26 @@
       <table class="total-stats-table">
         <thead style="background-color: #F9FAFB;">
           <tr>
-            <th scope="col" class="title-cell">
+            <th scope="col" class="">
               Total Revenue
             </th>
-            <th scope="col" class="title-cell">
+            <th scope="col" class="-">
               Total Spent
             </th>
-            <th scope="col" class="title-cell">
+            <th scope="col" class="">
               Total Profit
+            </th>
+            <th scope="col" class="">
+              ROI
+            </th>
+            <th scope="col" class="">
+              Total Posts
+            </th>
+            <th scope="col" class="">
+              Total Views
+            </th>
+            <th scope="col" class="">
+              Total Tansactions
             </th>
           </tr>
         </thead>
@@ -46,6 +58,18 @@
             </td>
             <td class="normal-cell">
               <%= number_to_currency(@total_stats[:total_profit], precision: 2, :unit => '€') %>
+            </td>
+            <td class="normal-cell">
+              <%= number_to_percentage(@total_stats[:roi], precision: 2) %>
+            </td>
+            <td class="normal-cell">
+              <%= @total_stats[:total_posts] %>
+            </td>
+            <td class="normal-cell">
+              <%= @total_stats[:total_views] %>
+            </td>
+            <td class="normal-cell">
+              <%= @total_stats[:total_transactions] %>
             </td>
           </tr>
         </tbody>
@@ -64,7 +88,7 @@
   <#% end %>-->
 
   <% if @start_date.present? && @end_date.present? %>
-    <div id="chart-container" style="height: 600px"></div>
+    <div id="chart-container" style="height: 450px"></div>
   <% end %>
 
   <div class="tbl-header">
@@ -72,8 +96,18 @@
       <thead>
         <tr>
           <th>Date</th>
-          <th>Description</th>
-          <th>Amount</th>
+          <th>Revenue</th>
+          <th>Cost</th>
+          <th>Profit</th>
+          <th>ROI</th>
+          <th>Posts</th>
+          <th>Views</th>
+          <th>Transactions</th>
+          <th>Validating</th>
+          <th>Active</th>
+          <th>Banned</th>
+          <th>Sold and Not Shipped</th>
+          <th>Sold and Shipped</th>
         </tr>
       </thead>
     </table>
@@ -87,6 +121,50 @@
               Please filter to specific dates.
             </td>
           </tr>
+        <% else %>
+          <% @stats.each do |stat| %>
+            <tr class="<%= cycle("bg-white", "bg-gray") %>">
+              <td>
+                <%= stat.end_date.strftime("%d/%m/%y") %>
+              </td>
+              <td>
+                <%= number_to_currency(stat.total_revenue, precision: 2, :unit => '€') %>
+              </td>
+              <td>
+                <%= number_to_currency(stat.total_spent, precision: 2, :unit => '€') %>
+              </td>
+              <td>
+                <%= number_to_currency(stat.total_profit, precision: 2, :unit => '€') %>
+              </td>
+              <td>
+                <%= number_to_percentage(stat.roi, precision: 2) %>
+              </td>
+              <td>
+                <%= stat.total_posts %>
+              </td>
+              <td>
+                <%= stat.total_views %>
+              </td>
+              <td>
+                <%= stat.total_transactions %>
+              </td>
+              <td>
+                <%= stat.validating_posts %>
+              </td>
+              <td>
+                <%= stat.banned_posts %>
+              </td>
+              <td>
+                <%= stat.active_posts %>
+              </td>
+              <td>
+                <%= stat.sold_not_shipped_posts %>
+              </td>
+              <td>
+                <%= stat.sold_shipped_posts %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
         <tr>
       </tbody>
@@ -100,7 +178,7 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script src="https://code.highcharts.com/themes/high-contrast-light.js"></script>
 
-<script>
+<script type="text/javascript">
   var days = <%= @days.to_json.html_safe %>;
   var chart_data = <%= @line_chart_data.to_json.html_safe %>;
 
@@ -125,6 +203,10 @@
     {
       name: 'Profit',
       data: chart_data[2]["data"]
+    },
+    {
+      name: 'ROI',
+      data: chart_data[3]["data"]
     }
     ],
 
@@ -149,6 +231,13 @@
       }, {
         point: 'min-Profit',
         text: 'Min Profit',
+        backgroundColor: 'white'
+      }, {
+        point: 'max-ROI',
+        text: 'Max ROI',
+      }, {
+        point: 'min-ROI',
+        text: 'Min ROI',
         backgroundColor: 'white'
       }]
     }]

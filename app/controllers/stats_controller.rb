@@ -50,7 +50,8 @@ class StatsController < ApplicationController
     @line_chart_data = [
       {name: "Revenue", data: @stats.pluck(:total_revenue)},
       {name: "Cost", data: @stats.pluck(:total_spent)},
-      {name: "Profit", data: @stats.pluck(:total_profit)}
+      {name: "Profit", data: @stats.pluck(:total_profit)},
+      {name: "ROI", data: @stats.pluck(:roi)}
     ]
     @line_chart_data.each do |row|
       max_pos = row[:data].each_with_index.max[1]
