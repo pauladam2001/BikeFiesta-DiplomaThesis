@@ -1,2 +1,91 @@
-<h1>Stats#index</h1>
-<p>Find me in app/views/stats/index.html.erb</p>
+<div class="main-page-div">
+  <h1 class="h1-title">Costs</h1>
+  <div class="filter-first-div">
+    <div class="filter-second-div">
+      <form>
+        <div class="filter-option-div">
+          <span class="filter-span">Filter by Start Date</span>
+          <br/>
+          <input type="date" name="start_date" value="<%= params[:start_date] %>" class="filter-input">
+        </div>
+        <div class="filter-option-div">
+          <span class="filter-span">Filter by End Date</span>
+          <br/>
+          <input type="date" name="end_date" value="<%= params[:end_date] %>" class="filter-input">
+        </div>
+        <div style="float: left;">
+          <input type="submit" name="submitButton" class="filter-submit" value="Search" data-turbo="false"/>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="total-stats-main-div">
+    <div class="total-stats-second-div">
+      <table class="total-stats-table">
+        <thead style="background-color: #F9FAFB;">
+          <tr>
+            <th scope="col" class="title-cell">
+              Total Revenue
+            </th>
+            <th scope="col" class="title-cell">
+              Total Spent
+            </th>
+            <th scope="col" class="title-cell">
+              Total Profit
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background-color: #ffffff;">
+            <td class="normal-cell">
+              <%= number_to_currency(@total_stats[:total_revenue], precision: 2, :unit => '€') %>
+            </td>
+            <td class="normal-cell">
+              <%= number_to_currency(@total_stats[:total_spent], precision: 2, :unit => '€') %>
+            </td>
+            <td class="normal-cell">
+              <%= number_to_currency(@total_stats[:total_profit], precision: 2, :unit => '€') %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <% if @start_date.present? && @end_date.present? %>
+    <div class="chart-main-div">
+      <div class="chart-second-div">
+        <div style="margin-bottom: 1rem;">Financial Metrics by Day</div>
+        <br/>
+        <%= line_chart @line_chart_data %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <% if @start_date.nil? || @end_date.nil? %>
+          <tr class="<%= cycle("bg-white", "bg-gray-50") %>">
+            <td>
+              Please filter to specific dates.
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "@hotwired/turbo-rails"
 import "controllers"
+import "chartkick/chart.js"
 
 require("jquery")
 

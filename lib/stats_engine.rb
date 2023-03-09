@@ -27,6 +27,7 @@ class StatsEngine
   end
 
   # Called hourly, used when date filters are not present on the page
+  # Not used
   def self.run_total
     Time.zone = "UTC"
     

@@ -3,6 +3,8 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, :check_permissions
 
   def index
+    require 'will_paginate/array'
+    
     @current_user = current_user
     @rooms = Room.public_rooms
     @no_message_rooms = @rooms.joins("LEFT OUTER JOIN messages ON messages.room_id = rooms.id").where('messages.id IS NULL').uniq
