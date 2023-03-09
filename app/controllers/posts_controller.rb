@@ -133,9 +133,15 @@ class PostsController < ApplicationController
   end
 
   def bikes_to_ship
-    @bikes_to_ship = Post.where(user_id: current_user.id, sold: true, shipped: false)
+    @bikes_to_ship = Post.where(user_id: current_user.id, sold: true, shipped: false)   # or is_active: -2
 
     @bikes_to_ship = @bikes_to_ship.paginate(page: params[:page], per_page: 16)
+  end
+
+  def bought_bikes
+    @bought_bikes = Post.where(buyer_id: current_user.id, sold: true, shipped: true)    # or is_active: -3
+
+    @bought_bikes = @bought_bikes.paginate(page: params[:page], per_page: 16)
   end
 
   def most_viewed_posts

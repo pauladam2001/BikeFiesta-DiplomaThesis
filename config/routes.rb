@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   end
 
   get "/my_posts", to: "posts#my_posts"
-  get "bikes_to_ship", to: "posts#bikes_to_ship"
+  get "/bikes_to_ship", to: "posts#bikes_to_ship"
+  get "/bought_bikes", to: "posts#bought_bikes"
   get "/most_viewed_posts", to: "posts#most_viewed_posts"
   get "/on_sale_posts", to: "posts#on_sale_posts"
   get "/following_posts", to: "posts#following_posts"
