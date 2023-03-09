@@ -51,6 +51,11 @@ gem 'rails-pg-extras'   # for deadlock debug
 gem 'turbo-rails'       # for chat
 # gem 'stimulus-rails'    # for chat (bundle exec rails webpacker:install:stimulus)
 
+gem 'caxlsx'
+gem 'caxlsx_rails'
+
+gem 'chartkick'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
