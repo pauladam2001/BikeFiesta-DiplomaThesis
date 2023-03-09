@@ -91,7 +91,6 @@ GEM
     caxlsx_rails (0.6.3)
       actionpack (>= 3.1)
       caxlsx (>= 3.0)
-    chartkick (5.0.1)
     cloudinary (1.25.0)
       aws_cf_signer
       rest-client (>= 2.0.0)
@@ -357,7 +356,6 @@ DEPENDENCIES
   capybara (>= 3.26)
   caxlsx
   caxlsx_rails
-  chartkick
   cloudinary
   devise
   httparty
