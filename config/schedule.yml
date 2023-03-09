@@ -51,3 +51,15 @@ send_chat_notification_to_users_job:
   class: "CronJobSendChatNotificationToUsers"
   # queue: cron_jobs
   # status: 'disabled'
+
+stats_engine_run_daily_job:
+  cron: "every 30 minutes"
+  class: "CronJobStatsEngineRunDaily"
+  # queue: cron_jobs
+  # status: 'disabled'
+
+stats_engine_run_total_job:
+  cron: "every hour"
+  class: "CronJobStatsEngineRunTotal"
+  # queue: cron_jobs
+  # status: 'disabled'
