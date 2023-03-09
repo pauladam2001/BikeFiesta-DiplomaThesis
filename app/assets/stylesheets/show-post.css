@@ -59,6 +59,10 @@
   font-size: 35px;
 }
 
+.views-span {
+  margin-left: 7.5rem;
+}
+
 .sale-price-div {
   margin-left: 2.5rem;
   font-size: 35px;
@@ -97,4 +101,10 @@
 .right-buttons-remove {
   display: flex;
   margin-left: 8rem;
+}
+
+.favorites-div {
+  margin-left: 23rem;
+  margin-top: 2rem;
+  font-size: 18px;
 }

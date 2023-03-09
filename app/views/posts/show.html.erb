@@ -66,6 +66,7 @@
         <% else %>
           <p><span class="price-span"><%= number_to_currency(@post.price, precision: 2, :unit => '€') %></span></p>
         <% end %>
+        <span class="views-span"><%= @post.views %> views</span>
       </div>
       <div class="description-div">
         <span style="font-size: 28px;">Description</span>
@@ -101,6 +102,9 @@
           <%= render "reports/report_pop_up" %>
         </form>
       </div>
+    </div>
+    <div class="favorites-div">
+      <span>This bike was added to Favorites by <%= @post.favorites.count %> users.</span>
     </div>
   </div>
 </div>
