@@ -54,6 +54,8 @@ gem 'turbo-rails'       # for chat
 gem 'caxlsx'
 gem 'caxlsx_rails'
 
+# gem 'chartkick'   # we're using highcharts
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

@@ -53,14 +53,18 @@
     </div>
   </div>
 
-  <% if @start_date.present? && @end_date.present? %>
+  <!--<#% if @start_date.present? && @end_date.present? %>
     <div class="chart-main-div">
       <div class="chart-second-div">
-        <div style="margin-bottom: 1rem;">Financial Metrics by Day</div>
+        <div style="margin-bottom: 1rem;">Financial Metrics by Day</div>    # this was for chartkick
         <br/>
-        <%= line_chart @line_chart_data %>
+        <%#= line_chart @line_chart_data %>
       </div>
     </div>
+  <#% end %>-->
+
+  <% if @start_date.present? && @end_date.present? %>
+    <div id="chart-container" style="height: 600px"></div>
   <% end %>
 
   <div class="tbl-header">
@@ -89,3 +93,64 @@
     </table>
   </div>
 </div>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/annotations.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/themes/high-contrast-light.js"></script>
+
+<script>
+  var days = <%= @days.to_json.html_safe %>;
+  var chart_data = <%= @line_chart_data.to_json.html_safe %>;
+
+  Highcharts.chart('chart-container', {
+    xAxis: {
+      categories: days
+    },
+
+    title: {
+      text: 'Statistics by Day'
+    },
+
+    series: [
+    {
+      name: 'Cost',
+      data: chart_data[0]["data"]
+    },
+    {
+      name: 'Revenue',
+      data: chart_data[1]["data"]
+    },
+    {
+      name: 'Profit',
+      data: chart_data[2]["data"]
+    }
+    ],
+
+    annotations: [{
+      labels: [{
+        point: 'max-Cost',
+        text: 'Max Cost'
+      }, {
+        point: 'min-Cost',
+        text: 'Min Cost',
+        backgroundColor: 'white'
+      }, {
+        point: 'max-Revenue',
+        text: 'Max Revenue',
+      }, {
+        point: 'min-Revenue',
+        text: 'Min Revenue',
+        backgroundColor: 'white'
+      }, {
+        point: 'max-Profit',
+        text: 'Max Profit',
+      }, {
+        point: 'min-Profit',
+        text: 'Min Profit',
+        backgroundColor: 'white'
+      }]
+    }]
+  });
+</script>

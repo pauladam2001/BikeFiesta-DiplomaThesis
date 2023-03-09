@@ -7,7 +7,7 @@ class StatsController < ApplicationController
     @start_date = params[:start_date].to_date if params[:start_date].present? && params[:start_date] != "all"
     @end_date = params[:end_date].to_date if params[:end_date].present? && params[:end_date] != "all"
     
-    @stats = Stat.where(period: "daily-total")
+    @stats = Stat.where(period: "daily-total").order(end_date: :asc)
 
     if @start_date.present?
       @stats = @stats.where("end_date >= ?", @start_date)
@@ -35,11 +35,30 @@ class StatsController < ApplicationController
       @total_stats[:roi] = -100
     end
 
+    @days = []
+    if @start_date.present? && @end_date.present?
+      (@start_date..@end_date).each do |day|
+        @days << day.strftime("%d/%m/%y")
+      end
+    end
+    
+    # @line_chart_data = [
+    #   {name: "Revenue", data: @stats.collect { |s| [s.end_date, (s.total_revenue).round(2)]}},
+    #   {name: "Cost", date: @stats.collect { |s| [s.end_date, (s.total_spent).round(2)]}},           # this was for chartkick
+    #   {name: "Profit", date: @stats.collect { |s| [s.end_date, (s.total_profit).round(2)]}}
+    # ]
     @line_chart_data = [
-      {name: "Revenue", data: @stats.collect { |s| [s.end_date, (s.total_revenue).round(2)]}},
-      {name: "Cost", date: @stats.collect { |s| [s.end_date, (s.total_spent).round(2)]}},
-      {name: "Profit", date: @stats.collect { |s| [s.end_date, (s.total_profit).round(2)]}}
+      {name: "Revenue", data: @stats.pluck(:total_revenue)},
+      {name: "Cost", data: @stats.pluck(:total_spent)},
+      {name: "Profit", data: @stats.pluck(:total_profit)}
     ]
+    @line_chart_data.each do |row|
+      max_pos = row[:data].each_with_index.max[1]
+      min_pos = row[:data].each_with_index.min[1]
+
+      row[:data][max_pos] = {y: row[:data][max_pos], id: "max-#{row[:name]}"}
+      row[:data][min_pos] = {y: row[:data][min_pos], id: "min-#{row[:name]}"}
+    end
   end
 
   private
