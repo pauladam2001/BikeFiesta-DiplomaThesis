@@ -7,7 +7,7 @@ class StatsEngine
     today_stat.initialize_with_zero_if_needed
 
     today_stat.total_revenue = Purchase.where(status: "CAPTURED").where("created_at >= ? AND created_at <= ?", date.beginning_of_day, date.end_of_day).sum(:amount)
-    today_stat.total_spent = Cost.where("created_at >= ? AND created_at <= ?", date.beginning_of_day, date.end_of_day).sum(:amount)
+    today_stat.total_spent = Cost.where(day: date).sum(:amount)
     today_stat.total_profit = today_stat.total_revenue - today_stat.total_spent
     if today_stat.total_revenue > 0
       today_stat.roi = today_stat.total_profit / today_stat.total_spent * 100

@@ -194,15 +194,21 @@
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                 <span class="sidebar-title-span">Messages</span>
               </a>
-              <a href=<%= new_messages_index_path %> class="sidebar-a" data-turbo="false">
+              <a href=<%= new_messages_path %> class="sidebar-a" data-turbo="false">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                 <span class="sidebar-title-span">New Messages</span>
               </a>
             </li>
             <li>
-              <a href=<%= issues_index_path %> class="sidebar-a" data-turbo="false">
+              <a href=<%= issues_path %> class="sidebar-a" data-turbo="false">
                 <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
                 <span class="sidebar-title-span">Issues</span>
+              </a>
+            </li>
+            <li>
+              <a href=<%= costs_path %> class="sidebar-a" data-turbo="false">
+                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-title-span">Costs</span>
               </a>
             </li>
           </ul>

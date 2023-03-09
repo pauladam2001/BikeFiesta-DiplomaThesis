@@ -1,0 +1,72 @@
+<div class="main-page-div">
+  <h1 class="h1-title">Costs</h1>
+  <div class="filter-first-div">
+    <div class="filter-second-div">
+      <form>
+        <div class="filter-option-div">
+          <span class="filter-span">Filter by Start Date</span>
+          <br/>
+          <input type="date" name="start_date" value="<%= params[:start_date] %>" class="filter-input">
+        </div>
+        <div class="filter-option-div">
+          <span class="filter-span">Filter by End Date</span>
+          <br/>
+          <input type="date" name="end_date" value="<%= params[:end_date] %>" class="filter-input">
+        </div>
+        <div class="filter-option-div">
+          <span class="filter-span">Filter by Description</span>
+          <br/>
+          <input type="text" name="description" value="<%= params[:description] %>" class="filter-input">
+        </div>
+        <div style="float: left;">
+          <input type="submit" name="submitButton" class="filter-submit" value="Search" data-turbo="false"/>
+        </div>
+      </form>
+      <%= button_to "Add New Cost", new_cost_path, method: :get, :class => "button add-link", data: { turbo: "false" } %>
+    </div>
+  </div>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <% @costs.each do |cost| %>
+          <tr class="<%= cycle("bg-white", "bg-gray") %>">
+            <td>
+              <%= cost.day.strftime("%d/%m/%y") %>
+            </td>
+            <td>
+              <%= cost.description %>
+            </td>
+            <td>
+              <%= number_to_currency(cost.amount, precision: 2, :unit => '€') %>
+            </td>
+            <td>
+              <%= link_to cost_path(cost), method: :delete, class: "links-class", data: {confirm: "Are you sure you want to delete this cost?", turbo: "false"} do %>
+                Delete
+              <% end %>
+              •
+              <%= link_to edit_cost_path(cost), class: "links-class", data: { turbo: "false" } do %>
+                Edit
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+      </tbody>
+    </table>
+    <div class="pagination" data-turbo="false">
+      <%= will_paginate @brand_names %>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'new_messages/index'
-  get 'issues/index'
   root 'home#index'
 
   devise_for :users, controllers: {
@@ -76,6 +74,8 @@ Rails.application.routes.draw do
   resources :rooms do
     resources :messages
   end
+
+  resources :costs
 
   get "/follow_page", to: "users#follow_page"
 
