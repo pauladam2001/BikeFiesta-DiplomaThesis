@@ -76,6 +76,7 @@ Rails.application.routes.draw do
   end
 
   resources :costs
+  resources :stats, only: [:index]
 
   get "/follow_page", to: "users#follow_page"
 
