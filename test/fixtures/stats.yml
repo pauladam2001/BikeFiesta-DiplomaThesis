@@ -1,23 +1,25 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  analysis_start_time: 2023-01-27 11:03:14
-  analysis_end_time: 2023-01-27 11:03:14
+  analysis_start_time: 2023-03-09 12:07:25
+  analysis_end_time: 2023-03-09 12:07:25
+  end_date: 2023-03-09
+  total_revenue: 1.5
+  total_spent: 1.5
+  total_profit: 1.5
+  roi: 1.5
   total_views: 1
   total_posts: 1
-  total_cost: 1.5
-  total_revenue: 1.5
-  total_profit: 1.5
   total_transactions: 1
-  roi: 1.5
 
 two:
-  analysis_start_time: 2023-01-27 11:03:14
-  analysis_end_time: 2023-01-27 11:03:14
+  analysis_start_time: 2023-03-09 12:07:25
+  analysis_end_time: 2023-03-09 12:07:25
+  end_date: 2023-03-09
+  total_revenue: 1.5
+  total_spent: 1.5
+  total_profit: 1.5
+  roi: 1.5
   total_views: 1
   total_posts: 1
-  total_cost: 1.5
-  total_revenue: 1.5
-  total_profit: 1.5
   total_transactions: 1
-  roi: 1.5

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_07_191251) do
+ActiveRecord::Schema.define(version: 2023_03_09_100724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -222,13 +222,14 @@ ActiveRecord::Schema.define(version: 2023_03_07_191251) do
   create_table "stats", force: :cascade do |t|
     t.datetime "analysis_start_time"
     t.datetime "analysis_end_time"
+    t.date "end_date"
+    t.float "total_revenue"
+    t.float "total_spent"
+    t.float "total_profit"
+    t.float "roi"
     t.integer "total_views"
     t.integer "total_posts"
-    t.float "total_cost"
-    t.float "total_revenue"
-    t.float "total_profit"
     t.integer "total_transactions"
-    t.float "roi"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
