@@ -60,6 +60,13 @@ class StatsController < ApplicationController
       row[:data][max_pos] = {y: row[:data][max_pos], id: "max-#{row[:name]}"}
       row[:data][min_pos] = {y: row[:data][min_pos], id: "min-#{row[:name]}"}
     end
+    
+    respond_to do |format|
+      format.xlsx do
+        render xlsx: 'stats', template: 'stats/stats'
+      end
+      format.html
+    end
   end
 
   private

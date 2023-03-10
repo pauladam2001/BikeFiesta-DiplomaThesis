@@ -1,0 +1,12 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Stats") do |sheet|
+  # Create the header row
+  sheet.add_row ["Date", "Revenue", "Cost", "Profit", "ROI", "Posts", "Views", "Transactions", "Validating", "Active", "Banned", "Sold and Not Shipped", "Sold and Shipped"]
+  # Create entries for each item
+  @stats.each do |stat|
+    sheet.add_row [stat.end_date.strftime("%d/%m/%y"), number_to_currency(stat.total_revenue, precision: 2, :unit => '€'), number_to_currency(stat.total_spent, precision: 2, :unit => '€'), 
+      number_to_currency(stat.total_profit, precision: 2, :unit => '€'), number_to_percentage(stat.roi, precision: 2), stat.total_posts, stat.total_views, stat.total_transactions, 
+      stat.validating_posts, stat.banned_posts, stat.active_posts, stat.sold_not_shipped_posts, stat.sold_shipped_posts]
+  end
+end
