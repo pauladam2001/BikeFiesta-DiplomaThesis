@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Leaderboard") do |sheet|
+  # Create the header row
+  sheet.add_row ["User", "Revenue", "Spent", "Posts", "Views", "Followers", "Following"]
+  # Create entries for each item
+  @user_stats.each do |stat|
+    sheet.add_row [stat.user.full_name, number_to_currency(stat.user_revenue, precision: 2, :unit => '€'), number_to_currency(stat.user_spent, precision: 2, :unit => '€'), 
+      stat.user_posts, stat.user_views, stat.followers, stat.following]
+  end
+end

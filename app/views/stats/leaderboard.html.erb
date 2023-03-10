@@ -1,5 +1,5 @@
 <div class="main-page-div">
-  <h1 class="h1-title">Users Leaderboard - <%= link_to 'Download as Excel', stats_path(start_date: params[:start_date], end_date: params[:end_date], format: :xlsx), method: :post, class: "", data: { turbo: "false" } %></h1>
+  <h1 class="h1-title">Users Leaderboard - <%= link_to 'Download as Excel', leaderboard_path(archived: params[:archived], user: params[:user], rank_by: params[:rank_by], format: :xlsx), method: :post, class: "", data: { turbo: "false" } %></h1>
   <div class="filter-first-div">
     <div class="filter-second-div">
       <form>

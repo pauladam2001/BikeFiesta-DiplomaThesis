@@ -70,6 +70,8 @@ class StatsController < ApplicationController
   end
 
   def leaderboard
+    require 'will_paginate/array'
+    
     @user_stats = Stat.where(period: "user-total")
     @total_stats = Stat.where(period: "user-grand-total").first
 
