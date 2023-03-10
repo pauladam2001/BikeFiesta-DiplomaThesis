@@ -23,14 +23,16 @@
           <br/>
           <input type="number" name="grade" value="<%= params[:grade] %>" class="filter-input" min="1" max="5">
         </div>
-        <div class="filter-option-div" style="margin-top: 1.2rem;">
-          <select name="reviewer" style="width: 150px;">
-            <%= options_for_select([["Filter by Reviewer", "all"]] + @users.collect { |o| [o[0], o[1]]}, params[:reviewer]) %>
+        <div class="filter-option-div">
+          <span class="filter-span">Filter by Reviewer</span>
+          <select name="reviewer" class="filter-select">
+            <%= options_for_select([["All", "all"]] + @users.collect { |o| [o[0], o[1]]}, params[:reviewer]) %>
           </select>
         </div>
-        <div class="filter-option-div" style="margin-top: 1.2rem;">
-          <select name="reviewed" style="width: 150px;">
-            <%= options_for_select([["Filter by Reviewed", "all"]] + @users.collect { |o| [o[0], o[1]]}, params[:reviewed]) %>
+        <div class="filter-option-div">
+          <span class="filter-span">Filter by Reviewed</span>
+          <select name="reviewed" class="filter-select">
+            <%= options_for_select([["All", "all"]] + @users.collect { |o| [o[0], o[1]]}, params[:reviewed]) %>
           </select>
         </div>
         <div style="float: left;">

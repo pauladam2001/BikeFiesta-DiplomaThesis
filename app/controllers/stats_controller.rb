@@ -72,7 +72,37 @@ class StatsController < ApplicationController
   def leaderboard
     @user_stats = Stat.where(period: "user-total")
     @total_stats = Stat.where(period: "user-grand-total").first
-    
+
+    if params[:archived].present?
+      @user_stats = @user_stats.joins(:user).where("users.archived = ?", params[:archived])
+      @users = User.where(role: "normal", archived: params[:archived]).order(:full_name).pluck(:full_name, :id)
+    else
+      @user_stats = @user_stats.joins(:user).where("users.archived = false")
+      @users = User.where(role: "normal", archived: false).order(:full_name).pluck(:full_name, :id)
+    end
+
+    @user_stats = @user_stats.where(user_id: params[:user]) if params[:user].present? && params[:user] != "all"
+
+    if params[:rank_by].present?
+      if params[:rank_by] == "revenue"
+        @user_stats = @user_stats.sort_by { |stat| stat.user_revenue }.reverse
+      elsif params[:rank_by] == "spent"
+        @user_stats = @user_stats.sort_by { |stat| stat.user_spent }.reverse
+      elsif params[:rank_by] == "posts"
+        @user_stats = @user_stats.sort_by { |stat| stat.user_posts }.reverse
+      elsif params[:rank_by] == "views"
+        @user_stats = @user_stats.sort_by { |stat| stat.user_views }.reverse
+      elsif params[:rank_by] == "followers"
+        @user_stats = @user_stats.sort_by { |stat| stat.followers }.reverse
+      elsif params[:rank_by] == "following"
+        @user_stats = @user_stats.sort_by { |stat| stat.following }.reverse
+      end
+    else
+      @user_stats = @user_stats.sort_by { |stat| stat.user_revenue }.reverse
+    end
+
+    @user_stats = @user_stats.paginate(page: params[:page], per_page: 12)
+
     respond_to do |format|
       format.xlsx do
         render xlsx: 'leaderboard', template: 'stats/leaderboard'
