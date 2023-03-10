@@ -10,7 +10,7 @@ class AsyncCheckForDiscount
       if user.posts.where(sold: true, shipped: true).count % 5 == 0
         user.discount = 5
 
-        Notification.create(notification_type: "discount", notified_id: user_id, message: "You have a 5% discount on your next order")
+        Notification.create(notification_type: "discount", notified_id: user_id, message: "You have a 5% discount on your next sell/order")
 
         seller_message = "BikeFiesta - You have a 5% discount on your next sell/order."
 
@@ -23,7 +23,7 @@ class AsyncCheckForDiscount
       if Post.where(sold: true, shipped: true, buyer_id: user_id).count % 5 == 0
         user.discount = 5
 
-        Notification.create(notification_type: "discount", notified_id: user_id, message: "You have a 5% discount on your next order")
+        Notification.create(notification_type: "discount", notified_id: user_id, message: "You have a 5% discount on your next order/sell")
 
         buyer_message = "BikeFiesta - You have a 5% discount on your next sell/order."
 

@@ -221,10 +221,16 @@ module Marketing
     Post.where(sold: true, shipped: true).where("shipped_date <= ?", 5.days.ago).joins(:purchase).where({purchase: {money_sent_to_seller: false}}).find_each do |post|
       purchase = post.purchase
       if !purchase.on_hold
+        discount = 0
+        seller = post.user
+        if seller.discount.present?
+          discount = seller.discount
+        end
         if post.sale_percentage.nil?
-          amount = 0.9 * purchase.amount * 100
+          amount = ((90 + discount) / 100) * purchase.amount * 100
         else
-          amount = ((90 + post.sale_percentage) / 100) * purchase.amount * 100
+          max_discount = post.sale_percentage > discount ? post.sale_percentage : discount
+          amount = ((90 + max_discount) / 100) * purchase.amount * 100
         end
 
         # transfer = gateway.transfer(amount, purchase.seller.paypal_email, :subject => "Money for #{post.name}", :note => "Thank you for listing you bike on our site.")
@@ -233,9 +239,16 @@ module Marketing
           Notification.create(notification_type: "money_sent", notified_id: purchase.seller_id, message: "The money for #{purchase.post.name} were sent to you")
 
           seller_phone = purchase.seller.phone
-          message = "BikeFiesta - The money for #{purchase.post.name} were sent to you. Check you PayPal today."
+          if post.sale_percentage.present?
+            message = "BikeFiesta - The money for #{purchase.post.name} were sent to you. Check your PayPal today. You also had a discount of #{max_discount}%."
+          else
+            message = "BikeFiesta - The money for #{purchase.post.name} were sent to you. Check your PayPal today. You also had a discount of #{discount}%."
+          end
 
           AsyncSendSmsToUser.perform_async(seller_phone, message)
+
+          user.discount = nil
+          user.save(validate: false)
 
           purchase.money_sent_to_seller = true
           purchase.save
