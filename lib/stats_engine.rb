@@ -4,7 +4,7 @@ class StatsEngine
     Time.zone = "UTC"
 
     today_stat = Stat.find_or_create_by(end_date: date)
-    today_stat.initialize_with_zero_if_needed
+    today_stat.initialize_total_with_zero_if_needed
 
     today_stat.total_revenue = Purchase.where(status: "CAPTURED").where("created_at >= ? AND created_at <= ?", date.beginning_of_day, date.end_of_day).sum(:amount)
     today_stat.total_spent = Cost.where(day: date).sum(:amount)
@@ -49,6 +49,39 @@ class StatsEngine
     total_stat.sold_not_shipped_posts = Stat.where(period: "daily-total").sum(:sold_not_shipped_posts)
     total_stat.sold_shipped_posts = Stat.where(period: "daily-total").sum(:sold_shipped_posts)
     total_stat.total_transactions = Stat.where(period: "daily-total").sum(:total_transactions)
+
+    total_stat.save
+  end
+
+  # Called every 30 minutes for accurate stats
+  def self.run_users(date = Date.today)
+    Time.zone = "UTC"
+
+    User.where(archived: false, role: "normal").find_each do |user|
+      user_stat = Stat.find_or_create_by(user_id: user.id)
+      user_stat.initialize_user_with_zero_if_needed
+
+      user_stat.user_views = user.posts.sum(:views)
+      user_stat.followers = user.followers.count
+      user_stat.following = user.following.count
+      user_stat.user_posts = user.posts.count
+      user_stat.user_revenue = Purchase.where(seller_id: user.id).sum(:amount)
+      user_stat.user_spent = Purchase.where(buyer_id: user.id).sum(:amount)
+
+      user_stat.save
+    end
+  end
+
+  # Called hourly, used for total stats
+  def self.run_users_total
+    Time.zone = "UTC"
+
+    total_stat = Stat.find_or_create_by(period: "user-grand-total")
+
+    total_stat.user_views = Stat.where(period: "user-total").sum(:user_views)
+    total_stat.user_posts = Stat.where(period: "user-total").sum(:user_posts)
+    total_stat.user_revenue = Stat.where(period: "user-total").sum(:user_revenue)
+    total_stat.user_spent = Stat.where(period: "user-total").sum(:user_spent)
 
     total_stat.save
   end

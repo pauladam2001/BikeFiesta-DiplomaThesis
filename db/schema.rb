@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_10_154504) do
+ActiveRecord::Schema.define(version: 2023_03_10_192920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -232,6 +232,13 @@ ActiveRecord::Schema.define(version: 2023_03_10_154504) do
     t.integer "active_posts"
     t.integer "sold_not_shipped_posts"
     t.integer "sold_shipped_posts"
+    t.integer "user_id"
+    t.integer "user_views"
+    t.integer "followers"
+    t.integer "following"
+    t.integer "user_posts"
+    t.float "user_revenue"
+    t.float "user_spent"
   end
 
   create_table "suggestions", force: :cascade do |t|

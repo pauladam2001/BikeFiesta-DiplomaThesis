@@ -63,3 +63,15 @@ stats_engine_run_daily_job:
 #   class: "CronJobStatsEngineRunTotal"
 #   # queue: cron_jobs
 #   # status: 'disabled'
+
+stats_engine_run_users_job:
+  cron: "every 30 minutes"
+  class: "CronJobStatsEngineRunUsers"
+  # queue: cron_jobs
+  # status: 'disabled'
+
+stats_engine_run_users_total_job:
+  cron: "every hour"
+  class: "CronJobStatsEngineRunUsersTotal"
+  # queue: cron_jobs
+  # status: 'disabled'

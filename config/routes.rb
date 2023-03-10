@@ -88,5 +88,7 @@ Rails.application.routes.draw do
   
   get "/new_messages", to: "new_messages#index"
 
+  get "/leaderboard", to: "stats#leaderboard"
+
   get '*path' => redirect('/posts')
 end

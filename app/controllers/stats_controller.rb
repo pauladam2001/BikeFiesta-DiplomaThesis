@@ -69,6 +69,10 @@ class StatsController < ApplicationController
     end
   end
 
+  def leaderboard
+    
+  end
+
   private
     def check_permissions
       redirect_to posts_path and return if current_user.is_normal?
