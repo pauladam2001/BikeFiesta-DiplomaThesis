@@ -4,7 +4,11 @@
       <form action="/checkout" method="post">
         <div class="row">
           <div class="col-50">
-            <h3 style="padding-left: 15rem; padding-bottom: 1rem;">Shipping Address</h3>
+            <% if current_user.discount.present? %>
+              <h3 style="padding-left: 15rem; padding-bottom: 1rem;">Shipping Address - You have a <%= current_user.discount %>% discount for your next order</h3>
+            <% else %>
+              <h3 style="padding-left: 15rem; padding-bottom: 1rem;">Shipping Address</h3>
+            <% end %>
             <label for="full_name">Full Name</label>
             <input required type="text" id="full_name" name="full_name" placeholder="Victor Pop" class="checkout-input">
             <label for="address">Address</label>

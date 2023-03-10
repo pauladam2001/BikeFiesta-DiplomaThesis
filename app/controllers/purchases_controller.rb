@@ -95,6 +95,9 @@ class PurchasesController < ApplicationController
 
         if credit_card.valid?
           price = post.sale_price.present? ? post.sale_price : post.price
+          if current_user.discount.present?
+            price = price - ((current_user.discount * price) / 100)
+          end
           price = price * 100
 
           response = gateway.authorize(price, credit_card, ip: "127.0.0.1")   # just authorize the payment, don't get the money (gateway.purchase to do both authorize and capture)
@@ -124,6 +127,9 @@ class PurchasesController < ApplicationController
             message = "BikeFiesta - Your post #{post.name} was bought. You have 2 days to ship it and upload the proof. Shipping details - Name:
               #{full_name}, Address: #{address}, County: #{county}, City: #{city}, Zip Code: #{zip_code}"
             AsyncSendSmsToUser.perform_async(phone, message)
+
+            current_user.discount = nil
+            current_user.save(validate: false)
             
             post.save!
             redirect_to posts_path, alert: "Your payment was authorized successfully. Your money will leave your account once the seller will ship the bicycle, he has 2 days to do it."
@@ -155,7 +161,7 @@ class PurchasesController < ApplicationController
 
     response = gateway.capture(purchase.amount * 100, purchase.payment_details[:authorization_code])
     if response.success?
-      Notification.create(notification_type: "shipped_purchase", notified_id: purchase.seller_id, message: "The bike #{purchase.post.name} was shipped. You will receive it in 2-3 days")
+      Notification.create(notification_type: "shipped_purchase", notified_id: purchase.seller_id, message: "The proof for #{purchase.post.name} was accepted. You will receive the money in maximum 5 days")
       Notification.create(notification_type: "shipped_purchase", notified_id: purchase.buyer_id, message: "The bike #{purchase.post.name} was shipped. You will receive it in 2-3 days")
 
       seller_phone = purchase.seller.phone
@@ -177,6 +183,9 @@ class PurchasesController < ApplicationController
 
       Notification.create(notification_type: "invoice", post_id: purchase.post_id, notified_id: purchase.seller_id, message: "Download your invoice for ")
       Notification.create(notification_type: "invoice", post_id: purchase.post_id, notified_id: purchase.buyer_id, message: "Download your invoice for ")
+
+      AsyncCheckForDiscount.perform_async(purchase.seller_id, "seller")
+      AsyncCheckForDiscount.perform_async(purchase.buyer_id, "buyer")
 
       redirect_back(fallback_location: purchases_path)
     else
