@@ -214,7 +214,7 @@ class PostsController < ApplicationController
   end
 
   def favorites
-    @favorites = current_user.favorite_posts
+    @favorites = current_user.favorite_posts.where(is_active: 1)    # also we delete the Favorite entries for a post that is sold
 
     @users = User.where(role: "normal", archived: false).pluck(:full_name, :id)
     @colors = Color.order(:name).pluck(:name, :id)
@@ -225,6 +225,13 @@ class PostsController < ApplicationController
     @component_groups = ComponentGroup.order(:name).pluck(:name, :id)
 
     @favorites = @favorites.paginate(page: params[:page], per_page: 16)
+  end
+
+  def user_posts
+    user = User.find(params[:user_id])
+    @user_posts = user.posts.where(is_active: 1)
+
+    @user_posts = @user_posts.paginate(page: params[:page], per_page: 16)
   end
 
   def add_to_favorites

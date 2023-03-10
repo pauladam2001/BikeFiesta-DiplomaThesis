@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get "/following_posts", to: "posts#following_posts"
   get "/all_posts", to: "posts#all_posts"
   get "/favorites", to: "posts#favorites"
+  get "/user_posts", to: "posts#user_posts"
 
   resources :brandnames
   resources :colors

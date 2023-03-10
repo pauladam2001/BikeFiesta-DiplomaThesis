@@ -3,17 +3,19 @@
     <% @following.each do |followed| %>
       <div class="user-card">
         <div class="profile">
-          <div class="image">
-            <% if followed.provider == "google_oauth2" %>
-              <h6><%= image_tag(followed.avatar_url, border: 0, width: '40px', class: "image-radius") %></h6>
-            <% else %>
-              <% if followed.avatar.attached? %>
-                <h6><%= image_tag(followed.avatar, border: 0, width: '80px', class: "image-radius") %></h6>
+          <%= link_to user_posts_path(user_id: followed.id), data: { turbo: "false" } do %>
+            <div class="image">
+              <% if followed.provider == "google_oauth2" %>
+                <h6><%= image_tag(followed.avatar_url, border: 0, width: '40px', class: "image-radius") %></h6>
               <% else %>
-                <h6><%= image_tag("user-icon.png", border: 0, width: '70px') %></h6>
+                <% if followed.avatar.attached? %>
+                  <h6><%= image_tag(followed.avatar, border: 0, width: '80px', class: "image-radius") %></h6>
+                <% else %>
+                  <h6><%= image_tag("user-icon.png", border: 0, width: '70px') %></h6>
+                <% end %>
               <% end %>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
           <div class="name"><%= followed.name %></div>
           <div class="actions">
             <% if current_user.following?(followed) %>
