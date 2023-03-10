@@ -1,1 +1,99 @@
-Leaderboard
+<div class="main-page-div">
+  <h1 class="h1-title">Users Leaderboard - <%= link_to 'Download as Excel', stats_path(start_date: params[:start_date], end_date: params[:end_date], format: :xlsx), method: :post, class: "", data: { turbo: "false" } %></h1>
+  <div class="filter-first-div">
+    <div class="filter-second-div">
+      <form>
+        
+        <div style="float: left;">
+          <input type="submit" name="submitButton" class="filter-submit" value="Search" data-turbo="false"/>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="total-stats-main-div">
+    <div class="total-stats-second-div">
+      <table class="total-stats-table">
+        <thead style="background-color: #F9FAFB;">
+          <tr>
+            <th scope="col" class="">
+              Total Revenue
+            </th>
+            <th scope="col" class="-">
+              Total Spent
+            </th>
+            <th scope="col" class="">
+              Total Posts
+            </th>
+            <th scope="col" class="">
+              Total Views
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background-color: #ffffff;">
+            <td class="normal-cell">
+              <%= number_to_currency(@total_stats[:user_revenue], precision: 2, :unit => '€') %>
+            </td>
+            <td class="normal-cell">
+              <%= number_to_currency(@total_stats[:user_spent], precision: 2, :unit => '€') %>
+            </td>
+            <td class="normal-cell">
+              <%= @total_stats[:user_posts] %>
+            </td>
+            <td class="normal-cell">
+              <%= @total_stats[:user_views] %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Revenue</th>
+          <th>Spent</th>
+          <th>Posts</th>
+          <th>Views</th>
+          <th>Followers</th>
+          <th>Following</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <% @user_stats.each do |stat| %>
+          <tr class="<%= cycle("bg-white", "bg-gray") %>">
+            <td>
+              <%= stat.user.full_name %>
+            </td>
+            <td>
+              <%= number_to_currency(stat.user_revenue, precision: 2, :unit => '€') %>
+            </td>
+            <td>
+              <%= number_to_currency(stat.user_spent, precision: 2, :unit => '€') %>
+            </td>
+            <td>
+              <%= stat.user_posts %>
+            </td>
+            <td>
+              <%= stat.user_views %>
+            </td>
+            <td>
+              <%= stat.followers %>
+            </td>
+            <td>
+              <%= stat.following %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

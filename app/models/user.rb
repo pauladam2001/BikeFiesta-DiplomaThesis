@@ -41,6 +41,7 @@ class User < ApplicationRecord
   has_many :reviews, foreign_key: :reviewed_id, dependent: :destroy
   has_many :suggestions
   has_many :purchases
+  has_one :stat
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create!(skip_validation: true) do |user|

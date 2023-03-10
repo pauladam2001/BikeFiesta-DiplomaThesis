@@ -1,4 +1,6 @@
 class Stat < ApplicationRecord
+  belongs_to :user, foreign_key: :user_id, optional: true
+
   def initialize_total_with_zero_if_needed
     self.period ||= "daily-total"
     self.total_revenue ||= 0.0

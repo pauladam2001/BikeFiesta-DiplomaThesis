@@ -70,7 +70,15 @@ class StatsController < ApplicationController
   end
 
   def leaderboard
+    @user_stats = Stat.where(period: "user-total")
+    @total_stats = Stat.where(period: "user-grand-total").first
     
+    respond_to do |format|
+      format.xlsx do
+        render xlsx: 'leaderboard', template: 'stats/leaderboard'
+      end
+      format.html
+    end
   end
 
   private
