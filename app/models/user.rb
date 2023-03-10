@@ -19,6 +19,7 @@ class User < ApplicationRecord
     (?=.*[A-Z])   # comtains at least 1 uppercase letter
   /x
 
+  validates_uniqueness_of :email
   validates :first_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation || Proc.new { |u| u.reset_password_token.present? }
   validates :last_name, presence: true, length: { minimum: 3, maximum: 25 }, unless: :skip_validation || Proc.new { |u| u.reset_password_token.present? }
   validates :phone, presence: true, length: { minimum: 9, maximum: 12 }, unless: :skip_validation || Proc.new { |u| u.reset_password_token.present? }

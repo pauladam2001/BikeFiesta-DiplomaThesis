@@ -63,26 +63,35 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
-    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+    user = User.where(email: params[:user][:email]).first
+    if user.provider == "google_oauth2"
+      user.paypal_email = params[:user][:paypal_email]
+      user.phone = params[:user][:phone]
+      user.save(validate: false)
 
-    resource_updated = update_resource(resource, account_update_params)
-    yield resource if block_given?
-    if resource_updated
-      set_flash_message_for_update(resource, prev_unconfirmed_email)
-      bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
-
-      respond_with resource, location: after_update_path_for(resource)
+      redirect_to posts_path
     else
-      # clean_up_passwords resource
-      # set_minimum_password_length
-      # respond_with resource
-      if resource.errors.full_messages.first == "Password is invalid"
-        error_message = "The password should have more than 6 characters including 1 uppercase letter, 1 number and 1 special character"
+      self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+      prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+
+      resource_updated = update_resource(resource, account_update_params)
+      yield resource if block_given?
+      if resource_updated
+        set_flash_message_for_update(resource, prev_unconfirmed_email)
+        bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
+
+        respond_with resource, location: after_update_path_for(resource)
       else
-        error_message = resource.errors.full_messages.first
+        # clean_up_passwords resource
+        # set_minimum_password_length
+        # respond_with resource
+        if resource.errors.full_messages.first == "Password is invalid"
+          error_message = "The password should have more than 6 characters including 1 uppercase letter, 1 number and 1 special character"
+        else
+          error_message = resource.errors.full_messages.first
+        end
+        redirect_to edit_user_registration_path, alert: "Error - #{error_message}."
       end
-      redirect_to edit_user_registration_path, alert: "Error - #{error_message}."
     end
   end
 
