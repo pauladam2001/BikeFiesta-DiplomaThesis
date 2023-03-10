@@ -78,6 +78,10 @@
                         <%= link_to edit_user_registration_path, class: "", data: { turbo: "false" } do %>
                           <%= notification.message %>.
                         <% end %>
+                      <% elsif notification.notification_type == "invoice" %>
+                        <%= link_to purchase_path(notification&.post&.purchase, format: :pdf), class: "", data: { turbo: "false" } do %>
+                          <%= notification.message %><%= notification&.post&.name %>.
+                        <% end %>
                       <% else %>
                         <%= notification.message %>.
                       <% end %>

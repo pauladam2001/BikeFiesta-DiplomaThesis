@@ -175,6 +175,9 @@ class PurchasesController < ApplicationController
       post.shipped_date = Time.now
       post.save
 
+      Notification.create(notification_type: "invoice", post_id: purchase.post_id, notified_id: purchase.seller_id, message: "Download your invoice for ")
+      Notification.create(notification_type: "invoice", post_id: purchase.post_id, notified_id: purchase.buyer_id, message: "Download your invoice for ")
+
       redirect_back(fallback_location: purchases_path)
     else
       redirect_back(fallback_location: purchases_path, alert: "Error - #{response.message}.")
@@ -240,5 +243,28 @@ class PurchasesController < ApplicationController
     purchase.on_hold = false
     purchase.save
     redirect_back(fallback_location: purchases_path)
+  end
+
+  def show
+    @purchase = Purchase.find(params[:id])
+
+    if @purchase.status != "CAPTURED" || !(current_user.is_admin? || @purchase.seller_id == current_user.id || @purchase.buyer_id == current_user.id)
+      redirect_back(fallback_location: posts_path, alert: "Error - You are not allowed to see this invoice.")
+      return
+    end
+    
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Purchase ##{@purchase.id} - #{@purchase.seller.full_name} - #{@purchase.buyer.full_name}",
+        page_size: 'A4',
+        template: "purchases/show.html.erb",
+        layout: "pdf.html",
+        orientation: "Landscape",
+        lowquality: true,
+        zoom: 1,
+        dpi: 75
+      end
+    end
   end
 end

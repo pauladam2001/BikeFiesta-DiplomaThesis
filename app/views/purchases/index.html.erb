@@ -43,6 +43,8 @@
               <%= purchase.created_at.strftime("%d/%m/%y") %>
               <% if purchase.status == "CAPTURED" %>
                 <span style="padding-top: 0.1em; padding-bottom: 0.1rem" class="admin-label">Shipped</span>
+                <br/>
+                <%= link_to "Download PDF", purchase_path(purchase, format: :pdf), data: { turbo: "false" } %>
               <% end %>
               <% if purchase.status == "AUTHORIZED_PROOF" %>
                 <span style="padding-top: 0.1em; padding-bottom: 0.1rem; background-color: orange;" class="admin-label">Proof</span>

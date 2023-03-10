@@ -56,6 +56,11 @@ gem 'caxlsx_rails'
 
 # gem 'chartkick'   # we're using highcharts
 
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
+gem 'solargraph'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

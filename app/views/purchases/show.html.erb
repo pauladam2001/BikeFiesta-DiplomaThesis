@@ -1,0 +1,68 @@
+<div class="invoice-box">
+  <table cellpadding="0" cellspacing="0">
+    <tr class="top">
+      <td colspan="4">
+        <table>
+          <tr>
+            <td class="title">
+              <%= image_tag wicked_pdf_asset_base64('logo_pdf.png') %>
+            </td>
+            <td>
+              Invoice #: <b><%= @purchase.id %></b>
+              <br/>
+              Created: <b><%= @purchase.created_at.strftime('%d/%m/%y') %></b>
+              <br/>
+              Status: <span class="<%= @purchase.status %>"><%= @purchase.status %></span>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="information">
+      <td colspan="4">
+        <table>
+          <tr>
+            <td>
+              <b><%= @purchase.seller.full_name %></b>
+              <br/>
+              <i class="far fa-envelope"></i> <%= @purchase.seller.email %>
+              <br/>
+              <i class="fas fa-phone"></i> <%= @purchase.seller.phone %>
+            </td>
+            <td>
+              <b><%= @purchase.buyer.full_name %></b>
+              <br/>
+              <%= @purchase.shipping_details[:address] %>, <%= @purchase.shipping_details[:city] %>, <%= @purchase.shipping_details[:county] %>
+              <br/>
+              <i class="far fa-envelope"></i> <%= @purchase.buyer.email %>
+              <br/>
+              <i class="fas fa-phone"></i> <%= @purchase.buyer.phone %>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="heading">
+      <td>Item</td>
+      <td></td>
+      <td></td>
+      <td class="right">Price</td>
+    </tr>
+    <tr class="item">
+      <td>
+        <%= @purchase.post.name %> #<%= @purchase.post.id %>
+      </td>
+      <td></td>
+      <td></td>
+      <td class="right">
+        <%= number_to_currency(@purchase.amount, precision: 2) %>
+      </td>
+    </tr>
+    <tr class="heading">
+      <td colspan="3"><b>TOTAL:</b></td>
+      <td>
+        <b><%= number_to_currency(@purchase.amount, precision: 2) %></b>
+      </td>
+    </tr>
+  </table>
+</div>
