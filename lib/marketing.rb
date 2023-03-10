@@ -239,11 +239,12 @@ module Marketing
           Notification.create(notification_type: "money_sent", notified_id: purchase.seller_id, message: "The money for #{purchase.post.name} were sent to you")
 
           seller_phone = purchase.seller.phone
-          if post.sale_percentage.present?
-            message = "BikeFiesta - The money for #{purchase.post.name} were sent to you. Check your PayPal today. You also had a discount of #{max_discount}%."
-          else
-            message = "BikeFiesta - The money for #{purchase.post.name} were sent to you. Check your PayPal today. You also had a discount of #{discount}%."
+
+          if post.sale_percentage.nil?
+            max_discount = discount
           end
+          
+          message = "BikeFiesta - The money for #{purchase.post.name} were sent to you. Check your PayPal today. You also had a discount of #{max_discount}%."
 
           AsyncSendSmsToUser.perform_async(seller_phone, message)
 
