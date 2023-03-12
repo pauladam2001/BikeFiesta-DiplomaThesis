@@ -63,7 +63,7 @@
               <%= review.created_at.strftime("%d/%m/%y") %>
             </td>
             <td>
-              <%= review.reviewer.full_name %> - <%= review.reviewed.full_name %>
+              <%= link_to review.reviewer.full_name, "/users/#{review.reviewer_id}", data: { turbo: "false" } %> - <%= link_to review.reviewed.full_name, "/users/#{review.reviewed_id}", data: { turbo: "false" } %>
             </td>
             <td>
               <%= review.message %>

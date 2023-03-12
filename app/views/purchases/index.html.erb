@@ -62,7 +62,7 @@
               <% end %>
             </td>
             <td style="width: 20%;">
-              <%= purchase.seller.full_name %> - <%= purchase.buyer.full_name %> - <%= link_to purchase.post.name, post_path(purchase.post), data: { turbo: "false" } %> - <%= number_to_currency(purchase.amount, precision: 2, :unit => '€') %>
+              <%= link_to purchase.seller.full_name, user_posts_path(user_id: purchase.seller_id), data: { turbo: "false" } %> - <%= link_to purchase.buyer.full_name, user_posts_path(user_id: purchase.buyer_id), data: { turbo: "false" } %>  - <%= link_to purchase.post.name, post_path(purchase.post), data: { turbo: "false" } %> - <%= number_to_currency(purchase.amount, precision: 2, :unit => '€') %>
             </td>
             <td style="width: 20%;">
               <%= purchase.shipping_details %>

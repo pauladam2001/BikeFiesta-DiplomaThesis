@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, :check_permissions
   
   def index
-    @users = User.order(:email)
+    @users = User.where.not(id: current_user.id).order(:email)
 
     @users = @users.where("email ilike?", "%#{params[:email]}%") if params[:email].present?
     @users = @users.where("full_name ilike?", "%#{params[:name]}%") if params[:name].present?
