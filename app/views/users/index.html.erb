@@ -31,6 +31,38 @@
       </form>
     </div>
   </div>
+  <div class="total-stats-main-div">
+    <div class="total-stats-second-div">
+      <table class="total-stats-table">
+        <thead style="background-color: #F9FAFB;">
+          <tr>
+            <th scope="col" class="">
+              Total Users
+            </th>
+            <th scope="col" class="-">
+              Archived Users
+            </th>
+            <th scope="col" class="">
+              Unarchived Users
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background-color: #ffffff;">
+            <td class="normal-cell">
+              <%= @total_stats[:total_users] %>
+            </td>
+            <td class="normal-cell">
+              <%= @total_stats[:archived_users] %>
+            </td>
+            <td class="normal-cell">
+              <%= @total_stats[:unarchived_users] %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <div class="tbl-header">
     <table cellpadding="0" cellspacing="0" border="0">
       <thead>

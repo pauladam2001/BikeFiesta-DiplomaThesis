@@ -15,6 +15,12 @@ class UsersController < ApplicationController
       @users = @users.where(archived: false)
     end
 
+    @total_stats = {
+      total_users: User.where(role: "normal").count,
+      archived_users: User.where(role: "normal", archived: true).count
+    }
+    @total_stats[:unarchived_users] = @total_stats[:total_users] - @total_stats[:archived_users]
+
     @users = @users.paginate(page: params[:page], per_page: 12)
   end
 
