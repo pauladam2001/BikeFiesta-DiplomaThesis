@@ -39,18 +39,22 @@ class UsersController < ApplicationController
 
     user = User.find(user_id)
 
-    # transfer = gateway.transfer(amount, user.paypal_email, :subject => "Refund", :note => "Sorry for the inconvenience.")
-    transfer = gateway.transfer(amount * 100, 'sb-3orv825105929@personal.example.com', :subject => "Refund", :note => "Sorry for the inconvenience.")
-    if transfer.success?
-      Notification.create(notification_type: "money_sent", notified_id: user.id, message: "€#{amount} were refunded to you")
+    if Cost.where(amount: amount, description: "Refund for #{user.email}", day: Date.today).count == 0
+      # transfer = gateway.transfer(amount, user.paypal_email, :subject => "Refund", :note => "Sorry for the inconvenience.")
+      transfer = gateway.transfer(amount * 100, 'sb-3orv825105929@personal.example.com', :subject => "Refund", :note => "Sorry for the inconvenience.")
+      if transfer.success?
+        Notification.create(notification_type: "money_sent", notified_id: user.id, message: "€#{amount} were refunded to you")
 
-      message = "BikeFiesta - €#{amount} were refunded to you."
+        message = "BikeFiesta - €#{amount} were refunded to you."
 
-      AsyncSendSmsToUser.perform_async(user.phone, message)
+        AsyncSendSmsToUser.perform_async(user.phone, message)
 
-      Cost.create(amount: amount, description: "Refund for #{user.email}", day: Date.today)
+        Cost.create(amount: amount, description: "Refund for #{user.email}", day: Date.today)
 
-      redirect_back(fallback_location: users_path, alert: "User refunded and cost created successfully.")
+        redirect_back(fallback_location: users_path, alert: "User refunded and cost created successfully.")
+      end
+    else
+      redirect_back(fallback_location: users_path, alert: "Error - The user was already refunded.")
     end
   end
 
