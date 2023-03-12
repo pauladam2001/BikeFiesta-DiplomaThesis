@@ -1,1 +1,3 @@
-<%= render 'posts_grid', grid_posts: @user_posts, favorite_posts: [], my_posts: true %>
+<div class="<%= 'admin-margin-user-posts' if current_user.is_admin? %>">
+  <%= render 'posts_grid', grid_posts: @user_posts, favorite_posts: [], my_posts: true %>
+</div>
