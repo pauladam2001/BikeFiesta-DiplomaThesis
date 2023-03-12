@@ -5,7 +5,8 @@ class HomeController < ApplicationController
     else
       session[:current_user] = current_user.id
       if current_user.is_normal?
-        redirect_to posts_path and return
+        redirect_to posts_path, alert: "Logged in successfully."
+        return
       else
         redirect_to users_path and return
       end

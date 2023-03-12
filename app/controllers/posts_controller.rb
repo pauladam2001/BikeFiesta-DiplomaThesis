@@ -53,7 +53,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.attributes = post_params
     if @post.save
-      redirect_to my_posts_path
+      redirect_to my_posts_path, alert: "Post #{@post.name} updated successfully."
     else
       redirect_back(fallback_location: my_posts_path, alert: "Error - #{@post.errors.full_messages.first}.")
     end
@@ -92,7 +92,7 @@ class PostsController < ApplicationController
   def report(post_id, user_id, message, title)
     report = Report.find_or_create_by(post_id: post_id, user_id: user_id, message: message, title: title)
     
-    redirect_to post_path(post_id)
+    redirect_to post_path(post_id), alert: "Thank you for your report."
   end
 
   def send_suggestion(user_id, message)
@@ -104,7 +104,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path
+    redirect_back(fallback_location: posts_path, alert: "Post deleted successfully.")
   end
 
   def upload
@@ -122,7 +122,7 @@ class PostsController < ApplicationController
       purchase.proof = params[:file]
       purchase.status = "AUTHORIZED_PROOF"
       purchase.save
-      redirect_back(fallback_location: posts_path)
+      redirect_back(fallback_location: posts_path, alert: "Proof uploaded successfully.")
     end
   end
 
@@ -238,7 +238,7 @@ class PostsController < ApplicationController
     post_id = params[:id]
     user_id= current_user.id
     new_favorite = Favorite.find_or_create_by(post_id: post_id, user_id: user_id)
-    redirect_back(fallback_location: posts_path)
+    redirect_back(fallback_location: posts_path, alert: "Post successfully added to favorites.")
   end
 
   def remove_from_favorites
@@ -246,7 +246,7 @@ class PostsController < ApplicationController
     user_id= current_user.id
     favorite = Favorite.where(post_id: post_id, user_id: user_id).first
     favorite.delete
-    redirect_back(fallback_location: posts_path)
+    redirect_back(fallback_location: posts_path, alert: "Post successfully removed to favorites.")
   end
 
   def ban

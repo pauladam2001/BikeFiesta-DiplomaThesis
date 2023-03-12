@@ -69,7 +69,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       user.phone = params[:user][:phone]
       user.save(validate: false)
 
-      redirect_to posts_path
+      redirect_to posts_path, alert: "Account updated successfully."
     else
       self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
       prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
