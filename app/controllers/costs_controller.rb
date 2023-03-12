@@ -30,7 +30,7 @@ class CostsController < ApplicationController
     @cost = Cost.find(params[:id])
     @cost.attributes = cost_params
     if @cost.save
-      redirect_back(fallback_location: costs_path, alert: "Cost updated successfully.")
+      redirect_to costs_path, alert: "Cost updated successfully."
     else
       redirect_back(fallback_location: costs_path, alert: "Error - #{@cost.errors.full_messages.first}.")
     end
@@ -39,7 +39,7 @@ class CostsController < ApplicationController
   def create
     @cost = Cost.new(cost_params)
     if @cost.save
-      redirect_to costs_path, alert: "Cost updated successfully."
+      redirect_to costs_path, alert: "Cost created successfully."
     else
       redirect_back(fallback_location: costs_path, alert: "Error - #{@cost.errors.full_messages.first}.")
     end

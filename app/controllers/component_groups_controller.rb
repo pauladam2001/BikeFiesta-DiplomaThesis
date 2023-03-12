@@ -21,11 +21,13 @@ class ComponentGroupsController < ApplicationController
   
   def update
     @component = ComponentGroup.find(params[:id])
+    @component.with_lock do
     @component.attributes = component_group_params
-    if @component.save
-      redirect_back(fallback_location: component_groups_path, alert: "Component #{@component.name} updated successfully.")
-    else
-      redirect_back(fallback_location: component_groups_path, alert: "Error - #{@component.errors.full_messages.first}.")
+      if @component.save
+        redirect_to component_groups_path, alert: "Component #{@component.name} updated successfully."
+      else
+        redirect_back(fallback_location: component_groups_path, alert: "Error - #{@component.errors.full_messages.first}.")
+      end
     end
   end
   

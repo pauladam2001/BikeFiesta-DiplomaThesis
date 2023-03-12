@@ -21,11 +21,13 @@ class BrandnamesController < ApplicationController
   
   def update
     @brand_name = Brandname.find(params[:id])
-    @brand_name.attributes = brandname_params
-    if @brand_name.save
-      redirect_back(fallback_location: brandnames_path, alert: "Brand #{@brand_name.name} updated successfully.")
-    else
-      redirect_back(fallback_location: brandnames_path, alert: "Error - #{@brand_name.errors.full_messages.first}.")
+    @brand_name.with_lock do
+      @brand_name.attributes = brandname_params
+      if @brand_name.save
+        redirect_to brandnames_path, alert: "Brand #{@brand_name.name} updated successfully."
+      else
+        redirect_back(fallback_location: brandnames_path, alert: "Error - #{@brand_name.errors.full_messages.first}.")
+      end
     end
   end
   

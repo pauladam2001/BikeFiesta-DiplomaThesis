@@ -21,11 +21,13 @@ class ColorsController < ApplicationController
   
   def update
     @color = Color.find(params[:id])
-    @color.attributes = color_params
-    if @color.save
-      redirect_back(fallback_location: colors_path, alert: "Color #{@color.name} updated successfully.")
-    else
-      redirect_back(fallback_location: colors_path, alert: "Error - #{@color.errors.full_messages.first}.")
+    @color.with_lock do
+      @color.attributes = color_params
+      if @color.save
+        redirect_to colors_path, alert: "Color #{@color.name} updated successfully."
+      else
+        redirect_back(fallback_location: colors_path, alert: "Error - #{@color.errors.full_messages.first}.")
+      end
     end
   end
   

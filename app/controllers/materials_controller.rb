@@ -21,11 +21,13 @@ class MaterialsController < ApplicationController
   
   def update
     @material = Material.find(params[:id])
-    @material.attributes = material_params
-    if @material.save
-      redirect_back(fallback_location: materials_path, alert: "Material #{@material.name} updated successfully.")
-    else
-      redirect_back(fallback_location: materials_path, alert: "Error - #{@material.errors.full_messages.first}.")
+    @material.with_lock do
+      @material.attributes = material_params
+      if @material.save
+        redirect_to materials_path, alert: "Material #{@material.name} updated successfully."
+      else
+        redirect_back(fallback_location: materials_path, alert: "Error - #{@material.errors.full_messages.first}.")
+      end
     end
   end
   

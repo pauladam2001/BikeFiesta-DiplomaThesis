@@ -21,11 +21,13 @@ class CategoriesController < ApplicationController
   
   def update
     @category = Category.find(params[:id])
-    @category.attributes = category_params
-    if @category.save
-      redirect_back(fallback_location: categories_path, alert: "Category #{@category.name} updated successfully.")
-    else
-      redirect_back(fallback_location: categories_path, alert: "Error - #{@category.errors.full_messages.first}.")
+    @category.with_lock do
+      @category.attributes = category_params
+      if @category.save
+        redirect_to categories_path, alert: "Category #{@category.name} updated successfully."
+      else
+        redirect_back(fallback_location: categories_path, alert: "Error - #{@category.errors.full_messages.first}.")
+      end
     end
   end
   
