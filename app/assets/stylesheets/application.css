@@ -101,6 +101,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   gap: 0.2rem;
+  height: 50px;
 }
 
 .footer-relative {
@@ -201,4 +202,8 @@ a:hover {
   display: inline-block;
   font-size: 17px;
   color: red;
+}
+
+.body {
+  min-height: 100%;
 }

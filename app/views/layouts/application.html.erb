@@ -246,6 +246,7 @@
     <% end %>
     <%= yield %>
   </body>
+  <div class="footer <%= request.fullpath == "/follow_page" || request.fullpath.include?("/posts/") ? "footer-fixed" : "footer-relative" %>">© <%= Time.now.year %><span>BikeFiesta. All rights reserved.</span></div>
 </html>
 
 <script type="text/javascript">
