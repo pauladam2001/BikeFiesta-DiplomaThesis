@@ -1,6 +1,6 @@
 <div class="edit-page-div">
   <div class="edit-title-div bottom-border">
-    <h1 class="h1-edit-title"><%= @category.persisted? ? "Edit" : "New" %>Category</h1>
+    <h1 class="h1-edit-title"><%= @category.persisted? ? "Edit " : "New " %>Category</h1>
   </div>
   <div class="edit-title-div">
     
@@ -25,7 +25,7 @@
           <%= link_to categories_path, class: "cancel-link", data: { turbo: "false" } do %>
             Cancel
           <% end %>
-          <button type="submit" class="button">
+          <button type="submit" class="button" data-turbo="false">
             Save
           </button>
         </div>

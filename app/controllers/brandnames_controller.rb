@@ -31,6 +31,8 @@ class BrandnamesController < ApplicationController
     @brand_name = Brandname.new(brandname_params)
     if @brand_name.save
       redirect_to brandnames_path
+    else
+      redirect_to brandnames_path
     end
   end
 
