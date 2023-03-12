@@ -85,7 +85,7 @@
                       <% else %>
                         <%= notification.message %>.
                       <% end %>
-                      <%= link_to notification_path(notification), method: :delete, class: "links-class" do %>
+                      <%= button_to notification_path(notification), method: :delete, class: "button-to-style", form_class: "button-to-form", data: { turbo: "false" } do %>
                         <span style="float: right;">&times;</span>
                       <% end %>
                     </div>
