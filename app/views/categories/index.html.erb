@@ -33,7 +33,7 @@
               <%= category.name %>
             </td>
             <td>
-              <%= link_to category_path(category), method: :delete, class: "links-class", data: {confirm: "Are you sure you want to delete this category?", turbo: "false"} do %>
+              <%= button_to category_path(category), method: :delete, class: "button-to-style", form_class: "button-to-form", data: {confirm: "Are you sure you want to delete this category?", turbo: "false"} do %>
                 Delete
               <% end %>
               •

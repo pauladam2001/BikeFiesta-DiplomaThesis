@@ -187,3 +187,17 @@ a:hover {
   line-height: 1rem; 
   border-radius: 9999px; 
 }
+
+.button-to-form {
+  display: inline;
+}
+
+.button-to-style {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-size: 17px;
+}

@@ -23,23 +23,25 @@ class BrandnamesController < ApplicationController
     @brand_name = Brandname.find(params[:id])
     @brand_name.attributes = brandname_params
     if @brand_name.save
-      redirect_to brandnames_path
+      redirect_back(fallback_location: brandnames_path, alert: "Brand #{@brand_name.name} updated successfully.")
+    else
+      redirect_back(fallback_location: brandnames_path, alert: "Error - #{@brand_name.errors.full_messages.first}.")
     end
   end
   
   def create
     @brand_name = Brandname.new(brandname_params)
     if @brand_name.save
-      redirect_to brandnames_path
+      redirect_to brandnames_path, alert: "Brand #{@brand_name.name} created successfully."
     else
-      redirect_to brandnames_path
+      redirect_back(fallback_location: brandnames_path, alert: "Error - #{@brand_name.errors.full_messages.first}.")
     end
   end
 
   def destroy
     @brand_name = Brandname.find(params[:id])
     @brand_name.destroy
-    redirect_to brandnames_path
+    redirect_back(fallback_location: brandnames_path, alert: "Brand destroyed successfully.")
   end
 
   private

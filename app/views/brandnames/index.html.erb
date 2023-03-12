@@ -33,7 +33,7 @@
               <%= brand_name.name %>
             </td>
             <td>
-              <%= link_to brandname_path(brand_name), method: :delete, class: "links-class", data: {confirm: "Are you sure you want to delete this brand name?", turbo: "false"} do %>
+              <%= button_to brandname_path(brand_name), method: :delete, class: "button-to-style", form_class: "button-to-form", data: {confirm: "Are you sure you want to delete this brand name?", turbo: "false"} do %>
                 Delete
               <% end %>
               •

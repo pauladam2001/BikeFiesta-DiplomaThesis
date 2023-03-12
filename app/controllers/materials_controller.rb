@@ -23,21 +23,25 @@ class MaterialsController < ApplicationController
     @material = Material.find(params[:id])
     @material.attributes = material_params
     if @material.save
-      redirect_to materials_path
+      redirect_back(fallback_location: materials_path, alert: "Material #{@material.name} updated successfully.")
+    else
+      redirect_back(fallback_location: materials_path, alert: "Error - #{@material.errors.full_messages.first}.")
     end
   end
   
   def create
     @material = Material.new(material_params)
     if @material.save
-      redirect_to materials_path
+      redirect_to materials_path, alert: "Material #{@material.name} created successfully."
+    else
+      redirect_back(fallback_location: materials_path, alert: "Error - #{@material.errors.full_messages.first}.")
     end
   end
 
   def destroy
     @material = Material.find(params[:id])
     @material.destroy
-    redirect_to materials_path
+    redirect_back(fallback_location: materials_path, alert: "Material destroyed successfully.")
   end
 
   private

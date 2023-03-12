@@ -23,21 +23,25 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     @category.attributes = category_params
     if @category.save
-      redirect_to categories_path
+      redirect_back(fallback_location: categories_path, alert: "Category #{@category.name} updated successfully.")
+    else
+      redirect_back(fallback_location: categories_path, alert: "Error - #{@category.errors.full_messages.first}.")
     end
   end
   
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to categories_path
+      redirect_to categories_path, alert: "Category #{@category.name} created successfully."
+    else
+      redirect_back(fallback_location: categories_path, alert: "Error - #{@category.errors.full_messages.first}.")
     end
   end
 
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
-    redirect_to categories_path
+    redirect_back(fallback_location: categories_path, alert: "Category destroyed successfully.")
   end
 
   private

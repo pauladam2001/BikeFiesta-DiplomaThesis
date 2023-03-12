@@ -23,21 +23,25 @@ class ColorsController < ApplicationController
     @color = Color.find(params[:id])
     @color.attributes = color_params
     if @color.save
-      redirect_to colors_path
+      redirect_back(fallback_location: colors_path, alert: "Color #{@color.name} updated successfully.")
+    else
+      redirect_back(fallback_location: colors_path, alert: "Error - #{@color.errors.full_messages.first}.")
     end
   end
   
   def create
     @color = Color.new(color_params)
     if @color.save
-      redirect_to colors_path
+      redirect_to colors_path, alert: "Color #{@color.name} created successfully."
+    else
+      redirect_back(fallback_location: colors_path, alert: "Error - #{@color.errors.full_messages.first}.")
     end
   end
 
   def destroy
     @color = Color.find(params[:id])
     @color.destroy
-    redirect_to colors_path
+    redirect_back(fallback_location: colors_path, alert: "Color destroyed successfully.")
   end
 
   private

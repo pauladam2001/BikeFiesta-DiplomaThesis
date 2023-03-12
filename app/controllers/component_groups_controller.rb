@@ -23,21 +23,25 @@ class ComponentGroupsController < ApplicationController
     @component = ComponentGroup.find(params[:id])
     @component.attributes = component_group_params
     if @component.save
-      redirect_to component_groups_path
+      redirect_back(fallback_location: component_groups_path, alert: "Component #{@component.name} updated successfully.")
+    else
+      redirect_back(fallback_location: component_groups_path, alert: "Error - #{@component.errors.full_messages.first}.")
     end
   end
   
   def create
     @component = ComponentGroup.new(component_group_params)
     if @component.save
-      redirect_to component_groups_path
+      redirect_to component_groups_path, alert: "Component #{@component.name} created successfully."
+    else
+      redirect_back(fallback_location: component_groups_path, alert: "Error - #{@component.errors.full_messages.first}.")
     end
   end
 
   def destroy
     @component = ComponentGroup.find(params[:id])
     @component.destroy
-    redirect_to component_groups_path
+    redirect_back(fallback_location: component_groups_path, alert: "Component destroyed successfully.")
   end
 
   private
