@@ -255,7 +255,7 @@ class PostsController < ApplicationController
     post.save
 
     phone = post.user.phone
-    message = "BikeFiesta - One of the posts that you reported was banned. Thank you!"
+    message = "BikeFiesta - Your post #{post.name} was banned."
     AsyncSendSmsToUser.perform_async(phone, message)
 
     AsyncMarkPostReportsAsSolved.perform_async(post.id)

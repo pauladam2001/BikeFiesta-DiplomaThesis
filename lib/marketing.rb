@@ -151,6 +151,8 @@ module Marketing
       phone = report.user.phone
       AsyncSendSmsToUser.perform_async(phone, message)
 
+      Notification.create(notification_type: "banned_post", notified_id: report.user_id, message: "One of the posts that you reported was banned")
+
       report.solved = true
       report.save
     end
