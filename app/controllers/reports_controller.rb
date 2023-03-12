@@ -25,7 +25,7 @@ class ReportsController < ApplicationController
     report = Report.find(params[:id])
     report.solved = true
     report.save
-    redirect_back(fallback_location: reports_path)
+    redirect_back(fallback_location: reports_path, alert: "Report marked as solved successfully.")
   end
 
   private

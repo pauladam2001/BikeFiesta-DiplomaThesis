@@ -1,5 +1,5 @@
 <% if resource.errors.any? %>
-  <% if resource.errors.full_messages.first.include?("successfully")%>
+  <% if resource.errors.full_messages.first.include?("successfully") || resource.errors.full_messages.first.include?("Thank")%>
     <div class="alert-success">
   <% else %>
     <div class="alert-danger">

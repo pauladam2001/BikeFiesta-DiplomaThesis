@@ -52,7 +52,7 @@
               <%= number_to_currency(cost.amount, precision: 2, :unit => '€') %>
             </td>
             <td>
-              <%= link_to cost_path(cost), method: :delete, class: "links-class", data: {confirm: "Are you sure you want to delete this cost?", turbo: "false"} do %>
+              <%= button_to cost_path(cost), method: :delete, class: "button-to-style", form_class: "button-to-form", data: {confirm: "Are you sure you want to delete this cost?", turbo: "false"} do %>
                 Delete
               <% end %>
               •

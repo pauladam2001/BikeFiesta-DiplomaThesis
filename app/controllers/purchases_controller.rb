@@ -187,7 +187,7 @@ class PurchasesController < ApplicationController
       AsyncCheckForDiscount.perform_async(purchase.seller_id, "seller")
       AsyncCheckForDiscount.perform_async(purchase.buyer_id, "buyer")
 
-      redirect_back(fallback_location: purchases_path)
+      redirect_back(fallback_location: purchases_path, alert: "Purchase marked as shipped successfully.")
     else
       redirect_back(fallback_location: purchases_path, alert: "Error - #{response.message}.")
     end
@@ -236,7 +236,7 @@ class PurchasesController < ApplicationController
 
       purchase.delete
 
-      redirect_back(fallback_location: purchases_path)
+      redirect_back(fallback_location: purchases_path, alert: "Purchase canceled successfully.")
     end
   end
 
@@ -244,14 +244,14 @@ class PurchasesController < ApplicationController
     purchase = Purchase.find(params[:id])
     purchase.on_hold = true
     purchase.save
-    redirect_back(fallback_location: purchases_path)
+    redirect_back(fallback_location: purchases_path, alert: "Purchase marked on hold successfully.")
   end
 
   def mark_off_hold
     purchase = Purchase.find(params[:id])
     purchase.on_hold = false
     purchase.save
-    redirect_back(fallback_location: purchases_path)
+    redirect_back(fallback_location: purchases_path, alert: "Purchase marked off hold successfully.")
   end
 
   def show

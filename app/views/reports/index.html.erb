@@ -62,7 +62,7 @@
                 <br/>
                 •
                 <br/>
-                <%= link_to ban_post_path(report.post_id), method: :put, class: "links-class", data: { turbo: "false" } do %>
+                <%= button_to ban_post_path(report.post_id), method: :put, class: "button-to-style", form_class: "button-to-form", data: { turbo: "false" } do %>
                   Ban Post
                 <% end %>
               <% end %>
@@ -70,7 +70,7 @@
                 <br/>
                 •
                 <br/>
-                <%= link_to solve_report_path(report), class: "links-class", method: :put, data: { confirm: "Are you sure you want to mark this report as solved?", turbo: "false" }  do %>
+                <%= button_to solve_report_path(report), class: "button-to-style", form_class: "button-to-form", method: :put, data: { confirm: "Are you sure you want to mark this report as solved?", turbo: "false" }  do %>
                   Mark as Solved
                 <% end %>
                 <br/>

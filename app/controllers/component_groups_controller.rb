@@ -41,7 +41,7 @@ class ComponentGroupsController < ApplicationController
   def destroy
     @component = ComponentGroup.find(params[:id])
     @component.destroy
-    redirect_back(fallback_location: component_groups_path, alert: "Component destroyed successfully.")
+    redirect_back(fallback_location: component_groups_path, alert: "Component deleted successfully.")
   end
 
   private

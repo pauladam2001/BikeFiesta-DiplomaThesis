@@ -41,7 +41,7 @@ class ColorsController < ApplicationController
   def destroy
     @color = Color.find(params[:id])
     @color.destroy
-    redirect_back(fallback_location: colors_path, alert: "Color destroyed successfully.")
+    redirect_back(fallback_location: colors_path, alert: "Color deleted successfully.")
   end
 
   private

@@ -9,10 +9,18 @@ class UsersController < ApplicationController
     @users = @users.where("full_name ilike?", "%#{params[:name]}%") if params[:name].present?
     @users = @users.where(role: params[:role]) if params[:role].present? && params[:role] != "all"
 
+    if params[:archived].present?
+      @users = @users.where(archived: params[:archived])
+    else
+      @users = @users.where(archived: false)
+    end
+
     @users = @users.paginate(page: params[:page], per_page: 12)
   end
 
   def show
+    require 'will_paginate/array'
+    
     @user = User.find(params[:id])
     @current_user = current_user
     if @current_user.is_normal? && @user.is_normal?
@@ -62,28 +70,28 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     user.archived = true
     user.save(validate: false)
-    redirect_back(fallback_location: users_path)
+    redirect_back(fallback_location: users_path, alert: "User archived successfully.")
   end
 
   def unarchive_user
     user = User.find(params[:id])
     user.archived = false
     user.save(validate: false)
-    redirect_back(fallback_location: users_path)
+    redirect_back(fallback_location: users_path, alert: "User unarchived successfully.")
   end
 
   def make_user_admin
     user = User.find(params[:id])
     user.role = "admin"
     user.save(validate: false)
-    redirect_back(fallback_location: users_path)
+    redirect_back(fallback_location: users_path, alert: "#{user.full_name} updated successfully.")
   end
 
   def remove_user_admin
     user = User.find(params[:id])
     user.role = "normal"
     user.save(validate: false)
-    redirect_back(fallback_location: users_path)
+    redirect_back(fallback_location: users_path, alert: "#{user.full_name} updated successfully.")
   end
 
   private

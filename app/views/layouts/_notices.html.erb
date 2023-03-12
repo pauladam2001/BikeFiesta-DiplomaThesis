@@ -1,5 +1,5 @@
 <% if alert %>
-  <% if alert.include?("successfully")%>
+  <% if alert.include?("successfully") || alert.include?("Thank")%>
     <div class="alert-success">
   <% else %>
     <div class="alert-danger">

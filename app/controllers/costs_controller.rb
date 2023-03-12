@@ -30,21 +30,25 @@ class CostsController < ApplicationController
     @cost = Cost.find(params[:id])
     @cost.attributes = cost_params
     if @cost.save
-      redirect_to costs_path
+      redirect_back(fallback_location: costs_path, alert: "Cost updated successfully.")
+    else
+      redirect_back(fallback_location: costs_path, alert: "Error - #{@cost.errors.full_messages.first}.")
     end
   end
 
   def create
     @cost = Cost.new(cost_params)
     if @cost.save
-      redirect_to costs_path
+      redirect_to costs_path, alert: "Cost updated successfully."
+    else
+      redirect_back(fallback_location: costs_path, alert: "Error - #{@cost.errors.full_messages.first}.")
     end
   end
 
   def destroy
     @cost = Cost.find(params[:id])
     @cost.destroy
-    redirect_to costs_path
+    redirect_back(fallback_location: costs_path, alert: "Cost deleted successfully.")
   end
 
   private

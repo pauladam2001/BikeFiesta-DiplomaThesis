@@ -28,7 +28,7 @@ class SuggestionsController < ApplicationController
 
     Notification.create(notification_type: "suggestion", notified_id: suggestion.user_id, message: "Your suggestion has been seen. Thank you")
 
-    redirect_back(fallback_location: suggestions_path)
+    redirect_back(fallback_location: suggestions_path, alert: "Suggestion marked as solved successfully.")
   end
 
   private

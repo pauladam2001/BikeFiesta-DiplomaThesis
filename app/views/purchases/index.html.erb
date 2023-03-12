@@ -70,25 +70,25 @@
             <td>
               <% if purchase.status != "CAPTURED"%>
                 <% if purchase.status == "AUTHORIZED_PROOF" && !purchase.on_hold %>
-                  <%= link_to mark_as_shipped_purchase_path(purchase), class: "links-class", method: :put, data: {confirm: "Are you sure you want to mark this purchase as shipped?"} do %>
+                  <%= button_to mark_as_shipped_purchase_path(purchase), class: "button-to-style", form_class: "button-to-form", method: :put, data: {confirm: "Are you sure you want to mark this purchase as shipped?"} do %>
                     Mark as Shipped
                   <% end %>
                   <br/>
                   •
                   <br/>
                 <% end %>
-                <%= link_to cancel_purchase_purchase_path(purchase), class: "links-class", method: :put, data: {confirm: "Are you sure you want to delete this purchase?"} do %>
+                <%= button_to cancel_purchase_purchase_path(purchase), class: "button-to-style", form_class: "button-to-form", method: :put, data: {confirm: "Are you sure you want to delete this purchase?"} do %>
                   Cancel Purchase
                 <% end %>
                 <br/>
                 •
                 <br/>
                 <% if purchase.on_hold %>
-                  <%= link_to mark_off_hold_purchase_path(purchase), class: "links-class", method: :put do %>
+                  <%= button_to mark_off_hold_purchase_path(purchase), class: "button-to-style", form_class: "button-to-form", method: :put, data: { turbo: "false" } do %>
                     Mark Off Hold
                   <% end %>
                 <% else %>
-                  <%= link_to mark_on_hold_purchase_path(purchase), class: "links-class", method: :put do %>
+                  <%= button_to mark_on_hold_purchase_path(purchase), class: "button-to-style", form_class: "button-to-form", method: :put, data: { turbo: "false" } do %>
                     Mark On Hold
                   <% end %>
                 <% end %>

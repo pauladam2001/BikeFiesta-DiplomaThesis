@@ -41,7 +41,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
-    redirect_back(fallback_location: categories_path, alert: "Category destroyed successfully.")
+    redirect_back(fallback_location: categories_path, alert: "Category deleted successfully.")
   end
 
   private

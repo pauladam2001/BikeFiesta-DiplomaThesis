@@ -41,7 +41,7 @@ class BrandnamesController < ApplicationController
   def destroy
     @brand_name = Brandname.find(params[:id])
     @brand_name.destroy
-    redirect_back(fallback_location: brandnames_path, alert: "Brand destroyed successfully.")
+    redirect_back(fallback_location: brandnames_path, alert: "Brand deleted successfully.")
   end
 
   private

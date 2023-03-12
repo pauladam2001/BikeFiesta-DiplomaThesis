@@ -260,7 +260,7 @@ class PostsController < ApplicationController
 
     AsyncMarkPostReportsAsSolved.perform_async(post.id)
 
-    redirect_back(fallback_location: reports_path)
+    redirect_back(fallback_location: reports_path, alert: "Post banned successfully.")
   end
 
   protected

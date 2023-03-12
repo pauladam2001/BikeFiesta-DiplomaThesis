@@ -41,7 +41,7 @@ class MaterialsController < ApplicationController
   def destroy
     @material = Material.find(params[:id])
     @material.destroy
-    redirect_back(fallback_location: materials_path, alert: "Material destroyed successfully.")
+    redirect_back(fallback_location: materials_path, alert: "Material deleted successfully.")
   end
 
   private

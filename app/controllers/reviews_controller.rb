@@ -50,13 +50,13 @@ class ReviewsController < ApplicationController
       notification = Notification.where(post_id: params[:post_id], notified_id: reviewer_id).first
       notification.delete
 
-      redirect_to posts_path
+      redirect_to posts_path, alert: "Thank you for your review."
     end
   end
 
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
-    redirect_to reviews_path
+    redirect_back(fallback_location: reviews_path, alert: "Review deleted successfully.")
   end
 end
