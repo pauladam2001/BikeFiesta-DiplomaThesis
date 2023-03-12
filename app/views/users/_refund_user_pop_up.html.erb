@@ -1,0 +1,15 @@
+<div id="refund_pop_up" class="hidden">
+  <div class="popup-wrapper" style="width: 25rem; min-height: 8rem; top: 40%; left: 40%;">
+    <div>
+      <input required name="refund_amount" type="number" placeholder="Amount" class="input">
+    </div>
+    <div style="margin-top: 1rem;">
+      <button name="submitButton" value="Refund User" class="button" data-turbo="false">
+        Refund
+      </button>
+      <button type="button" onclick="closeRefundUserPopUp()" class="button">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

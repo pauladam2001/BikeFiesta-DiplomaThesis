@@ -3,25 +3,55 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, :check_permissions
   
   def index
-    @users = User.where.not(id: current_user.id).order(:email)
-
-    @users = @users.where("email ilike?", "%#{params[:email]}%") if params[:email].present?
-    @users = @users.where("full_name ilike?", "%#{params[:name]}%") if params[:name].present?
-    @users = @users.where(role: params[:role]) if params[:role].present? && params[:role] != "all"
-
-    if params[:archived].present?
-      @users = @users.where(archived: params[:archived])
+    if params[:submitButton] == "Refund User"
+      refund_user(params[:user_id].to_i, params[:refund_amount].to_i)
     else
-      @users = @users.where(archived: false)
+      @users = User.where.not(id: current_user.id).order(:email)
+
+      @users = @users.where("email ilike?", "%#{params[:email]}%") if params[:email].present?
+      @users = @users.where("full_name ilike?", "%#{params[:name]}%") if params[:name].present?
+      @users = @users.where(role: params[:role]) if params[:role].present? && params[:role] != "all"
+
+      if params[:archived].present?
+        @users = @users.where(archived: params[:archived])
+      else
+        @users = @users.where(archived: false)
+      end
+
+      @total_stats = {
+        total_users: User.where(role: "normal").count,
+        archived_users: User.where(role: "normal", archived: true).count
+      }
+      @total_stats[:unarchived_users] = @total_stats[:total_users] - @total_stats[:archived_users]
+
+      @users = @users.paginate(page: params[:page], per_page: 12)
     end
+  end
 
-    @total_stats = {
-      total_users: User.where(role: "normal").count,
-      archived_users: User.where(role: "normal", archived: true).count
-    }
-    @total_stats[:unarchived_users] = @total_stats[:total_users] - @total_stats[:archived_users]
+  def refund_user(user_id, amount)
+    ActiveMerchant::Billing::Base.mode = :test
 
-    @users = @users.paginate(page: params[:page], per_page: 12)
+    gateway = ActiveMerchant::Billing::PaypalGateway.new(
+      login: ENV['PAYPAL_LOGIN'],
+      password: ENV['PAYPAL_PASSWORD'],
+      signature: ENV['PAYPAL_SIGNATURE']
+    )
+
+    user = User.find(user_id)
+
+    # transfer = gateway.transfer(amount, user.paypal_email, :subject => "Refund", :note => "Sorry for the inconvenience.")
+    transfer = gateway.transfer(amount * 100, 'sb-3orv825105929@personal.example.com', :subject => "Refund", :note => "Sorry for the inconvenience.")
+    if transfer.success?
+      Notification.create(notification_type: "money_sent", notified_id: user.id, message: "€#{amount} were refunded to you")
+
+      message = "BikeFiesta - €#{amount} were refunded to you."
+
+      AsyncSendSmsToUser.perform_async(user.phone, message)
+
+      Cost.create(amount: amount, description: "Refund for #{user.email}", day: Date.today)
+
+      redirect_back(fallback_location: users_path, alert: "User refunded and cost created successfully.")
+    end
   end
 
   def show
