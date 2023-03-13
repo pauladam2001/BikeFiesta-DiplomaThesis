@@ -11,7 +11,7 @@
         <div>used bicycles.</div>
       </div>
     </div>
-    <div class="container" id="container" style="margin-top: 20vh;">
+    <div class="container" id="container" style="margin-top: 20vh; margin-left: 3rem;">
       <div class="form-container sign-up-container">
         <div class="login-form">
           <h1 class="titles">Create Account</h1>
@@ -27,7 +27,7 @@
               or
               <%= f.file_field :avatar, id: 'image', accept: 'image/*' %>
             </label>
-            <%= f.submit "Register", :class => 'button margin-top', data: { turbo: "false" } %>
+            <%= f.submit "Register", class: 'button', style: "border: 2px solid white;", data: { turbo: "false" } %>
           <% end %>
         </div>
       </div>
@@ -37,7 +37,7 @@
           <div class="social-container">
             <%#= link_to image_tag("google-icon.png", border: 0), omniauth_authorize_path(resource_name, 'google_oauth2'), method: :post, data: { turbo: "false" } %>
             <%= form_for "Login", url: omniauth_authorize_path(resource_name, 'google_oauth2'), method: :post, data: {turbo: "false"} do |f| %>
-              <%= image_submit_tag("google-icon.png", border: 0) %>
+              <%= image_submit_tag("google-icon.png", border: 0, width: '35px', height: '35px') %>
             <% end %>  
           </div>
           <span class="span">or use your account</span>
@@ -45,15 +45,15 @@
             <%= f.email_field :email, id: "sign-in-email", autofocus: true, autocomplete: "email", placeholder: "Email", :class => 'input' %>
             <%= f.password_field :password, id: "sign-in-password", autocomplete: "current-password", placeholder: "Password", :class => 'input' %>
             <% if devise_mapping.rememberable? %>
-              <div class="">
-                <%= f.check_box :remember_me %>
-                <%= f.label :remember_me %>
+              <div style="display: flex; margin-left: 5rem;">
+                <%= f.check_box :remember_me, class: "cursor-pointer" %>
+                <%= f.label :remember_me, class: "cursor-pointer", style: "margin-top: 10px; margin-left: 5px;" %>
               </div>
             <% end %>
             <div style="padding-top: 1rem;">
-              <%= link_to "Forgot your password?", new_password_path(resource_name), data: { turbo: "false" } %>
+              <%= link_to "Forgot your password?", new_password_path(resource_name), class: "forgot-password", data: { turbo: "false" } %>
             </div>
-            <%= f.submit "Log in", :class => 'button margin-top', data: { turbo: "false" } %>
+            <%= f.submit "Log in", class: 'button margin-top', style: "border: 2px solid white;", data: { turbo: "false" } %>
           <% end %>
         </div>
       </div>

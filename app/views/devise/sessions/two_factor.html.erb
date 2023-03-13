@@ -1,6 +1,6 @@
 <div class="sms-code-div">
   <span class="sms-code-span">Please introduce the code you received in the message</span>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name), method: :post) do |f| %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), method: :post, data: {turbo: "false"}) do |f| %>
     <%= f.hidden_field :email %>
     <input type="text" class="input input-center" placeholder="SMS Code" name="sms_code" value="<%= params[:sms_code] %>">
     <%= f.submit "Sign in", class: "button", id: "send-sms-button" %>
