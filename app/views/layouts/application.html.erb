@@ -246,7 +246,7 @@
     <% end %>
     <%= yield %>
   </body>
-  <% if current_user.is_normal? %>
+  <% if current_user.present? && current_user.is_normal? %>
    <div class="footer <%= request.fullpath == "/follow_page" || request.fullpath.include?("/posts/") ? "footer-fixed" : "footer-relative" %>">© <%= Time.now.year %><span>BikeFiesta. All rights reserved.</span></div>
   <% end %>
 </html>
