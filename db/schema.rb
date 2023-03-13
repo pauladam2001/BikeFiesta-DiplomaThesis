@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_10_192920) do
+ActiveRecord::Schema.define(version: 2023_03_13_115106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,24 +55,28 @@ ActiveRecord::Schema.define(version: 2023_03_10_192920) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_brandnames_on_name", unique: true
   end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
   create_table "colors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_colors_on_name", unique: true
   end
 
   create_table "component_groups", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_component_groups_on_name", unique: true
   end
 
   create_table "costs", force: :cascade do |t|
@@ -81,6 +85,7 @@ ActiveRecord::Schema.define(version: 2023_03_10_192920) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "day"
+    t.index ["amount", "description"], name: "index_costs_on_amount_and_description", unique: true
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -101,6 +106,7 @@ ActiveRecord::Schema.define(version: 2023_03_10_192920) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_materials_on_name", unique: true
   end
 
   create_table "messages", force: :cascade do |t|
@@ -161,6 +167,10 @@ ActiveRecord::Schema.define(version: 2023_03_10_192920) do
     t.boolean "shipped", default: false
     t.float "sale_percentage"
     t.datetime "shipped_date"
+    t.index ["buyer_id"], name: "index_posts_on_buyer_id"
+    t.index ["is_active", "user_id"], name: "index_posts_on_is_active_and_user_id"
+    t.index ["is_active"], name: "index_posts_on_is_active"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -239,6 +249,7 @@ ActiveRecord::Schema.define(version: 2023_03_10_192920) do
     t.integer "user_posts"
     t.float "user_revenue"
     t.float "user_spent"
+    t.index ["end_date", "period"], name: "stats_common_query"
   end
 
   create_table "suggestions", force: :cascade do |t|

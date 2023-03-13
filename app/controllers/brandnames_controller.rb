@@ -33,9 +33,13 @@ class BrandnamesController < ApplicationController
   
   def create
     @brand_name = Brandname.new(brandname_params)
-    if @brand_name.save
-      redirect_to brandnames_path, alert: "Brand #{@brand_name.name} created successfully."
-    else
+    begin
+      if @brand_name.save
+        redirect_to brandnames_path, alert: "Brand #{@brand_name.name} created successfully."
+      else
+        redirect_back(fallback_location: brandnames_path, alert: "Error - #{@brand_name.errors.full_messages.first}.")
+      end
+    rescue PG::UniqueViolation
       redirect_back(fallback_location: brandnames_path, alert: "Error - #{@brand_name.errors.full_messages.first}.")
     end
   end
