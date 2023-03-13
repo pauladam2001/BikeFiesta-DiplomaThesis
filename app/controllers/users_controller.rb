@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
         message = "BikeFiesta - €#{amount} were refunded to you."
 
-        AsyncSendSmsToUser.perform_async(user.phone, message)
+        AsyncSendSmsToUser.perform_async(user&.phone, message)
 
         Cost.create(amount: amount, description: "Refund for #{user.email}", day: Date.today)
 

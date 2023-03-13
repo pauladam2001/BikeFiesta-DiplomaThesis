@@ -8,7 +8,7 @@ module AuthenticateWithTwilio
       authenticate_user_with_sms_code(user)
     elsif user&.valid_password?(user_params[:password])
       User.generate_code(user)
-      send_auth_sms(user.phone, user.code)
+      send_auth_sms(user&.phone, user.code)
       prompt_for_sms_code(user, nil)
     end
   end

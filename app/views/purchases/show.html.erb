@@ -27,7 +27,7 @@
               <br/>
               <i class="far fa-envelope"></i> <%= @purchase.seller.email %>
               <br/>
-              <i class="fas fa-phone"></i> <%= @purchase.seller.phone %>
+              <i class="fas fa-phone"></i> <%= @purchase.seller&.phone %>
             </td>
             <td>
               <b><%= @purchase.buyer.full_name %></b>
@@ -36,7 +36,7 @@
               <br/>
               <i class="far fa-envelope"></i> <%= @purchase.buyer.email %>
               <br/>
-              <i class="fas fa-phone"></i> <%= @purchase.buyer.phone %>
+              <i class="fas fa-phone"></i> <%= @purchase.buyer&.phone %>
             </td>
           </tr>
         </table>

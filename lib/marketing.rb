@@ -148,7 +148,7 @@ module Marketing
     message = "BikeFiesta - One of the posts that you reported was banned. Thank you!"
 
     Report.where(post_id: post_id).find_each do |report|
-      phone = report.user.phone
+      phone = report.user&.phone
       AsyncSendSmsToUser.perform_async(phone, message)
 
       Notification.create(notification_type: "banned_post", notified_id: report.user_id, message: "One of the posts that you reported was banned")
@@ -190,8 +190,8 @@ module Marketing
           Notification.create(notification_type: "cancel_purchase", notified_id: purchase.seller_id, message: "The shipping proof for #{purchase.post.name} was not uploaded in time. The purchase was cancelled")
           Notification.create(notification_type: "cancel_purchase", notified_id: purchase.buyer_id, message: "The shipping proof for #{purchase.post.name} was not uploaded in time. The purchase was cancelled")
 
-          seller_phone = purchase.seller.phone
-          buyer_phone = purchase.buyer.phone
+          seller_phone = purchase.seller&.phone
+          buyer_phone = purchase.buyer&.phone
           message = "BikeFiesta - The shipping proof for #{purchase.post.name} was not uploaded in time. The purchase was cancelled."
 
           AsyncSendSmsToUser.perform_async(seller_phone, message)
@@ -240,7 +240,7 @@ module Marketing
         if transfer.success?
           Notification.create(notification_type: "money_sent", notified_id: purchase.seller_id, message: "The money for #{purchase.post.name} were sent to you")
 
-          seller_phone = purchase.seller.phone
+          seller_phone = purchase.seller&.phone
 
           if post.sale_percentage.nil?
             max_discount = discount

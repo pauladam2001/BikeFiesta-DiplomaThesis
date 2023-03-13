@@ -7,7 +7,7 @@ class AsyncSendSmsToFollowers
     message = "BikeFiesta - #{user.full_name} just posted a new bike for sale (#{name}), go check it out!"
 
     user.followers.each do |follower|
-      phone = follower.phone
+      phone = follower&.phone
       AsyncSendSmsToUser.perform_async(phone, message)
     end
     puts "Finish Running AsyncSendSmsToFollowers"

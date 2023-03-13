@@ -14,7 +14,7 @@ class AsyncCheckForDiscount
 
         seller_message = "BikeFiesta - You have a 5% discount on your next sell/order."
 
-        AsyncSendSmsToUser.perform_async(user.phone, seller_message)
+        AsyncSendSmsToUser.perform_async(user&.phone, seller_message)
       else
         user.discount = nil
       end
@@ -27,7 +27,7 @@ class AsyncCheckForDiscount
 
         buyer_message = "BikeFiesta - You have a 5% discount on your next sell/order."
 
-        AsyncSendSmsToUser.perform_async(user.phone, buyer_message)
+        AsyncSendSmsToUser.perform_async(user&.phone, buyer_message)
       else
         user.discount = nil
       end
