@@ -100,9 +100,9 @@
   border-radius: 15px;
 }
 
-::placeholder {
-  /* color: #dad7cd; */
-}
+/* ::placeholder {
+  color: #dad7cd;
+} */
 
 .container {
 	background-color: white;
