@@ -14,19 +14,15 @@
  *= require_self
  */
 
+
+
  :root {
   --dark-red: #780000;
   --light-red: #C1121F;
   --beige: #FDF0D5;
   --dark-blue: #003049;
   --light-blue: #669BBC;
-  /* --white: #FFFFFF;
-  --dark-green: #0D1F22;
-  --light-green: #318223;
-  --mid-green: #3C5233;
-  --light-red: #C1121F; */
-  --primary-color: #185ee0;
-  --secondary-color: #e6eef9;
+  font-family: 'Nunito Sans', sans-serif;
  }
 
  .menu {
