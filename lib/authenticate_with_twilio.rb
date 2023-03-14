@@ -8,14 +8,16 @@ module AuthenticateWithTwilio
       authenticate_user_with_sms_code(user)
     elsif user&.valid_password?(user_params[:password])
       User.generate_code(user)
-      send_auth_sms(user&.phone, user.code)
+      crypt = ActiveSupport::MessageEncryptor.new(Base64.decode64(ENV['KEY']))
+      send_auth_sms(user&.phone, crypt.decrypt_and_verify(user.code))
       prompt_for_sms_code(user, nil)
     end
   end
 
   private
     def valid_sms_code?(user)
-      if user.code == params[:sms_code]
+      crypt = ActiveSupport::MessageEncryptor.new(Base64.decode64(ENV['KEY']))
+      if user.code.present? && crypt.decrypt_and_verify(user.code) == params[:sms_code]
         return true
       else
         return false

@@ -71,7 +71,9 @@ class User < ApplicationRecord
 
   def self.generate_code(user)
     code = Random.rand.to_s[2..7]
-    user.code = code
+    crypt = ActiveSupport::MessageEncryptor.new(Base64.decode64(ENV['KEY']))
+    encrypted_code = crypt.encrypt_and_sign(code)
+    user.code = encrypted_code
     user.code_expiration_date = Time.now + 30.minutes
     user.save(validate: false)
   end
