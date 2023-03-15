@@ -5,7 +5,8 @@
   margin-bottom: 10px;
   margin-left: 15px;
   padding: 15px;
-  background-color: var(--light-red);
+  background-color: #006d77;
+  color: white;
 }
 
 .messages-main-container {
@@ -14,16 +15,22 @@
 }
 
 .content-container {
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column-reverse;
-  height: 93vh;
+  height: 97vh;
   overflow-y: scroll;
   width: 65vw;
   padding-right: 20px;
-  border: 1px solid black;
+  border: 1px solid #2a9d8f;
+  border-radius: 15px;
   margin-left: 5px;
   overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.content-container::-webkit-scrollbar {
+  display: none;
 }
 
 .rooms-container {
@@ -81,14 +88,17 @@
   height: 100px;
   display: flex;
   align-items: center;
-  border-top: 2px solid #EEE;
-  background-color: beige;
+  border-top: 1px solid #2a9d8f;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: white;
 }
 
 .room-name-div {
   margin-top: 1rem;
-  margin-left: 33rem;
-  margin-bottom: 0.5rem;
+  text-align: center;
+  margin-bottom: 0.3rem;
+  color: #2a9d8f;
 }
 
 .write-message {
@@ -97,6 +107,12 @@
   margin-left: 20px;
   padding: 10px;
   border-radius: 15px;
+  outline: none;
+  outline: 1px solid #2a9d8f;
+}
+
+.write-message:focus {
+  outline: 2px solid #006d77;
 }
 
 .footer-chat-form {
@@ -109,4 +125,10 @@
   margin-top: 20px;
   margin-left: 1rem;
   float: right;
+}
+
+.chat-room {
+  border: 1px solid #2a9d8f;
+  border-radius: 15px;
+  padding: 5px;
 }

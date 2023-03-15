@@ -1,4 +1,4 @@
 <%= form_with(model: @room, remote: true, class: "", data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }) do |f| %>
-  <%= f.text_field :name, class: "input", autocomplete: 'off' %>
+  <%= f.text_field :name, class: "input", autocomplete: 'off', placeholder: "Room Name" %>
   <%= f.submit "Create New Room", data: { disable_with: false }, :class => 'button', :style => "margin-left: 4rem; font-size: 10px;" %>
 <% end %>

@@ -2,7 +2,7 @@
   <div class="messages-main-container">
     <div class="flex-container">
       <div class="rooms-container">
-        <h1 class="h1-title" style="margin-left: 2rem; margin-bottom: 2rem; margin-top: 2rem;">Users</h1>
+        <h1 class="h1-title" style="margin-bottom: 2rem; margin-top: 2rem;">Users</h1>
         <%= turbo_stream_from "users" %>
         <div id="users" class="users-div">
           <%= render @users %>
@@ -10,7 +10,7 @@
         <div class="pagination" data-turbo="false">
           <%= will_paginate @users, param_name: 'users_page' %>
         </div>
-        <h1 class="h1-title" style="margin-left: 2rem; margin-bottom: 2rem;">Rooms</h1>
+        <h1 class="h1-title" style="margin-bottom: 2rem;">Rooms</h1>
         <%= turbo_stream_from "rooms" %>
         <div id="rooms" class="rooms-div">
           <%= render @rooms %>
@@ -26,14 +26,14 @@
       <% if @single_room %>
         <%= render partial: 'layouts/new_message_form' %>
         <div id="messages">
-          <div style=" margin-left: 26rem;">
+          <div style="text-align: center; border-bottom: 1px solid #2a9d8f; margin-bottom: 0.5rem; margin-left: 1rem">
             <span>This is the beginning of the conversation</span>
           </div>
           <%= render @messages %>
         </div>                                                  <%# everything in this div is reversed because we have flex-direction: column-reverse in order to be scrolled to the text box%>
         <%= turbo_stream_from @single_room %>
         <div class="room-name-div">
-          <h4 class="text-center"><%= @user&.name || @single_room.name %></h4>
+          <h4><%= @user&.name || @single_room.name %></h4>
         </div>
       <% end %>
     </div>
@@ -57,14 +57,14 @@
       <% if @single_room %>
         <%= render partial: 'layouts/new_message_form' %>
         <div id="messages">
-          <div style=" margin-left: 26rem;">
+          <div style="text-align: center; border-bottom: 1px solid #2a9d8f; margin-bottom: 0.5rem; margin-left: 1rem">
             <span>This is the beginning of the conversation</span>
           </div>
           <%= render @messages %>
         </div>                                                  <%# everything in this div is reversed because we have flex-direction: column-reverse in order to be scrolled to the text box%>
         <%= turbo_stream_from @single_room %>
         <div class="room-name-div">
-          <h4 class="text-center"><%= @user&.name || @single_room.name %></h4>
+          <h4><%= @user&.name || @single_room.name %></h4>
         </div>
       <% end %>
     </div>
