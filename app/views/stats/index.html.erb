@@ -1,6 +1,6 @@
 <div class="main-page-div">
   <% if @start_date.present? && @end_date.present? %>
-    <h1 class="h1-title">Stats - <%= link_to 'Download as Excel', stats_path(start_date: params[:start_date], end_date: params[:end_date], format: :xlsx), method: :post, class: "", data: { turbo: "false" } %></h1>
+    <h1 class="h1-title">Stats - <%= link_to 'Download as Excel', stats_path(start_date: params[:start_date], end_date: params[:end_date], format: :xlsx), method: :post, class: "links-class", style: "font-size: 30px;", data: { turbo: "false" } %></h1>
   <% else %>
     <h1 class="h1-title">Stats</h1>
   <% end %>

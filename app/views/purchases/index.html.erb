@@ -44,14 +44,14 @@
               <% if purchase.status == "CAPTURED" %>
                 <span style="padding-top: 0.1em; padding-bottom: 0.1rem" class="admin-label">Shipped</span>
                 <br/>
-                <%= link_to "Download PDF", purchase_path(purchase, format: :pdf), data: { turbo: "false" } %>
+                <%= link_to "Download PDF", purchase_path(purchase, format: :pdf), class: "links-class", data: { turbo: "false" } %>
               <% end %>
               <% if purchase.status == "AUTHORIZED_PROOF" %>
-                <span style="padding-top: 0.1em; padding-bottom: 0.1rem; background-color: orange;" class="admin-label">Proof</span>
+                <span style="padding-top: 0.1em; padding-bottom: 0.1rem; background-color: #F5761A; color: white;" class="admin-label">Proof</span>
               <% end %>
 
               <% if purchase.on_hold %>
-                <span style="padding-top: 0.1em; padding-bottom: 0.1rem; background-color: yellow;" class="admin-label">On Hold</span>
+                <span style="padding-top: 0.1em; padding-bottom: 0.1rem; background-color: #FFD800; color: white;" class="admin-label">On Hold</span>
               <% end %>
             </td>
             <td style="width: 20%;">
@@ -62,7 +62,7 @@
               <% end %>
             </td>
             <td style="width: 20%;">
-              <%= link_to purchase.seller.full_name, user_posts_path(user_id: purchase.seller_id), data: { turbo: "false" } %> - <%= link_to purchase.buyer.full_name, user_posts_path(user_id: purchase.buyer_id), data: { turbo: "false" } %>  - <%= link_to purchase.post.name, post_path(purchase.post), data: { turbo: "false" } %> - <%= number_to_currency(purchase.amount, precision: 2, :unit => '€') %>
+              <%= link_to purchase.seller.full_name, user_posts_path(user_id: purchase.seller_id), class: "links-class", data: { turbo: "false" } %> - <%= link_to purchase.buyer.full_name, user_posts_path(user_id: purchase.buyer_id), class: "links-class", data: { turbo: "false" } %>  - <%= link_to purchase.post.name, post_path(purchase.post), class: "links-class", data: { turbo: "false" } %> - <%= number_to_currency(purchase.amount, precision: 2, :unit => '€') %>
             </td>
             <td style="width: 20%;">
               <%= purchase.shipping_details %>

@@ -16,9 +16,9 @@
           <tr class="<%= cycle("bg-white", "bg-gray") %>">
             <td>
               <% if room.is_private %>
-                You have unread messages in the private chat with <%= link_to room.participants.where.not(user_id: current_user.id).first.user.full_name, room, data: { turbo: "false" } %>.
+                You have unread messages in the private chat with <%= link_to room.participants.where.not(user_id: current_user.id).first.user.full_name, room, class: "links-class", data: { turbo: "false" } %>.
               <% else %>
-                You have unread messages in <%= link_to room.name, room, data: { turbo: "false" } %>.
+                You have unread messages in <%= link_to room.name, room, class: "links-class", data: { turbo: "false" } %>.
               <% end %>
             </td>
           </tr>

@@ -1,6 +1,6 @@
 <div class="edit-page-div">
   <div class="edit-title-div bottom-border">
-    <h1 class="h1-edit-title"><%= @brand_name.persisted? ? "Edit " : "New " %>Brand Name</h1>
+    <h1 class="h1-edit-title"><%= @brand_name.persisted? ? "Edit " : "New " %>Brand</h1>
   </div>
   <div class="edit-title-div">
     
@@ -25,7 +25,7 @@
           <%= link_to brandnames_path, class: "cancel-link", data: { turbo: "false" } do %>
             Cancel
           <% end %>
-          <button type="submit" class="button" data-turbo="false">
+          <button type="submit" class="button" data-turbo="false" style="padding: 10px 30px; font-size: 14px; text-transform: none;">
             Save
           </button>
         </div>

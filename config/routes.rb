@@ -78,6 +78,7 @@ Rails.application.routes.draw do
 
   resources :costs
   resources :stats, only: [:index]
+  post "/stats", to: "stats#index"
 
   get "/follow_page", to: "users#follow_page"
 

@@ -90,7 +90,7 @@
               <% end %>
             </td>
             <td>
-              <%= link_to user.name, "/users/#{user.id}", data: { turbo: "false" } %>
+              <%= link_to user.name, "/users/#{user.id}", class: "links-class", data: { turbo: "false" } %>
             </td>
             <td>
               <% if user.is_normal? %>

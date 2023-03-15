@@ -168,7 +168,7 @@ a:hover {
   padding-left: 0.75rem;
   padding-right: 0.75rem; 
   background-color: #FECACA; 
-  color: #991B1B; 
+  color: #A30000; 
   font-size: 1rem;
   line-height: 1rem; 
   border-radius: 9999px; 
@@ -179,7 +179,7 @@ a:hover {
   padding-left: 0.75rem;
   padding-right: 0.75rem; 
   background-color: #A7F3D0; 
-  color: #065F46; 
+  color: #007500; 
   font-size: 1rem;
   line-height: 1rem; 
   border-radius: 9999px; 
@@ -196,8 +196,14 @@ a:hover {
   margin: 0;
   padding: 0;
   display: inline-block;
-  font-size: 17px;
-  color: red;
+  font-size: 18px;
+  color: #2a9d8f;
+  transition: 0.5s;
+}
+
+.button-to-style:hover {
+  color: #006d77;
+  
 }
 
 .body {

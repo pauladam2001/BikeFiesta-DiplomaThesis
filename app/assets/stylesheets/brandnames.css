@@ -46,20 +46,30 @@ th {
 td {
   padding: 15px;
   text-align: center;
-  vertical-align:middle;
-  font-weight: 300;
-  font-size: 20px;
-  border-bottom: 0.5px solid var(--light-blue);
+  vertical-align: middle;
+  border-bottom: 0.5px solid #2a9d8f;
 }
 
 .links-class {
-  font-size: 20px;
+  font-size: 18px;
+  color: #2a9d8f;
+  transition: 0.5s;
+  font-weight: bold;
+}
+
+.links-class:hover {
+  color: #006d77;
+  text-decoration: none;
 }
 
 .add-link {
   float: right; 
   margin-top: 1rem; 
   margin-bottom: 1rem;
+}
+
+.add-link:hover {
+  text-decoration: none;
 }
 
 .edit-title-div {
@@ -71,7 +81,7 @@ td {
 }
 
 .bottom-border {
-  border-bottom: 1px solid var(--light-blue);
+  border-bottom: 1px solid #2a9d8f;
 }
 
 .edit-form-div-1 {
@@ -110,10 +120,6 @@ td {
   padding-top: 10px;
   padding-right: 10px;
   font-size: 20px;
-}
-
-.h1-edit-title {
-  color: var(--dark-blue);
 }
 
 .flex-div {

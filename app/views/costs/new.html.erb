@@ -1,6 +1,6 @@
 <div class="edit-page-div">
   <div class="edit-title-div bottom-border">
-    <h1 class="h1-edit-title"><%= @cost.persisted? ? "Edit" : "New" %>Cost</h1>
+    <h1 class="h1-edit-title"><%= @cost.persisted? ? "Edit " : "New " %>Cost</h1>
   </div>
   <div class="edit-title-div">
     
@@ -12,7 +12,7 @@
               <label for="first-name" class="edit-label-div">
                 Amount
               </label>
-              <div class="edit-field-div">
+              <div class="edit-field-div" style="margin-left: 6.5rem;">
                 <%= f.number_field :amount, class: "input" %>
               </div>
             </div>
@@ -28,7 +28,7 @@
               <label for="first-name" class="edit-label-div">
                 Date
               </label>
-              <div class="edit-field-div">
+              <div class="edit-field-div" style="margin-left: 8rem;">
                 <%= f.date_field :day, class: "input" %>
               </div>
             </div>
@@ -41,7 +41,7 @@
           <%= link_to costs_path, class: "cancel-link", data: { turbo: "false" } do %>
             Cancel
           <% end %>
-          <button type="submit" class="button">
+          <button type="submit" class="button" data-turbo="false" style="padding: 10px 30px; font-size: 14px; text-transform: none;">
             Save
           </button>
         </div>

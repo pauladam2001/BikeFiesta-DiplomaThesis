@@ -51,7 +51,7 @@
             <td>
               <%= report.title %>
             </td>
-            <td style="width: 35%;">
+            <td>
               <%= report.message %>
             </td>
             <td>
@@ -76,7 +76,7 @@
                 <br/>
                 •
                 <br/>
-                <%= link_to "Chat", "/users/#{report.post.user_id}", data: { turbo: "false" } %>
+                <%= link_to "Chat", "/users/#{report.post.user_id}", class: "links-class", data: { turbo: "false" } %>
               <% end %>
             </td>
           </tr>
