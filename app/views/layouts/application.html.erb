@@ -74,34 +74,34 @@
             </div>
             <label class="show" for="navtoggle"><%= image_tag("notification.png", border: 0, width: '40px', height: '40px') %></label>
             <div class="notifications">
-              <div class="groupofnotes">
-                <% if @notifications_number > 0 %>
-                  <% @notifications.each do |notification| %>
+              <% if @notifications_number > 0 %>
+                <% @notifications.each do |notification| %>
+                  <div class="horizontally-scrollable-div">
                     <div class="note">
                       <% if notification.notification_type == "review" %>
-                        <%= link_to new_review_path(post_id: notification.post_id, reviewer_id: notification.notified_id), class: "", data: { turbo: "false" } do %>
+                        <%= link_to new_review_path(post_id: notification.post_id, reviewer_id: notification.notified_id), class: "links-class", data: { turbo: "false" } do %>
                           <%= notification.message %><%= notification&.post&.user&.full_name %>.
                         <% end %>
                       <% elsif notification.notification_type == "paypal_edit" %>
-                        <%= link_to edit_user_registration_path, class: "", data: { turbo: "false" } do %>
+                        <%= link_to edit_user_registration_path, class: "links-class", data: { turbo: "false" } do %>
                           <%= notification.message %>.
                         <% end %>
                       <% elsif notification.notification_type == "invoice" %>
-                        <%= link_to purchase_path(notification&.post&.purchase, format: :pdf), class: "", data: { turbo: "false" } do %>
+                        <%= link_to purchase_path(notification&.post&.purchase, format: :pdf), class: "links-class", data: { turbo: "false" } do %>
                           <%= notification.message %><%= notification&.post&.name %>.
                         <% end %>
                       <% else %>
                         <%= notification.message %>.
                       <% end %>
                       <%= button_to notification_path(notification), method: :delete, class: "button-to-style", form_class: "button-to-form", data: { turbo: "false" } do %>
-                        <span style="float: right;">&times;</span>
+                        &times;
                       <% end %>
                     </div>
-                  <% end %>
-                <% else %>
-                  You have no new notifications.
+                  </div>
                 <% end %>
-              </div>
+              <% else %>
+                You have no new notifications.
+              <% end %>
             </div>
           </div>
         </div>
