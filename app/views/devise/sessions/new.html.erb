@@ -73,12 +73,17 @@
       </div>
     </div>
   </div>
+  <div class="terms-conditions-div">
+    <span style="color: white; cursor: pointer;" onclick="openTermsConditionsPopUp()">Terms & Conditions</span>
+    <%= render "terms_conditions_pop_up" %>
+  </div>
 </div>
 <script type="text/javascript">
   var signUpButton = document.getElementById('signUp');
   var signInButton = document.getElementById('signIn');
   var container = document.getElementById('container');
   var hiddenInput = document.getElementById('hiddenInput');
+  var terms_conditions_pop_up = document.getElementById("terms_conditions_pop_up");
   alert = "<%= alert %>";
 
   signUpButton.addEventListener('click', () => {
@@ -91,5 +96,13 @@
 
   if (alert.startsWith("Error -")) {
     container.classList.add("right-panel-active");
+  }
+
+  function openTermsConditionsPopUp() {
+    terms_conditions_pop_up.classList.remove("hidden");
+  }
+
+  function closeTermsConditionsPopUp() {
+    terms_conditions_pop_up.classList.add("hidden");
   }
 </script>

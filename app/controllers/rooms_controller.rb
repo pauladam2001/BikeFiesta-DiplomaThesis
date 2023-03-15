@@ -8,13 +8,13 @@ class RoomsController < ApplicationController
     @current_user = current_user
     @rooms = Room.public_rooms
     @no_message_rooms = @rooms.joins("LEFT OUTER JOIN messages ON messages.room_id = rooms.id").where('messages.id IS NULL').uniq
-    @rooms = @rooms.ordered + @no_message_rooms
+    @rooms = @rooms.ordered + @no_message_rooms   #TODO check this
     if current_user.is_admin?
       @users = User.where.not(id: @current_user.id)
     else
       @users = User.where(role: "admin")
     end
-    @users = @users.order(:full_name)
+    @users = @users.order(:full_name)     #TODO check this
     @room = Room.new
 
     @users = @users.paginate(page: params[:users_page], per_page: 12)

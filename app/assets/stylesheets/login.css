@@ -252,14 +252,14 @@
 .alert-danger {
   margin-top: 0px;
   padding: 20px;
-  background-color: var(--light-red);
+  background-color: #A30000;
   color: white;
 }
 
 .alert-success {
 	margin-top: 0px;
 	padding: 20px;
-	background-color: green;
+	background-color: #007500;
 	color: white;
 }
 
@@ -275,7 +275,7 @@
 }
 
 .close-button:hover {
-  color: var(--dark-blue);
+  color: #2f3e46;
 }
 
 .alert-paragraph {
@@ -474,4 +474,10 @@ input[type=file]::file-selector-button:hover {
 	width: 250px;
 	margin: 0 auto;
 	margin-top: 1rem;
+}
+
+.terms-conditions-div {
+	margin-top: 10rem;
+	margin-right: 9rem;
+	float: right;
 }
