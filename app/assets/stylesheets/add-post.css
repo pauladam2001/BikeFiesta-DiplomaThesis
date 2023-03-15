@@ -4,11 +4,9 @@ select {
   width: 20em;
   height: 3em;
   padding: 0 1em 0 0.5em;
-  background-color: #EEDCB9;
-  color: var(--dark-blue);
-  border-radius: 7px;
-  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  border-radius: 15px; 
+  outline: 1px solid #2a9d8f;
 }
 
 select option {
@@ -16,7 +14,7 @@ select option {
 }
 
 select:focus {
-  outline: none;
+  outline: 1px solid #2a9d8f;
 }
 
 select::-ms-expand {

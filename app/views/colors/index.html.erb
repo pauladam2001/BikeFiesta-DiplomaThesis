@@ -9,23 +9,23 @@
           <input type="text" name="name" value="<%= params[:name] %>" class="filter-input">
         </div>
         <div style="float: left;">
-          <input type="submit" name="submitButton" class="filter-submit" value="Search" data-turbo="false"/>
+          <input type="submit" name="submitButton" class="button" style="margin-top: 1.2rem;" value="Search" data-turbo="false"/>
         </div>
       </form>
     </div>
   </div>
   <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Actions</th>
+          <th class="header-cell">Name</th>
+          <th class="header-cell">Actions</th>
         </tr>
       </thead>
     </table>
   </div>
   <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0">
       <tbody>
         <% @colors.each do |color| %>
           <tr class="<%= cycle("bg-white", "bg-gray") %>">

@@ -133,63 +133,63 @@
       <div id="main-sidebar-div" class="main-sidebar-div">
         <div class="main-sidebar-div-2">
           <div class="logo-div">
-            <h1><%= link_to image_tag("logo.png", border: 0, width: '200px'), users_path, data: { turbo: "false" } %></h1>
+            <h1><%= link_to image_tag("logo.png", border: 0, width: '180px'), users_path, data: { turbo: "false" } %></h1>
           </div>
           <ul class="sidebar-ul">
             <li>
               <a href=<%= users_path %> class="sidebar-a" data-turbo="false">
-                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-icon-span"><%= image_tag("user-icon.png", border: 0, width: '35px') %></span>
                 <span class="sidebar-title-span">Users</span>
               </a>
             </li>
             <li>
               <a href=<%= reports_path %> class="sidebar-a" data-turbo="false">
-                <span class="sidebar-icon-span"><%= image_tag("reports.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-icon-span"><%= image_tag("reports.png", border: 0, width: '35px') %></span>
                 <span class="sidebar-title-span">Reports</span>
               </a>
             </li>
             <li>
               <a href=<%= suggestions_path %> class="sidebar-a" data-turbo="false">
-                <span class="sidebar-icon-span"><%= image_tag("suggestions.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-icon-span"><%= image_tag("suggestions.png", border: 0, width: '35px') %></span>
                 <span class="sidebar-title-span">Suggestions</span>
               </a>
             </li>
             <li>
               <a href=<%= reviews_path %> class="sidebar-a" data-turbo="false">
-                <span class="sidebar-icon-span"><%= image_tag("reviews.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-icon-span"><%= image_tag("reviews.png", border: 0, width: '35px') %></span>
                 <span class="sidebar-title-span">Reviews</span>
               </a>
             </li>
             <div class="item">
-              <span class="sidebar-icon-span sub-btn dropdown-span" style="margin-left: 2rem">Categorization<%= image_tag("right-arrow.png", border: 0, width: '25px', :class => "dropdown dropdown-arrow") %></span>
+              <span class="sidebar-icon-span sub-btn dropdown-span" style="margin-left: 2.3rem; font-weight: bold;">Categorization<%= image_tag("right-arrow.png", border: 0, width: '25px', :class => "dropdown dropdown-arrow") %></span>
               <div class="sub-menu">
                 <li>
                   <a href=<%= brandnames_path %> class="sidebar-a" data-turbo="false">
-                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("brands.png", border: 0, width: '40px') %></span>
+                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("brands.png", border: 0, width: '35px') %></span>
                     <span class="sidebar-title-span">Brands</span>
                   </a>
                 </li>
                 <li>
                   <a href=<%= colors_path %> class="sidebar-a" data-turbo="false">
-                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("colors.png", border: 0, width: '40px') %></span>
+                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("colors.png", border: 0, width: '35px') %></span>
                     <span class="sidebar-title-span">Colors</span>
                   </a>
                 </li>
                 <li>
                   <a href=<%= categories_path %> class="sidebar-a" data-turbo="false">
-                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("categories.png", border: 0, width: '40px') %></span>
+                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("categories.png", border: 0, width: '35px') %></span>
                     <span class="sidebar-title-span">Categories</span>
                   </a>
                 </li>
                 <li>
                   <a href=<%= component_groups_path %> class="sidebar-a" data-turbo="false">
-                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("components.png", border: 0, width: '40px') %></span>
+                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("components.png", border: 0, width: '35px') %></span>
                     <span class="sidebar-title-span">Components</span>
                   </a>
                 </li>
                 <li>
                   <a href=<%= materials_path %> class="sidebar-a" data-turbo="false">
-                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("materials.png", border: 0, width: '40px') %></span>
+                    <span class="sidebar-icon-span" style="margin-left: 1rem"><%= image_tag("materials.png", border: 0, width: '35px') %></span>
                     <span class="sidebar-title-span">Materials</span>
                   </a>
                 </li>
@@ -197,41 +197,41 @@
             </div>
             <li>
               <a href=<%= purchases_path %> class="sidebar-a" data-turbo="false">
-                <span class="sidebar-icon-span"><%= image_tag("purchases.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-icon-span"><%= image_tag("purchases.png", border: 0, width: '35px') %></span>
                 <span class="sidebar-title-span">Purchases</span>
               </a>
             </li>
             <li>
               <a href=<%= rooms_path %> class="sidebar-a" data-turbo="false">
-                <span class="sidebar-icon-span"><%= image_tag("messages.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-icon-span"><%= image_tag("messages.png", border: 0, width: '35px') %></span>
                 <span class="sidebar-title-span">Messages</span>
               </a>
               <a href=<%= new_messages_path %> class="sidebar-a" data-turbo="false">
-                <span class="sidebar-icon-span"><%= image_tag("new_messages.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-icon-span"><%= image_tag("new_messages.png", border: 0, width: '35px') %></span>
                 <span class="sidebar-title-span">New Messages</span>
               </a>
             </li>
             <li>
               <a href=<%= issues_path %> class="sidebar-a" data-turbo="false">
-                <span class="sidebar-icon-span"><%= image_tag("issues.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-icon-span"><%= image_tag("issues.png", border: 0, width: '35px') %></span>
                 <span class="sidebar-title-span">Issues</span>
               </a>
             </li>
             <li>
               <a href=<%= costs_path %> class="sidebar-a" data-turbo="false">
-                <span class="sidebar-icon-span"><%= image_tag("costs.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-icon-span"><%= image_tag("costs.png", border: 0, width: '35px') %></span>
                 <span class="sidebar-title-span">Costs</span>
               </a>
             </li>
             <li>
               <a href=<%= stats_path %> class="sidebar-a" data-turbo="false">
-                <span class="sidebar-icon-span"><%= image_tag("stats.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-icon-span"><%= image_tag("stats.png", border: 0, width: '35px') %></span>
                 <span class="sidebar-title-span">Stats</span>
               </a>
             </li>
             <li>
               <a href=<%= leaderboard_path %> class="sidebar-a" data-turbo="false">
-                <span class="sidebar-icon-span"><%= image_tag("leaderboard.png", border: 0, width: '40px') %></span>
+                <span class="sidebar-icon-span"><%= image_tag("leaderboard.png", border: 0, width: '35px') %></span>
                 <span class="sidebar-title-span">Leaderboard</span>
               </a>
             </li>

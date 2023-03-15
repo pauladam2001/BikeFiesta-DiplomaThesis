@@ -18,7 +18,7 @@
           <input type="date" name="end_date" value="<%= params[:end_date] %>" class="filter-input">
         </div>
         <div style="float: left;">
-          <input type="submit" name="submitButton" class="filter-submit" value="Search" data-turbo="false"/>
+          <input type="submit" name="submitButton" class="button" style="margin-top: 1.2rem;" value="Search" data-turbo="false"/>
         </div>
       </form>
     </div>
@@ -26,28 +26,28 @@
 
   <div class="total-stats-main-div">
     <div class="total-stats-second-div">
-      <table class="total-stats-table">
+      <table class="total-stats-table" cellpadding="0" cellspacing="0">
         <thead style="background-color: #F9FAFB;">
           <tr>
-            <th scope="col" class="">
+            <th scope="col" class="header-cell">
               Total Revenue
             </th>
-            <th scope="col" class="-">
+            <th scope="col" class="header-cell">
               Total Spent
             </th>
-            <th scope="col" class="">
+            <th scope="col" class="header-cell">
               Total Profit
             </th>
-            <th scope="col" class="">
+            <th scope="col" class="header-cell">
               ROI
             </th>
-            <th scope="col" class="">
+            <th scope="col" class="header-cell">
               Total Posts
             </th>
-            <th scope="col" class="">
+            <th scope="col" class="header-cell">
               Total Views
             </th>
-            <th scope="col" class="">
+            <th scope="col" class="header-cell">
               Total Tansactions
             </th>
           </tr>
@@ -96,28 +96,28 @@
   <% end %>
 
   <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0">
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Revenue</th>
-          <th>Cost</th>
-          <th>Profit</th>
-          <th>ROI</th>
-          <th>Posts</th>
-          <th>Views</th>
-          <th>Transactions</th>
-          <th>Validating</th>
-          <th>Active</th>
-          <th>Banned</th>
-          <th>Sold and Not Shipped</th>
-          <th>Sold and Shipped</th>
+          <th class="header-cell">Date</th>
+          <th class="header-cell">Revenue</th>
+          <th class="header-cell">Cost</th>
+          <th class="header-cell">Profit</th>
+          <th class="header-cell">ROI</th>
+          <th class="header-cell">Posts</th>
+          <th class="header-cell">Views</th>
+          <th class="header-cell">Transactions</th>
+          <th class="header-cell">Validating</th>
+          <th class="header-cell">Active</th>
+          <th class="header-cell">Banned</th>
+          <th class="header-cell">Sold and Not Shipped</th>
+          <th class="header-cell">Sold and Shipped</th>
         </tr>
       </thead>
     </table>
   </div>
   <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0">
       <tbody>
         <% if @start_date.nil? || @end_date.nil? %>
           <tr class="<%= cycle("bg-white", "bg-gray-50") %>">

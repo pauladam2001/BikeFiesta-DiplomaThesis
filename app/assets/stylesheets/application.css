@@ -20,7 +20,6 @@
   --dark-red: #780000;
   --light-red: #C1121F;
   --beige: #FDF0D5;
-  --dark-blue: #003049;
   --light-blue: #669BBC;
   
   font-family: 'Nunito Sans', sans-serif;
@@ -124,7 +123,6 @@ a:hover {
   text-align: center;
   padding: 1em;
   cursor: default;
-  color: var(--light-red); 
 }
 
 .pagination a, .pagination span {
@@ -138,7 +136,7 @@ a:hover {
 .pagination .current {
   font-style: normal;
   font-weight: bold;
-  background-color: #EEDCB9;
+  background-color: #cad2c5;
   display: inline-block;
   width: 1.4em;
   height: 1.4em;
@@ -151,7 +149,7 @@ a:hover {
 
 .pagination a {
   text-decoration: none;
-  color: var(--light-red);
+  color: #2a9d8f;
 }
 
 .pagination a:hover, .pagination a:focus {

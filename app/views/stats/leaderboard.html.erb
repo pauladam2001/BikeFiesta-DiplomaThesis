@@ -22,7 +22,7 @@
           </select>
         </div>
         <div style="float: left;">
-          <input type="submit" name="submitButton" class="filter-submit" value="Search" data-turbo="false"/>
+          <input type="submit" name="submitButton" class="button" style="margin-top: 1.2rem;" value="Search" data-turbo="false"/>
         </div>
       </form>
     </div>
@@ -30,19 +30,19 @@
 
   <div class="total-stats-main-div">
     <div class="total-stats-second-div">
-      <table class="total-stats-table">
+      <table class="total-stats-table" cellpadding="0" cellspacing="0">
         <thead style="background-color: #F9FAFB;">
           <tr>
-            <th scope="col" class="">
+            <th scope="col" class="header-cell">
               Total Revenue
             </th>
-            <th scope="col" class="-">
+            <th scope="col" class="header-cell">
               Total Spent
             </th>
-            <th scope="col" class="">
+            <th scope="col" class="header-cell">
               Total Posts
             </th>
-            <th scope="col" class="">
+            <th scope="col" class="header-cell">
               Total Views
             </th>
           </tr>
@@ -68,22 +68,22 @@
   </div>
 
   <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0">
       <thead>
         <tr>
-          <th>User</th>
-          <th>Revenue</th>
-          <th>Spent</th>
-          <th>Posts</th>
-          <th>Views</th>
-          <th>Followers</th>
-          <th>Following</th>
+          <th class="header-cell">User</th>
+          <th class="header-cell">Revenue</th>
+          <th class="header-cell">Spent</th>
+          <th class="header-cell">Posts</th>
+          <th class="header-cell">Views</th>
+          <th class="header-cell">Followers</th>
+          <th class="header-cell">Following</th>
         </tr>
       </thead>
     </table>
   </div>
   <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0">
       <tbody>
         <% @user_stats.each do |stat| %>
           <tr class="<%= cycle("bg-white", "bg-gray") %>">

@@ -16,26 +16,26 @@
           </select>
         </div>
         <div style="float: left;">
-          <input type="submit" name="submitButton" class="filter-submit" value="Search" data-turbo="false"/>
+          <input type="submit" name="submitButton" class="button" style="margin-top: 1.2rem;" value="Search" data-turbo="false"/>
         </div>
       </form>
     </div>
   </div>
   <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0">
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Proof</th>
-          <th>Seller - Buyer - Post - Amount</th>
-          <th>Shipping Details</th>
-          <th>Actions</th>
+          <th class="header-cell">Date</th>
+          <th class="header-cell">Proof</th>
+          <th class="header-cell">Seller - Buyer - Post - Amount</th>
+          <th class="header-cell">Shipping Details</th>
+          <th class="header-cell">Actions</th>
         </tr>
       </thead>
     </table>
   </div>
   <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0">
       <tbody>
         <% @purchases.each do |purchase| %>
           <tr class="<%= cycle("bg-white", "bg-gray") %>">

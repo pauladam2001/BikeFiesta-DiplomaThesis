@@ -25,30 +25,30 @@
             <%= options_for_select([["Unarchived", "false"], ["Archived", "true"]], params[:archived]) %>
           </select>
         </div>
-        <div style="float: left;">
-          <input type="submit" name="submitButton" class="filter-submit" value="Search" data-turbo="false"/>
+        <div>
+          <input type="submit" name="submitButton" class="button" style="margin-top: 1.2rem;" value="Search" data-turbo="false"/>
         </div>
       </form>
     </div>
   </div>
   <div class="total-stats-main-div">
     <div class="total-stats-second-div">
-      <table class="total-stats-table">
-        <thead style="background-color: #F9FAFB;">
+      <table class="total-stats-table" cellpadding="0" cellspacing="0">
+        <thead class="try" style="background-color: #F8F8F8;">
           <tr>
-            <th scope="col" class="">
+            <th scope="col" class="header-cell">
               Total Users
             </th>
-            <th scope="col" class="-">
+            <th scope="col" class="header-cell">
               Archived Users
             </th>
-            <th scope="col" class="">
+            <th scope="col" class="header-cell">
               Unarchived Users
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr style="background-color: #ffffff;">
+          <tr>
             <td class="normal-cell">
               <%= @total_stats[:total_users] %>
             </td>
@@ -64,19 +64,19 @@
     </div>
   </div>
   <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0">
       <thead>
         <tr>
-          <th>Email</th>
-          <th>Name</th>
-          <th>Grade</th>
-          <th>Actions</th>
+          <th class="header-cell">Email</th>
+          <th class="header-cell">Name</th>
+          <th class="header-cell">Grade</th>
+          <th class="header-cell">Actions</th>
         </tr>
       </thead>
     </table>
   </div>
   <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0">
       <tbody>
         <% @users.each do |user| %>
           <tr class="<%= cycle("bg-white", "bg-gray") %>">
@@ -94,7 +94,7 @@
             </td>
             <td>
               <% if user.is_normal? %>
-                <span class="star-span" style="margin-left: 0; padding-right: 0;">★</span><%= user.rating %>
+                <span class="star-span" style="margin-left: 0; padding-right: 0;">★</span>  <%= user.rating %>
               <% end %>
             </td>
             <td>

@@ -7,7 +7,7 @@ class StatsController < ApplicationController
     @start_date = params[:start_date].to_date if params[:start_date].present? && params[:start_date] != "all"
     @end_date = params[:end_date].to_date if params[:end_date].present? && params[:end_date] != "all"
     
-    @stats = Stat.where(period: "daily-total").order(end_date: :asc)
+    @stats = Stat.where(period: "daily-total").order(end_date: :desc)
 
     if @start_date.present?
       @stats = @stats.where("end_date >= ?", @start_date)
