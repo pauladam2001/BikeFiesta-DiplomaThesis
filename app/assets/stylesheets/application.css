@@ -25,6 +25,7 @@
   
   font-family: 'Nunito Sans', sans-serif;
   color: #2f3e46;
+  font-size: 16px;
 }
 
  .menu {
@@ -79,13 +80,12 @@
 
 a {
   text-decoration: none;
-  color: var(--light-red);
+  color: #2f3e46;
 }
 
 a:hover {
-  color: var(--dark-red);
+  text-decoration: underline;
 }
-
 
 .footer {
   bottom: 0;
