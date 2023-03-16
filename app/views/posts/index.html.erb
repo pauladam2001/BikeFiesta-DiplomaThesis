@@ -43,14 +43,14 @@
               <div class="wrapper">
                 <div class="product-img">
                   <% if post.assets.present? %>
-                    <%= image_tag(post.assets.where(is_bicycle: true).first.image.url, border: 0, width: '100%', height: '100%', :class => "") %>
+                    <%= image_tag(post.assets.where(is_bicycle: true).first.image.url, width: '100%', height: '100%') %>
                   <% else %>
-                    <%= image_tag("bike3.jpg", border: 0, width: '100%', height: '100%') %>
+                    <%= image_tag("bike3.jpg", width: '100%', height: '100%') %>
                   <% end %>
                   <% if @favorite_posts.where(id: post.id).size == 0 %>
-                    <%= link_to image_tag("mark_favorite.png"), add_to_favorites_post_path(post), :method => :put, remote: true, class: 'favorites-button' %>
+                    <%= link_to image_tag("mark_favorite.png", style: "border: none;"), add_to_favorites_post_path(post), :method => :put, remote: true, class: 'favorites-button' %>
                   <% else %>
-                    <%= link_to image_tag("favorite.png"), remove_from_favorites_post_path(post), :method => :put, remote: true, class: 'favorites-button' %>
+                    <%= link_to image_tag("favorite.png", style: "border: none;"), remove_from_favorites_post_path(post), :method => :put, remote: true, class: 'favorites-button' %>
                   <% end %>
                   <% if post.electric %>
                     <button class="button electric-button">Electric</button>
@@ -72,7 +72,7 @@
                     <% else %>
                       <p><span class="card-span"><%= number_to_currency(post.price, precision: 2, :unit => '€') %></span></p>
                     <% end %>
-                    <button class="button"><%= link_to "See Post", post_path(post), data: { turbo: "false" } %></button>
+                    <button class="button"><%= link_to "See Post", post_path(post), style: "font-size: 12px; text-transform: none; color: white;", data: { turbo: "false" } %></button>
                   </div>
                 </div>
               </div>

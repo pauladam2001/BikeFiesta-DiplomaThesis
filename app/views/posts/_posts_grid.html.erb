@@ -15,6 +15,9 @@
                 <%= image_tag(post.assets.where(is_bicycle: true).first.image.url, border: 0, width: '100%', height: '100%', :class => "") %>
               <% else %>
                 <%= image_tag("bike3.jpg", border: 0, width: '100%', height: '100%') %>
+                <!--<div style="margin-top: 9rem; margin-left: 2.5rem;">
+                  <span>Please upload images for this post.</span>          #TODO swap these
+                </div>-->
               <% end %>
               <% if favorite_posts.present? %>
                 <% if favorite_posts.where(id: post.id).size == 0 %>
