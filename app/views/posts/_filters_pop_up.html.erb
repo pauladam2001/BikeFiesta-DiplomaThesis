@@ -1,5 +1,5 @@
 <div id="filters_pop_up" class="hidden">
-  <div class="popup-wrapper" style="margin-top: 1rem; z-index: 2; overflow: scroll; height: 780px; width: 720px; overflow-x: hidden; overflow-y:hidden;">
+  <div class="popup-wrapper" style="z-index: 2; overflow: scroll; height: 700px; width: 720px; overflow-x: hidden; overflow-y:hidden;">
     <div style="margin-left: 1rem; margin-top: 1rem; margin-right: 1rem;">
       <div>
         <input type="text" name="name" placeholder="Search by Name..." value="<%= params[:name] %>" class="filter-input" style="margin-right: 10px;">
@@ -55,7 +55,7 @@
           <%= options_for_select([["Search for a Specific Component", "all", {:disabled => 'restricted'}]] + @component_groups.collect { |o| [o[0], o[1]]}, params[:component]) %>
         </select>
       </div>
-      <div style="margin-top: 8rem; margin-left: 11rem;">
+      <div style="margin-top: 3rem; margin-left: 11.5rem;">
         <button name="submitButton" value="Filters" class="button" data-turbo="false">
           Search
         </button>

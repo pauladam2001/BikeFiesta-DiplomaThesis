@@ -236,3 +236,7 @@ a:hover {
 .underline:hover::after {
   width: 100%;
 }
+
+select::-webkit-scrollbar {
+  display: none;
+}
