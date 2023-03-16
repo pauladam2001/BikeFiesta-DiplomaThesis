@@ -24,10 +24,21 @@ select::-ms-expand {
 .add-post-div {
   margin-top: 2rem;
   margin-left: 25rem;
-  max-height: 1000px;
   margin-bottom: 3rem;
 }
 
 .cancel-link {
   font-size: 20px;
+}
+
+.textarea-input {
+  width: 49rem;
+  border-radius: 15px; 
+  border-color: #2a9d8f;
+  border-width: 1.5px;
+  outline: none;
+}
+
+.textarea-input:focus {
+	border: 2px solid #006d77;
 }

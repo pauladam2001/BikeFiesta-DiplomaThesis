@@ -1,82 +1,65 @@
-<div class="">
+<div style="">
   <div class="edit-post-title-div">
     <% if @post.persisted? %>
       <% if params[:upload] == "true" %>
-        <h1 class="">Upload Images</h1>
+        <h1>Upload Images</h1>
       <% else %>
-        <h1 class="">Edit Post</h1>
+        <h1>Edit Post</h1>
       <% end %>
     <% else %>
-      <h1 class="">New Post</h1>
+      <h1>New Post</h1>
     <% end %>
   </div>
   <% if !(params[:upload] == "true") %>
-    <div class="add-post-div container" style="overflow-y: scroll;">
+    <div class="add-post-div container" style="width: 51.5rem; height: 40rem;">
       <%= form_for @post do |f| %>
-        <div class="">
-          <div class="">
-            <div class="">
-              <div class="">
-                <div class="">
-                  <%= f.text_field :name, placeholder: "Post Name (Maximum 20 characters)", maxlength: "20", class: "input" %>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div style="margin-top: 1rem; margin-left: 5.7rem;">
+                  <%= f.text_field :name, placeholder: "Post name (Maximum 20 characters)", maxlength: "20", class: "filter-input", style: "width: 20rem;" %>
+                  <%= f.number_field :price, placeholder: "Price (€)", class: "filter-input", step: :any, style: "width: 20rem;" %>
                 </div>
-                <div class="">
-                  <%= f.text_area :description, placeholder: "Description...", cols: "50", rows: "10", class: "input" %>
+                <div style="margin-top: 1rem; margin-left: 1.2rem;">
+                  <%= f.text_area :description, placeholder: "Description...", cols: "50", rows: "10", class: "textarea-input" %>
                 </div>
-                <div class="">
-                  <%= f.text_area :short_description, placeholder: "Short Description (Maximum 100 characters)", maxlength: 100, cols: "30", rows: "5", class: "input" %>
+                <div style="margin-left: 1.2rem;">
+                  <%= f.text_area :short_description, placeholder: "Short description (maximum 100 characters)", maxlength: 100, cols: "30", rows: "5", class: "textarea-input" %>
                 </div>
-                <div class="">
-                  <%= f.number_field :price, placeholder: "Price", class: "input", step: :any %>
-                </div>
-                <div class="">
-                  <%= f.select :color_id, options_for_select([["Select the color", nil]] + @colors.collect { |a| [a[0], a[1]]}, f.object.color_id), {}, class: "input" %>
-                </div>
-                <div class="">
+                <div style="margin-top: 1rem; margin-left: 0.5rem;">
+                  <%= f.select :color_id, options_for_select([["Select the color", nil]] + @colors.collect { |a| [a[0], a[1]]}, f.object.color_id), {} %>
                   <%= f.select :year, [["Select the year", nil]] + (Time.now.year).downto(Time.now.year - 70).to_a %>
-                </div>
-                <div class="">
                   <%= f.select :size, [["Select the size", nil], ["XXS (<47)", "XXS"], ["XS (48-50)", "XS"], ["S (50-52)", "S"], ["M (53-55)", "M"], ["L (56-58)", "L"], ["XL (59-62)", "XL"], ["XXL (>63)", "XXL"]] %>
                 </div>
-                <div class="">
+                <div style="margin-top: 0.5rem; margin-left: 0.5rem;">
                   <%= f.select :condition, [["Select the condition", nil], ["Brand New", "Brand New"], ["Perfect", "Perfect"], ["Very Good", "Very Good"], ["Good", "Good"], ["Ok", "Ok"], ["Bad", "Bad"]] %>
+                  <%= f.select :location_id, options_for_select([["Select the location", nil]] + @locations.collect { |a| [a[0], a[1]]}, f.object.location_id), {} %>
+                  <%= f.select :brandname_id, options_for_select([["Select the brand name", nil]] + @brand_names.collect { |a| [a[0], a[1]]}, f.object.brandname_id), {} %>
+                <div style="margin-top: 0.5rem;">
+                  <%= f.select :category_id, options_for_select([["Select the category", nil]] + @categories.collect { |a| [a[0], a[1]]}, f.object.category_id), {} %>
+                  <%= f.select :material_id, options_for_select([["Select the material", nil]] + @materials.collect { |a| [a[0], a[1]]}, f.object.material_id), {} %>
+                  <%= f.select :component_group_id, options_for_select([["Select the component group brand", nil]] + @component_groups.collect { |a| [a[0], a[1]]}, f.object.component_group_id), {} %>
                 </div>
-                <div class="select-div">
-                  <%= f.select :location_id, options_for_select([["Select the location", nil]] + @locations.collect { |a| [a[0], a[1]]}, f.object.location_id), {}, class: "" %>
-                </div>
-                <div class="">
-                  <%= f.select :brandname_id, options_for_select([["Select the brand name", nil]] + @brand_names.collect { |a| [a[0], a[1]]}, f.object.brandname_id), {}, class: "" %>
-                </div>
-                <div class="">
-                  <%= f.select :category_id, options_for_select([["Select the category", nil]] + @categories.collect { |a| [a[0], a[1]]}, f.object.category_id), {}, class: "" %>
-                </div>
-                <div class="">
-                  <%= f.select :material_id, options_for_select([["Select the material", nil]] + @materials.collect { |a| [a[0], a[1]]}, f.object.material_id), {}, class: "" %>
-                </div>
-                <div class="">
-                  <%= f.select :component_group_id, options_for_select([["Select the component group brand", nil]] + @component_groups.collect { |a| [a[0], a[1]]}, f.object.component_group_id), {}, class: "" %>
-                </div>
-                <div class="">
-                  <%= f.select :electric, options_for_select([["Select the bike type", nil], ["Electric", true], ["Normal", false]], f.object.electric), {}, class: "" %>
+                <div style="margin-top: 0.5rem; margin-left: 16.9rem;">
+                  <%= f.select :electric, options_for_select([["Select the bike type", nil], ["Electric", true], ["Normal", false]], f.object.electric), {} %>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="">
-          <div class="">
-            <%= link_to posts_path, class: "cancel-link", data: { turbo: "false" } do %>
-              Cancel
+        <div style="padding-top: 3.5rem; width: 20rem; margin: 0 auto; padding-left: 1.5rem;">
+          <%= link_to posts_path, class: "cancel-link", data: { turbo: "false" } do %>
+            Cancel
+          <% end %>
+          <button type="submit" class="button">
+            <% if !@post.persisted? %>
+              Go to Upload
+            <% else %>
+              Save Changes
             <% end %>
-            <button type="submit" class="button">
-              <% if !@post.persisted? %>
-                Go to Upload
-              <% else %>
-                Save Changes
-              <% end %>
-            </button>
-          </div>
+          </button>
         </div>
       <% end %>
     </div>
