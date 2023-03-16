@@ -218,9 +218,8 @@
 
 .product-price {
   font-size: 20px;
-  color: var(--light-red);
+  color: #A30000;
   font-weight: 600;
-
   display: inline-block;
   position: absolute;
   height: 50px;
@@ -243,6 +242,7 @@
   text-decoration: line-through;
   display: inline-block;
   margin-right: 5px;
+  color: #2f3e46;
 }
 
 .product-price-grid small {
