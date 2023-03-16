@@ -8,9 +8,9 @@
 .user-card {
   height: 180px;
   width: 250px;
-  border-radius: 3px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .profile {
@@ -22,20 +22,18 @@
 
 .profile .image {
   position: relative;
-  width: 70px;
-  height: 70px;
+  width: 65px;
+  height: 65px;
   margin: 38px auto 0 auto;
 }
 
 .profile .image img {
   display: block;
   border-radius: 50%;
-  background: #f5e8df;
 }
 
 .profile .name {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
   margin-top: 10px;
 }
 
@@ -71,10 +69,10 @@
   box-sizing: border-box;
   width: 130px;
   height: 45px;
-  background: #f5e8df;
+  border-left: 1px solid #2a9d8f;
+  border-bottom: 1px solid #2a9d8f;
   text-align: center;
   padding-top: 5px;
-  transition: all 0.4s ease-in-out;
 }
 
 .stats .box:nth-child(2) {

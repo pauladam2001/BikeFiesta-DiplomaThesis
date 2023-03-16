@@ -1,4 +1,4 @@
 <%= form_with(model: current_user.active_relationships.build, local: true) do |f| %>
   <div><%= hidden_field_tag :followed_id, user.id %></div>
-  <%= f.submit "Follow", class: "button-small", data: { turbo: "false" } %>
+  <%= f.submit "Follow", class: "button", style: "padding: 5px 10px; font-size: 14px; text-transform: none; font-size: 12px;", data: { turbo: "false" } %>
 <% end %>

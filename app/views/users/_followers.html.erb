@@ -6,12 +6,12 @@
           <%= link_to user_posts_path(user_id: follower.id), data: { turbo: "false" } do %>
             <div class="image">
               <% if follower.provider == "google_oauth2" %>
-                <h6><%= image_tag(follower.avatar_url, border: 0, width: '40px', class: "image-radius") %></h6>
+                <h6><%= image_tag(follower.avatar_url, border: 0, width: '65px', class: "image-radius") %></h6>
               <% else %>
                 <% if follower.avatar.attached? %>
-                  <h6><%= image_tag(follower.avatar, border: 0, width: '80px', class: "image-radius") %></h6>
+                  <h6><%= image_tag(follower.avatar, border: 0, width: '65px', class: "image-radius") %></h6>
                 <% else %>
-                  <h6><%= image_tag("user-icon.png", border: 0, width: '70px') %></h6>
+                  <h6><%= image_tag("user-icon.png", border: 0, width: '65px') %></h6>
                 <% end %>
               <% end %>
             </div>

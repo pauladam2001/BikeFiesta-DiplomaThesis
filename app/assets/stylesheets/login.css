@@ -53,20 +53,6 @@
   transform: translateY(-0.25em);
 }
 
-.button-small {
-	border-radius: 20px;
-	border: 2px solid var(--beige);
-	background-color: var(--dark-red);
-	color: white;
-	font-size: 12px;
-	font-weight: bold;
-	padding: 10px 10px;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	transition: transform 80ms ease-in;
-	cursor: pointer;
-}
-
 .button:active {
 	transform: scale(0.95);
 }
