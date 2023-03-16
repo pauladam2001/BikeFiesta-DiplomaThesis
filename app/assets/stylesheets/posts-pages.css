@@ -17,5 +17,6 @@
 }
 
 .validating {
-  opacity: 0.4;
+  width: 327px;
+  background-color: rgba(0, 0, 0, .3);
 }

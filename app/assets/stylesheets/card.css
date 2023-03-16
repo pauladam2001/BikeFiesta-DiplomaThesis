@@ -34,16 +34,19 @@
 
 .product-img-grid .electric-button {
   position: absolute;
-  margin-left: 10rem;
-  margin-top: 13rem;
+  margin-left: 15.7rem;
+  margin-top: 13.7rem;
+  padding: 7px;
+  border-radius: 10px;
+  background-color: #006d77;
+  font-size: 10px;
 }
 
-.product-img-grid .validating-span {
+.validating-span {
   position: absolute;
-  padding-left: 4rem;
-  padding-top: 4rem;
-  opacity: 1;
-  font-weight: 700;
+  margin-left: 1rem;
+  padding-top: 3rem;
+  font-weight: bold;
 }
 
 .product-img .favorites-button {
@@ -61,15 +64,20 @@
 
 .product-img-grid .size-button {
   position: absolute;
-  margin-top: 13rem;
+  margin-top: 13.7rem;
+  padding: 7px;
+  border-radius: 10px;
+  background-color: #006d77;
+  font-size: 10px;
 }
 
 .product-img img {
-  border-radius: 7px 0 0 7px;
+  border-radius: 10px 0 0 10px;
 }
 
 .product-img-grid img {
-  border-radius: 7px 7px 0 0;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid #2a9d8f;
 }
 
 .product-info {
@@ -84,8 +92,11 @@
   float: left;
   height: 240px;
   width: 327px;
-  border-radius: 0 0 7px 7px;
-  background-color: var(--beige);
+  border-radius: 0 0 10px 10px;
+  /* background-color: white; */
+  border-left: 1px solid #2a9d8f;
+  border-bottom: 1px solid #2a9d8f;
+  border-right: 1px solid #2a9d8f;
 }
 
 .product-text {
@@ -137,7 +148,7 @@
 
 .product-text-grid p {
   height: 20px;
-  margin: 25px 0 20px 10px;
+  margin: 15px 0 15px 10px;
   line-height: 1.7em;
   font-size: 15px;
   font-weight: lighter;
@@ -207,9 +218,8 @@
 
 .product-price-grid {
   font-size: 20px;
-  color: var(--light-red);
+  color: #A30000;
   font-weight: 600;
-
   display: inline-block;
   position: absolute;
   height: 50px;
@@ -230,6 +240,7 @@
   text-decoration: line-through;
   display: inline-block;
   margin-right: 5px;
+  color: #2f3e46;
 }
 
 small {
