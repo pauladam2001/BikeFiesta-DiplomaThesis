@@ -17,11 +17,6 @@
 
 
  :root {
-  --dark-red: #780000;
-  --light-red: #C1121F;
-  --beige: #FDF0D5;
-  --light-blue: #669BBC;
-  
   font-family: 'Nunito Sans', sans-serif;
   color: #2f3e46;
   font-size: 16px;
@@ -55,26 +50,11 @@
   margin-left: 25rem;
 }
 
-.menu .menu-item .wee {
-  height: 2px;
-  width: 100%;
-  background-color: var(--dark-red);
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  transition: 0.75s;
-}
-
 .menu .menu-item h6 {
   margin: 0;
   padding: 0 1rem 1.5rem;
   font-size: 1rem;
-  color: var(--light-red);
   transition: 0.75s;
-}
-
-.menu .menu-item:hover h6 {
-  color: var(--dark-red);
 }
 
 .image-radius {
