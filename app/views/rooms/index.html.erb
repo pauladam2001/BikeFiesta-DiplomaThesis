@@ -53,7 +53,7 @@
       </div>
     <div>
 
-    <div class="content-container" style="margin-left: 5rem; height: 85vh; width: 73vw">
+    <div class="content-container <%= current_user.is_normal? ? "content-container-user-height" : "" %>" style="margin-left: 5rem; width: 73vw">
       <% if @single_room %>
         <%= render partial: 'layouts/new_message_form' %>
         <div id="messages">

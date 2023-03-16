@@ -4,18 +4,18 @@
 
 .most-viewed-title {
   color: var(--dark-blue);
-  padding-left: 48.5rem;
+  padding-left: 47rem;
 }
 
 .sale-padding {
-  padding-left: 52rem;
+  padding-left: 50rem;
 }
 
 .suggestion-div {
   margin-top: 3rem;
-  margin-left: 32rem;
   margin-bottom: 4rem;
   width: 40rem;
+  margin: 0 auto;
 }
 
 .suggestion-span {

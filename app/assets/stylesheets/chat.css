@@ -29,6 +29,10 @@
   overflow-y: scroll;
 }
 
+.content-container-user-height {
+  height: 90vh;
+}
+
 .content-container::-webkit-scrollbar {
   display: none;
 }

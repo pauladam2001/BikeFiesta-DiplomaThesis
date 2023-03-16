@@ -94,6 +94,7 @@ input:nth-of-type(5):checked ~ main#carousel {
 
 .carousel-div input[type='radio'] {
   cursor: pointer;
+  margin-left: 2rem;
 }
 
 .carousel-div input[type='radio']:after {
@@ -103,7 +104,7 @@ input:nth-of-type(5):checked ~ main#carousel {
   top: -2px;
   left: -1px;
   position: relative;
-  background-color: var(--light-blue);
+  background-color: #2f3e46;
   content: '';
   display: inline-block;
   visibility: visible;
@@ -117,7 +118,7 @@ input:nth-of-type(5):checked ~ main#carousel {
   top: -2px;
   left: -1px;
   position: relative;
-  background-color: var(--dark-blue);
+  background-color: #2a9d8f;
   content: '';
   display: inline-block;
   visibility: visible;

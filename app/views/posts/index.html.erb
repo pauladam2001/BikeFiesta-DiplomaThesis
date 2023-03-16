@@ -1,7 +1,7 @@
-<div class='page-div'>
+<div style="width: 100%;">
   <div class="search_container">
       <form data-turbo="false">
-        <input class="search_input" type="text" placeholder="Search by Name..." name="name" value="<%= params[:name] %>">
+        <input class="search_input" type="text" placeholder="Search by name..." name="name" value="<%= params[:name] %>">
       </form>
   </div>
 
@@ -10,88 +10,89 @@
       <div class="most-viewed-title <%= 'sale-padding' if title == "Sale" || title == "All" %>">
         <h1>
           <% if title == "Most Viewed" %>
-            <%= link_to title, most_viewed_posts_path, data: { turbo: "false" } %>
+            <%= link_to title, most_viewed_posts_path, class: "underline", data: { turbo: "false" } %>
           <% elsif title == "Sale" %>
-            <%= link_to title, on_sale_posts_path, data: { turbo: "false" } %>
+            <%= link_to title, on_sale_posts_path, class: "underline", data: { turbo: "false" } %>
           <% elsif title == "Following" %>
-            <%= link_to title, following_posts_path, data: { turbo: "false" } %>
+            <%= link_to title, following_posts_path, class: "underline", data: { turbo: "false" } %>
           <% else %>
-            <%= link_to title, all_posts_path, data: { turbo: "false" } %>
+            <%= link_to title, all_posts_path, class: "underline", data: { turbo: "false" } %>
           <% end %>
         </h1>
     </div>
-      <div class="carousel-div">
-        <% if title == "Most Viewed" %>
-          <% posts = @most_viewed_posts %>
-        <% elsif title == "Sale" %>
-          <% posts = @sale_posts %>
-        <% elsif title == "Following" %>
-          <% posts = @following_posts %>
-        <% else %>
-          <% posts = @all_posts %>
+    <div class="carousel-div">
+      <% if title == "Most Viewed" %>
+        <% posts = @most_viewed_posts %>
+      <% elsif title == "Sale" %>
+        <% posts = @sale_posts %>
+      <% elsif title == "Following" %>
+        <% posts = @following_posts %>
+      <% else %>
+        <% posts = @all_posts %>
+      <% end %>
+      <% if posts.present? %>
+        <input type="radio" name="position" checked />
+        <% (posts.size - 1).times do |_|%>
+          <input type="radio" name="position" />
         <% end %>
+      <% end %>
+      <main id="carousel">
         <% if posts.present? %>
-          <input type="radio" name="position" checked />
-          <% (posts.size - 1).times do |_|%>
-            <input type="radio" name="position" />
-          <% end %>
-        <% end %>
-        <main id="carousel">
-          <% if posts.present? %>
-            <% posts.each do |post| %>
-              <div class="div-item">
-                <div class="wrapper">
-                  <div class="product-img">
-                    <% if post.assets.present? %>
-                      <%= image_tag(post.assets.where(is_bicycle: true).first.image.url, border: 0, width: '100%', height: '100%', :class => "") %>
-                    <% else %>
-                      <%= image_tag("bike3.jpg", border: 0, width: '100%', height: '100%') %>
-                    <% end %>
-                    <% if @favorite_posts.where(id: post.id).size == 0 %>
-                      <%= link_to image_tag("mark_favorite.png"), add_to_favorites_post_path(post), :method => :put, remote: true, class: 'favorites-button' %>
-                    <% else %>
-                      <%= link_to image_tag("favorite.png"), remove_from_favorites_post_path(post), :method => :put, remote: true, class: 'favorites-button' %>
-                    <% end %>
-                    <% if post.electric %>
-                      <button class="button electric-button">Electric</button>
-                    <% end %>
-                    <button class="button size-button"><%= post.size %></button>
+          <% posts.each do |post| %>
+            <div class="div-item">
+              <div class="wrapper">
+                <div class="product-img">
+                  <% if post.assets.present? %>
+                    <%= image_tag(post.assets.where(is_bicycle: true).first.image.url, border: 0, width: '100%', height: '100%', :class => "") %>
+                  <% else %>
+                    <%= image_tag("bike3.jpg", border: 0, width: '100%', height: '100%') %>
+                  <% end %>
+                  <% if @favorite_posts.where(id: post.id).size == 0 %>
+                    <%= link_to image_tag("mark_favorite.png"), add_to_favorites_post_path(post), :method => :put, remote: true, class: 'favorites-button' %>
+                  <% else %>
+                    <%= link_to image_tag("favorite.png"), remove_from_favorites_post_path(post), :method => :put, remote: true, class: 'favorites-button' %>
+                  <% end %>
+                  <% if post.electric %>
+                    <button class="button electric-button">Electric</button>
+                  <% end %>
+                  <button class="button size-button"><%= post.size %></button>
+                </div>
+                <div class="product-info">
+                  <div class="product-text">
+                    <h1><%= post.name %></h1>
+                    <h2>by <%= post.user.name %></h2>
+                    <p><%= post.short_description %></p>
+                    <h2>Condition: <%= post.condition %></h2>
+                    <h2>Year: <%= post.year %></h2>
+                    <h2>Material: <%= post.material.name %></h2>
                   </div>
-                  <div class="product-info">
-                    <div class="product-text">
-                      <h1><%= post.name %></h1>
-                      <h2>by <%= post.user.name %></h2>
-                      <p><%= post.short_description %></p>
-                      <h2>Condition: <%= post.condition %></h2>
-                      <h2>Year: <%= post.year %></h2>
-                      <h2>Material: <%= post.material.name %></h2>
-                    </div>
-                    <div class="product-price-btn">
-                      <% if post.sale_price.present? %>
-                        <div class="product-price"><small><%= number_to_currency(post.price, precision: 2, :unit => '€') %></small><%= number_to_currency(post.sale_price, precision: 2, :unit => '€') %></div>
-                      <% else %>
-                        <p><span class="card-span"><%= number_to_currency(post.price, precision: 2, :unit => '€') %></span></p>
-                      <% end %>
-                      <button class="button"><%= link_to "See Post", post_path(post), data: { turbo: "false" } %></button>
-                    </div>
+                  <div class="product-price-btn">
+                    <% if post.sale_price.present? %>
+                      <div class="product-price"><small><%= number_to_currency(post.price, precision: 2, :unit => '€') %></small><%= number_to_currency(post.sale_price, precision: 2, :unit => '€') %></div>
+                    <% else %>
+                      <p><span class="card-span"><%= number_to_currency(post.price, precision: 2, :unit => '€') %></span></p>
+                    <% end %>
+                    <button class="button"><%= link_to "See Post", post_path(post), data: { turbo: "false" } %></button>
                   </div>
                 </div>
               </div>
-            <% end %>
-          <% else %>
-            <p style="margin-left: 17.5rem;">No posts found</p>
+            </div>
           <% end %>
-        </main>
-      </div>
+        <% else %>
+          <p style="margin-left: 15rem;">No posts found.</p>
+        <% end %>
+      </main>
     </div>
   <% end %>
   <div class="suggestion-div">
-    <span class="suggestion-span">Do you have a suggestion? Leave it below</span>
+    <span class="suggestion-span">Do you have a suggestion? Leave it below.</span>
     <form id="suggestion-form">
       <textarea required name="suggestion" cols="2" rows="12" placeholder="Leave a suggestion..." maxLength="1000" class="input review-textarea" form="suggestion-form"></textarea>
-      <button name="submitButton" value="Send Suggestion" class="button", style="margin-left: 12rem;" data-turbo="false">
+      <div style="width: 240px; margin: 0 auto;">
+      <button name="submitButton" value="Send Suggestion" class="button" data-turbo="false">
         Send Suggestion
       </button>
+      </div>
     </form>
   </div>
 </div>

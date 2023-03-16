@@ -104,8 +104,3 @@
 .dropdown-span {
   cursor: pointer;
 }
-
-.dropdown-span:hover {
-  transition: 0.5s ease;
-  text-decoration: underline;
-}

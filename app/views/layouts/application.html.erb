@@ -46,22 +46,22 @@
           <h6><%= link_to image_tag("logo.png", border: 0, width: '200px'), posts_path, data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item menu-item-padding first-item">
-          <h6><%= link_to "Home", posts_path, data: { turbo: "false" } %></h6>
+          <h6><%= link_to "Home", posts_path, class: "underline", data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item menu-item-padding">
-          <h6><%= link_to "Follow Page", follow_page_path, data: { turbo: "false" } %></h6>
+          <h6><%= link_to "Follow Page", follow_page_path, class: "underline", data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item menu-item-padding">
-          <h6><%= link_to "My Posts", my_posts_path, data: { turbo: "false" } %></h6>
+          <h6><%= link_to "My Posts", my_posts_path, class: "underline", data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item menu-item-padding">
-          <h6><%= link_to "Bikes to Ship", bikes_to_ship_path, data: { turbo: "false" } %></h6>
+          <h6><%= link_to "Bikes to Ship", bikes_to_ship_path, class: "underline", data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item menu-item-padding">
-          <h6><%= link_to "Bought Bikes", bought_bikes_path, data: { turbo: "false" } %></h6>
+          <h6><%= link_to "Bought Bikes", bought_bikes_path, class: "underline", data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item menu-item-padding">
-          <h6><%= link_to "Favorites", favorites_path, data: { turbo: "false" } %></h6>
+          <h6><%= link_to "Favorites", favorites_path, class: "underline", data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item">
           <%= button_to "Post", new_post_path, method: :get, :class => "button", data: { turbo: "false" } %>
@@ -93,7 +93,7 @@
                       <% else %>
                         <%= notification.message %>.
                       <% end %>
-                      <%= button_to notification_path(notification), method: :delete, class: "button-to-style", form_class: "button-to-form", data: { turbo: "false" } do %>
+                      <%= button_to notification_path(notification), method: :delete, class: "button-to-style", form_class: "button-to-form", style: "color: #A30000;", data: { turbo: "false" } do %>
                         &times;
                       <% end %>
                     </div>
@@ -117,7 +117,7 @@
           <% end %>
         </div>
         <div class="menu-item menu-item-padding">
-          <h6><%= link_to "Support", rooms_path, data: { turbo: "false" } %></h6>
+          <h6><%= link_to "Support", rooms_path, class: "underline", data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item menu-item-padding">
             <h6>
@@ -161,7 +161,7 @@
               </a>
             </li>
             <div class="item">
-              <span class="sidebar-icon-span sub-btn dropdown-span" style="margin-left: 2.3rem; font-weight: bold;">Categorization<%= image_tag("right-arrow.png", border: 0, width: '25px', :class => "dropdown dropdown-arrow") %></span>
+              <span class="sidebar-icon-span sub-btn dropdown-span sidebar-a" style="margin-left: 2.3rem; font-weight: bold;">Categorization<%= image_tag("right-arrow.png", border: 0, width: '25px', :class => "dropdown dropdown-arrow") %></span>
               <div class="sub-menu">
                 <li>
                   <a href=<%= brandnames_path %> class="sidebar-a" data-turbo="false">
@@ -255,7 +255,9 @@
     <%= yield %>
   </body>
   <% if current_user.present? && current_user.is_normal? %>
-   <div class="footer <%= request.fullpath == "/follow_page" || request.fullpath.include?("/posts/") ? "footer-fixed" : "footer-relative" %>" style="height: 30px;">© <%= Time.now.year %><span>BikeFiesta. All rights reserved.</span></div>
+    <% if !(request.fullpath.include?("/rooms") || request.fullpath.include?("/users")) %>
+      <div class="footer <%= request.fullpath == "/follow_page" || request.fullpath.include?("/posts/") ? "footer-fixed" : "footer-relative" %>" style="margin-top: 50px;">© <%= Time.now.year %><span>BikeFiesta. All rights reserved.</span></div>
+    <% end %>
   <% end %>
 </html>
 

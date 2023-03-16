@@ -1,7 +1,8 @@
 .search_container {
   padding-top: 2rem;
-  margin-left: 32%;
+  align-items: center;
   width: 600px;
+  margin: 0 auto;
 }
 
 .search_input {
@@ -11,20 +12,18 @@
   transition: transform 250ms ease-in-out;
   font-size: 14px;
   line-height: 18px;
-  color: var(--dark-blue);
   background-image: url('magnifier.png');
   background-repeat: no-repeat;
   background-size: 20px 20px;
   background-position: 95% center;
   border-radius: 50px;
-  border: 1px solid var(--light-red);
+  border: 1px solid #006d77;
   transition: all 250ms ease-in-out;
   backface-visibility: hidden;
   transform-style: preserve-3d;
 }
 
 .search_input::placeholder {
-  color: var(--dark-blue);
   letter-spacing: 1.5px;
 }
 
@@ -32,7 +31,7 @@
   padding: 12px 0;
   outline: 0;
   border: 1px solid transparent;
-  border-bottom: 1px solid var(--light-red);
+  border-bottom: 1px solid #006d77;
   border-radius: 0;
   background-position: 100% center;
 }
