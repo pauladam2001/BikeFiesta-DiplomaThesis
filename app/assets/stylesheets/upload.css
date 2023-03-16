@@ -1,6 +1,6 @@
 .edit-post-title-div {
   padding-top: 2rem;
-  width: 10rem;
+  width: 15rem;
   margin: 0 auto;
 }
 
@@ -11,11 +11,15 @@
 }
 
 .upload-info-div-1 {
-  margin-top: 5rem;
-  margin-left: 42rem;
+  padding-top: 7rem;
+  width: 30rem;
+  margin: 0 auto;
+  padding-left: 4rem;
 }
 
 .upload-info-div-2 {
-  margin-top: 3rem;
-  margin-left: 39rem;
+  padding-top: 3rem;
+  width: 30rem;
+  margin: 0 auto;
+  padding-left: 1rem;
 }

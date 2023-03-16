@@ -53,7 +53,7 @@
           <%= link_to posts_path, class: "cancel-link", data: { turbo: "false" } do %>
             Cancel
           <% end %>
-          <button type="submit" class="button">
+          <button type="submit" class="button" data-turbo="false">
             <% if !@post.persisted? %>
               Go to Upload
             <% else %>
@@ -66,14 +66,14 @@
   <% end %>
   <% if params[:upload] == "true" %>
     <div class="upload-info-div-1">
-      <span style="margin-left: 2.5rem">Please upload maximum 5 images</span>
+      <span style="margin-left: 2.5rem">Please upload maximum 5 images.</span>
       <br/>
-      <span>At least one image must include the entire bike</span>
+      <span>At least one image must include the entire bike.</span>
     </div>
-    <div class="dropzone dropzone-flex drop-title drop-container dropzone-styles" id="dropzone-form"></div>
+    <div class="dropzone dropzone-flex drop-title drop-container dropzone-styles" id="dropzone-form" style="border: 1px solid #006d77; border-radius: 10px; margin-left: 28rem; color: #006d77;"></div>
     <div class="upload-info-div-2">
-      <%= button_to "Upload", posts_path, id: "createPost", method: :get, :class => "button", :style => "margin-left: 7.5rem; margin-bottom: 0.5rem;" %>
-      <span>After uploading it takes up to 10 minutes to validate your post</span>
+      <%= button_to "Upload", posts_path, id: "createPost", method: :get, :class => "button", :style => "margin-left: 8.5rem; margin-bottom: 0.5rem;", data: { turbo: "false" } %>
+      <span>After uploading it takes up to 10 minutes to validate your post.</span>
     </div>
   <% end %>
 </div>
