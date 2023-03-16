@@ -1,15 +1,13 @@
 .edit-title {
   padding-top: 1rem;
   padding-left: 2rem;
-  color: var(--dark-blue);
 }
 
 .title-div {
   padding-left: 5rem;
-  border-bottom: 1px solid var(--light-blue);
+  border-bottom: 1px solid #006d77;
   max-width: 1500px;
   padding-bottom: 15px;
-  color: var(--dark-blue);
 }
 
 .identity-div {
@@ -17,10 +15,9 @@
   margin-left: 2rem;
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid var(--light-blue);
+  border-bottom: 1px solid #006d77;
   max-width: 1500px;
   padding-bottom: 15px;
-  color: var(--dark-blue);
 }
 
 .security-div {
@@ -28,10 +25,9 @@
   margin-left: 2rem;
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid var(--light-blue);
+  border-bottom: 1px solid #006d77;
   max-width: 1500px;
   padding-bottom: 15px;
-  color: var(--dark-blue);
 }
 
 .identity-title {
@@ -51,18 +47,21 @@
 }
 
 .input-edit {
-  background-color: #EEDCB9;
+  background-color: #edf6f9;
 	border: none;
 	padding: 12px 15px;
 	margin-bottom: 10px;
   width: 400px;
-  border-radius: 10px;
-  color: var(--dark-blue);
+  border-radius: 15px;
+  outline: none;
+}
+
+.input-edit:focus {
+	border: 2px solid #006d77;
 }
 
 .edit-span {
   padding-right: 30px;
-  color: var(--dark-blue);
 }
 
 .update-button {
@@ -73,7 +72,6 @@
 .cancel-account {
   margin-top: 2rem;
   margin-left: 14rem;
-  color: var(--dark-blue);
 }
 
 .cancel-div {
@@ -83,14 +81,9 @@
 
 .unhappy-span {
   padding-left: 5rem;
-  color: var(--dark-blue);
   font-size: 20px;
 }
 
 .add-div {
   margin-bottom: 10px;
-}
-
-.info-span {
-  margin-left: 31%;
 }

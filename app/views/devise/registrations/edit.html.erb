@@ -15,16 +15,16 @@
     </div>
     <div class="identity-inputs">
       <span class="edit-span">First Name</span>
-      <%= f.text_field :first_name, autofocus: true, autocomplete: "First Name", placeholder: "First Name", :class => 'input-edit', :style => "margin-left: 1.5rem" %>
+      <%= f.text_field :first_name, autofocus: true, autocomplete: "First Name", placeholder: "First Name", :class => 'input-edit', :style => "margin-left: 2rem" %>
       </br>
       <span class="edit-span">Last Name</span>
-      <%= f.text_field :last_name, autocomplete: "Last Name", placeholder: "Last Name", :class => 'input-edit', :style => "margin-left: 1.5rem" %>
+      <%= f.text_field :last_name, autocomplete: "Last Name", placeholder: "Last Name", :class => 'input-edit', :style => "margin-left: 2rem" %>
       </br>
       <span class="edit-span">Phone Number</span>
       <%= f.telephone_field :phone, autocomplete: "Phone Number", placeholder: "Phone Number", :class => 'input-edit' %>
       </br>
       <span class="edit-span">Paypal Email</span>
-      <%= f.email_field :paypal_email, id: "paypal-email", autocomplete: "PayPal Email", placeholder: "PayPal Email", :class => 'input-edit', :style => "margin-left: 0.5rem" %>
+      <%= f.email_field :paypal_email, id: "paypal-email", autocomplete: "PayPal Email", placeholder: "PayPal Email", :class => 'input-edit', :style => "margin-left: 1rem" %>
       </br>
     </div>
   </div>
@@ -34,16 +34,16 @@
     </div>
     <div class="security-inputs">
       <span class="edit-span">Email</span>
-      <%= f.email_field :email, id: "edit-email", autofocus: true, autocomplete: "email", placeholder: "Email", :class => "input-edit", :style => "margin-left: 9rem" %>
+      <%= f.email_field :email, id: "edit-email", autofocus: true, autocomplete: "email", placeholder: "Email", :class => "input-edit", :style => "margin-left: 10.2rem" %>
       <br/>
       <span class="edit-span">New Password</span>
-      <%= f.password_field :password, autocomplete: "new-password", placeholder: "Leave blank if you don't want to change it", :class => "input-edit", :style => "margin-left: 5.5rem" %>
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "Leave blank if you don't want to change it", :class => "input-edit", :style => "margin-left: 6rem" %>
       <br/>
       <span class="edit-span">New Password Confirmation</span>
       <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "New Password Confirmation", :class => "input-edit" %>
       <br/>
       <span class="edit-span">Current Password</span>
-      <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "We need your current password to confirm your changes", :class => "input-edit", :style => "margin-left: 4.5rem" %>
+      <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "We need your current password to confirm your changes", :class => "input-edit", :style => "margin-left: 4.7rem" %>
     </div>
     <div class="actions">
       <%= f.submit "Update", :class => 'button update-button', data: { turbo: "false" } %>
@@ -60,5 +60,7 @@
     </div>
     <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "button" %>
   </div>
-  <span class="info-span">Your account will be permanently deleted, losing all data.</span>
+  <div style="width: 600px; margin: 0 auto; margin-top: 0.5rem;">
+    <span>Your account will be permanently deleted, losing all data.</span>
+  </div>
 </div>

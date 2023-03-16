@@ -255,7 +255,7 @@
     <%= yield %>
   </body>
   <% if current_user.present? && current_user.is_normal? %>
-    <% if !(request.fullpath.include?("/rooms") || request.fullpath.include?("/users")) %>
+    <% if !(request.fullpath.include?("/rooms") || (request.fullpath.include?("/users") && request.fullpath != "/users/edit")) %>
       <div class="footer <%= request.fullpath.include?("/follow_page") || request.fullpath.include?("/posts/") ? "footer-fixed" : "footer-relative" %>" style="margin-top: 50px;">© <%= Time.now.year %><span>BikeFiesta. All rights reserved.</span></div>
     <% end %>
   <% end %>
