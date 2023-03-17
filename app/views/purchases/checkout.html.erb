@@ -31,6 +31,11 @@
               </div>
               <input type="number" class="hidden" name="post_id" value=<%= request.parameters["post_id"] %>>
             </div>
+            <div style="margin-top: 2rem; margin-left: 13rem;">
+              <button name="submitButton" value="Complete Purchase" class="button" data-turbo="false" style="text-transform: none; font-size: 13px; padding: 10px 15px;">
+                Complete Purchase
+              </button>
+            </div>
           </div>
           <div class="col-50">
             <div class="align-center">
@@ -61,11 +66,6 @@
                 <div class="card-cvc">
                   <label for="card_cvc" style="color: #fff; padding-left: 10px;">CVV</label>
                   <input required type="text" id="cvc" name="card_cvc" class="card-cvc-input checkout-input" size="3" placeholder="123" minlength="3" maxlength="3"/>
-                </div>
-                <div style="padding-top: 2rem;">
-                  <button name="submitButton" value="Complete Purchase" class="buy-button" data-turbo="false">
-                    Complete Purchase
-                  </button>
                 </div>
               </div>
             </div>

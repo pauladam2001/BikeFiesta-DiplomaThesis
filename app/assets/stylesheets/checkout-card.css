@@ -9,7 +9,6 @@
   width: 500px;
   height: 300px;
   border-radius: 12px;
-  box-shadow: 2px 2px 0 #222, 2px 2px 15px rgba(0,0,0,0.9);
   /* background: hsla(49, 82%, 72%, 1);
   background: linear-gradient(315deg, hsla(49, 82%, 72%, 1) 0%, hsla(45, 44%, 39%, 1) 100%);
   background: -moz-linear-gradient(315deg, hsla(49, 82%, 72%, 1) 0%, hsla(45, 44%, 39%, 1) 100%);
@@ -108,22 +107,4 @@
 
 .checkout-select:focus {
   outline: white;
-}
-
-.buy-button {
-  cursor: pointer;
-  margin-top: 65px;
-  margin-left: 100px;
-  margin-right: -100px;
-  padding: 10px 10px;
-  border-radius: 10px;
-  box-shadow: -2px 0px 6px 1px #000000;
-  background-color: #686868;
-  border:none;
-  color: #fff;
-}
-
-.buy-button:hover {
-  background-color: #66BB6A;
-  transition: linear 0.2s;
 }
