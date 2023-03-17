@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 3.5rem;
+  margin-top: 4.5rem;
 }
 
 .card {
@@ -10,13 +10,22 @@
   height: 300px;
   border-radius: 12px;
   box-shadow: 2px 2px 0 #222, 2px 2px 15px rgba(0,0,0,0.9);
-  background: black;
+  /* background: hsla(49, 82%, 72%, 1);
+  background: linear-gradient(315deg, hsla(49, 82%, 72%, 1) 0%, hsla(45, 44%, 39%, 1) 100%);
+  background: -moz-linear-gradient(315deg, hsla(49, 82%, 72%, 1) 0%, hsla(45, 44%, 39%, 1) 100%);
+  background: -webkit-linear-gradient(315deg, hsla(49, 82%, 72%, 1) 0%, hsla(45, 44%, 39%, 1) 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F2DD7E", endColorstr="#8E7837", GradientType=1 ); */
+  background: hsla(49, 77%, 71%, 1);
+  background: linear-gradient(225deg, hsla(49, 77%, 71%, 1) 32%, hsla(45, 63%, 31%, 1) 100%);
+  background: -moz-linear-gradient(225deg, hsla(49, 77%, 71%, 1) 32%, hsla(45, 63%, 31%, 1) 100%);
+  background: -webkit-linear-gradient(225deg, hsla(49, 77%, 71%, 1) 32%, hsla(45, 63%, 31%, 1) 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#EEDA7E", endColorstr="#7F661D", GradientType=1 );
 }
 
 .card-title {
   float:left;
   margin-top: 15px;
-  color: #fff;
+  color: white;
   margin-left: 15px;
 }
 
@@ -38,6 +47,7 @@
   background-color: transparent;
   border: none;
   color: #fff;
+  border-radius: 5px;
 }
 
 .card-name {
@@ -53,7 +63,9 @@
   background-color: transparent;
   border: none;
   color: white;
-  width: 70px;
+  width: 80px;
+  border-radius: 5px;
+  margin-left: 10px;
 }
 
 .card-number-input:focus, .card-name-input:focus {
@@ -79,12 +91,23 @@
   height: 10px;
 }
 
+.card-cvc .card-cvc-input:focus {
+  color: #fff;
+  outline: none;
+  border: 1px solid white;
+}
+
 .checkout-select {
-  border: none;
   background-color: rgba(255,255,255, 0.2);
   color: #fff;
   width: 90px;
   height: 30px;
+  border-color: white;
+  outline: none;
+}
+
+.checkout-select:focus {
+  outline: white;
 }
 
 .buy-button {
@@ -93,9 +116,9 @@
   margin-left: 100px;
   margin-right: -100px;
   padding: 10px 10px;
-  border-radius: 6px;
+  border-radius: 10px;
   box-shadow: -2px 0px 6px 1px #000000;
-  background-color: #FFAB40;
+  background-color: #686868;
   border:none;
   color: #fff;
 }

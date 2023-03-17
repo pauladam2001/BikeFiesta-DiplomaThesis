@@ -78,8 +78,7 @@
 }
 
 .input {
-	background-color: #edf6f9;
-	border: none;
+	border: 1px solid #2a9d8f;
 	padding: 12px 15px;
 	margin: 8px 0;
 	width: 100%;
