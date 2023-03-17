@@ -103,3 +103,10 @@
 .review-box {
   border-bottom: 0.5px solid black;
 }
+
+.review-input {
+  background-color: white;
+  border: 1px solid #2a9d8f;
+  width: 30rem;
+  margin-left: 10rem;
+}
