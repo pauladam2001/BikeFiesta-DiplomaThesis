@@ -64,7 +64,7 @@
           <h6><%= link_to "Favorites", favorites_path, class: "underline", data: { turbo: "false" } %></h6>
         </div>
         <div class="menu-item">
-          <%= button_to "Post", new_post_path, method: :get, :class => "button", data: { turbo: "false" } %>
+          <%= button_to "Post", new_post_path, method: :get, :class => "button", style: "margin-bottom: 0.3rem;", data: { turbo: "false" } %>
         </div>
         <div class="menu-item">
           <input type="checkbox" id="navtoggle" />

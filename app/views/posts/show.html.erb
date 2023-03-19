@@ -30,22 +30,22 @@
       <div class="user-name">
         <div style="display: flex;">
           <% if @user.provider == "google_oauth2" %>
-            <span><%= image_tag(@user.avatar_url, border: 0, width: '40px', class: "image-radius") %></span>
-            <span class="user-name-span"><%= @user.name %></span>
+            <span style="margin-top: 0.3rem;"><%= link_to image_tag(@user.avatar_url, border: 0, width: '40px', class: "image-radius"), user_posts_path(user_id: @user.id), data: { turbo: "false" } %></span>
+            <span class="user-name-span"><%= link_to @user.name, user_posts_path(user_id: @user.id), data: { turbo: "false" } %></span>
           <% else %>
             <% if @user.avatar.attached? %>
-              <span><%= image_tag(@user.avatar, border: 0, width: '80px', class: "image-radius") %></span>
-              <span class="user-name-span"><%= @user.name %></span>
+              <span style="margin-top: 0.3rem;"><%= link_to image_tag(@user.avatar, border: 0, width: '80px', class: "image-radius"), user_posts_path(user_id: @user.id), data: { turbo: "false" }  %></span>
+              <span class="user-name-span"><%= link_to @user.name, user_posts_path(user_id: @user.id), data: { turbo: "false" } %></span>
             <% else %>
-              <span><%= image_tag("user-icon.png", border: 0, width: '40px', style: "padding-top: 0rem;") %></span>
-              <span class="user-name-span"><%= @user.name %></span>
+              <span style="margin-top: 0.3rem;"><%= link_to image_tag("user-icon.png", border: 0, width: '40px', style: "padding-top: 0rem;"), user_posts_path(user_id: @user.id), data: { turbo: "false" }  %></span>
+              <span class="user-name-span"><%= link_to @user.name, user_posts_path(user_id: @user.id), data: { turbo: "false" } %></span>
             <% end %>
           <% end %>
         </div>
-        <span class="star-span">★</span><span class="rating-span" style="cursor: pointer;" onclick="openReviewsPopUp()"><%= @user.rating %> (<%= pluralize(@user.reviews.count, 'review') %>)</span>
+        <span class="star-span" style="margin-left: 2.8rem;">★</span><span class="rating-span" style="cursor: pointer;" onclick="openReviewsPopUp()"><%= @user.rating %> <u>(<%= pluralize(@user.reviews.count, 'review') %>)</u></span>
         <%= render "reviews/reviews_pop_up" %>
       </div>
-      <div style="margin-top: 0.7rem; margin-left: 0.5rem;">
+      <div style="margin-top: 1rem; margin-left: 0.5rem;">
         <% if current_user.id != @user.id %>
           <% if current_user.following?(@user) %>
             <%= render 'users/unfollow', user: @user %>
@@ -57,12 +57,12 @@
     </div>
     <div class="information-section">
       <div class="main-info-div">
-        <span class="name-span"><%= @post.name %>,</span>
+        <span class="name-span">Giant Bike,</span>
         <%= image_tag("pin.png", border: 0, width: '45px', style: "padding-top: 0rem;") %>
         <span class="location-span"><%= @post.location.name %></span>
         <br/>
         <% if @post.sale_price.present? %>
-          <div class="sale-price-div"><small><%= number_to_currency(@post.price, precision: 2, :unit => '€') %></small><%= number_to_currency(@post.sale_price, precision: 2, :unit => '€') %></div>
+          <div class="sale-price-div"><small style="font-size: 20px; color: #2f3e46;"><%= number_to_currency(@post.price, precision: 2, :unit => '€') %></small><%= number_to_currency(@post.sale_price, precision: 2, :unit => '€') %></div>
         <% else %>
           <p><span class="price-span"><%= number_to_currency(@post.price, precision: 2, :unit => '€') %></span></p>
         <% end %>
@@ -93,18 +93,18 @@
       <% is_fav = @favorite_posts.where(id: @post.id).size == 0 %>
       <div class="<%= is_fav ? 'right-buttons' : 'right-buttons-remove' %>">
         <% if is_fav %>
-          <%= button_to "Add to Favorites", add_to_favorites_post_path(@post), :method => :put, remote: true, :class => "button" %>
+          <%= button_to "Add to Favorites", add_to_favorites_post_path(@post), :method => :put, remote: true, :class => "button", style: "text-transform: none; margin-right: 0.5rem; margin-left: 1.5rem;" %>
         <% else %>
-          <%= button_to "Remove from Favorites", remove_from_favorites_post_path(@post), :method => :put, remote: true, :class => "button" %>
+          <%= button_to "Remove from Favorites", remove_from_favorites_post_path(@post), :method => :put, remote: true, :class => "button", style: "text-transform: none; margin-right: 0.5rem; margin-left: 1.5rem;" %>
         <% end %>
         <form id="report-form">
-          <input type="button" class="button" onclick="openReportPopUp()" value="Report Post"></input>
+          <input type="button" class="button" style="text-transform: none;" onclick="openReportPopUp()" value="Report Post"></input>
           <%= render "reports/report_pop_up" %>
         </form>
       </div>
     </div>
     <div class="favorites-div">
-      <span>This bike was added to Favorites by <%= @post.favorites.count %> users.</span>
+      <span>This bike was added to Favorites by <u><%= pluralize(@post.favorites.count, 'user') %></u>.</span>
     </div>
   </div>
 </div>

@@ -237,6 +237,12 @@ class PostsController < ApplicationController
   def add_to_favorites
     post_id = params[:id]
     user_id= current_user.id
+
+    if Post.find(post_id).user_id == user_id
+      redirect_back(fallback_location: posts_path, alert: "Error - You can't add your own bicycle to favorites.")
+      return
+    end
+
     new_favorite = Favorite.find_or_create_by(post_id: post_id, user_id: user_id)
     redirect_back(fallback_location: posts_path, alert: "Post successfully added to favorites.")
   end

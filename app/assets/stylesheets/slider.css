@@ -1,7 +1,9 @@
 .slidershow{
+  margin-top: 1rem;
   width: 750px;
   height: 500px;
   overflow: hidden;
+  border-radius: 15px;
 }
 .middle{
   position: absolute;
@@ -19,7 +21,7 @@
 .bar{
   width: 50px;
   height: 10px;
-  border: 2px solid black;
+  border: 2px solid #006d77;
   margin: 6px;
   cursor: pointer;
   transition: 0.4s;

@@ -43,7 +43,7 @@
               <div class="wrapper">
                 <div class="product-img">
                   <% if post.assets.present? %>
-                    <%= image_tag(post.assets.where(is_bicycle: true).first.image.url, width: '100%', height: '100%') %>
+                    <%= image_tag(post.assets.where(is_bicycle: true).first&.image&.url, width: '100%', height: '100%') %>
                   <% else %>
                     <%= image_tag("bike3.jpg", width: '100%', height: '100%') %>
                   <% end %>

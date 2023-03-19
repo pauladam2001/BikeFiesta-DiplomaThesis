@@ -1,5 +1,5 @@
 <div id="reviews_pop_up" class="hidden">
-  <div class="popup-wrapper" style="margin-top: 2rem;">
+  <div class="popup-wrapper" style="margin-top: 2rem; margin-left: 10px;">
     <div class="reviews-div">
       <div class="reviews-popup-title">
         <span style="font-size: 25px; font-weight: 600; margin-left: 19rem;">Last 50 Reviews</span>
@@ -14,7 +14,7 @@
             <span style="float: right;"><%= review.created_at.strftime("%d/%m/%y") %></span>
           </div>
           <div class="review-reviewer">
-            <span style="font-weight: 600;"><%= review.reviewer.full_name %></span>
+            <span style="font-weight: 700;"><%= review.reviewer.full_name %></span>
           </div>
           <div class="review-message">
             <%= review.message %>

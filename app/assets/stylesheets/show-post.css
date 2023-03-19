@@ -1,14 +1,13 @@
 .user-section {
-  padding-top: 5rem;
-  margin-left: 72rem;
+  margin-top: 1rem;
+  margin-left: 25rem;
   font-size: 30px;
   display: flex;
   flex-direction: row;
 }
 
 .user-name {
-  margin-top: 0.7rem;
-  margin-right: 0.5rem;
+  margin-top: 1rem;
 }
 
 .admin-margin {
@@ -33,7 +32,7 @@
 }
 
 .user-name-span {
-  padding-top: 0.3rem; 
+  padding-top: 0.3rem;
   padding-left: 0.3rem;
 }
 
@@ -42,12 +41,13 @@
 }
 
 .information-section {
-  margin-top: 3rem;
   margin-left: 58rem;
 }
 
 .main-info-div {
   margin-left: 12rem;
+  width: 25rem;
+  margin: 0 auto;
 }
 
 .name-span {
@@ -68,8 +68,9 @@
 }
 
 .sale-price-div {
-  margin-left: 2.5rem;
+  margin-left: 3rem;
   font-size: 35px;
+  color: #A30000;
 }
 
 .description-div {
@@ -84,16 +85,15 @@
 }
 
 .other-info-div {
-  margin-top: 2rem;
+  margin-top: 11rem;
   margin-left: 5rem;
   display: flex;
-  gap: 3rem;
+  gap: 10rem;
   font-size: 20px;
 }
 
 .actions-section {
-  margin-top: 1rem;
-  margin-left: 8.7rem;
+  margin-left: 9rem;
   display: flex;
 }
 
@@ -108,7 +108,7 @@
 }
 
 .favorites-div {
-  margin-left: 23rem;
-  margin-top: 2rem;
+  margin-left: 32.5rem;
+  margin-top: 1rem;
   font-size: 18px;
 }
