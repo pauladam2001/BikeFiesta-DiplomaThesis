@@ -4,9 +4,10 @@
       <form action="/checkout" method="post">
         <div class="row">
           <div class="col-50">
-            <% if current_user.discount.present? %>
+            <% if current_user.discount.present? && @post.sale_price.nil? %>
               <h3 style="padding-left: 15rem; padding-bottom: 0.3rem;">Shipping Address</h3>
-              <h4 style="padding-left: 10rem; padding-bottom: 1rem;">You have a <%= current_user.discount %>% discount for your next order</h6>
+              <h4 style="padding-left: 10rem;">You have a <%= current_user.discount %>5% discount for your next order</h4>
+              <h4 style="padding-left: 15rem; padding-bottom: 1rem; color: #2a9d8f; font-weight: 700;">Your price: <%= number_to_currency(@reduced_price, precision: 2, :unit => '€') %></h4>
             <% else %>
               <h3 style="padding-left: 15rem; padding-bottom: 1rem;">Shipping Address</h3>
             <% end %>
