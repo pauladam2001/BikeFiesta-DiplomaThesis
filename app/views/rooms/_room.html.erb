@@ -1,1 +1,7 @@
-<div style="flex: 0 1 calc(20%);"> <%= link_to room.name, room, class: "links-class chat-room", style: "font-size: 16px;", data: { turbo: "false" } %> </div>
+<div style="flex: 0 1 calc(20%);">
+  <% if unread_rooms.present? && unread_rooms.include?(room) %>
+    <%= link_to room.name, room, class: "links-class chat-room", style: "font-size: 18px; color: var(--r); border: 2px solid var(--r);", data: { turbo: "false" } %>
+  <% else %>
+    <%= link_to room.name, room, class: "links-class chat-room", style: "font-size: 16px", data: { turbo: "false" } %>
+  <% end %>
+</div>

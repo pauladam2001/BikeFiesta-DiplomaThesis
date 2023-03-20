@@ -87,8 +87,6 @@ Rails.application.routes.draw do
 
   get "/issues", to: "issues#index"
   
-  get "/new_messages", to: "new_messages#index"
-
   get "/leaderboard", to: "stats#leaderboard"
   post "/leaderboard", to: "stats#leaderboard"
 

@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   after_save :update_phone_number_and_name
-  scope :ordered, -> { joins(:messages).order('messages.created_at DESC').uniq }
   after_create_commit { broadcast_append_to "users" }
   has_many :messages
+  has_many :message_statuses
 
   attr_accessor :skip_validation
   

@@ -5,7 +5,7 @@
         <h1 class="h1-title" style="margin-bottom: 2rem; margin-top: 2rem;">Users</h1>
         <%= turbo_stream_from "users" %>
         <div id="users" class="users-div">
-          <%= render @users %>
+          <%= render @users, unread_users_ids: @unread_users_ids %>
         </div>
         <div class="pagination" data-turbo="false">
           <%= will_paginate @users, param_name: 'users_page' %>
@@ -13,7 +13,7 @@
         <h1 class="h1-title" style="margin-bottom: 2rem;">Rooms</h1>
         <%= turbo_stream_from "rooms" %>
         <div id="rooms" class="rooms-div">
-          <%= render @rooms %>
+          <%= render @rooms, unread_rooms: @unread_rooms %>
         </div>
         <div class="pagination" data-turbo="false">
           <%= will_paginate @rooms, param_name: 'rooms_page' %>
