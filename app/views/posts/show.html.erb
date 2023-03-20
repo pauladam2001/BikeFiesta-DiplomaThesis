@@ -46,7 +46,7 @@
         <%= render "reviews/reviews_pop_up" %>
       </div>
       <div style="margin-top: 1rem; margin-left: 0.5rem;">
-        <% if current_user.id != @user.id %>
+        <% if current_user.id != @user.id && current_user.is_normal? %>
           <% if current_user.following?(@user) %>
             <%= render 'users/unfollow', user: @user %>
           <% else %>
@@ -73,7 +73,7 @@
         <br/>
         <div class="description-span"><%= @post.description %></div>
       </div>
-      <div class="other-info-div">
+      <div class="other-info-div <%= current_user.is_admin? ? 'other-info-div-admin' : '' %>">
         <ul style="list-style-type: circle;">
           <li>Size - <%= @post.size %></li>
           <li>Condition - <%= @post.condition %></li>
@@ -88,22 +88,24 @@
         </ul>
       </div>
     </div>
-    <div class="actions-section">
-      <%= link_to "Buy Now", checkout_path(post_id: @post.id), class: "button", data: { 'turbo-method' => :get, turbo: "false" } %> 
-      <% is_fav = @favorite_posts.where(id: @post.id).size == 0 %>
-      <div class="<%= is_fav ? 'right-buttons' : 'right-buttons-remove' %>">
-        <% if is_fav %>
-          <%= button_to "Add to Favorites", add_to_favorites_post_path(@post), :method => :put, remote: true, :class => "button", style: "text-transform: none; margin-right: 0.5rem; margin-left: 1.5rem;" %>
-        <% else %>
-          <%= button_to "Remove from Favorites", remove_from_favorites_post_path(@post), :method => :put, remote: true, :class => "button", style: "text-transform: none; margin-right: 0.5rem; margin-left: 1.5rem;" %>
-        <% end %>
-        <form id="report-form">
-          <input type="button" class="button" style="text-transform: none;" onclick="openReportPopUp()" value="Report Post"></input>
-          <%= render "reports/report_pop_up" %>
-        </form>
+    <% if current_user.is_normal? %>
+      <div class="actions-section">
+        <%= link_to "Buy Now", checkout_path(post_id: @post.id), class: "button", data: { 'turbo-method' => :get, turbo: "false" } %> 
+        <% is_fav = @favorite_posts.where(id: @post.id).size == 0 %>
+        <div class="<%= is_fav ? 'right-buttons' : 'right-buttons-remove' %>">
+          <% if is_fav %>
+            <%= button_to "Add to Favorites", add_to_favorites_post_path(@post), :method => :put, remote: true, :class => "button", style: "text-transform: none; margin-right: 0.5rem; margin-left: 1.5rem;" %>
+          <% else %>
+            <%= button_to "Remove from Favorites", remove_from_favorites_post_path(@post), :method => :put, remote: true, :class => "button", style: "text-transform: none; margin-right: 0.5rem; margin-left: 1.5rem;" %>
+          <% end %>
+          <form id="report-form">
+            <input type="button" class="button" style="text-transform: none;" onclick="openReportPopUp()" value="Report Post"></input>
+            <%= render "reports/report_pop_up" %>
+          </form>
+        </div>
       </div>
-    </div>
-    <div class="favorites-div">
+    <% end %>
+    <div class="favorites-div <%= current_user.is_admin? ? 'favorites-div-admin' : '' %>">
       <span>This bike was added to Favorites by <u><%= pluralize(@post.favorites.count, 'user') %></u>.</span>
     </div>
   </div>

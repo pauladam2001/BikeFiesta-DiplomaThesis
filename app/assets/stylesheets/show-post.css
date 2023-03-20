@@ -15,7 +15,7 @@
 }
 
 .admin-margin-top {
-  padding-top: 12rem;
+  padding-top: 5rem;
 }
 
 .admin-margin-user-posts {
@@ -92,6 +92,10 @@
   font-size: 20px;
 }
 
+.other-info-div-admin {
+  margin-left: 2rem;
+}
+
 .actions-section {
   margin-left: 9rem;
   display: flex;
@@ -111,4 +115,8 @@
   margin-left: 32.5rem;
   margin-top: 1rem;
   font-size: 18px;
+}
+
+.favorites-div-admin {
+  margin-left: 21rem;
 }

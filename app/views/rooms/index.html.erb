@@ -45,7 +45,7 @@
         <h1 class="h1-title" style="margin-left: 1rem; margin-bottom: 2rem; margin-top: 2rem;">Talk to one of our Admins</h1>
         <%= turbo_stream_from "users" %>
         <div id="users" class="users-div">
-          <%= render @users %>
+          <%= render @users, unread_users_ids: @unread_users_ids %>
         </div>
         <div class="pagination" data-turbo="false">
           <%= will_paginate @users, param_name: 'users_page' %>
