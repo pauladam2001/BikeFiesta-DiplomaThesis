@@ -51,13 +51,13 @@ input[id="radio-2"] {
   height: 2rem;
   margin-left: 0.75rem;
   border-radius: 50%;
-  background-color: #006d77;
+  background-color: var(--dg);
   color: white;
   transition: 0.15s ease-in;
 }
 
 input[type="radio"]:checked + label > .notification {
-  background-color: #2a9d8f;
+  background-color: var(--lg);
   color: #fff;
 }
 
@@ -74,7 +74,7 @@ input[id="radio-2"]:checked ~ .glider {
   display: flex;
   height: 54px;
   width: 200px;
-  border: 1px solid #006d77;
+  border: 1px solid var(--dg);
   z-index: 1;
   border-radius: 99px;
   transition: 0.25s ease-out;

@@ -17,8 +17,12 @@
 
 
  :root {
+  --lg: #2a9d8f;
+  --dg: #006d77;
+  --b: #2f3e46;
+  --r: #A30000;
   font-family: 'Nunito Sans', sans-serif;
-  color: #2f3e46;
+  color: var(--b);
   font-size: 16px;
 }
 
@@ -30,7 +34,7 @@
   align-items: center;
   justify-content: center;
   background-color: white;
-  border-bottom: 1px solid #2a9d8f;
+  border-bottom: 1px solid var(--lg);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -63,7 +67,7 @@
 
 a {
   text-decoration: none;
-  color: #2f3e46;
+  color: var(--b);
 }
 
 .footer {
@@ -78,7 +82,7 @@ a {
   align-items: center;
   gap: 0.2rem;
   height: 1rem;
-  border-top: 1px solid #2a9d8f;
+  border-top: 1px solid var(--lg);
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 }
@@ -131,7 +135,7 @@ a {
 
 .pagination a {
   text-decoration: none;
-  color: #2a9d8f;
+  color: var(--lg);
 }
 
 .pagination a:hover, .pagination a:focus {
@@ -150,7 +154,7 @@ a {
   padding-left: 0.75rem;
   padding-right: 0.75rem; 
   background-color: #FECACA; 
-  color: #A30000; 
+  color: var(--r); 
   font-size: 1rem;
   line-height: 1rem; 
   border-radius: 9999px; 
@@ -179,12 +183,12 @@ a {
   padding: 0;
   display: inline-block;
   font-size: 18px;
-  color: #2a9d8f;
+  color: var(--lg);
   transition: 0.5s;
 }
 
 .button-to-style:hover {
-  color: #006d77;
+  color: var(--dg);
   
 }
 

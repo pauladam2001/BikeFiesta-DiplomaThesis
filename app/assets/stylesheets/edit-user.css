@@ -5,7 +5,7 @@
 
 .title-div {
   padding-left: 5rem;
-  border-bottom: 1px solid #006d77;
+  border-bottom: 1px solid var(--dg);
   max-width: 1500px;
   padding-bottom: 15px;
 }
@@ -15,7 +15,7 @@
   margin-left: 2rem;
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid #006d77;
+  border-bottom: 1px solid var(--dg);
   max-width: 1500px;
   padding-bottom: 15px;
 }
@@ -25,7 +25,7 @@
   margin-left: 2rem;
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid #006d77;
+  border-bottom: 1px solid var(--dg);
   max-width: 1500px;
   padding-bottom: 15px;
 }
@@ -57,7 +57,7 @@
 }
 
 .input-edit:focus {
-	border: 2px solid #006d77;
+	border: 2px solid var(--dg);
 }
 
 .edit-span {

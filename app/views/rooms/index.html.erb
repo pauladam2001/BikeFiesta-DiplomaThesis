@@ -26,7 +26,7 @@
       <% if @single_room %>
         <%= render partial: 'layouts/new_message_form' %>
         <div id="messages">
-          <div style="text-align: center; border-bottom: 1px solid #2a9d8f; margin-bottom: 0.5rem; margin-left: 1rem">
+          <div style="text-align: center; border-bottom: 1px solid var(--lg); margin-bottom: 0.5rem; margin-left: 1rem">
             <span>This is the beginning of the conversation</span>
           </div>
           <%= render @messages %>
@@ -57,7 +57,7 @@
       <% if @single_room %>
         <%= render partial: 'layouts/new_message_form' %>
         <div id="messages">
-          <div style="text-align: center; border-bottom: 1px solid #2a9d8f; margin-bottom: 0.5rem; margin-left: 1rem">
+          <div style="text-align: center; border-bottom: 1px solid var(--lg); margin-bottom: 0.5rem; margin-left: 1rem">
             <span>This is the beginning of the conversation</span>
           </div>
           <%= render @messages %>

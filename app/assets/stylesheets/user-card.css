@@ -69,8 +69,8 @@
   box-sizing: border-box;
   width: 130px;
   height: 45px;
-  border-left: 1px solid #2a9d8f;
-  border-bottom: 1px solid #2a9d8f;
+  border-left: 1px solid var(--lg);
+  border-bottom: 1px solid var(--lg);
   text-align: center;
   padding-top: 5px;
 }

@@ -5,7 +5,7 @@
   margin-bottom: 10px;
   margin-left: 15px;
   padding: 15px;
-  background-color: #006d77;
+  background-color: var(--dg);
   color: white;
 }
 
@@ -22,7 +22,7 @@
   overflow-y: scroll;
   width: 65vw;
   padding-right: 20px;
-  border: 1px solid #2a9d8f;
+  border: 1px solid var(--lg);
   border-radius: 15px;
   margin-left: 5px;
   overflow-x: hidden;
@@ -92,7 +92,7 @@
   height: 100px;
   display: flex;
   align-items: center;
-  border-top: 1px solid #2a9d8f;
+  border-top: 1px solid var(--lg);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: white;
@@ -102,21 +102,21 @@
   margin-top: 1rem;
   text-align: center;
   margin-bottom: 0.3rem;
-  color: #2a9d8f;
+  color: var(--lg);
 }
 
 .write-message {
   border: none !important;
-  width: 70rem;
-  margin-left: 20px;
+  width: 62rem;
   padding: 10px;
   border-radius: 15px;
   outline: none;
-  outline: 1px solid #2a9d8f;
+  outline: 1px solid var(--lg);
+  margin: 0 auto;
 }
 
 .write-message:focus {
-  outline: 2px solid #006d77;
+  outline: 2px solid var(--dg);
 }
 
 .footer-chat-form {
@@ -132,7 +132,7 @@
 }
 
 .chat-room {
-  border: 1px solid #2a9d8f;
+  border: 1px solid var(--lg);
   border-radius: 15px;
   padding: 5px;
 }

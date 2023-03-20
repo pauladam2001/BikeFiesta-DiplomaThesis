@@ -21,7 +21,7 @@
 .bar{
   width: 50px;
   height: 10px;
-  border: 2px solid #006d77;
+  border: 2px solid var(--dg);
   margin: 6px;
   cursor: pointer;
   transition: 0.4s;

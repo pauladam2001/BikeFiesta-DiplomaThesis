@@ -13,7 +13,7 @@
 
 .review-textarea {
   background-color: white;
-  border: 1px solid #2a9d8f;
+  border: 1px solid var(--lg);
 }
 
 .rating {
@@ -96,20 +96,20 @@
 }
 
 .reviews-popup-title {
-  border-bottom: 2px solid #2a9d8f;
+  border-bottom: 2px solid var(--lg);
   padding-bottom: 10px;
   margin-top: 0.5rem;
 }
 
 .review-box {
-  border-bottom: 0.5px solid #2a9d8f;
+  border-bottom: 0.5px solid var(--lg);
   padding-left: 5px;
   padding-right: 5px;
 }
 
 .review-input {
   background-color: white;
-  border: 1px solid #2a9d8f;
+  border: 1px solid var(--lg);
   width: 30rem;
   margin-left: 10rem;
 }

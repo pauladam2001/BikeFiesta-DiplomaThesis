@@ -5,7 +5,7 @@
   overflow-y: auto;
   position: fixed;
   left: 0;
-  border-right: 0.7px solid #2a9d8f;
+  border-right: 0.7px solid var(--lg);
   border-top-right-radius: 1.5rem;
   border-bottom-right-radius: 2.5rem;
 }
@@ -25,7 +25,7 @@
   align-items: center; 
   height: 5rem; 
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  border-bottom: 0.5px solid #2a9d8f;
+  border-bottom: 0.5px solid var(--lg);
 }
 
 .sidebar-ul {
@@ -79,7 +79,7 @@
   padding: 1rem;
   position: fixed;
   bottom: 0;
-  border-top: 0.5px solid #2a9d8f;
+  border-top: 0.5px solid var(--lg);
   width: 14rem;
   justify-content: center;
 }

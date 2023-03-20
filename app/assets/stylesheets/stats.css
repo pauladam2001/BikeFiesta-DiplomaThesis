@@ -23,7 +23,7 @@
 .total-stats-second-div {
   overflow: hidden; 
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.06), 0 3px 2px 0 rgba(0, 0, 0, 0.06);
-  border: 0.5px solid #2a9d8f;
+  border: 0.5px solid var(--lg);
   border-radius: 15px;
 }
 
@@ -54,6 +54,6 @@
 
 .header-cell {
   border-radius: 15px; 
-  border-top: 1px solid #2a9d8f; 
-  border-bottom: 1px solid #2a9d8f;
+  border-top: 1px solid var(--lg); 
+  border-bottom: 1px solid var(--lg);
 }

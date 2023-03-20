@@ -6,7 +6,7 @@ select {
   padding: 0 1em 0 0.5em;
   cursor: pointer;
   border-radius: 15px; 
-  outline: 1px solid #2a9d8f;
+  outline: 1px solid var(--lg);
 }
 
 select option {
@@ -14,7 +14,7 @@ select option {
 }
 
 select:focus {
-  outline: 1px solid #2a9d8f;
+  outline: 1px solid var(--lg);
 }
 
 select::-ms-expand {
@@ -34,11 +34,11 @@ select::-ms-expand {
 .textarea-input {
   width: 49rem;
   border-radius: 15px; 
-  border-color: #2a9d8f;
+  border-color: var(--lg);
   border-width: 1.5px;
   outline: none;
 }
 
 .textarea-input:focus {
-	border: 2px solid #006d77;
+	border: 2px solid var(--dg);
 }

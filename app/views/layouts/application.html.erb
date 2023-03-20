@@ -2,7 +2,7 @@
 
 <style>
   <%= ".msg-#{current_user&.id}" %> {
-    background-color: #2a9d8f !important;
+    background-color: var(--lg) !important;
   }
   <%= ".cont-#{current_user&.id}" %> {
     display: flex;
@@ -93,7 +93,7 @@
                       <% else %>
                         <%= notification.message %>.
                       <% end %>
-                      <%= button_to notification_path(notification), method: :delete, class: "button-to-style", form_class: "button-to-form", style: "color: #A30000;", data: { turbo: "false" } do %>
+                      <%= button_to notification_path(notification), method: :delete, class: "button-to-style", form_class: "button-to-form", style: "color: var(--r);", data: { turbo: "false" } do %>
                         &times;
                       <% end %>
                     </div>

@@ -70,7 +70,7 @@
 .sale-price-div {
   margin-left: 3rem;
   font-size: 35px;
-  color: #A30000;
+  color: var(--r);
 }
 
 .description-div {

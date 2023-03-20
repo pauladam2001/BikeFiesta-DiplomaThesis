@@ -104,7 +104,7 @@ input:nth-of-type(5):checked ~ main#carousel {
   top: -2px;
   left: -1px;
   position: relative;
-  background-color: #2f3e46;
+  background-color: var(--b);
   content: '';
   display: inline-block;
   visibility: visible;
@@ -118,7 +118,7 @@ input:nth-of-type(5):checked ~ main#carousel {
   top: -2px;
   left: -1px;
   position: relative;
-  background-color: #2a9d8f;
+  background-color: var(--lg);
   content: '';
   display: inline-block;
   visibility: visible;

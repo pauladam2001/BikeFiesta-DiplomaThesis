@@ -18,9 +18,9 @@ table {
 .tbl-header {
 	overflow: hidden; 
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.06), 0 3px 2px 0 rgba(0, 0, 0, 0.06);
-  border-top: 0.5px solid #2a9d8f;
-  border-left: 0.5px solid #2a9d8f;
-  border-right: 0.5px solid #2a9d8f;
+  border-top: 0.5px solid var(--lg);
+  border-left: 0.5px solid var(--lg);
+  border-right: 0.5px solid var(--lg);
   border-radius: 15px;
   background-color: #F8F8F8;
 }
@@ -28,9 +28,9 @@ table {
 .tbl-content {
   height: 75vh;
   overflow-x:auto;
-  border-bottom: 0.5px solid #2a9d8f;
-  border-left: 0.5px solid #2a9d8f;
-  border-right: 0.5px solid #2a9d8f;
+  border-bottom: 0.5px solid var(--lg);
+  border-left: 0.5px solid var(--lg);
+  border-right: 0.5px solid var(--lg);
   border-radius: 15px;
 }
 
@@ -47,18 +47,18 @@ td {
   padding: 15px;
   text-align: center;
   vertical-align: middle;
-  border-bottom: 0.5px solid #2a9d8f;
+  border-bottom: 0.5px solid var(--lg);
 }
 
 .links-class {
   font-size: 18px;
-  color: #2a9d8f;
+  color: var(--lg);
   transition: 0.5s;
   font-weight: bold;
 }
 
 .links-class:hover {
-  color: #006d77;
+  color: var(--dg);
   text-decoration: none;
 }
 
@@ -81,7 +81,7 @@ td {
 }
 
 .bottom-border {
-  border-bottom: 1px solid #2a9d8f;
+  border-bottom: 1px solid var(--lg);
 }
 
 .edit-form-div-1 {
@@ -138,7 +138,7 @@ td {
   overflow: hidden; 
   padding: 1rem; 
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.06), 3px 3px 3px 3px rgba(0, 0, 0, 0.06);
-  border: 0.5px solid #2a9d8f;
+  border: 0.5px solid var(--lg);
   border-radius: 15px;
 }
 
@@ -157,13 +157,13 @@ td {
   max-width: 50rem; 
   height: 2.5rem; 
   border-radius: 15px; 
-  border-color: #2a9d8f;
+  border-color: var(--lg);
   border-width: 1.5px;
   outline: none;
 }
 
 .filter-input:focus {
-	border: 2px solid #006d77;
+	border: 2px solid var(--dg);
 }
 
 .filter-select {

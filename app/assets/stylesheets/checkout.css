@@ -31,7 +31,7 @@
   width: 100%;
   margin-bottom: 20px;
   padding: 12px;
-  border: 1px solid #2a9d8f;
+  border: 1px solid var(--lg);
   border-radius: 15px;
 }
 

@@ -32,7 +32,7 @@
   margin-top: 24.4rem;
   padding: 7px;
   border-radius: 10px;
-  background-color: #006d77;
+  background-color: var(--dg);
   font-size: 10px;
 }
 
@@ -42,7 +42,7 @@
   margin-top: 13.8rem;
   padding: 7px;
   border-radius: 10px;
-  background-color: #006d77;
+  background-color: var(--dg);
   font-size: 10px;
 }
 
@@ -66,7 +66,7 @@
   margin-top: 24.4rem;
   padding: 7px;
   border-radius: 10px;
-  background-color: #006d77;
+  background-color: var(--dg);
   font-size: 10px;
 }
 
@@ -75,18 +75,18 @@
   margin-top: 13.8rem;
   padding: 7px;
   border-radius: 10px;
-  background-color: #006d77;
+  background-color: var(--dg);
   font-size: 10px;
 }
 
 .product-img img {
   border-radius: 10px 0 0 10px;
-  border: 1px solid #2a9d8f;
+  border: 1px solid var(--lg);
 }
 
 .product-img-grid img {
   border-radius: 10px 10px 0 0;
-  border: 1px solid #2a9d8f;
+  border: 1px solid var(--lg);
 }
 
 .product-info {
@@ -95,9 +95,9 @@
   width: 327px;
   border-radius: 0 10px 10px 0px;
   background-color: white;
-  border-top: 1px solid #2a9d8f;
-  border-bottom: 1px solid #2a9d8f;
-  border-right: 1px solid #2a9d8f;
+  border-top: 1px solid var(--lg);
+  border-bottom: 1px solid var(--lg);
+  border-right: 1px solid var(--lg);
 }
 
 .product-info-grid {
@@ -105,9 +105,9 @@
   height: 240px;
   width: 327px;
   border-radius: 0 0 10px 10px;
-  border-left: 1px solid #2a9d8f;
-  border-bottom: 1px solid #2a9d8f;
-  border-right: 1px solid #2a9d8f;
+  border-left: 1px solid var(--lg);
+  border-bottom: 1px solid var(--lg);
+  border-right: 1px solid var(--lg);
 }
 
 .product-text {
@@ -218,7 +218,7 @@
 
 .product-price {
   font-size: 20px;
-  color: #A30000;
+  color: var(--r);
   font-weight: 600;
   display: inline-block;
   position: absolute;
@@ -228,7 +228,7 @@
 
 .product-price-grid {
   font-size: 20px;
-  color: #A30000;
+  color: var(--r);
   font-weight: 600;
   display: inline-block;
   position: absolute;
@@ -242,7 +242,7 @@
   text-decoration: line-through;
   display: inline-block;
   margin-right: 5px;
-  color: #2f3e46;
+  color: var(--b);
 }
 
 .product-price-grid small {
@@ -251,7 +251,7 @@
   text-decoration: line-through;
   display: inline-block;
   margin-right: 5px;
-  color: #2f3e46;
+  color: var(--b);
 }
 
 small {

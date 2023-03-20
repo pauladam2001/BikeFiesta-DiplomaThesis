@@ -62,7 +62,7 @@
         <span class="location-span"><%= @post.location.name %></span>
         <br/>
         <% if @post.sale_price.present? %>
-          <div class="sale-price-div"><small style="font-size: 20px; color: #2f3e46;"><%= number_to_currency(@post.price, precision: 2, :unit => '€') %></small><%= number_to_currency(@post.sale_price, precision: 2, :unit => '€') %></div>
+          <div class="sale-price-div"><small style="font-size: 20px; color: var(--b);"><%= number_to_currency(@post.price, precision: 2, :unit => '€') %></small><%= number_to_currency(@post.sale_price, precision: 2, :unit => '€') %></div>
         <% else %>
           <p><span class="price-span"><%= number_to_currency(@post.price, precision: 2, :unit => '€') %></span></p>
         <% end %>
