@@ -34,7 +34,7 @@
             <span class="user-name-span"><%= link_to @user.name, user_posts_path(user_id: @user.id), data: { turbo: "false" } %></span>
           <% else %>
             <% if @user.avatar.attached? %>
-              <span style="margin-top: 0.3rem;"><%= link_to image_tag(@user.avatar, border: 0, width: '80px', class: "image-radius"), user_posts_path(user_id: @user.id), data: { turbo: "false" }  %></span>
+              <span style="margin-top: 0.3rem;"><%= link_to image_tag(@user.avatar.url, border: 0, width: '45px', class: "image-radius"), user_posts_path(user_id: @user.id), data: { turbo: "false" }  %></span>
               <span class="user-name-span"><%= link_to @user.name, user_posts_path(user_id: @user.id), data: { turbo: "false" } %></span>
             <% else %>
               <span style="margin-top: 0.3rem;"><%= link_to image_tag("user-icon.png", border: 0, width: '40px', style: "padding-top: 0rem;"), user_posts_path(user_id: @user.id), data: { turbo: "false" }  %></span>

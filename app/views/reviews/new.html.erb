@@ -6,7 +6,7 @@
           <h6><%= image_tag(@reviewed.avatar_url, border: 0, width: '60px', class: "image-radius") %></h6>
         <% else %>
           <% if @reviewed.avatar.attached? %>
-            <h6><%= image_tag(@reviewed.avatar, border: 0, width: '80px', class: "image-radius") %></h6>
+            <h6><%= image_tag(@reviewed.avatar.url, border: 0, width: '45px', class: "image-radius") %></h6>
           <% else %>
             <h6><%= image_tag("user-icon.png", border: 0, width: '60px') %></h6>
           <% end %>

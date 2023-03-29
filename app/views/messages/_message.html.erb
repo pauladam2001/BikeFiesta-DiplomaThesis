@@ -5,7 +5,7 @@
         <% if message.user.provider == "google_oauth2" %>
           <h6><%= image_tag(message.user.avatar_url, border: 0, width: '40px', class: "image-radius") %></h6>
         <% elsif message.user.avatar.attached? %>
-          <h6><%= image_tag(message.user.avatar, border: 0, width: '80px', class: "image-radius") %></h6>
+          <h6><%= image_tag(message.user.avatar.url, border: 0, width: '45px', class: "image-radius") %></h6>
         <% end %>
         <h6 class="message-name"> <%= message.user.name %> </h6>
       </div>

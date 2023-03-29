@@ -9,7 +9,7 @@
                 <h6><%= image_tag(followed.avatar_url, border: 0, width: '65px', class: "image-radius") %></h6>
               <% else %>
                 <% if followed.avatar.attached? %>
-                  <h6><%= image_tag(followed.avatar, border: 0, width: '65px', class: "image-radius") %></h6>
+                  <h6><%= image_tag(followed.avatar.url, border: 0, width: '65px', class: "image-radius") %></h6>
                 <% else %>
                   <h6><%= image_tag("user-icon.png", border: 0, width: '65px') %></h6>
                 <% end %>
