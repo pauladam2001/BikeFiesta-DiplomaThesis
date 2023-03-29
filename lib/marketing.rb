@@ -148,8 +148,11 @@ module Marketing
     message = "BikeFiesta - One of the posts that you reported was banned. Thank you!"
 
     Report.where(post_id: post_id).find_each do |report|
-      phone = report.user&.phone
-      AsyncSendSmsToUser.perform_async(phone, message)
+      user = report.user
+      if user.sms_opt_in
+        phone = user&.phone
+        AsyncSendSmsToUser.perform_async(phone, message)
+      end
 
       Notification.create(notification_type: "banned_post", notified_id: report.user_id, message: "One of the posts that you reported was banned")
 
@@ -190,12 +193,18 @@ module Marketing
           Notification.create(notification_type: "cancel_purchase", notified_id: purchase.seller_id, message: "The shipping proof for #{purchase.post.name} was not uploaded in time. The purchase was cancelled")
           Notification.create(notification_type: "cancel_purchase", notified_id: purchase.buyer_id, message: "The shipping proof for #{purchase.post.name} was not uploaded in time. The purchase was cancelled")
 
-          seller_phone = purchase.seller&.phone
-          buyer_phone = purchase.buyer&.phone
+          seller = purchase.seller
+          buyer = purchase.buyer
+          seller_phone = seller&.phone
+          buyer_phone = buyer&.phone
           message = "BikeFiesta - The shipping proof for #{purchase.post.name} was not uploaded in time. The purchase was cancelled."
 
-          AsyncSendSmsToUser.perform_async(seller_phone, message)
-          AsyncSendSmsToUser.perform_async(buyer_phone, message)
+          if seller.sms_opt_in
+            AsyncSendSmsToUser.perform_async(seller_phone, message)
+          end
+          if buyer.sms_opt_in
+            AsyncSendSmsToUser.perform_async(buyer_phone, message)
+          end
 
           post.sold_date = nil
           post.sold = false
@@ -240,15 +249,17 @@ module Marketing
         if transfer.success?
           Notification.create(notification_type: "money_sent", notified_id: purchase.seller_id, message: "The money for #{purchase.post.name} were sent to you")
 
-          seller_phone = purchase.seller&.phone
+          seller = purchase.seller
+          seller_phone = seller&.phone
 
           if post.sale_percentage.nil?
             max_discount = discount
           end
           
-          message = "BikeFiesta - The money for #{purchase.post.name} were sent to you. Check your PayPal today. You also had a discount of #{max_discount}%."
-
-          AsyncSendSmsToUser.perform_async(seller_phone, message)
+          if seller.sms_opt_in
+            message = "BikeFiesta - The money for #{purchase.post.name} were sent to you. Check your PayPal today. You also had a discount of #{max_discount}%."
+            AsyncSendSmsToUser.perform_async(seller_phone, message)
+          end
 
           user.discount = nil
           user.save(validate: false)

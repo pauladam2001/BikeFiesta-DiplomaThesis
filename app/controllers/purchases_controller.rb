@@ -129,10 +129,13 @@ class PurchasesController < ApplicationController
 
             Notification.create(notification_type: "ship_bike", notified_id: post.user_id, message: "#{post.name} was bought. Ship it in 2 days")
 
-            phone = post.user.phone
-            message = "BikeFiesta - Your post #{post.name} was bought. You have 2 days to ship it and upload the proof. Shipping details - Name:
-              #{full_name}, Address: #{address}, County: #{county}, City: #{city}, Zip Code: #{zip_code}"
-            AsyncSendSmsToUser.perform_async(phone, message)
+            user = post.user
+            if user.sms_opt_in
+              phone = user.phone
+              message = "BikeFiesta - Your post #{post.name} was bought. You have 2 days to ship it and upload the proof. Shipping details - Name:
+                #{full_name}, Address: #{address}, County: #{county}, City: #{city}, Zip Code: #{zip_code}"
+              AsyncSendSmsToUser.perform_async(phone, message)
+            end
 
             current_user.discount = nil
             current_user.save(validate: false)
@@ -170,13 +173,19 @@ class PurchasesController < ApplicationController
       Notification.create(notification_type: "shipped_purchase", notified_id: purchase.seller_id, message: "The proof for #{purchase.post.name} was accepted. You will receive the money in maximum 5 days")
       Notification.create(notification_type: "shipped_purchase", notified_id: purchase.buyer_id, message: "The bike #{purchase.post.name} was shipped. You will receive it in 2-3 days")
 
-      seller_phone = purchase.seller.phone
-      buyer_phone = purchase.buyer.phone
+      seller = purchase.seller
+      buyer = purchase.buyer
+      seller_phone = seller.phone
+      buyer_phone = buyer.phone
       seller_message = "BikeFiesta - The bike #{purchase.post.name} was shipped. You will receive it in 2-3 days."
       buyer_message = "BikeFiesta - The bike #{purchase.post.name} was shipped. You will receive it in 2-3 days. Please contact an admin in maximum 5 days if anything bad happens"
       
-      AsyncSendSmsToUser.perform_async(seller_phone, seller_message)
-      AsyncSendSmsToUser.perform_async(buyer_phone, buyer_message)
+      if seller.sms_opt_in
+        AsyncSendSmsToUser.perform_async(seller_phone, seller_message)
+      end
+      if buyer.sms_opt_in
+        AsyncSendSmsToUser.perform_async(buyer_phone, buyer_message)
+      end
 
       purchase.status = "CAPTURED"
       purchase.save
@@ -228,12 +237,18 @@ class PurchasesController < ApplicationController
       Notification.create(notification_type: "cancel_purchase", notified_id: purchase.seller_id, message: "The shipping proof for #{purchase.post.name} was not okay. The purchase was cancelled")
       Notification.create(notification_type: "cancel_purchase", notified_id: purchase.buyer_id, message: "The shipping proof for #{purchase.post.name} was not okay. The purchase was cancelled")
 
-      seller_phone = purchase.seller.phone
-      buyer_phone = purchase.buyer.phone
+      seller = purchase.seller
+      buyer = purchase.buyer
+      seller_phone = seller.phone
+      buyer_phone = buyer.phone
       message = "BikeFiesta - The shipping proof for #{purchase.post.name} was not okay. The purchase was cancelled."
 
-      AsyncSendSmsToUser.perform_async(seller_phone, message)
-      AsyncSendSmsToUser.perform_async(buyer_phone, message)
+      if seller.sms_opt_in
+        AsyncSendSmsToUser.perform_async(seller_phone, message)
+      end
+      if buyer.sms_opt_in
+        AsyncSendSmsToUser.perform_async(buyer_phone, message)
+      end
 
       post.sold_date = nil
       post.sold = false

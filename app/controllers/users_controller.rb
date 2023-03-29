@@ -45,9 +45,10 @@ class UsersController < ApplicationController
       if transfer.success?
         Notification.create(notification_type: "money_sent", notified_id: user.id, message: "€#{amount} were refunded to you")
 
-        message = "BikeFiesta - €#{amount} were refunded to you."
-
-        AsyncSendSmsToUser.perform_async(user&.phone, message)
+        if user.sms_opt_in
+          message = "BikeFiesta - €#{amount} were refunded to you."
+          AsyncSendSmsToUser.perform_async(user&.phone, message)
+        end
 
         Cost.create(amount: amount, description: "Refund for #{user.email}", day: Date.today)
 

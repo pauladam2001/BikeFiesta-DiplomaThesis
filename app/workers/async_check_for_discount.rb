@@ -12,9 +12,10 @@ class AsyncCheckForDiscount
 
         Notification.create(notification_type: "discount", notified_id: user_id, message: "You have a 5% discount on your next sell/order (only for orders that are not already on sale)")
 
-        seller_message = "BikeFiesta - You have a 5% discount on your next sell/order (only for orders that are not already on sale)."
-
-        AsyncSendSmsToUser.perform_async(user&.phone, seller_message)
+        if user.sms_opt_in
+          seller_message = "BikeFiesta - You have a 5% discount on your next sell/order (only for orders that are not already on sale)."
+          AsyncSendSmsToUser.perform_async(user&.phone, seller_message)
+        end
       else
         user.discount = nil
       end
@@ -25,9 +26,10 @@ class AsyncCheckForDiscount
 
         Notification.create(notification_type: "discount", notified_id: user_id, message: "You have a 5% discount on your next order/sell (only for orders that are not already on sale)")
 
-        buyer_message = "BikeFiesta - You have a 5% discount on your next sell/order (only for orders that are not already on sale)."
-
-        AsyncSendSmsToUser.perform_async(user&.phone, buyer_message)
+        if user.sms_opt_in
+          buyer_message = "BikeFiesta - You have a 5% discount on your next sell/order (only for orders that are not already on sale)."
+          AsyncSendSmsToUser.perform_async(user&.phone, buyer_message)
+        end
       else
         user.discount = nil
       end

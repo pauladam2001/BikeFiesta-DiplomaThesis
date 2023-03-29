@@ -260,9 +260,12 @@ class PostsController < ApplicationController
     post.is_active = -1
     post.save
 
-    phone = post.user.phone
-    message = "BikeFiesta - Your post #{post.name} was banned."
-    AsyncSendSmsToUser.perform_async(phone, message)
+    user = post.user
+    if user.sms_opt_in
+      phone = user.phone
+      message = "BikeFiesta - Your post #{post.name} was banned."
+      AsyncSendSmsToUser.perform_async(phone, message)
+    end
 
     AsyncMarkPostReportsAsSolved.perform_async(post.id)
 
