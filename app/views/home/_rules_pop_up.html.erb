@@ -1,0 +1,27 @@
+<div id="rules_pop_up">
+  <div class="popup-wrapper">
+    <div class="reviews-div">
+      <div class="reviews-popup-title">
+        <span style="font-size: 25px; font-weight: 600; margin-left: 22.5rem;">Rules</span>
+        <%= button_to showed_rules_user_path(current_user), method: :put, class: "button-to-style", form_class: "button-to-form", style: "font-size: 20px; float: right; margin-right: 1rem; margin-top: 0.5rem;", data: { turbo: "false" } do %>
+          &times;
+        <% end %>
+      </div>
+      <p>
+        • For selling and buying bicycles on our site you need to have a PayPal account.
+      </p>
+      <br/>
+      <p>
+        • We can keep up to 10% of the selling price of a bicycle, depending on the discounts you have. So, you will always receive at least 90% of the selling price.
+      </p>
+      <br/>
+      <p>
+        • You are not allowed to talk to other users by any method. You can talk only with administrators.
+      </p>
+      <br/>
+      <p>
+        • All your photos need to be true and authentic, otherwise your account will be banned permanently.
+      </p>
+    </div>
+  </div>
+</div>

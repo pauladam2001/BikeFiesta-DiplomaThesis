@@ -57,6 +57,7 @@ Rails.application.routes.draw do
       put :unarchive_user
       put :make_user_admin
       put :remove_user_admin
+      put :showed_rules
     end
   end
 

@@ -150,9 +150,16 @@ class UsersController < ApplicationController
     redirect_back(fallback_location: users_path, alert: "#{user.full_name} updated successfully.")
   end
 
+  def showed_rules
+    user = User.find(params[:id])
+    user.showed_rules = true
+    user.save(validate: false)
+    redirect_back(fallback_location: posts_path)
+  end
+
   private
     def check_permissions
-      redirect_to posts_path and return if current_user.is_normal? && (params[:action] != "follow_page" && params[:action] != "show")
+      redirect_to posts_path and return if current_user.is_normal? && (params[:action] != "follow_page" && params[:action] != "show" && params[:action] != "showed_rules")
     end
 
     def get_name(user1, user2)
