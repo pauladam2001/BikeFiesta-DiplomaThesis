@@ -9,9 +9,13 @@ module Marketing
     is_bicycle = false
 
     post.assets.each do |asset|
-      asset_link = link + asset.image.url.split('http://res.cloudinary.com/')[1]
-
-      h = HTTParty.post(asset_link)
+      begin
+        asset_link = link + asset.image.url.split('http://res.cloudinary.com/')[1]
+        h = HTTParty.post(asset_link, timeout: 30)
+      rescue Exception => e
+        puts e
+        next
+      end
       
       h.each do |response|
         if (response["class"].include?("bike") || response["class"].include?("bicycle") || response["class"].include?("cycle")) || response["confidence"] >= 50.0

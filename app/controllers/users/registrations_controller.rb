@@ -13,9 +13,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     require 'open-uri'
 
-    link = 'http://localhost:8000/api/extract?token=24apa2001'
-    bodyCall = { "file": params[:user][:avatar] }
-    h = HTTParty.post(link, body: bodyCall)
+    begin
+      link = 'http://localhost:8000/api/extract?token=24apa2001'
+      bodyCall = { "file": params[:user][:avatar] }
+      h = HTTParty.post(link, body: bodyCall, timeout: 30)
+    rescue Exception => e
+      puts e
+      redirect_to new_user_session_path, alert: "Error - Couldn't communicate with the API. Try again later."
+      return
+    end
 
     if h.include?("cloudinary.com")
       file = URI.open(h)
