@@ -2,7 +2,7 @@ class AsyncCheckForDiscount
   include Sidekiq::Worker
   sidekiq_options queue: "default"
   def perform(user_id, type)
-    puts "Running AsyncCheckImagesForPost"
+    puts "Running AsyncCheckForDiscount"
     
     user = User.find(user_id)
 
@@ -36,6 +36,6 @@ class AsyncCheckForDiscount
       user.save(validate: false)
     end
 
-    puts "Finish Running AsyncCheckImagesForPost"
+    puts "Finish Running AsyncCheckForDiscount"
   end
 end
