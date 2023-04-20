@@ -46,12 +46,6 @@ send_money_to_sellers_job:
   # queue: cron_jobs
   # status: 'disabled'
 
-send_chat_notification_to_users_job:
-  cron: "every hour"
-  class: "CronJobSendChatNotificationToUsers"
-  # queue: cron_jobs
-  # status: 'disabled'
-
 stats_engine_run_daily_job:
   cron: "every 30 minutes"
   class: "CronJobStatsEngineRunDaily"
