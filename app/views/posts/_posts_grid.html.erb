@@ -12,7 +12,7 @@
           <div class="wrapper-grid <%= 'validating' if post.is_active != 1 || post&.purchase&.proof&.attached? %>">
             <div class="product-img-grid">
               <% if post.assets.present? %>
-                <%= image_tag(post.assets.where(is_bicycle: true).first&.image&.url, border: 0, width: '100%', height: '100%', :class => "") %>
+                <%= image_tag(post.assets.where(is_bicycle: true).first&.image&.url || post.assets.first&.image&.url, border: 0, width: '100%', height: '100%', :class => "") %>
               <% else %>
                 <div style="margin-top: 9rem; margin-left: 2.5rem;">
                   <span>Please upload images for this post.</span>

@@ -88,7 +88,7 @@
         </ul>
       </div>
     </div>
-    <% if current_user.is_normal? %>
+    <% if current_user.is_normal? && current_user.id != @post.user_id %>
       <div class="actions-section">
         <%= link_to "Buy Now", checkout_path(post_id: @post.id), class: "button", data: { 'turbo-method' => :get, turbo: "false" } %> 
         <% is_fav = @favorite_posts.where(id: @post.id).size == 0 %>
@@ -105,7 +105,7 @@
         </div>
       </div>
     <% end %>
-    <div class="favorites-div <%= current_user.is_admin? ? 'favorites-div-admin' : '' %>">
+    <div class="favorites-div <%= current_user.is_admin? ? 'favorites-div-admin' : '' %>" style="<%= current_user.id == @post.user_id ? 'margin-top: -1.5rem;' : ''%>">
       <span>This bike was added to Favorites by <u><%= pluralize(@post.favorites.count, 'user') %></u>.</span>
     </div>
   </div>

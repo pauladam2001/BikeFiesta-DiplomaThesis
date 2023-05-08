@@ -10,11 +10,11 @@ class PostsController < ApplicationController
     if params[:name].present?
       redirect_to all_posts_path(name: params[:name])
     else
-      @most_viewed_posts = Post.where(is_active: 1).order(views: :desc).limit(5)
-      @sale_posts = Post.where(is_active: 1).where.not(sale_price: [nil, ""]).limit(5)
+      @most_viewed_posts = Post.where(is_active: 1).where.not(user_id: current_user.id).order(views: :desc).limit(5)
+      @sale_posts = Post.where(is_active: 1).where.not(user_id: current_user.id).where.not(sale_price: [nil, ""]).limit(5)
       following_users = current_user.following
       @following_posts = Post.where(is_active: 1).where(user_id: following_users).limit(5)
-      @all_posts = Post.where(is_active: 1).limit(5)
+      @all_posts = Post.where(is_active: 1).where.not(user_id: current_user.id).limit(5)
       @favorite_posts = current_user.favorite_posts
     end
   end
