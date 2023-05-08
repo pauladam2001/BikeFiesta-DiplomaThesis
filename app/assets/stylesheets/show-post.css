@@ -86,14 +86,10 @@
 
 .other-info-div {
   margin-top: 11rem;
-  margin-left: 5rem;
+  margin-left: 0.5rem;
   display: flex;
   gap: 10rem;
   font-size: 20px;
-}
-
-.other-info-div-admin {
-  margin-left: 2rem;
 }
 
 .actions-section {

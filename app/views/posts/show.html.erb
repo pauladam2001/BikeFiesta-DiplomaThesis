@@ -42,7 +42,7 @@
             <% end %>
           <% end %>
         </div>
-        <span class="star-span" style="margin-left: 2.8rem;">★</span><span class="rating-span" style="cursor: pointer;" onclick="openReviewsPopUp()"><%= @user.rating %> <u>(<%= pluralize(@user.reviews.count, 'review') %>)</u></span>
+        <span class="star-span" style="margin-left: 2.8rem;">★</span><span class="rating-span" style="cursor: pointer;" onclick="openReviewsPopUp()"><%= (@user.rating.present? && @user.rating != 0.0) ? number_with_precision(@user.rating, precision: 1) : '' %> <u>(<%= pluralize(@user.reviews.count, 'review') %>)</u></span>
         <%= render "reviews/reviews_pop_up" %>
       </div>
       <div style="margin-top: 1rem; margin-left: 0.5rem;">
@@ -71,9 +71,9 @@
       <div class="description-div">
         <span style="font-size: 28px;">Description</span>
         <br/>
-        <div class="description-span"><%= @post.description %></div>
+        <div class="description-span">&emsp;<%= @post.description %></div>
       </div>
-      <div class="other-info-div <%= current_user.is_admin? ? 'other-info-div-admin' : '' %>">
+      <div class="other-info-div">
         <ul style="list-style-type: circle;">
           <li>Size - <%= @post.size %></li>
           <li>Condition - <%= @post.condition %></li>
