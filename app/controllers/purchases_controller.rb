@@ -54,7 +54,7 @@ class PurchasesController < ApplicationController
     else
       @post = Post.find(params[:post_id])
       
-      if @post.sale_price.nil?
+      if @post.sale_price.present?
         @reduced_price = @post.price - ((current_user.discount * @post.price) / 100)
       end
       
