@@ -122,7 +122,7 @@ class PostsController < ApplicationController
       purchase.proof = params[:file]
       purchase.status = "AUTHORIZED_PROOF"
       purchase.save
-      redirect_back(fallback_location: posts_path, alert: "Proof uploaded successfully.")
+      redirect_back(fallback_location: bikes_to_ship_path, alert: "Proof uploaded successfully.")
     end
   end
 

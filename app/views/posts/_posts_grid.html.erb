@@ -70,7 +70,11 @@
                   <% elsif post.is_active == -1 %>
                     <span class="validating-span">This post is permanently banned</span>
                   <% elsif post.is_active == -2 %>
-                    <span class="validating-span">Please upload your shipping proof</span>
+                    <% if post.purchase.proof.present? %>
+                      <span class="validating-span">Your proof is being verified...</span>
+                    <% else %>
+                      <span class="validating-span">Please upload your shipping proof</span>
+                    <% end %>
                   <% elsif post.is_active == -3 %>
                     <span class="validating-span">SOLD</span>
                   <% end %>
