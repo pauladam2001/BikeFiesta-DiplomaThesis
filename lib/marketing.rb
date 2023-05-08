@@ -121,7 +121,7 @@ module Marketing
   # Send notification to buyer if he bought the bike more than 5 days ago
   def self.send_notification_to_buyers
     Post.where(leave_review_notification_sent: false).where("shipped_date <= ?", 5.days.ago).find_each do |post|
-      Notification.create(notification_type: "review", post_id: post.id, notified_id: post.user_id, message: "Leave a review for ")
+      Notification.create(notification_type: "review", post_id: post.id, notified_id: post.buyer_id, message: "Leave a review for ")
       
       post.leave_review_notification_sent = true
       post.save
