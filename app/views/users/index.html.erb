@@ -94,7 +94,7 @@
             </td>
             <td>
               <% if user.is_normal? %>
-                <span class="star-span" style="margin-left: 0; padding-right: 0;">★</span>  <%= user.rating %>
+                <span class="star-span" style="margin-left: 0; padding-right: 0;">★</span>  <%= (user.rating.present? && user.rating != 0.0) ? number_with_precision(user.rating, precision: 1) : '' %>
               <% end %>
             </td>
             <td>

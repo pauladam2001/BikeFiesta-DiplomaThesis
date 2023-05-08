@@ -140,7 +140,7 @@ module Marketing
         count += 1
       end
 
-      user.rating = (rating / count) || 0.0
+      user.rating = (rating / count).nan? ? 0.0 : (rating / count)
       user.save(validate: false)
     end
   end
