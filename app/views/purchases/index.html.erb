@@ -70,14 +70,14 @@
             <td>
               <% if purchase.status != "CAPTURED"%>
                 <% if purchase.status == "AUTHORIZED_PROOF" && !purchase.on_hold %>
-                  <%= button_to mark_as_shipped_purchase_path(purchase), class: "button-to-style", form_class: "button-to-form", method: :put, data: {confirm: "Are you sure you want to mark this purchase as shipped?"} do %>
+                  <%= button_to mark_as_shipped_purchase_path(purchase), class: "button-to-style", form_class: "button-to-form", method: :put, data: {confirm: "Are you sure you want to mark this purchase as shipped?", turbo: "false"} do %>
                     Mark as Shipped
                   <% end %>
                   <br/>
                   •
                   <br/>
                 <% end %>
-                <%= button_to cancel_purchase_purchase_path(purchase), class: "button-to-style", form_class: "button-to-form", method: :put, data: {confirm: "Are you sure you want to delete this purchase?"} do %>
+                <%= button_to cancel_purchase_purchase_path(purchase), class: "button-to-style", form_class: "button-to-form", method: :put, data: {confirm: "Are you sure you want to delete this purchase?", turbo: "false"} do %>
                   Cancel Purchase
                 <% end %>
                 <br/>

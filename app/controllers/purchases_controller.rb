@@ -8,13 +8,11 @@ class PurchasesController < ApplicationController
     if params[:shipped].present? && params[:shipped] == "true"
       @purchases = @purchases.where(status: "CAPTURED")
     else
-      @purchases = @purchases.where.not(status: "CAPTURED")
-    end
-
-    if params[:proof].present? && params[:proof] == "false"
-      @purchases = @purchases.where(status: "AUTHORIZED_NO_PROOF")
-    else
-      @purchases = @purchases.where(status: "AUTHORIZED_PROOF")
+      if params[:proof].present? && params[:proof] == "false"
+        @purchases = @purchases.where(status: "AUTHORIZED_NO_PROOF")
+      else
+        @purchases = @purchases.where(status: "AUTHORIZED_PROOF")
+      end
     end
 
     @purchases = @purchases.paginate(page: params[:page], per_page: 12)
