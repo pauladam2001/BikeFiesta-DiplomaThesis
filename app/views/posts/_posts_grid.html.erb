@@ -60,7 +60,7 @@
                   <% if post&.purchase&.proof&.attached? %>
                     <span class="validating-span">We are validating your shipping proof...</span>
                   <% else %>
-                    <p><%= post.short_description[0, 45] %>[...]</p>
+                    <p><%= post.short_description[0, 45] %><% if post.short_description.length > 45 %>[...]<% end %></p>
                     <h2>Condition: <%= post.condition %></h2>
                     <h2>Year: <%= post.year %></h2>
                     <h2>Material: <%= post.material.name %></h2>

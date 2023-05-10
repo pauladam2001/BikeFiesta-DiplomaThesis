@@ -61,7 +61,7 @@
                 </div>
                 <div class="product-info">
                   <div class="product-text">
-                    <h1><%= post.name %></h1>
+                    <h1><%= post.name[0, 16] %><% if post.name.length > 16 %>[...]<% end %></h1>
                     <h2>by <%= post.user.name %></h2>
                     <p><%= post.short_description %></p>
                     <h2>Condition: <%= post.condition %></h2>
