@@ -107,7 +107,8 @@ module Marketing
       client = Twilio::REST::Client.new(account_sid, auth_token)
 
       from = ENV['TWILIO_NUMBER']
-      to = phone
+      # to = phone
+      to = ENV['TWILIO_TRIAL_NUMBER']
       
       client.messages.create(
         from: from,
