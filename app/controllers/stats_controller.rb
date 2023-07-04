@@ -54,11 +54,13 @@ class StatsController < ApplicationController
       {name: "ROI", data: @stats.pluck(:roi)}
     ]
     @line_chart_data.each do |row|
-      max_pos = row[:data].each_with_index.max[1]
-      min_pos = row[:data].each_with_index.min[1]
+      if row[:data].present?
+        max_pos = row[:data].each_with_index.max[1]
+        min_pos = row[:data].each_with_index.min[1]
 
-      row[:data][max_pos] = {y: row[:data][max_pos], id: "max-#{row[:name]}"}
-      row[:data][min_pos] = {y: row[:data][min_pos], id: "min-#{row[:name]}"}
+        row[:data][max_pos] = {y: row[:data][max_pos], id: "max-#{row[:name]}"}
+        row[:data][min_pos] = {y: row[:data][min_pos], id: "min-#{row[:name]}"}
+      end
     end
     
     respond_to do |format|
