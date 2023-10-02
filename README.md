@@ -1,24 +1,3 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+BikeFiesta is my diploma thesis, a marketplace for used bicycles.
+For more informations: [Licenta IE ADAM VA PAUL-ADRIAN.pdf](https://github.com/pauladam2001/BikeFiesta-DiplomaThesis/files/12785265/Licenta.IE.ADAM.VA.PAUL-ADRIAN.pdf) or 
+[BikeFiesta - A marketplace for used bicycles - Slides.pdf](https://github.com/pauladam2001/BikeFiesta-DiplomaThesis/files/12785269/BikeFiesta.-.A.marketplace.for.used.bicycles.-.Slides.pdf)
