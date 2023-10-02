@@ -4,6 +4,7 @@ It is a web application for buying and selling used bicycles. The platform is de
 
 My application consists of two distinct parts: an admin panel and a user interface. Administrators have a comprehensive range of functionalities that enable them to maintain the effectiveness of the platform. These functionalities include the ability to ban users and posts, refund buyers, and access detailed user and transactional statistics on a daily basis. Users can buy and sell bicycles, as well as access additional features, such as adding items to favorites, reviewing other users, following them, and reporting issues. Although users cannot communicate directly, a chat functionality is available between users and administrators. Essentially, the marketplace prioritizes the interests of sellers, with the site taking a maximum commission of 10%, depending on the present discounts. Sellers are required to update shipping proof before receiving their funds.
 
-For more information: 
+For more information:
+- [Image Classification and Face Extraction APIs](https://github.com/pauladam2001/ImageClassificationAndExtractionAPI-DiplomaThesis)
 - [BikeFiesta - A marketplace for used bicycles.pdf](https://github.com/pauladam2001/BikeFiesta-DiplomaThesis/files/12785265/Licenta.IE.ADAM.VA.PAUL-ADRIAN.pdf)
 - [BikeFiesta - A marketplace for used bicycles - Presentation.pdf](https://github.com/pauladam2001/BikeFiesta-DiplomaThesis/files/12785269/BikeFiesta.-.A.marketplace.for.used.bicycles.-.Slides.pdf)
